@@ -35,4 +35,3 @@ mvn exec:java
 + Edit dialog for card
 + Backlogs displays cards in 3 columns grid 
 + Backlog can be sorted by creation time (default), headline, value, size
-test
