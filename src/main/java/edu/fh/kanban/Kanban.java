@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
@@ -37,6 +38,10 @@ public class Kanban {
 		
 		View backlogView = new BacklogView();
 		View boardView = new BoardView();
+		
+		BoardView bv = new BoardView();
+		
+		bv.boardy();
 	
 		JTabbedPane pane = new JTabbedPane();
 		pane.addTab("Backlog", backlogView.getComponent());
