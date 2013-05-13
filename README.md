@@ -76,6 +76,3 @@ mvn exec:java
 + Backlog can be sorted by creation time (default), headline, value, size
 test
 >>>>>>> 54f3450e2ac8600e56ebaf1ce39262460486c810
-
-
-WTF?!
