@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 package edu.fh.kanban.ui.view;
 
 import javax.swing.JComponent;
@@ -13,7 +13,7 @@ public class BoardView implements View{
 
 	
 
-=======
+=======*/
 package edu.fh.kanban.ui.view;
 
 import javax.swing.JComponent;
@@ -35,5 +35,5 @@ public class BoardView implements View{
 
 	
 
->>>>>>> 54f3450e2ac8600e56ebaf1ce39262460486c810
+//>>>>>>> 54f3450e2ac8600e56ebaf1ce39262460486c810
 }

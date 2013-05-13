@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+
+/*<<<<<<< HEAD
 package edu.fh.kanban;
 
 import java.awt.BorderLayout;
@@ -21,6 +22,8 @@ public class Kanban {
 	/**
 	 * @param args
 	 */
+
+/*
 	public static void main(String[] args) {
 		LOGGER.info("Starting kanban app.");
 		
@@ -55,7 +58,8 @@ public class Kanban {
 	}
 
 }
-=======
+
+=======*/
 package edu.fh.kanban;
 
 import java.awt.BorderLayout;
@@ -117,4 +121,4 @@ public class Kanban {
 	}
 
 }
->>>>>>> 54f3450e2ac8600e56ebaf1ce39262460486c810
+//>>>>>>> 54f3450e2ac8600e56ebaf1ce39262460486c810
