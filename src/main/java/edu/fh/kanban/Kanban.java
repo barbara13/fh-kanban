@@ -73,6 +73,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
 import edu.fh.kanban.ui.dialog.Board_Preferences;
+import edu.fh.kanban.ui.dialog.Card_Preferences;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.View;
@@ -96,17 +97,18 @@ public class Kanban {
 		
 		LOGGER.info("Creating UI components.");
 		
-		JMenuBar menubar = new JMenuBar();
-		JMenu file = new JMenu("File");
-		menubar.add(file);
 		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
-		file.add(board_preferences);
 		board_preferences.addActionListener(new Board_Preferences());
+		
 		JMenuItem card_preferences = new JMenuItem("Card Preferences");
+		card_preferences.addActionListener(new Card_Preferences());
+		
+		JMenu file = new JMenu("File");
+		file.add(board_preferences);
 		file.add(card_preferences);
 		
-		
-		
+		JMenuBar menubar = new JMenuBar();
+		menubar.add(file);
 		
 		
 		View backlogView = new BacklogView();
