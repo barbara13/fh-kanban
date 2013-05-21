@@ -72,6 +72,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
+import edu.fh.kanban.ui.dialog.Board_Preferences;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.View;
@@ -100,6 +101,7 @@ public class Kanban {
 		menubar.add(file);
 		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
 		file.add(board_preferences);
+		board_preferences.addActionListener(new Board_Preferences());
 		JMenuItem card_preferences = new JMenuItem("Card Preferences");
 		file.add(card_preferences);
 		
