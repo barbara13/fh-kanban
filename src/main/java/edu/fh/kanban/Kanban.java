@@ -96,7 +96,16 @@ public class Kanban {
 		LOGGER.info("Creating UI components.");
 		
 		JMenuBar menubar = new JMenuBar();
-		menubar.add(new JMenu("File"));
+		JMenu file = new JMenu("File");
+		menubar.add(file);
+		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
+		file.add(board_preferences);
+		JMenuItem card_preferences = new JMenuItem("Card Preferences");
+		file.add(card_preferences);
+		
+		
+		
+		
 		
 		View backlogView = new BacklogView();
 		View boardView = new BoardView();
@@ -118,6 +127,7 @@ public class Kanban {
 		frame.setLocationByPlatform(true);
 		frame.add(pane);
 		frame.setVisible(true);
+		
 	}
 
 }
