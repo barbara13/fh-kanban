@@ -1,5 +1,4 @@
 package edu.fh.kanban.ui.dialog;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,15 +25,17 @@ public class Board_Preferences implements ActionListener{
 	JSpinner auswahl = new JSpinner();
 	
 	public void actionPerformed(ActionEvent e){
-		FormLayout formLayout = new FormLayout("p, 2dlu, 3cm, 2dlu, p, 2dlu, 1cm, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p,2dlu, p,2dlu, p ",  //Colums
+		FormLayout formLayout1 = new FormLayout("p, 2dlu, 3cm, 2dlu, p, 2dlu, 1cm, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p ,2dlu, p ",  //Colums
 											   "p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p");	//rows
-        FormLayout fl = new FormLayout("center:2cm, 2dlu, center:2cm, 2dlu, center:2cm, 2dlu, center:2cm",
-        								"p");
+        FormLayout formLayout2 = new FormLayout("center:2cm, 2dlu, center:2cm, 2dlu, center:2cm, 2dlu, center:2cm",
+        										"p");
+        FormLayout formLayout3 = new FormLayout("p, 2dlu, 3cm, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p, 2dlu, p ,2dlu, p ",
+        										"p");
         
 		CellConstraints cc = new CellConstraints();
-		fl.setColumnGroups(new int[][]{{1, 3, 5, 7}, {}});
+		formLayout2.setColumnGroups(new int[][]{{1, 3, 5, 7}, {}});
 		
-		DefaultFormBuilder bbutton = new DefaultFormBuilder(fl);
+		DefaultFormBuilder bbutton = new DefaultFormBuilder(formLayout2); //Neues Register für Farben
 		bbutton.setDefaultDialogBorder();
 		
 		bbutton.add(rot_Button, cc.xy(1, 1));
@@ -42,32 +43,41 @@ public class Board_Preferences implements ActionListener{
 		bbutton.add(gruen_Button, cc.xy(5, 1));
 		bbutton.add(blau_Button, cc.xy(7, 1));
                 
-        DefaultFormBuilder builder = new DefaultFormBuilder(formLayout);
+        DefaultFormBuilder builder = new DefaultFormBuilder(formLayout1);
         builder.setDefaultDialogBorder();
                       
         builder.addLabel(" Bordname:", cc.xy(1, 1));
-        builder.add(texteingabe_Bordname, cc.xy(3,1));//Textfeld Texteingabe	
+        builder.add(texteingabe_Bordname, cc.xy(3,1));		//Textfeld Texteingabe	
         
-        builder.addSeparator("Color", cc.xyw(1, 3, 11));
+        builder.addSeparator(" Color", cc.xyw(1, 3, 11));
         
         builder.add(bbutton.getPanel(), cc.xyw(1, 7, 11));
         
         builder.addSeparator(" Colums", cc.xyw(1, 9, 11) );
-        builder.addLabel("Name Colums:", cc.xy(1, 11));		//Label Name des Colums
-        builder.add(texteingabe_Colomsname, cc.xy(3, 11));//Textfeld_Texteingabe
-       	
-        builder.addLabel("Wip", cc.xy(5, 11));
-        builder.add(auswahl, cc.xy(7, 11));	//Erhöhen und senken der Wip
         
-        builder.add(plus_Button, cc.xy(9, 11));		//Plus Button um weitere Colums zu wählen
-        builder.add(minus_Button, cc.xy(11, 11));	//Minus Button um erstellte Buttons zu löschen
+        //formLayout3.setColumnGroups(new int[][]{{1,3,5,7,9,11},{}});
+        
+        DefaultFormBuilder bbbutton = new DefaultFormBuilder(formLayout3);	//AB HIER
+        bbbutton.setDefaultDialogBorder();
+        
+        bbbutton.addLabel(" Name Colums:", cc.xy(1, 1));	//Label Name des Colums
+        bbbutton.add(texteingabe_Colomsname, cc.xy(3, 1));  //Textfeld_Texteingabe
+       	
+        bbbutton.addLabel("Wip", cc.xy(5, 1));
+        bbbutton.add(auswahl, cc.xy(7, 1));					//Erhöhen und senken der Wip
+        
+        bbbutton.add(plus_Button, cc.xy(9, 1));				//Plus Button um weitere Colums zu wählen
+        bbbutton.add(minus_Button, cc.xy(11, 1));			//Minus Button um erstellte Buttons zu löschen //BIS HIER SEPERAT
                
         builder.add(new JButton("Abbrechen"), cc.xy(5, 13));
         builder.add(new JButton("Speichern"), cc.xy(9, 13));
         
+        builder.add(bbbutton.getPanel(), cc.xyw(1,11, 11));
+        
         JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.add(builder.getPanel(), BorderLayout.CENTER);
+       
         frame.setTitle("Teamproject 2013 - Kanban");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
