@@ -102,7 +102,7 @@ public class Kanban {
 		
 		JMenuItem card_preferences = new JMenuItem("Card Preferences");
 		card_preferences.addActionListener(new Card_Preferences());
-		card_preferences.doClick();
+		//card_preferences.doClick();
 		
 		JMenu file = new JMenu("File");
 		file.add(board_preferences);
@@ -131,7 +131,7 @@ public class Kanban {
 		frame.setSize(700, 500);
 		frame.setLocationByPlatform(true);
 		frame.add(pane);
-		//frame.setVisible(true);
+		frame.setVisible(true);
 		
 	}
 
