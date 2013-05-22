@@ -72,6 +72,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
+import edu.fh.kanban.ui.view.Backlog;
 import edu.fh.kanban.ui.dialog.Board_Preferences;
 import edu.fh.kanban.ui.dialog.Card_Preferences;
 import edu.fh.kanban.ui.view.BacklogView;
@@ -114,15 +115,18 @@ public class Kanban {
 		
 		View backlogView = new BacklogView();
 		View boardView = new BoardView();
-		
+                
+                Backlog backlog = new Backlog();
+                
 		BoardView bv = new BoardView();
 		
 		bv.boardy();
 	
 		JTabbedPane pane = new JTabbedPane();
-		pane.addTab("Backlog", backlogView.getComponent());
-		pane.addTab("Boad", boardView.getComponent());
-		
+		pane.addTab("Backlog", backlog.getComponent());
+		pane.addTab("Board", boardView.getComponent());
+		          
+                
 		JFrame frame = new JFrame();
 		frame.setJMenuBar(menubar);
 		frame.setLayout(new BorderLayout());
@@ -131,7 +135,7 @@ public class Kanban {
 		frame.setSize(700, 500);
 		frame.setLocationByPlatform(true);
 		frame.add(pane);
-		//frame.setVisible(true);
+		frame.setVisible(true);
 		
 	}
 

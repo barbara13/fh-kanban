@@ -11,14 +11,30 @@ import javax.swing.JTextField;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
 
 public class Backlog implements ActionListener{
-		
-	JTextField suche = new JTextField();
 
 	public void actionPerformed(ActionEvent e) {
-	FormLayout formLayout = new FormLayout("right:p, 2dlu, p:g, 2dlu, p, 2dlu, right:p, 2dlu, p:g",	//colums
+	
+	}
+   
+        public JComponent getComponent() {
+  
+            JPanel bl = new JPanel();
+            JTextField suche = new JTextField();
+            JLabel label_suche = new JLabel();
+            JSeparator separator = new JSeparator();
+            
+            label_suche.setText("Suche: ");
+            
+            
+        FormLayout formLayout = new FormLayout("right:p, 2dlu, p:g, 2dlu, p, 2dlu, right:p, 2dlu, p:g",	//colums
                                                 "p, 1dlu, p, 5dlu, p, 2dlu, p , 2dlu, p, 2dlu");		//rows
+        bl.setLayout(formLayout);
         
         CellConstraints cc = new CellConstraints();
        
@@ -27,21 +43,13 @@ public class Backlog implements ActionListener{
         DefaultFormBuilder builder = new DefaultFormBuilder(formLayout);
         builder.setDefaultDialogBorder();
                 
+       
+       bl.add(label_suche, cc.xy(7, 1));
+       bl.add(suche, cc.xy(9, 1));
+       bl.add(separator, cc.xyw(1, 5, 9));
         
-        builder.addLabel("Suche: ", cc.xy(7, 1));
-        builder.add(suche, cc.xy(9, 1));
-        builder.addSeparator("",cc.xyw(1, 5, 9));
         
-        
-        JFrame frame = new JFrame();
-        frame.setLayout(new BorderLayout());
-        frame.add(builder.getPanel(), BorderLayout.CENTER);
-        
-        frame.setTitle("Backlog");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 500);
-        frame.setLocationByPlatform(true);
-        frame.setVisible(true);
+        return bl;
 	}
 	
 }
