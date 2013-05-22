@@ -14,7 +14,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
-public class Card_Preferences implements ActionListener{
+public class Card_Create implements ActionListener{
 	
 	JTextField ticketID_textfield = new JTextField();
 	JTextField aufwand_textfield = new JTextField();

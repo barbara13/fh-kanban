@@ -72,9 +72,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
-import edu.fh.kanban.ui.view.Backlog;
 import edu.fh.kanban.ui.dialog.Board_Preferences;
-import edu.fh.kanban.ui.dialog.Card_Preferences;
+import edu.fh.kanban.ui.dialog.Card_Create;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.View;
@@ -101,9 +100,9 @@ public class Kanban {
 		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
 		board_preferences.addActionListener(new Board_Preferences());
 		
-		JMenuItem card_preferences = new JMenuItem("Card Preferences");
-		card_preferences.addActionListener(new Card_Preferences());
-		//card_preferences.doClick();
+		JMenuItem card_preferences = new JMenuItem("Ticket Erstellen");
+		card_preferences.addActionListener(new Card_Create());
+		//Card_Create.doClick();
 		
 		JMenu file = new JMenu("File");
 		file.add(board_preferences);
@@ -113,20 +112,17 @@ public class Kanban {
 		menubar.add(file);
 		
 		
-		//View backlogView = new BacklogView();
+		View backlogView = new BacklogView();
 		View boardView = new BoardView();
-                
-                Backlog backlog = new Backlog();
-                
+		
 		BoardView bv = new BoardView();
 		
 		bv.boardy();
 	
 		JTabbedPane pane = new JTabbedPane();
-		pane.addTab("Backlog", backlog.getComponent());
-		pane.addTab("Board", boardView.getComponent());
-         
-                
+		pane.addTab("Backlog", backlogView.getComponent());
+		pane.addTab("Boad", boardView.getComponent());
+		
 		JFrame frame = new JFrame();
 		frame.setJMenuBar(menubar);
 		frame.setLayout(new BorderLayout());
