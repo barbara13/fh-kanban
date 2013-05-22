@@ -1,7 +1,6 @@
 package edu.fh.kanban.ui.dialog;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,9 +25,8 @@ public class Card_Preferences implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		FormLayout formLayout = new FormLayout("right:p, 2dlu, 5cm, 2cm, p, 4.8cm, right:p, 2dlu, 2cm",	//colums
-											   "p, 1dlu, p, 5dlu, p, 2dlu, p:g, 2dlu, p");							//rows
+											   "p, 1dlu, p, 5dlu, p, 2dlu, p:g, 2dlu, p");				//rows
         CellConstraints cc = new CellConstraints();
-        //formLayout.setColumnGroups(new int[][]{{1, 7}, {3, 9}});
         
         ButtonBarBuilder2 buttonbuilder = ButtonBarBuilder2.createLeftToRightBuilder();
         buttonbuilder.addButton(new JButton[]{create = new JButton("create"), cancel = new JButton("cancel")});
