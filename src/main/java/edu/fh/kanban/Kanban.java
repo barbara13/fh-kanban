@@ -113,7 +113,7 @@ public class Kanban {
 		menubar.add(file);
 		
 		
-		View backlogView = new BacklogView();
+		//View backlogView = new BacklogView();
 		View boardView = new BoardView();
                 
                 Backlog backlog = new Backlog();
@@ -125,7 +125,7 @@ public class Kanban {
 		JTabbedPane pane = new JTabbedPane();
 		pane.addTab("Backlog", backlog.getComponent());
 		pane.addTab("Board", boardView.getComponent());
-		          
+         
                 
 		JFrame frame = new JFrame();
 		frame.setJMenuBar(menubar);
