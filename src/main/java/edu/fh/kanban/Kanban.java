@@ -136,8 +136,8 @@ public class Kanban {
 		frame.setLocationByPlatform(true);
 		frame.add(pane);
 		frame.setVisible(true);
-		
+                
 	}
-
+        
 }
 //>>>>>>> 54f3450e2ac8600e56ebaf1ce39262460486c810
