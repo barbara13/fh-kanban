@@ -1,7 +1,6 @@
 package edu.fh.kanban.ui.dialog;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,9 +25,8 @@ public class Card_Preferences implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) {
 		FormLayout formLayout = new FormLayout("right:p, 2dlu, 5cm, 2cm, p, 4.8cm, right:p, 2dlu, 2cm",	//colums
-											   "p, 1dlu, p, 5dlu, p, 2dlu, p");							//rows
+											   "p, 1dlu, p, 5dlu, p, 2dlu, p:g, 2dlu, p");				//rows
         CellConstraints cc = new CellConstraints();
-        //formLayout.setColumnGroups(new int[][]{{1, 7}, {3, 9}});
         
         ButtonBarBuilder2 buttonbuilder = ButtonBarBuilder2.createLeftToRightBuilder();
         buttonbuilder.addButton(new JButton[]{create = new JButton("create"), cancel = new JButton("cancel")});
@@ -46,12 +44,12 @@ public class Card_Preferences implements ActionListener{
         builder.addSeparator("Beschreibung", cc.xyw(1, 5, 9));
         builder.add(beschreibung_text, cc.xyw(1, 7, 9));
         
-        beschreibung_text.setBackground(Color.gray);
+        builder.add(buttonbuilder.getPanel(), cc.xyw(6, 9, 4));
         
         JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.add(builder.getPanel(), BorderLayout.CENTER);
-        frame.add(buttonbuilder.getPanel(), BorderLayout.SOUTH);
+        //frame.add(buttonbuilder.getPanel(), BorderLayout.SOUTH);
         frame.setTitle("Ticket Erzeugen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
