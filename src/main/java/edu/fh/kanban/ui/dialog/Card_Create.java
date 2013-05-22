@@ -24,9 +24,18 @@ public class Card_Create implements ActionListener{
 	JButton create, cancel;
 	
 	public void actionPerformed(ActionEvent e) {
-		FormLayout formLayout = new FormLayout("right:p, 2dlu, 5cm, 2cm, p, 4.8cm, right:p, 2dlu, 2cm",	//colums
-											   "p, 1dlu, p, 5dlu, p, 2dlu, p:g, 2dlu, p");				//rows
+		FormLayout formLayout = new FormLayout("right:p, 2dlu, 5cm, p:g, p, p:g, p",		//colums
+											   "p, 1dlu, p, 5dlu, p, 2dlu, p:g, 2dlu, p");	//rows
+		FormLayout aufwandwert = new FormLayout("right:p, 2dlu, 2cm", "p, 2dlu, p");
         CellConstraints cc = new CellConstraints();
+		
+		DefaultFormBuilder aufwandwert_builder = new DefaultFormBuilder(aufwandwert);
+		aufwandwert_builder.setDefaultDialogBorder();
+        
+        aufwandwert_builder.addLabel("Aufwand:", cc.xy(1, 1));
+        aufwandwert_builder.add(aufwand_textfield, cc.xy(3, 1));
+        aufwandwert_builder.addLabel("Wert:", cc.xy(1, 3));
+        aufwandwert_builder.add(wert_textfield, cc.xy(3, 3));
         
         ButtonBarBuilder2 buttonbuilder = ButtonBarBuilder2.createLeftToRightBuilder();
         buttonbuilder.addButton(new JButton[]{create = new JButton("create"), cancel = new JButton("cancel")});
@@ -37,14 +46,11 @@ public class Card_Create implements ActionListener{
         builder.addLabel("Name:", cc.xy(1, 1));
         builder.add(ticketID_textfield, cc.xy(3, 1));
         builder.add(farb_button, cc.xy(5, 1));
-        builder.addLabel("Aufwand", cc.xy(7, 1));
-        builder.add(aufwand_textfield, cc.xy(9, 1));
-        builder.addLabel("Wert", cc.xy(7, 3));
-        builder.add(wert_textfield, cc.xy(9, 3));
-        builder.addSeparator("Beschreibung", cc.xyw(1, 5, 9));
-        builder.add(beschreibung_text, cc.xyw(1, 7, 9));
+        builder.add(aufwandwert_builder.getPanel(), cc.xy(7, 1));
+        builder.addSeparator("Beschreibung", cc.xyw(1, 5, 7));
+        builder.add(beschreibung_text, cc.xyw(1, 7, 7));
         
-        builder.add(buttonbuilder.getPanel(), cc.xyw(6, 9, 4));
+        builder.add(buttonbuilder.getPanel(), cc.xyw(1, 9, 7));
         
         JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
