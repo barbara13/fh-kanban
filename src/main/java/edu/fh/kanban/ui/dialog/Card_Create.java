@@ -20,7 +20,7 @@ public class Card_Create implements ActionListener{
 	JTextField aufwand_textfield = new JTextField();
 	JTextField wert_textfield = new JTextField();
 	JTextArea beschreibung_text = new JTextArea();
-	JButton farb_button = new JButton("Farbe");
+	JButton state_button = new JButton("Status");
 	JButton create, cancel;
 	
 	public void actionPerformed(ActionEvent e) {
@@ -55,7 +55,6 @@ public class Card_Create implements ActionListener{
         JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
         frame.add(builder.getPanel(), BorderLayout.CENTER);
-        //frame.add(buttonbuilder.getPanel(), BorderLayout.SOUTH);
         frame.setTitle("Ticket Erzeugen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
