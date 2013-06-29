@@ -100,7 +100,7 @@ public class Kanban {
 		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
 		board_preferences.addActionListener(new Board_Preferences());
 		
-		JMenuItem card_preferences = new JMenuItem("Ticket Erstellen");
+		JMenuItem card_preferences = new JMenuItem("Card properties");
 		card_preferences.addActionListener(new Card_Create());
 		//Card_Create.doClick();
 		

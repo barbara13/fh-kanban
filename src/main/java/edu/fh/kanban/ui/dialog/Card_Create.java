@@ -45,7 +45,7 @@ public class Card_Create implements ActionListener{
                 
         builder.addLabel("Name:", cc.xy(1, 1));
         builder.add(ticketID_textfield, cc.xy(3, 1));
-        builder.add(farb_button, cc.xy(5, 1));
+        //builder.add(farb_button, cc.xy(5, 1));
         builder.add(aufwandwert_builder.getPanel(), cc.xy(7, 1));
         builder.addSeparator("Beschreibung", cc.xyw(1, 5, 7));
         builder.add(beschreibung_text, cc.xyw(1, 7, 7));
