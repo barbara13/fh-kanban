@@ -101,8 +101,9 @@ public class Kanban {
 		board_preferences.addActionListener(new Board_Preferences());
 		
 		JMenuItem card_preferences = new JMenuItem("Card properties");
-		card_preferences.addActionListener(new Card_Create());
-		//Card_Create.doClick();
+		Card_Create frame1 = new Card_Create();
+		frame1.setVisible(true);
+		//card_preferences.addActionListener(new Card_Create());
 		
 		JMenu file = new JMenu("File");
 		file.add(board_preferences);
