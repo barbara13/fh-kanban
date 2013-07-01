@@ -16,6 +16,11 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
+/**
+ * 
+ * @author Maxim
+ *
+ */
 public class CardCreateView extends JFrame implements View{
 	/**
 	 * 
@@ -33,6 +38,7 @@ public class CardCreateView extends JFrame implements View{
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
 	}
+	
 	private JComponent init(){
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.UNRELATED_GAP_COLSPEC,
