@@ -77,6 +77,7 @@ import edu.fh.kanban.ui.dialog.Card_Create;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.View;
+import edu.fh.kanban.ui.view.Board;
 
 public class Kanban {
 
@@ -100,9 +101,10 @@ public class Kanban {
 		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
 		board_preferences.addActionListener(new Board_Preferences());
 		
-		JMenuItem card_preferences = new JMenuItem("Ticket Erstellen");
-		card_preferences.addActionListener(new Card_Create());
-		//Card_Create.doClick();
+		JMenuItem card_preferences = new JMenuItem("Card properties");
+		Card_Create frame1 = new Card_Create();
+		frame1.setVisible(true);
+		//card_preferences.addActionListener(new Card_Create());
 		
 		JMenu file = new JMenu("File");
 		file.add(board_preferences);
@@ -114,6 +116,8 @@ public class Kanban {
 		
 		View backlogView = new BacklogView();
 		View boardView = new BoardView();
+                
+                View board = new Board();
 		
 		BoardView bv = new BoardView();
 		
@@ -121,7 +125,7 @@ public class Kanban {
 	
 		JTabbedPane pane = new JTabbedPane();
 		pane.addTab("Backlog", backlogView.getComponent());
-		pane.addTab("Boad", boardView.getComponent());
+		pane.addTab("Board", board.getComponent());
 		
 		JFrame frame = new JFrame();
 		frame.setJMenuBar(menubar);
