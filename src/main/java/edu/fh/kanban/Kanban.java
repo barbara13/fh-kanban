@@ -77,6 +77,7 @@ import edu.fh.kanban.ui.dialog.Card_Create;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.View;
+import edu.fh.kanban.ui.view.Board;
 
 public class Kanban {
 
@@ -115,6 +116,8 @@ public class Kanban {
 		
 		View backlogView = new BacklogView();
 		View boardView = new BoardView();
+                
+                View board = new Board();
 		
 		BoardView bv = new BoardView();
 		
@@ -122,7 +125,7 @@ public class Kanban {
 	
 		JTabbedPane pane = new JTabbedPane();
 		pane.addTab("Backlog", backlogView.getComponent());
-		pane.addTab("Boad", boardView.getComponent());
+		pane.addTab("Board", board.getComponent());
 		
 		JFrame frame = new JFrame();
 		frame.setJMenuBar(menubar);
