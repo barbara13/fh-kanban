@@ -51,7 +51,7 @@ public class Kanban {
 			public void actionPerformed(ActionEvent e) {
 				CardCreateView newCard = new CardCreateView();
 				newCard.getComponent();
-				//newCard.setVisible(true);
+				newCard.setVisible(true);
 			}
 		});
 		
