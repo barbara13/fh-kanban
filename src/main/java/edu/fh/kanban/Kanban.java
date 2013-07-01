@@ -74,10 +74,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
-import edu.fh.kanban.ui.dialog.Board_Preferences;
 import edu.fh.kanban.ui.dialog.Card_Create;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
+import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.View;
 //import edu.fh.kanban.ui.view.Board;
 
