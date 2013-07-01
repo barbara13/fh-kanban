@@ -1,4 +1,4 @@
-package edu.fh.kanban.ui.dialog;
+package edu.fh.kanban.ui.view;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import java.awt.TextArea;
 import java.awt.Rectangle;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JToggleButton;
 import javax.swing.ButtonGroup;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -15,7 +16,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
-public class Card_Create extends JFrame{
+public class CardCreateView extends JFrame implements View{
 	/**
 	 * 
 	 */
@@ -26,9 +27,13 @@ public class Card_Create extends JFrame{
 	private TextArea textArea;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
-	public Card_Create(){
+	public CardCreateView(){
+		super("New Card");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 700, 500));
+		setLocationByPlatform(true);
+	}
+	private JComponent init(){
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.UNRELATED_GAP_COLSPEC,
 				ColumnSpec.decode("48px"),
@@ -115,5 +120,11 @@ public class Card_Create extends JFrame{
 		
 		JButton btnCreate = new JButton("Create");
 		getContentPane().add(btnCreate, "8, 14, 3, 1, fill, top");
+		
+		return (JComponent) getContentPane();
+	}
+
+	public JComponent getComponent() {
+		return init();
 	}
 }
