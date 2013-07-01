@@ -13,17 +13,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
-<<<<<<< HEAD
-import edu.fh.kanban.ui.dialog.Card_Create;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.BoardPreferencesView;
-=======
-import edu.fh.kanban.ui.dialog.Board_Preferences;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
->>>>>>> f2e9b688e96817e9baec4e08a3ad41d03bc2d123
 import edu.fh.kanban.ui.view.View;
 //import edu.fh.kanban.ui.view.Board;
 
@@ -49,7 +44,7 @@ public class Kanban {
 		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
 		board_preferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Board_Preferences().setVisible(true);
+				//new Board_Preferences().setVisible(true);
 			}
 		});
 		
