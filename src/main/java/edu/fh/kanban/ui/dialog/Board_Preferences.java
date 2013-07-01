@@ -11,6 +11,9 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 public class Board_Preferences implements ActionListener{
+	
+	private JButton abbrechen, speichern;
+	private JFrame JFrame_BoardPreferences;
 		
 	JButton rot_Button = new JButton("rot");
 	JButton gelb_Button = new JButton("gelb");
@@ -70,7 +73,19 @@ public class Board_Preferences implements ActionListener{
         bbbutton.add(minus_Button, cc.xy(11, 1));			//Minus Button um erstellte Buttons zu löschen //BIS HIER SEPERAT
                
         builder.add(new JButton("Abbrechen"), cc.xy(5, 13));
+        builder.addActionListener(new ActionListener(){
+        	
+        	public void actionPerformed(new ActionEvent e){
+        		JFrame_BoardPreferences.dispose();
+        		}
+        }
         builder.add(new JButton("Speichern"), cc.xy(9, 13));
+        builder.addActionListener(new ActionListener(){
+        	
+        	public void actionPerformed(new ActionEvent e){
+        		JFrame_BoardPreferences.dispose();
+        	}
+        }
         
         builder.add(bbbutton.getPanel(), cc.xyw(1,11, 11));
         
@@ -78,11 +93,12 @@ public class Board_Preferences implements ActionListener{
         frame.setLayout(new BorderLayout());
         frame.add(builder.getPanel(), BorderLayout.CENTER);
        
-        frame.setTitle("Teamproject 2013 - Kanban");
+        frame.setTitle("Board_Preferences erstellen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700, 500);
         frame.setLocationByPlatform(true);
-        frame.setVisible(true);    
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 	}
         }
 	
