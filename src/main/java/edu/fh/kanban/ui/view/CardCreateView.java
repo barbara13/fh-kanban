@@ -20,7 +20,7 @@ public class CardCreateView extends JFrame implements View{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;	//Serial
+	private static final long serialVersionUID = 1L;
 	private JTextField txtCardId;
 	private JTextField txtAufwand;
 	private JTextField txtWert;
