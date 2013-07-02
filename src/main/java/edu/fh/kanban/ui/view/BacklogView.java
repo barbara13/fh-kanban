@@ -2,12 +2,63 @@ package edu.fh.kanban.ui.view;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
 
 public class BacklogView implements View{
+	private JTextField Searchfield;
 
+	/**
+	 * @author Lorenz
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	public JComponent getComponent() {
-		return new JPanel();
+		JPanel panel = new JPanel();
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(62dlu;pref)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(121dlu;pref)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(64dlu;pref):grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(67dlu;pref)"),
+				FormFactory.RELATED_GAP_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(14dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(16dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(54dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(44dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(48dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,}));
+		
+		Searchfield = new JTextField();
+		Searchfield.setText("Search");
+		panel.add(Searchfield, "6, 2, 3, 1, fill, default");
+		Searchfield.setColumns(10);
+		
+		JLabel lblSortBy = new JLabel("Sort by");
+		panel.add(lblSortBy, "6, 4, right, default");
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Creation time", "Headline", "Value", "Size"}));
+		comboBox.setToolTipText("");
+		panel.add(comboBox, "8, 4, right, default");
+		return panel;
 	}
 
 	

@@ -15,9 +15,6 @@ import javax.swing.UIManager;
 
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
-import edu.fh.kanban.ui.view.BoardPreferencesView;
-import edu.fh.kanban.ui.view.BacklogView;
-import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
 import edu.fh.kanban.ui.view.View;
 //import edu.fh.kanban.ui.view.Board;
@@ -67,12 +64,6 @@ public class Kanban {
 		
 		View backlogView = new BacklogView();
 		View boardView = new BoardView();
-                
-                //View board = new Board();
-		
-		BoardView bv = new BoardView();
-		
-		bv.boardy();
 	
 		JTabbedPane pane = new JTabbedPane();
 		pane.addTab("Backlog", backlogView.getComponent());
