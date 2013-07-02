@@ -4,6 +4,7 @@ package edu.fh.kanban;
 import edu.fh.kanban.database.Board;
 import edu.fh.kanban.database.Card;
 import edu.fh.kanban.database.Column;
+import edu.fh.kanban.database.DatabaseManager;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,13 +33,14 @@ public class Kanban {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-    
-            edu.fh.kanban.database.DatabaseManager.createConnection();
-                    
+
+            
+            DatabaseManager.createConnection();
+            
             /* Initiieren der Objekte */
             Board b = new Board();
             Card ca = new Card();
-            Column co = new Column();
+            //Column co = new Column();
 
             //Wird die id des zuletzt zugefügten Datensatzes gespeichert
             //Board
