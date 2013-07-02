@@ -1,4 +1,4 @@
-
+//Test für Malte
 package edu.fh.kanban;
 
 import java.awt.BorderLayout;
