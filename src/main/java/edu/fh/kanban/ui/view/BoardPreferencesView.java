@@ -3,6 +3,10 @@ package edu.fh.kanban.ui.view;
 import javax.swing.JFrame;
 
 import java.awt.Rectangle;
+import java.awt.Scrollbar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -19,7 +23,13 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JScrollBar;
 
+/**
+ * 
+ * @author Babsi
+ *
+ */
 public class BoardPreferencesView extends JFrame implements View{
 	
 	/**
@@ -29,6 +39,10 @@ public class BoardPreferencesView extends JFrame implements View{
 	private JTextField txtName;
 	private JTextField txtColumsname;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	
+	private JPanel panel;
+	
+	private int i=2;
 
 	public BoardPreferencesView(){
 		super("Board Preferences");
@@ -99,7 +113,21 @@ public class BoardPreferencesView extends JFrame implements View{
 		JSeparator separator_1 = new JSeparator();
 		getContentPane().add(separator_1, "4, 8, 11, 1, fill, center");
 		
-		JPanel panel = new JPanel();
+		ColumsPanel();
+		
+		JButton btnSpeichern = new JButton("Speichern");
+		getContentPane().add(btnSpeichern, "12, 12, fill, top");
+		
+		JButton btnAbbrechen = new JButton("Abbrechen");
+		getContentPane().add(btnAbbrechen, "14, 12, fill, top");	
+	}
+
+	public JComponent getComponent() {
+		return null;
+	}
+	
+	private void ColumsPanel(){
+		panel = new JPanel();
 		getContentPane().add(panel, "2, 10, 13, 1, fill, fill");
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -113,40 +141,126 @@ public class BoardPreferencesView extends JFrame implements View{
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("44px"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("44px"),},
+				ColumnSpec.decode("44px"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
 			new RowSpec[] {
+				RowSpec.decode("31px"),
+				RowSpec.decode("23px"),
+				RowSpec.decode("31px"),
+				RowSpec.decode("23px"),
+				RowSpec.decode("31px"),
+				RowSpec.decode("23px"),
+				RowSpec.decode("31px"),
+				RowSpec.decode("23px"),
+				RowSpec.decode("31px"),
+				RowSpec.decode("23px"),
+				RowSpec.decode("31px"),
+				RowSpec.decode("23px"),
+				RowSpec.decode("31px"),
+				RowSpec.decode("23px"),
+				RowSpec.decode("31px"),
+				RowSpec.decode("23px"),
+				RowSpec.decode("31px"),
+				RowSpec.decode("23px"),
 				RowSpec.decode("31px"),
 				RowSpec.decode("23px"),}));
 		
-		JLabel lblName_1 = DefaultComponentFactory.getInstance().createLabel("Name");
-		panel.add(lblName_1, "2, 2, fill, center");
+		Erweiterung(i);
+		i+=2;
+		
+//		for(int u=0; i<5; u++){
+//			Erweiterung(getI());
+//			setI();
+//			panel.repaint();
+//		}
+		
+	}
+	private void Erweiterung(int i){
+		//JLabel lblName_1 = DefaultComponentFactory.getInstance().createLabel("Name");
+		panel.add(new JLabel("Name"), "2, "+i+", fill, center");
 		
 		txtColumsname = new JTextField();
-		panel.add(txtColumsname, "4, 2, fill, center");
+		panel.add(txtColumsname, "4, "+i+", fill, center");
 		txtColumsname.setText("");
 		txtColumsname.setColumns(10);
 		
-		JLabel lblWip = DefaultComponentFactory.getInstance().createLabel("Wip");
-		panel.add(lblWip, "6, 2, fill, center");
+		//JLabel lblWip = DefaultComponentFactory.getInstance().createLabel("Wip");
+		panel.add(new JLabel("Wip"), "6, "+i+", fill, center");
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
-		panel.add(spinner, "8, 2, fill, center");
+		panel.add(spinner, "8, "+i+", fill, center");
 		
 		JButton button = new JButton("+");
-		panel.add(button, "10, 2, fill, top");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(getI()<21){
+					Erweiterung(getI());
+					incI();
+					panel.updateUI();
+				}else
+				System.out.println("i zu groß ");
+			}
+		});
+		panel.add(button, "10, "+i+", fill, top");
 		
 		JButton button_1 = new JButton("-");
-		panel.add(button_1, "12, 2, fill, top");
-		
-		JButton btnSpeichern = new JButton("Speichern");
-		getContentPane().add(btnSpeichern, "12, 12, fill, top");
-		
-		JButton btnAbbrechen = new JButton("Abbrechen");
-		getContentPane().add(btnAbbrechen, "14, 12, fill, top");	
-	}
+		button_1.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				if(getI()>2){
+					Loeschung();
+					decI();
+				}else
+					System.out.println("Kann nicht geloescht werden");	//Funktion löschen
 
-	public JComponent getComponent() {
-		return null;
+				
+				//
+				
+			}
+		});
+		panel.add(button_1, "12, "+i+", fill, top");
+		
+		JScrollBar scrollBar = new JScrollBar();	//Wie kann man bei Scollbar in Panel einbinden???
+		panel.add(scrollBar, "34, 1, 1, 8");
+		
+		
+	}
+	
+	private void Loeschung(){
+		
+
+		
+	}
+	
+	public int getI(){
+		return this.i;
+	}
+	public void incI(){
+		this.i += 2;
+	}
+	public void decI(){
+		this.i -= 2;
 	}
 }
