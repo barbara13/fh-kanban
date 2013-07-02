@@ -2,7 +2,12 @@ package edu.fh.kanban.ui.view;
 
 import javax.swing.JFrame;
 
+import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.Scrollbar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -19,7 +24,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
+/**
+ * 
+ * @author Babsi
+ *
+ */
 public class BoardPreferencesView extends JFrame implements View{
 	
 	/**
@@ -27,15 +39,19 @@ public class BoardPreferencesView extends JFrame implements View{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txtName;
-	private JTextField txtColumsname;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JPanel panel;
+	private JScrollPane scrollPane;
+	
+	private int i=2;
+	private JTextField txtColumname;
 
 	public BoardPreferencesView(){
 		super("Board Preferences");
 		setBounds(new Rectangle(0, 0, 700, 500));
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("44px"),
+				ColumnSpec.decode("44px:grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("69px"),
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -58,7 +74,7 @@ public class BoardPreferencesView extends JFrame implements View{
 				RowSpec.decode("31px"),
 				RowSpec.decode("14px"),
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("213px"),
+				RowSpec.decode("213px:grow"),
 				RowSpec.decode("25px"),
 				RowSpec.decode("23px"),}));
 		
@@ -99,45 +115,47 @@ public class BoardPreferencesView extends JFrame implements View{
 		JSeparator separator_1 = new JSeparator();
 		getContentPane().add(separator_1, "4, 8, 11, 1, fill, center");
 		
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, "2, 10, 13, 1, fill, fill");
+		scrollPane = new JScrollPane();
+		getContentPane().add(scrollPane, "2, 10, 13, 1, fill, fill");
+		
+		panel = new JPanel();
+		scrollPane.setViewportView(panel);
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("44px"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("94px"),
+				ColumnSpec.decode("119px"),
+				ColumnSpec.decode("28px"),
+				ColumnSpec.decode("22px"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("44px"),
+				ColumnSpec.decode("56px"),
+				ColumnSpec.decode("69px"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("44px"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("44px"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("44px"),},
+				ColumnSpec.decode("69px"),},
 			new RowSpec[] {
-				RowSpec.decode("31px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("23px"),}));
 		
-		JLabel lblName_1 = DefaultComponentFactory.getInstance().createLabel("Name");
-		panel.add(lblName_1, "2, 2, fill, center");
-		
-		txtColumsname = new JTextField();
-		panel.add(txtColumsname, "4, 2, fill, center");
-		txtColumsname.setText("");
-		txtColumsname.setColumns(10);
-		
-		JLabel lblWip = DefaultComponentFactory.getInstance().createLabel("Wip");
-		panel.add(lblWip, "6, 2, fill, center");
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
-		panel.add(spinner, "8, 2, fill, center");
-		
-		JButton button = new JButton("+");
-		panel.add(button, "10, 2, fill, top");
-		
-		JButton button_1 = new JButton("-");
-		panel.add(button_1, "12, 2, fill, top");
+		ColumsPanel();
 		
 		JButton btnSpeichern = new JButton("Speichern");
 		getContentPane().add(btnSpeichern, "12, 12, fill, top");
@@ -148,5 +166,84 @@ public class BoardPreferencesView extends JFrame implements View{
 
 	public JComponent getComponent() {
 		return null;
+	}
+	
+	private void ColumsPanel(){
+		
+		System.out.println("i = " + i);
+		
+		Erweiterung(i);
+		i+=2;
+		
+//		for(int u=0; i<5; u++){
+//			Erweiterung(getI());
+//			setI();
+//			panel.repaint();
+//		}
+		
+	}
+	private void Erweiterung(int i){
+		
+//		JLabel lblName_1 = DefaultComponentFactory.getInstance().createLabel("Name:");
+		panel.add(new JLabel("Name:"), "2, "+i+", fill, center");
+		
+		txtColumname = new JTextField();
+		panel.add(txtColumname, "4, "+i+", fill, center");
+		txtColumname.setColumns(10);
+		
+		JLabel lblWip = new JLabel("Wip:");
+		panel.add(lblWip, "6, "+i+", right, center");
+		
+		JSpinner spinner = new JSpinner();
+		panel.add(spinner, "8, "+i+", fill, center");
+		
+		JButton btnPlus = new JButton("+");
+		btnPlus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(getI() < 21){
+					Erweiterung(getI());
+					incI();
+					panel.updateUI();
+				}else System.out.println("I zu gross");
+			}
+		});
+		panel.add(btnPlus, "10, "+i+", fill, top");
+		
+		JButton btnMinus = new JButton("-");
+		btnMinus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				if(get)
+			}
+		});
+		panel.add(btnMinus, "12, "+i+", fill, top");
+		
+//		JScrollPane scrollPane = new JScrollPane();
+//		panel.add(scrollPane, "34, 1, 1, 8, fill, fill");
+//		JScrollPane scrollPane = new JScrollPane(panel);        
+//        scrollPane.setPreferredSize(new Dimension(250, 145));
+//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        
+//        add(panel);
+//        panel.add(scrollPane);
+//        setContentPane();
+//        setVisible(true);
+		
+		
+	}
+	
+	private void Loeschung(){
+		
+
+		
+	}
+	
+	public int getI(){
+		return this.i;
+	}
+	public void incI(){
+		this.i += 2;
+	}
+	public void decI(){
+		this.i -= 2;
 	}
 }

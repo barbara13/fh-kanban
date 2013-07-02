@@ -14,6 +14,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
 import edu.fh.kanban.ui.view.BacklogView;
+import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
 import edu.fh.kanban.ui.view.View;
@@ -40,7 +41,7 @@ public class Kanban {
 		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
 		board_preferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//new Board_Preferences().setVisible(true);
+				new BoardPreferencesView().setVisible(true);
 			}
 		});
 		
