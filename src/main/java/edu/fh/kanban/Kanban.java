@@ -26,43 +26,18 @@ import java.sql.ResultSet;
 
 public class Kanban {
 
-            
+    
 	static Logger LOGGER = Logger.getLogger(Kanban.class.getName());
-	
+
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	
+        public static void main(String[] args) {
 
-            
+
             DatabaseManager.createConnection();
-            
-            /* Initiieren der Objekte */
-            Board b = new Board();
-            Card ca = new Card();
-            //Column co = new Column();
 
-            //Wird die id des zuletzt zugefügten Datensatzes gespeichert
-            //Board
-            int b_id;
-            //Column
-            int co_id;
-            //Card
-            int ca_id;
-
-            ResultSet rs;
-            //db.createConnection();
-
-            //Board erstellen
-            //b_id = b.insertRow("Board", "red");
-
-            //Spalte erstellen
-            //co_id = co.insertRow(b_id, "Next", 2);
-
-            //Karte erstellen
-            //ca_id = ca.insertRow(co_id, "Aufgabe", "Beschreibung", 5, 2, "Fixed Date");
-    
-    
             
             
 		LOGGER.info("Starting kanban app.");

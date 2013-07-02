@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Tue Jul 02 20:57:58 CEST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-013f-a0bf-97b7-000000c76a98 
+on database directory C:\Users\Ronald\Documents\NetBeansProjects\fh-kanban\db with class loader sun.misc.Launcher$AppClassLoader@107077e 
+Loaded from file:/C:/Users/Ronald/.m2/repository/1/Derby/1/Derby-1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_25-b17
+user.dir=C:\Users\Ronald\Documents\NetBeansProjects\fh-kanban
+os.name=Windows 7
+os.arch=x86
+os.version=6.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

@@ -29,10 +29,11 @@ public class Column implements DBFunctions{
      * @param w_ip
      * @return Die Id der hinzugefügten Datensatzes
     
+    */
     public int insertRow(int b_id, String name, int w_ip) {
         return db.executeUpdateStatement("INSERT INTO Col (B_id, Name, Wip) VALUES("+b_id+",'"+name+"',"+w_ip+")");
     }
-     */
+     
     @Override
     public void deleteRow(int id) {
         db.executeUpdateStatement("DELETE FROM Col WHERE Co_id = "+id);
