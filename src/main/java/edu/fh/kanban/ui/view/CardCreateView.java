@@ -81,10 +81,10 @@ public class CardCreateView extends JFrame implements View{
 				RowSpec.decode("23px"),}));
 		
 		JLabel lblCardId = new JLabel("Card ID:");
-		getContentPane().add(lblCardId, "2, 2, 3, 1, left, center");
+		getContentPane().add(lblCardId, "2, 2, right, center");
 		
 		txtCardId = new JTextField();
-		getContentPane().add(txtCardId, "6, 2, 5, 1, left, top");
+		getContentPane().add(txtCardId, "4, 2, 7, 1, left, top");
 		txtCardId.setColumns(10);
 		
 		JLabel lblAufwand = new JLabel("Aufwand:");
@@ -110,7 +110,6 @@ public class CardCreateView extends JFrame implements View{
 				getContentPane().setBackground(Color.RED);
 			}
 		});
-		
 		buttonGroup.add(tglbtnRot);
 		getContentPane().add(tglbtnRot, "4, 8, 5, 1, fill, top");
 		
@@ -120,6 +119,7 @@ public class CardCreateView extends JFrame implements View{
 				getContentPane().setBackground(Color.YELLOW);
 			}
 		});
+		tglbtnGelb.doClick();
 		buttonGroup.add(tglbtnGelb);
 		getContentPane().add(tglbtnGelb, "10, 8, fill, top");
 		

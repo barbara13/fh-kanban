@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 /**
  * 
@@ -163,7 +164,7 @@ public class BoardPreferencesView extends JFrame implements View{
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC,},
+				ColumnSpec.decode("default:grow"),},
 			new RowSpec[] {
 				RowSpec.decode("31px"),
 				RowSpec.decode("23px"),
@@ -172,7 +173,7 @@ public class BoardPreferencesView extends JFrame implements View{
 				RowSpec.decode("31px"),
 				RowSpec.decode("23px"),
 				RowSpec.decode("31px"),
-				RowSpec.decode("23px"),
+				RowSpec.decode("23px:grow"),
 				RowSpec.decode("31px"),
 				RowSpec.decode("23px"),
 				RowSpec.decode("31px"),
@@ -242,8 +243,8 @@ public class BoardPreferencesView extends JFrame implements View{
 		});
 		panel.add(button_1, "12, "+i+", fill, top");
 		
-		JScrollBar scrollBar = new JScrollBar();	//Wie kann man bei Scollbar in Panel einbinden???
-		panel.add(scrollBar, "34, 1, 1, 8");
+		JScrollPane scrollPane = new JScrollPane();
+		panel.add(scrollPane, "34, 1, 1, 8, fill, fill");
 		
 		
 	}
