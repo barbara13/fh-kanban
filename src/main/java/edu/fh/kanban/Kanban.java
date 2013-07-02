@@ -14,6 +14,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
 import edu.fh.kanban.ui.view.BacklogView;
+import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
 import edu.fh.kanban.ui.view.View;
