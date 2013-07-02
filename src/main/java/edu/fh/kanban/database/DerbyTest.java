@@ -19,15 +19,20 @@ public class DerbyTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DatabaseManager db = new DatabaseManager();
+        
+        /* Initiieren der Objekte */
         Board b = new Board();
-        Card c = new Card();
+        Card ca = new Card();
+        Column co = new Column();
         
         ResultSet rs;
-        db.createConnection();
+        //db.createConnection();
         
-        b.insertRow("board1", "red");
-        c.insertRow(1, "card1", 2, 24, "started");
+        //Board erstellen
+        b.insertRow("Board1", "red");
+        
+        //Columns erstellen
+        //c.insertRow(1, "card1", 2, 24, "started");
         
         rs = b.getRows();
         try {
@@ -40,7 +45,7 @@ public class DerbyTest {
         }
         
         
-        db.closeConnection();
+        //db.closeConnection();
 
     }
 }

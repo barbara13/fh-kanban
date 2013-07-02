@@ -22,8 +22,9 @@ import java.util.logging.Logger;
 public class DatabaseManager {
 
     private static Connection con;
-    private ResultSet rs;
-    private Statement stmnt;
+    private static ResultSet rs;
+    private static Statement stmnt;
+    private int id;
     
     private static Properties prop = new Properties();
     
@@ -31,13 +32,13 @@ public class DatabaseManager {
     public DatabaseManager() {
     }
 
-    public void createConnection() {
+    public static void createConnection() {
         
         try {
             //Datenbanktreiber laden
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
             //Lader der Configdatei
-            prop.load(new FileInputStream("src\\derbyTest\\config.ini"));
+            prop.load(new FileInputStream("config.ini"));
             
             //Datenbankdaten aus config.ini auslesen
             String databaseDir = prop.getProperty("databaseDir");
@@ -48,13 +49,13 @@ public class DatabaseManager {
             con = DriverManager.getConnection("jdbc:derby:"+databaseDir+";create=true;bootPassword=a@"+password+";user="+user+"");
 
             //Create Table Board
-            createTableIfNotExist("Board", "CREATE TABLE Board (B_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, Name varchar(50) NOT NULL,Color varchar(15))");
+            createTableIfNotExist("Board", "CREATE TABLE Board (B_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, Name varchar(50) NOT NULL,Color varchar(15) NOT NULL)");
 
             //Create Table Column
-            createTableIfNotExist("Column", "CREATE TABLE Column(Co_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, B_id int CONSTRAINT fk_column REFERENCES Board(B_id),Name varchar(50) NOT NULL,Wip int)");
+            createTableIfNotExist("Col", "CREATE TABLE Col(Co_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, B_id int CONSTRAINT fk_column REFERENCES Board(B_id),Name varchar(50) NOT NULL,Wip int NOT NULL)");
 
             //Create Table Card
-            createTableIfNotExist("Card", "CREATE TABLE Card (Ca_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, Co_id int CONSTRAINT fk_card REFERENCES Coloumn(Co_id),Name varchar(50) NOT NULL,Description varchar(300) ,Value int,Status varchar(10))");
+            createTableIfNotExist("Card", "CREATE TABLE Card (Ca_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, Co_id int CONSTRAINT fk_card REFERENCES Col(Co_id), Name varchar(50) NOT NULL, Description varchar(500) NOT NULL, Effort int NOT NULL, Value int NOT NULL, Status varchar(10))");
 
         } catch (IOException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,14 +80,22 @@ public class DatabaseManager {
      *
      * @param statement
      */
-    public void executeUpdateStatement(String statement) {
+    public int executeUpdateStatement(String statement) {
+        
         try {
             stmnt = con.createStatement();
-            stmnt.executeUpdate(statement);
+            stmnt.execute(statement, Statement.RETURN_GENERATED_KEYS);
+           
+            rs = stmnt.getGeneratedKeys();
+            rs.next();
+            id = rs.getInt(1);
+ 
             stmnt.close();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return id;
     }
 
     /**
@@ -150,7 +159,7 @@ public class DatabaseManager {
         }
     }
 
-    private void createTableIfNotExist(String tablename, String statement) {
+    private static void createTableIfNotExist(String tablename, String statement) {
         try {
             rs = con.getMetaData().getTables("%", "%", "%", new String[]{"TABLE"});
             int columnCnt = rs.getMetaData().getColumnCount();
