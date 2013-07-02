@@ -21,9 +21,15 @@ public class Board implements DBFunctions{
     public Board(){
         db = new DatabaseManager();
     }
-    
-    public void insertRow(String name, String color) {
-        db.executeUpdateStatement("INSERT INTO Board (Name, Color) VALUES('"+name+"','"+color+"')");
+
+    /**
+     * Hinzufügen eines Boards in die DB.
+     * @param name
+     * @param color
+     * @return Die Id der hinzugefügten Datensatzes
+     */
+    public int insertRow(String name, String color) {
+        return db.executeUpdateStatement("INSERT INTO Board (Name, Color) VALUES('"+name+"','"+color+"')");
     }
 
     @Override
@@ -35,7 +41,7 @@ public class Board implements DBFunctions{
     public ResultSet getRows() {
         return db.executeQueryStatement("SELECT * FROM Board");
     }
-
+    
     @Override
     public ResultSet getRows(String name, String value) {
         return db.executeQueryStatement("SELECT * FROM Board WHERE "+name+" = '"+value+"'");
@@ -51,6 +57,24 @@ public class Board implements DBFunctions{
         }
         
         return id;
+    }
+    
+    /**
+     * Name des Boards in der DB ändern.
+     * @param b_id
+     * @param name 
+     */
+    public void setName(int b_id, String name){
+        db.executeUpdateStatement("UPDATE Board SET Name = '"+name+"' WHERE B_id = "+b_id);
+    }
+    
+    /**
+     * Farbe des Boards in der DB ändern.
+     * @param b_id
+     * @param color 
+     */
+    public void setColor(int b_id, String color){
+        db.executeUpdateStatement("UPDATE Board SET Color = '"+color+"' WHERE B_id = "+b_id);
     }
     
 }

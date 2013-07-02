@@ -1,6 +1,10 @@
-
+//Test für Malte
 package edu.fh.kanban;
 
+import edu.fh.kanban.database.Board;
+import edu.fh.kanban.database.Card;
+import edu.fh.kanban.database.Column;
+import edu.fh.kanban.database.DatabaseManager;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,16 +22,24 @@ import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
 import edu.fh.kanban.ui.view.View;
-//import edu.fh.kanban.ui.view.Board;
+import java.sql.ResultSet;
 
 public class Kanban {
 
+    
 	static Logger LOGGER = Logger.getLogger(Kanban.class.getName());
-	
+
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	
+        public static void main(String[] args) {
+
+
+            DatabaseManager.createConnection();
+
+            
+            
 		LOGGER.info("Starting kanban app.");
 		
 		LOGGER.info("Setting look and feel.");
@@ -68,8 +80,8 @@ public class Kanban {
 	
 		JTabbedPane pane = new JTabbedPane();
 		pane.addTab("Backlog", backlogView.getComponent());
-		//pane.addTab("Board", board.getComponent());
-		
+		pane.addTab("Board", boardView.getComponent());
+                                
 		JFrame frame = new JFrame();
 		frame.setJMenuBar(menubar);
 		frame.setLayout(new BorderLayout());
