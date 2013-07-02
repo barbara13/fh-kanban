@@ -1,6 +1,9 @@
 //Test für Malte
 package edu.fh.kanban;
 
+import edu.fh.kanban.database.Board;
+import edu.fh.kanban.database.Card;
+import edu.fh.kanban.database.Column;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,9 +21,39 @@ import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
 import edu.fh.kanban.ui.view.View;
+import java.sql.ResultSet;
 
 public class Kanban {
+            
+            
+    
+    edu.fh.kanban.database.DatabaseManager.createConnection();
+                    
+    /* Initiieren der Objekte */
+    Board b = new Board();
+    Card ca = new Card();
+    Column co = new Column();
 
+    //Wird die id des zuletzt zugefügten Datensatzes gespeichert
+    //Board
+    int b_id;
+    //Column
+    int co_id;
+    //Card
+    int ca_id;
+
+    ResultSet rs;
+    //db.createConnection();
+
+    //Board erstellen
+    b_id = b.insertRow("Board", "red");
+
+    //Spalte erstellen
+    co_id = co.insertRow(b_id, "Next", 2);
+
+    //Karte erstellen
+    ca_id = ca.insertRow(co_id, "Aufgabe", "Beschreibung", 5, 2, "Fixed Date");
+            
 	static Logger LOGGER = Logger.getLogger(Kanban.class.getName());
 	
 	/**
