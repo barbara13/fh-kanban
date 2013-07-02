@@ -53,7 +53,7 @@ public class BacklogView implements View{
 		
 		Searchfield = new JTextField();
 		Searchfield.setText("Search");
-		panel.add(Searchfield, "6, 2, 3, 1, fill, default");
+		panel.add(Searchfield, "6, 2, 3, 1, right, default");
 		Searchfield.setColumns(10);
 		
 		JLabel lblSortBy = new JLabel("Sort by");

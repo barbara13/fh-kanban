@@ -18,10 +18,16 @@ import javax.swing.JSeparator;
 
 public class Backlog implements ActionListener{
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public void actionPerformed(ActionEvent e) {
 	
 	}
    
+        /**
+         * @wbp.parser.entryPoint
+         */
         public JComponent getComponent() {
   
             JPanel bl = new JPanel();
