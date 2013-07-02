@@ -10,6 +10,7 @@ import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
+import javax.swing.JScrollBar;
 
 public class BacklogView implements View{
 	private JTextField Searchfield;
@@ -27,9 +28,11 @@ public class BacklogView implements View{
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("max(121dlu;pref)"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(64dlu;pref):grow"),
+				ColumnSpec.decode("max(57dlu;pref):grow"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(67dlu;pref)"),
+				ColumnSpec.decode("max(73dlu;pref)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -44,6 +47,8 @@ public class BacklogView implements View{
 				RowSpec.decode("max(44dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("max(48dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(73dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,}));
 		
 		Searchfield = new JTextField();
@@ -58,6 +63,9 @@ public class BacklogView implements View{
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Creation time", "Headline", "Value", "Size"}));
 		comboBox.setToolTipText("");
 		panel.add(comboBox, "8, 4, right, default");
+		
+		JScrollBar scrollBar = new JScrollBar();
+		panel.add(scrollBar, "10, 2, 1, 13");
 		return panel;
 	}
 
