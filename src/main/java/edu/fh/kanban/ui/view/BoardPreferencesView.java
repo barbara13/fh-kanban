@@ -2,19 +2,15 @@ package edu.fh.kanban.ui.view;
 
 import javax.swing.JFrame;
 
-import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.awt.Scrollbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
-
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
@@ -24,7 +20,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 /**
@@ -179,8 +174,7 @@ public class BoardPreferencesView extends JFrame implements View{
 //			Erweiterung(getI());
 //			setI();
 //			panel.repaint();
-//		}
-		
+//		}	
 	}
 	private void Erweiterung(int i){
 		
@@ -192,9 +186,10 @@ public class BoardPreferencesView extends JFrame implements View{
 		txtColumname.setColumns(10);
 		
 		JLabel lblWip = new JLabel("Wip:");
-		panel.add(lblWip, "6, "+i+", right, center");
+		panel.add(lblWip, "5, 2, 2, 1, right, center");
 		
 		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
 		panel.add(spinner, "8, "+i+", fill, center");
 		
 		JButton btnPlus = new JButton("+");
@@ -216,19 +211,7 @@ public class BoardPreferencesView extends JFrame implements View{
 			}
 		});
 		panel.add(btnMinus, "12, "+i+", fill, top");
-		
-//		JScrollPane scrollPane = new JScrollPane();
-//		panel.add(scrollPane, "34, 1, 1, 8, fill, fill");
-//		JScrollPane scrollPane = new JScrollPane(panel);        
-//        scrollPane.setPreferredSize(new Dimension(250, 145));
-//        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        
-//        add(panel);
-//        panel.add(scrollPane);
-//        setContentPane();
-//        setVisible(true);
-		
-		
+			
 	}
 	
 	private void Loeschung(){
