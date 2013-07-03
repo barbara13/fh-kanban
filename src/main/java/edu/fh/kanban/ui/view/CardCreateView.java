@@ -17,6 +17,10 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
+
+import edu.fh.kanban.database.Card;
+import edu.fh.kanban.database.DatabaseManager;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -105,6 +109,9 @@ public class CardCreateView extends JFrame implements View{
 		getContentPane().add(lblColor, "2, 6, right, top");
 		
 		JToggleButton tglbtnRot = new JToggleButton("Expedite");
+		tglbtnRot.setContentAreaFilled(false);
+		tglbtnRot.setOpaque(true);
+		tglbtnRot.setBackground(Color.RED);
 		tglbtnRot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				getContentPane().setBackground(Color.RED);
@@ -148,9 +155,20 @@ public class CardCreateView extends JFrame implements View{
 		getContentPane().add(textArea, "2, 12, 17, 1, fill, fill");
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
 		getContentPane().add(btnCancel, "2, 14, 5, 1, fill, top");
 		
 		JButton btnCreate = new JButton("Create");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//new Card().insertRow(Integer.parseInt(txtCardId.getText()), name, description, effort, value, status)
+			}
+		});
 		getContentPane().add(btnCreate, "8, 14, 3, 1, fill, top");
 		
 		return (JComponent) getContentPane();
