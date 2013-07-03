@@ -1,3 +1,4 @@
+
 package edu.fh.kanban.ui.view;
 
 import javax.swing.JFrame;
@@ -186,7 +187,7 @@ public class BoardPreferencesView extends JFrame implements View{
 		txtColumname.setColumns(10);
 		
 		//JLabel lblWip = new JLabel("Wip:");
-//		panel.add(new JLabel("Wip:"), "6, "+i+", right, center");
+		panel.add(new JLabel("Wip:"), "6, "+i+", right, center");
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
