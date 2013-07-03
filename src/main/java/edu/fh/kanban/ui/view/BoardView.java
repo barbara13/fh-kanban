@@ -57,6 +57,8 @@ public static TableModel tableModel;
         bpanel.add(searchtext, CC.xy(6, 3));
         bpanel.add(separator, CC.xywh(1, 5, 7, 1));
         
+        card1.setBackground(Color.red);
+        card1.setForeground(Color.red);
         bpanel.add(card1, CC.xy(3, 9));
         bpanel.add(label1, CC.xy(3, 7));
         
