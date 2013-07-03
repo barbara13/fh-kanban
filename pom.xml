@@ -60,7 +60,6 @@
         <dependency>
             <groupId>1</groupId>
             <artifactId>Derby</artifactId>
-            <version>1</version>
         </dependency>
     </dependencies>
 
@@ -122,4 +121,13 @@
         </repository>
     </repositories>
 
+    <dependencyManagement>
+    	<dependencies>
+    		<dependency>
+    			<groupId>1</groupId>
+    			<artifactId>Derby</artifactId>
+    			<version>1</version>
+    		</dependency>
+    	</dependencies>
+    </dependencyManagement>
 </project>
