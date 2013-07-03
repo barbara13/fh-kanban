@@ -149,13 +149,22 @@ public class BoardPreferencesView extends JFrame implements View{
 				RowSpec.decode("23px"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("23px"),}));
-		
+	
 		ColumsPanel();
 		
 		JButton btnSpeichern = new JButton("Speichern");
+		
 		getContentPane().add(btnSpeichern, "12, 12, fill, top");
 		
+		System.out.println("ichz erstelle die button");
+		
 		JButton btnAbbrechen = new JButton("Abbrechen");
+		btnAbbrechen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				System.out.println("ich bin drin");
+			}
+		});
 		getContentPane().add(btnAbbrechen, "14, 12, fill, top");	
 	}
 
@@ -164,17 +173,8 @@ public class BoardPreferencesView extends JFrame implements View{
 	}
 	
 	private void ColumsPanel(){
-		
-		System.out.println("i = " + i);
-		
 		Erweiterung(i);
 		i+=2;
-		
-//		for(int u=0; i<5; u++){
-//			Erweiterung(getI());
-//			setI();
-//			panel.repaint();
-//		}	
 	}
 	private void Erweiterung(int i){
 		
@@ -185,8 +185,8 @@ public class BoardPreferencesView extends JFrame implements View{
 		panel.add(txtColumname, "4, "+i+", fill, center");
 		txtColumname.setColumns(10);
 		
-		JLabel lblWip = new JLabel("Wip:");
-		panel.add(lblWip, "5, 2, 2, 1, right, center");
+		//JLabel lblWip = new JLabel("Wip:");
+//		panel.add(new JLabel("Wip:"), "6, "+i+", right, center");
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
