@@ -28,10 +28,11 @@ public class Board implements DBFunctions{
      * @param color
      * @return Die Id der hinzugefügten Datensatzes
      */
-    public int insertRow(String name, String color) {
-        return db.executeUpdateStatement("INSERT INTO Board (Name, Color) VALUES('"+name+"','"+color+"')");
+    public int insertRowAndReturn(String name, String color) {
+        return db.executeUpdateStatementAndReturn("INSERT INTO Board (Name, Color) VALUES('"+name+"','"+color+"')");
+        
     }
-
+    
     @Override
     public void deleteRow(int id) {
         db.executeUpdateStatement("DELETE FROM Board WHERE B_id = "+id);

@@ -30,8 +30,8 @@ public class Column implements DBFunctions{
      * @return Die Id der hinzugefügten Datensatzes
     
     */
-    public int insertRow(int b_id, String name, int w_ip) {
-        return db.executeUpdateStatement("INSERT INTO Col (B_id, Name, Wip) VALUES("+b_id+",'"+name+"',"+w_ip+")");
+    public void insertRow(int b_id, String name, int w_ip) {
+        db.executeUpdateStatement("INSERT INTO Col (B_id, Name, Wip) VALUES("+b_id+",'"+name+"',"+w_ip+")");
     }
      
     @Override
