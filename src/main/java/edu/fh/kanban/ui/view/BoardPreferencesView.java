@@ -1,7 +1,9 @@
+
 package edu.fh.kanban.ui.view;
 
 import javax.swing.JFrame;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +13,9 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
+
+import edu.fh.kanban.database.Board;
+
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
@@ -21,9 +26,14 @@ import javax.swing.JPanel;
 import javax.swing.ButtonGroup;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
 
 /**
- * 
+ * + Preferences dialog for colors, name of board, columns(10), wips(10)
+   + Validate on wip limits (10 Stück)
+   + Edit dialog for card
+   + Warn user if modifications have not been saved
+
  * @author Babsi
  *
  */
@@ -34,7 +44,6 @@ public class BoardPreferencesView extends JFrame implements View{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txtName;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JPanel panel;
 	private JScrollPane scrollPane;
 	
@@ -42,23 +51,23 @@ public class BoardPreferencesView extends JFrame implements View{
 	private JTextField txtColumname;
 
 	public BoardPreferencesView(){
-		super("Board Preferences");
+		super("Board Einstellungen");
 		setBounds(new Rectangle(0, 0, 700, 500));
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("44px:grow"),
+				ColumnSpec.decode("97px"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("69px"),
+				ColumnSpec.decode("97px"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("97px"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("97px"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("97px"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("69px"),
+				ColumnSpec.decode("97px"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("69px"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("69px"),
-				ColumnSpec.decode("31px"),
-				ColumnSpec.decode("119px"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("125px"),},
+				ColumnSpec.decode("max(21dlu;default)"),},
 			new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("20px"),
@@ -69,7 +78,7 @@ public class BoardPreferencesView extends JFrame implements View{
 				RowSpec.decode("31px"),
 				RowSpec.decode("14px"),
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("213px:grow"),
+				RowSpec.decode("238px"),
 				RowSpec.decode("25px"),
 				RowSpec.decode("23px"),}));
 		
@@ -78,37 +87,44 @@ public class BoardPreferencesView extends JFrame implements View{
 		
 		txtName = new JTextField();
 		txtName.setText("");
-		getContentPane().add(txtName, "4, 2, fill, top");
+		getContentPane().add(txtName, "4, 2, left, top");
 		txtName.setColumns(10);
 		
 		JLabel lblColors = DefaultComponentFactory.getInstance().createLabel("Colors: ");
 		getContentPane().add(lblColors, "2, 4, fill, top");
 		
 		JSeparator separator = new JSeparator();
-		getContentPane().add(separator, "4, 4, 11, 1, fill, center");
+		getContentPane().add(separator, "4, 4, 9, 1, fill, center");
 		
-		JToggleButton tglbtnRot = new JToggleButton("Rot");
-		
-		buttonGroup.add(tglbtnRot);
+		JToggleButton tglbtnRot = new JToggleButton("Expedite");		//Button Rot
+		//tglbtnRot.setContentAreaFilled(false);
+		tglbtnRot.setOpaque(true);
+		tglbtnRot.setBackground(Color.RED);
 		getContentPane().add(tglbtnRot, "4, 6, fill, top");
 		
-		JToggleButton tglbtnGelb = new JToggleButton("Gelb");
-		buttonGroup.add(tglbtnGelb);
+		JToggleButton tglbtnGelb = new JToggleButton("Standard");		//Button Gelb
+		//tglbtnGelb.setContentAreaFilled(false);
+		tglbtnGelb.setOpaque(true);
+		tglbtnGelb.setBackground(Color.YELLOW);
 		getContentPane().add(tglbtnGelb, "6, 6, fill, top");
 		
-		JToggleButton tglbtnGruen = new JToggleButton("Gruen");
-		buttonGroup.add(tglbtnGruen);
+		JToggleButton tglbtnGruen = new JToggleButton("Fixed date");	//Button Grün
+		//tglbtnGruen.setContentAreaFilled(false);
+		tglbtnGruen.setOpaque(true);
+		tglbtnGruen.setBackground(Color.GREEN);
 		getContentPane().add(tglbtnGruen, "8, 6, fill, top");
 		
-		JToggleButton tglbtnBlau = new JToggleButton("Blau");
-		buttonGroup.add(tglbtnBlau);
-		getContentPane().add(tglbtnBlau, "10, 6, fill, top");
+		JToggleButton tglbtnBlau = new JToggleButton("Intangible");		//Button Blau
+		//tglbtnBlau.setContentAreaFilled(false);
+		tglbtnBlau.setOpaque(true);
+		tglbtnBlau.setBackground(Color.BLUE);
+		getContentPane().add(tglbtnBlau, "10, 6, default, top");
 		
 		JLabel lblColums = DefaultComponentFactory.getInstance().createLabel("Colums: ");
 		getContentPane().add(lblColums, "2, 8, fill, top");
 		
 		JSeparator separator_1 = new JSeparator();
-		getContentPane().add(separator_1, "4, 8, 11, 1, fill, center");
+		getContentPane().add(separator_1, "4, 8, 9, 1, fill, center");
 		
 		scrollPane = new JScrollPane();
 		getContentPane().add(scrollPane, "2, 10, 13, 1, fill, fill");
@@ -153,19 +169,22 @@ public class BoardPreferencesView extends JFrame implements View{
 		ColumsPanel();
 		
 		JButton btnSpeichern = new JButton("Speichern");
+		btnSpeichern.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				//new Board().insertRow(String.na, color);
+				
+			}
+		});
 		
-		getContentPane().add(btnSpeichern, "12, 12, fill, top");
-		
-		System.out.println("ichz erstelle die button");
-		
+		getContentPane().add(btnSpeichern, "10, 12, fill, top");
+			
 		JButton btnAbbrechen = new JButton("Abbrechen");
 		btnAbbrechen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				System.out.println("ich bin drin");
 			}
 		});
-		getContentPane().add(btnAbbrechen, "14, 12, fill, top");	
+		getContentPane().add(btnAbbrechen, "12, 12, fill, top");	
 	}
 
 	public JComponent getComponent() {
@@ -178,15 +197,13 @@ public class BoardPreferencesView extends JFrame implements View{
 	}
 	private void Erweiterung(int i){
 		
-//		JLabel lblName_1 = DefaultComponentFactory.getInstance().createLabel("Name:");
 		panel.add(new JLabel("Name:"), "2, "+i+", fill, center");
 		
 		txtColumname = new JTextField();
 		panel.add(txtColumname, "4, "+i+", fill, center");
 		txtColumname.setColumns(10);
 		
-		//JLabel lblWip = new JLabel("Wip:");
-//		panel.add(new JLabel("Wip:"), "6, "+i+", right, center");
+		panel.add(new JLabel("Wip:"), "6, "+i+", right, center");
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
@@ -207,16 +224,25 @@ public class BoardPreferencesView extends JFrame implements View{
 		JButton btnMinus = new JButton("-");
 		btnMinus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				if(get)
+				Loeschung();
+				//panel.rem
+				//panel.updateUI();	
 			}
 		});
 		panel.add(btnMinus, "12, "+i+", fill, top");
-			
+		Aktualisierung();	
 	}
 	
 	private void Loeschung(){
+	//Funktion	
 		
-
+		
+		
+		Aktualisierung();
+	}
+	
+	private void Aktualisierung(){
+	
 		
 	}
 	
