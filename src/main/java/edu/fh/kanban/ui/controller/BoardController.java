@@ -10,9 +10,6 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author David
  */
-public class BoardController extends BoardView{
+public class BoardController{
    
-    public static void addNewRow(String workflow, String task, String choice){
-        ((DefaultTableModel)tableModel).addRow( new String[] {});
-    }
 }
