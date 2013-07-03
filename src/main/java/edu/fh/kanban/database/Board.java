@@ -21,16 +21,24 @@ public class Board implements DBFunctions{
     public Board(){
         db = new DatabaseManager();
     }
-
+    
     /**
      * Hinzufügen eines Boards in die DB.
+     * @param name
+     * @param color 
+     */   
+    public void insertRow(String name, String color) {
+        db.executeUpdateStatementAndReturn("INSERT INTO Board (Name, Color) VALUES('"+name+"','"+color+"')");   
+    }
+    
+    /**
+     * Hinzufügen eines Boards in die DB, wobei die id zurückkommt.
      * @param name
      * @param color
      * @return Die Id der hinzugefügten Datensatzes
      */
     public int insertRowAndReturn(String name, String color) {
-        return db.executeUpdateStatementAndReturn("INSERT INTO Board (Name, Color) VALUES('"+name+"','"+color+"')");
-        
+        return db.executeUpdateStatementAndReturn("INSERT INTO Board (Name, Color) VALUES('"+name+"','"+color+"')");   
     }
     
     @Override
