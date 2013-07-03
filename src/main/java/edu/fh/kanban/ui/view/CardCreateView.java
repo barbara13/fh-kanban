@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.TextArea;
 import java.awt.Rectangle;
 import javax.swing.JButton;
@@ -15,6 +17,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * 
@@ -37,6 +41,7 @@ public class CardCreateView extends JFrame implements View{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
+		getComponent();
 	}
 	
 	private JComponent init(){
@@ -76,10 +81,10 @@ public class CardCreateView extends JFrame implements View{
 				RowSpec.decode("23px"),}));
 		
 		JLabel lblCardId = new JLabel("Card ID:");
-		getContentPane().add(lblCardId, "2, 2, 3, 1, right, center");
+		getContentPane().add(lblCardId, "2, 2, right, center");
 		
 		txtCardId = new JTextField();
-		getContentPane().add(txtCardId, "6, 2, 5, 1, left, top");
+		getContentPane().add(txtCardId, "4, 2, 7, 1, left, top");
 		txtCardId.setColumns(10);
 		
 		JLabel lblAufwand = new JLabel("Aufwand:");
@@ -99,19 +104,40 @@ public class CardCreateView extends JFrame implements View{
 		JLabel lblColor = DefaultComponentFactory.getInstance().createLabel("Color:");
 		getContentPane().add(lblColor, "2, 6, right, top");
 		
-		JToggleButton tglbtnRot = new JToggleButton("Rot");
+		JToggleButton tglbtnRot = new JToggleButton("Expedite");
+		tglbtnRot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				getContentPane().setBackground(Color.RED);
+			}
+		});
 		buttonGroup.add(tglbtnRot);
 		getContentPane().add(tglbtnRot, "4, 8, 5, 1, fill, top");
 		
-		JToggleButton tglbtnGelb = new JToggleButton("Gelb");
+		JToggleButton tglbtnGelb = new JToggleButton("Standart");
+		tglbtnGelb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().setBackground(Color.YELLOW);
+			}
+		});
+		tglbtnGelb.doClick();
 		buttonGroup.add(tglbtnGelb);
 		getContentPane().add(tglbtnGelb, "10, 8, fill, top");
 		
-		JToggleButton tglbtnGruen = new JToggleButton("Gruen");
+		JToggleButton tglbtnGruen = new JToggleButton("Fixed Date");
+		tglbtnGruen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().setBackground(Color.GREEN);
+			}
+		});
 		buttonGroup.add(tglbtnGruen);
 		getContentPane().add(tglbtnGruen, "12, 8, fill, top");
 		
-		JToggleButton tglbtnBlau = new JToggleButton("Blau");
+		JToggleButton tglbtnBlau = new JToggleButton("Intangible");
+		tglbtnBlau.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				getContentPane().setBackground(Color.BLUE);
+			}
+		});
 		buttonGroup.add(tglbtnBlau);
 		getContentPane().add(tglbtnBlau, "14, 8, fill, top");
 		
