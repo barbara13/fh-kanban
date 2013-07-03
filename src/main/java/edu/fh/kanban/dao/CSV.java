@@ -9,9 +9,9 @@ import java.io.PrintWriter;
 * @author Lorenz
 */
 
-public class BacklogToCSV {						//Kleiner Test
+public class CSV {						//Kleiner Test
 	
-	public BacklogToCSV() throws IOException{
+	public CSV() throws IOException{
 	 //Note the "\\" used in the path of the file 
     //instead of "\", this is required to read 
     //the path in the String format.

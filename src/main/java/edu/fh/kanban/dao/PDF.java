@@ -7,6 +7,6 @@ package edu.fh.kanban.dao;
  * @author Lorenz
  *
  */
-public class BacklogToPDF {
+public class PDF {
 
 }
