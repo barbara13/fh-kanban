@@ -109,9 +109,6 @@ public class CardCreateView extends JFrame implements View{
 		getContentPane().add(lblColor, "2, 6, right, top");
 		
 		JToggleButton tglbtnRot = new JToggleButton("Expedite");
-		tglbtnRot.setContentAreaFilled(false);
-		tglbtnRot.setOpaque(true);
-		tglbtnRot.setBackground(Color.RED);
 		tglbtnRot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				getContentPane().setBackground(Color.RED);
