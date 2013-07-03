@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Wed Jul 03 16:42:09 CEST 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-013f-a4fb-bd7c-0000030b57d0 
+Wed Jul 03 17:44:24 CEST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-013f-a534-bb32-0000030c6ed8 
 on database directory C:\Users\David\Documents\NetBeansProjects\fh-kanban\db  with class loader sun.misc.Launcher$AppClassLoader@ba679e 
 Loaded from file:/C:/Users/David/.m2/repository/1/Derby/1/Derby-1.jar
 java.vendor=Oracle Corporation
@@ -8,9 +8,9 @@ java.runtime.version=1.7.0_21-b11
 user.dir=C:\Users\David\Documents\NetBeansProjects\fh-kanban
 derby.system.home=null
 ----------------------------------------------------------------
-Wed Jul 03 16:42:09 CEST 2013:
-Shutting down instance a816c00e-013f-a4fb-bd7c-0000030b57d0 on database directory C:\Users\David\Documents\NetBeansProjects\fh-kanban\db with class loader sun.misc.Launcher$AppClassLoader@ba679e 
-Wed Jul 03 16:42:09 CEST 2013 Thread[main,5,main] Cleanup action starting
+Wed Jul 03 17:44:24 CEST 2013:
+Shutting down instance a816c00e-013f-a534-bb32-0000030c6ed8 on database directory C:\Users\David\Documents\NetBeansProjects\fh-kanban\db with class loader sun.misc.Launcher$AppClassLoader@ba679e 
+Wed Jul 03 17:44:24 CEST 2013 Thread[main,5,main] Cleanup action starting
 java.sql.SQLException: Failed to start database 'db' with class loader sun.misc.Launcher$AppClassLoader@ba679e, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)

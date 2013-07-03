@@ -68,7 +68,7 @@ public class Kanban {
 		});
 		
 		JMenu file = new JMenu("File");
-		file.add(board_preferences);
+		//file.add(board_preferences);
 		file.add(card_preferences);
 		
 		JMenuBar menubar = new JMenuBar();

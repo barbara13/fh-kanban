@@ -4,10 +4,13 @@ import java.awt.*;
 import javax.swing.*;
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.table.*;
 
 
 public class BoardView extends JPanel implements View {
+    
     public BoardView() {
         getComponents();
     }
@@ -20,7 +23,6 @@ public void setTitle(JLabel title) {
 
 
 // Konstruktor
-private JButton button = new JButton();
 private JLabel title;
 private JTextField searchtext;
 private JSeparator separator;
@@ -28,10 +30,9 @@ private JScrollPane scrollPane;
 private JPanel bpanel;
 private JButton card1;
 private JLabel label1;
+private JButton b;
+        
 
-
-public static TableModel tableModel;
-    
 
     public JComponent getComponent() {
  
@@ -43,7 +44,7 @@ public static TableModel tableModel;
         label1 = new JLabel("New");
         card1 = new JButton("Karte 1");
         
-  
+        
   //Layout
         bpanel.setLayout(new FormLayout(
             "2*(default, $lcgap), 250dlu, 80dlu, 4*($lcgap, default)",
@@ -62,13 +63,7 @@ public static TableModel tableModel;
         bpanel.add(card1, CC.xy(3, 9));
         bpanel.add(label1, CC.xy(3, 7));
         
-        
-        
         return bpanel;
         
     }
-
-
-    
-
 }
