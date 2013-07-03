@@ -81,12 +81,27 @@ public class DatabaseManager {
      *
      * @param statement
      */
-    public int executeUpdateStatement(String statement) {
-        
+    public void executeUpdateStatement(String statement) {
         try {
             stmnt = con.createStatement();
-            stmnt.execute(statement, Statement.RETURN_GENERATED_KEYS);
-           
+            stmnt.execute(statement);
+            stmnt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    /**
+     * Führt eine Datenbank Anweisung aus
+     * @param statement
+     * @return Gibt die Id des hinzugefügten Datensatzes wieder.
+     */
+    public int executeUpdateStatementAndReturn(String statement) {
+        try {
+            stmnt = con.createStatement();
+            stmnt.executeUpdate(statement, Statement.RETURN_GENERATED_KEYS);
+  
             rs = stmnt.getGeneratedKeys();
             rs.next();
             id = rs.getInt(1);
@@ -97,7 +112,8 @@ public class DatabaseManager {
         }
         
         return id;
-    }
+    }    
+    
 
     /**
      * Führt eine Datenbank Abfrage aus und gibt das Ergebnis zurück

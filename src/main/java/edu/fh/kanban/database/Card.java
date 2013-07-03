@@ -33,8 +33,8 @@ public class Card implements DBFunctions{
      * @param status
      * @return Die Id der hinzugefügten Datensatzes
      */
-    public int insertRow(int co_id,String name, String description ,int effort, int value, String status) {
-        return db.executeUpdateStatement("INSERT INTO Card (Co_id, Name, Description, Effort, Value, Status) VALUES("+co_id+",'"+name+"','"+description+"',"+effort+","+value+",'"+status+"')");
+    public void insertRow(int co_id,String name, String description ,int effort, int value, String status) {
+        db.executeUpdateStatement("INSERT INTO Card (Co_id, Name, Description, Effort, Value, Status) VALUES("+co_id+",'"+name+"','"+description+"',"+effort+","+value+",'"+status+"')");
     }
     
 

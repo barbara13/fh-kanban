@@ -29,7 +29,7 @@ public class DerbyTest {
         //db.createConnection();
         
         //Board erstellen
-        b.insertRow("Board1", "red");
+        //b.insertRow("Board1", "red");
         
         //Columns erstellen
         //c.insertRow(1, "card1", 2, 24, "started");

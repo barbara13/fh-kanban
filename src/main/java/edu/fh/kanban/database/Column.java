@@ -23,15 +23,25 @@ public class Column implements DBFunctions{
     }
     
     /**
-     * Hinzufügen einer Spalte(Column) zum Board in die DB.
+     * Hinzufügen einer Spalte(Column) zum Board in die DB, wobei die id zurückkommt.
      * @param b_id
      * @param name
      * @param w_ip
      * @return Die Id der hinzugefügten Datensatzes
     
     */
-    public int insertRow(int b_id, String name, int w_ip) {
-        return db.executeUpdateStatement("INSERT INTO Col (B_id, Name, Wip) VALUES("+b_id+",'"+name+"',"+w_ip+")");
+    public int insertRowAndReturn(int b_id, String name, int w_ip) {
+        return db.executeUpdateStatementAndReturn("INSERT INTO Col (B_id, Name, Wip) VALUES("+b_id+",'"+name+"',"+w_ip+")");
+    }
+    
+    /**
+     * Hinzufügen einer Spalte(Column) zum Board in die DB.
+     * @param b_id
+     * @param name
+     * @param w_ip 
+     */
+    public void insertRow(int b_id, String name, int w_ip) {
+        db.executeUpdateStatement("INSERT INTO Col (B_id, Name, Wip) VALUES("+b_id+",'"+name+"',"+w_ip+")");
     }
      
     @Override

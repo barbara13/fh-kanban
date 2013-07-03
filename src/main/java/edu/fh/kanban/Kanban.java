@@ -34,10 +34,10 @@ public class Kanban {
 	 */
 	
         public static void main(String[] args) {
-
-
+            
+            //Verbindung mit der Datenbank aufbauen
             DatabaseManager.createConnection();
-
+            
             
             
 		LOGGER.info("Starting kanban app.");
