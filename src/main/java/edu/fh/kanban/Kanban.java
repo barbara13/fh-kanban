@@ -51,12 +51,12 @@ public class Kanban {
 		
 		LOGGER.info("Creating UI components.");
 		
-//		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
-//		board_preferences.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				new BoardPreferencesView().setVisible(true);
-//			}
-//		});
+		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
+		board_preferences.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new BoardPreferencesView().setVisible(true);
+			}
+		});
 		
 		JMenuItem card_preferences = new JMenuItem("New Card");
 		card_preferences.addActionListener(new ActionListener() {
@@ -68,7 +68,7 @@ public class Kanban {
 		});
 		
 		JMenu file = new JMenu("File");
-		file.add(board_preferences);
+//		file.add(board_preferences);
 		file.add(card_preferences);
 		
 		JMenuBar menubar = new JMenuBar();
