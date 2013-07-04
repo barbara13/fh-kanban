@@ -23,10 +23,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JSpinner;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.ButtonGroup;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
-import javax.swing.UIManager;
 
 /**
  * + Preferences dialog for colors, name of board, columns(10), wips(10)
@@ -47,8 +45,10 @@ public class BoardPreferencesView extends JFrame implements View{
 	private JPanel panel;
 	private JScrollPane scrollPane;
 	
-	private int i=2;
-	private JTextField txtColumname;
+	private int arrayindex=0;
+	private JTextField[] txtColumname = new JTextField[10]; 
+	private JSpinner[] wip = new JSpinner[10];
+	private JButton[] btnMinus= new JButton[10];
 
 	public BoardPreferencesView(){
 		super("Board Einstellungen");
@@ -166,7 +166,7 @@ public class BoardPreferencesView extends JFrame implements View{
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("23px"),}));
 	
-		ColumsPanel();
+		Erweiterung();
 		
 		JButton btnSpeichern = new JButton("Speichern");
 		btnSpeichern.addActionListener(new ActionListener() {	
@@ -191,68 +191,84 @@ public class BoardPreferencesView extends JFrame implements View{
 		return null;
 	}
 	
-	private void ColumsPanel(){
-		Erweiterung(i);
-		i+=2;
-	}
-	private void Erweiterung(int i){
-		
-		panel.add(new JLabel("Name:"), "2, "+i+", fill, center");
-		
-		txtColumname = new JTextField();
-		panel.add(txtColumname, "4, "+i+", fill, center");
-		txtColumname.setColumns(10);
-		
-		panel.add(new JLabel("Wip:"), "6, "+i+", right, center");
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
-		panel.add(spinner, "8, "+i+", fill, center");
-		
-		JButton btnPlus = new JButton("+");
-		btnPlus.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(getI() < 21){
-					Erweiterung(getI());
-					incI();
-					panel.updateUI();
-				}else System.out.println("I zu gross");
-			}
-		});
-		panel.add(btnPlus, "10, "+i+", fill, top");
-		
-		JButton btnMinus = new JButton("-");
-		btnMinus.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Loeschung();
-				//panel.rem
-				//panel.updateUI();	
-			}
-		});
-		panel.add(btnMinus, "12, "+i+", fill, top");
-		Aktualisierung();	
+	private void Erweiterung(){
+		if(arrayindex<10){
+			txtColumname[arrayindex] = new JTextField();
+			wip[arrayindex] = new JSpinner();
+			btnMinus[arrayindex] = new JButton("-");
+			arrayindex++;
+			Aktualisierung();
+		} else
+			System.out.println("Mehr als 10 nicht moeglich!!!");
 	}
 	
-	private void Loeschung(){
-	//Funktion	
-		
-		
+	private void Loeschung(int i){
+		txtColumname[i] = null;
+		wip[i] = null;
+		btnMinus[i] = null;
+		arrayindex--;
 		
 		Aktualisierung();
+		
 	}
 	
 	private void Aktualisierung(){
-	
 		
-	}
-	
-	public int getI(){
-		return this.i;
-	}
-	public void incI(){
-		this.i += 2;
-	}
-	public void decI(){
-		this.i -= 2;
+		for(int i = 0; i < 10; i++){
+			if(txtColumname[i] == null){
+				for(int k = (i+1); k < 10; k++){
+					if(txtColumname != null){
+						txtColumname[i] = txtColumname[k];
+						txtColumname[k] = null;
+						wip[i] = wip[k];
+						wip[k] = null;
+						btnMinus[i] = btnMinus[k];
+						btnMinus[k] = null;
+						break;
+					}
+				}
+			}
+		}
+		
+		if(txtColumname[0] == null)
+			Erweiterung();
+		
+		panel.removeAll();
+		
+		for(int i=0, k=2; i<10; i++, k+=2){
+			if(txtColumname[i]!=null){
+				
+				panel.add(new JLabel("Name:"), "2, "+k+", fill, center");
+				
+				panel.add(txtColumname[i], "4, "+k+", fill, center");
+				txtColumname[i].setColumns(10);
+				
+				panel.add(new JLabel("Wip:"), "6, "+k+", right, center");
+				
+				wip[i].setModel(new SpinnerNumberModel(1, 1, 10, 1));
+				panel.add(wip[i], "8, "+k+", fill, center");
+				
+				JButton btnPlus = new JButton("+");
+				btnPlus.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Erweiterung();
+					}
+				});
+				panel.add(btnPlus, "10, "+k+", fill, top");
+				
+				btnMinus[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						for(int i=0; i < 10; i++){
+							if(e.getSource() == btnMinus[i] && btnMinus != null){
+								Loeschung(i);
+								break;
+							}
+						}
+					}
+				});
+				panel.add(btnMinus[i], "12, "+k+", fill, top");
+			}
+		}
+		panel.updateUI();
 	}
 }
