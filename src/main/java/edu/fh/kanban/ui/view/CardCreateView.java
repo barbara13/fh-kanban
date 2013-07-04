@@ -23,6 +23,7 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
 import edu.fh.kanban.database.Card;
+import edu.fh.kanban.database.DatabaseManager;
 
 /**
  * 
@@ -221,8 +222,11 @@ public class CardCreateView extends JFrame implements View{
 					if(txtValue.getText().isEmpty()) txtValue.setBackground(Color.RED);
 					else txtValue.setBackground(Color.WHITE);
 				}else{
-					new Card().insertRow(Integer.parseInt(txtCardId.getText()), txtHeadline.getText(), textDescription.getText(), Integer.parseInt(txtEffort.getText()), Integer.parseInt(txtValue.getText()), getBackground().toString());
+					DatabaseManager.createConnection();
+					Card c = new Card();
+					c.insertRow(Integer.parseInt(txtCardId.getText()), txtHeadline.getText(), textDescription.getText(), Integer.parseInt(txtEffort.getText()), Integer.parseInt(txtValue.getText()), String.valueOf(getBackground()));
 					dispose();
+					DatabaseManager.closeConnection();
 				}	
 			}
 		});
