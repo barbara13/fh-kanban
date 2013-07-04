@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Thu Jul 04 14:09:17 CEST 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-013f-a996-26fa-00000702fa50 
+Thu Jul 04 15:07:25 CEST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-013f-a9cb-61d4-00000701ad58 
 on database directory D:\Users\KingDCB\Documents\NetBeansProjects\fh-kanban\db  with class loader sun.misc.Launcher$AppClassLoader@766c570c 
 Loaded from file:/C:/Users/KingDCB/.m2/repository/1/Derby/1/Derby-1.jar
 java.vendor=Oracle Corporation
@@ -8,9 +8,9 @@ java.runtime.version=1.7.0_09-b05
 user.dir=D:\Users\KingDCB\Documents\NetBeansProjects\fh-kanban
 derby.system.home=null
 ----------------------------------------------------------------
-Thu Jul 04 14:09:17 CEST 2013:
-Shutting down instance a816c00e-013f-a996-26fa-00000702fa50 on database directory D:\Users\KingDCB\Documents\NetBeansProjects\fh-kanban\db with class loader sun.misc.Launcher$AppClassLoader@766c570c 
-Thu Jul 04 14:09:17 CEST 2013 Thread[main,5,main] Cleanup action starting
+Thu Jul 04 15:07:25 CEST 2013:
+Shutting down instance a816c00e-013f-a9cb-61d4-00000701ad58 on database directory D:\Users\KingDCB\Documents\NetBeansProjects\fh-kanban\db with class loader sun.misc.Launcher$AppClassLoader@766c570c 
+Thu Jul 04 15:07:25 CEST 2013 Thread[main,5,main] Cleanup action starting
 java.sql.SQLException: Failed to start database 'db' with class loader sun.misc.Launcher$AppClassLoader@766c570c, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
@@ -25,7 +25,7 @@ java.sql.SQLException: Failed to start database 'db' with class loader sun.misc.
 	at java.sql.DriverManager.getConnection(DriverManager.java:579)
 	at java.sql.DriverManager.getConnection(DriverManager.java:243)
 	at edu.fh.kanban.database.DatabaseManager.createConnection(DatabaseManager.java:50)
-	at edu.fh.kanban.Kanban.main(Kanban.java:39)
+	at edu.fh.kanban.Kanban.main(Kanban.java:31)
 Caused by: java.sql.SQLException: Failed to start database 'db' with class loader sun.misc.Launcher$AppClassLoader@766c570c, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
@@ -80,7 +80,7 @@ java.sql.SQLException: Database at D:\Users\KingDCB\Documents\NetBeansProjects\f
 	at java.sql.DriverManager.getConnection(DriverManager.java:579)
 	at java.sql.DriverManager.getConnection(DriverManager.java:243)
 	at edu.fh.kanban.database.DatabaseManager.createConnection(DatabaseManager.java:50)
-	at edu.fh.kanban.Kanban.main(Kanban.java:39)
+	at edu.fh.kanban.Kanban.main(Kanban.java:31)
 Caused by: java.sql.SQLException: Database at D:\Users\KingDCB\Documents\NetBeansProjects\fh-kanban\db has an incompatible format with the current version of the software.  The database was created by or upgraded by version 10.10.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
@@ -132,7 +132,7 @@ java.sql.SQLException: Database at D:\Users\KingDCB\Documents\NetBeansProjects\f
 	at java.sql.DriverManager.getConnection(DriverManager.java:579)
 	at java.sql.DriverManager.getConnection(DriverManager.java:243)
 	at edu.fh.kanban.database.DatabaseManager.createConnection(DatabaseManager.java:50)
-	at edu.fh.kanban.Kanban.main(Kanban.java:39)
+	at edu.fh.kanban.Kanban.main(Kanban.java:31)
 Caused by: ERROR XSLAN: Database at D:\Users\KingDCB\Documents\NetBeansProjects\fh-kanban\db has an incompatible format with the current version of the software.  The database was created by or upgraded by version 10.10.
 	at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)
 	at org.apache.derby.impl.store.raw.log.LogToFile.readControlFile(Unknown Source)
@@ -204,6 +204,6 @@ ERROR XSLAN: Database at D:\Users\KingDCB\Documents\NetBeansProjects\fh-kanban\d
 	at java.sql.DriverManager.getConnection(DriverManager.java:579)
 	at java.sql.DriverManager.getConnection(DriverManager.java:243)
 	at edu.fh.kanban.database.DatabaseManager.createConnection(DatabaseManager.java:50)
-	at edu.fh.kanban.Kanban.main(Kanban.java:39)
+	at edu.fh.kanban.Kanban.main(Kanban.java:31)
 ============= end nested exception, level (3) ===========
 Cleanup action completed

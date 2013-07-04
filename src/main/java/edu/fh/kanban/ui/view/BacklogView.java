@@ -7,13 +7,17 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 
 public class BacklogView implements View{
 	private JTextField Searchfield;
+        private JButton button;
 
 	/**
 	 * @author Lorenz
@@ -21,6 +25,7 @@ public class BacklogView implements View{
 	 */
 	@Override
 	public JComponent getComponent() {
+                button = new JButton("Karte1");
 		JPanel panel = new JPanel();
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
@@ -52,10 +57,42 @@ public class BacklogView implements View{
 				FormFactory.RELATED_GAP_ROWSPEC,}));
 		
 		Searchfield = new JTextField();
-		Searchfield.setText("Search");
+		Searchfield.setText("");
 		panel.add(Searchfield, "6, 2, 3, 1, right, default");
 		Searchfield.setColumns(10);
 		
+                 panel.add(button, "2, 8");
+                Searchfield.addKeyListener(new KeyListener(){
+
+                @Override
+                public void keyTyped(KeyEvent e) {
+                   
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    if(Searchfield.getText().toString().regionMatches(true, 1, button.getText().toString() , 1, 1)){
+                        button.setVisible(true);
+                    }
+                    else {
+                        button.setVisible(false);
+                    }
+                
+                if(Searchfield.getText().toString() == "")
+                {
+                    button.setVisible(true);
+                }
+                }
+                
+                 
+            
+        });
+                
 		JLabel lblSortBy = new JLabel("Sort by");
 		panel.add(lblSortBy, "6, 4, right, default");
 		
@@ -64,8 +101,12 @@ public class BacklogView implements View{
 		comboBox.setToolTipText("");
 		panel.add(comboBox, "8, 4, right, default");
 		
+               
+                
 		JScrollBar scrollBar = new JScrollBar();
 		panel.add(scrollBar, "10, 2, 1, 13");
+                
+                
 		return panel;
 	}
 
