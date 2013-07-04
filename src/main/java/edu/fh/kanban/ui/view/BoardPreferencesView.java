@@ -32,14 +32,11 @@ import javax.swing.JScrollPane;
    + Edit dialog for card
    + Warn user if modifications have not been saved
 
- * @author Babsi
+ * @author Barbara
  *
  */
 public class BoardPreferencesView extends JFrame implements View{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txtName;
 	private JPanel panel;
@@ -53,6 +50,8 @@ public class BoardPreferencesView extends JFrame implements View{
 	public BoardPreferencesView(){
 		super("Board Einstellungen");
 		setBounds(new Rectangle(0, 0, 700, 500));
+		setLocationByPlatform(true);
+		setResizable(false);
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("97px"),
@@ -209,12 +208,10 @@ public class BoardPreferencesView extends JFrame implements View{
 		btnMinus[i] = null;
 		arrayindex--;
 		
-		Aktualisierung();
-		
+		Aktualisierung();	
 	}
 	
 	private void Aktualisierung(){
-		
 		for(int i = 0; i < 10; i++){
 			if(txtColumname[i] == null){
 				for(int k = (i+1); k < 10; k++){
