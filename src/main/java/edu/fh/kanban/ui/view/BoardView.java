@@ -79,7 +79,7 @@ private JButton b;
 
             @Override
             public void keyReleased(KeyEvent e) {
-                 if(searchtext.getText().toString().regionMatches(true, 0, card1.getText().toString(),0 , 3)){
+                 if(searchtext.getText().toString().regionMatches(true, 0, card1.getText().toString(),0 , 1)){
                     card1.setVisible(true);
                 }		
                 else
