@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 package edu.fh.kanban.ui.view;
 
 import javax.swing.JFrame;
@@ -275,5 +273,4 @@ public class BoardPreferencesView extends JFrame implements View{
 		panel.updateUI();
 	}
 }
-=======
->>>>>>> 04aac5d4127c54378fee3ec4a36eae4568b4e126
+
