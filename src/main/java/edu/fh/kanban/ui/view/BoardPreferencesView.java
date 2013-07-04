@@ -164,12 +164,25 @@ public class BoardPreferencesView extends JFrame implements View{
 		JButton btnSpeichern = new JButton("Speichern");
 		btnSpeichern.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
+				boolean panelfehler = false;
+				
+				for(int i=0; i<10; i++){
+					if(txtColumname[i]!= null){
+						if(txtColumname[i].getText().isEmpty()){
+							txtColumname[i].setBackground(Color.RED);
+							panelfehler = true;
+						}
+						else txtColumname[i].setBackground(Color.WHITE);	
+					}else break;
+				}
+				
 				if(txtName.getText().isEmpty() || (!tglbtnRot.isSelected() && !tglbtnGelb.isSelected() && !tglbtnGruen.isSelected() && !tglbtnBlau.isSelected())){
 					if(txtName.getText().isEmpty()) txtName.setBackground(Color.RED);
 					else txtName.setBackground(Color.WHITE);
 					if(!tglbtnRot.isSelected() && !tglbtnGelb.isSelected() && !tglbtnGruen.isSelected() && !tglbtnBlau.isSelected())
 						System.out.println("Mindestens eine Color MUSS selektiert sein!!!");
-				}else{
+					
+				}else if(panelfehler == false){
 					int b_ID;
 					DatabaseManager.createConnection();
 					Board b = new Board();
