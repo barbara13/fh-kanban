@@ -50,7 +50,7 @@ public class DatabaseManager {
             con = DriverManager.getConnection("jdbc:derby:"+databaseDir+";create=true;bootPassword=a@"+password+";user="+user+"");
 
             //Create Table Board
-            createTableIfNotExist("Board", "CREATE TABLE Board (B_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, Name varchar(50) NOT NULL,Color varchar(15) NOT NULL)");
+            createTableIfNotExist("Board", "CREATE TABLE Board (B_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, Name varchar(50) NOT NULL, Red varchar(15), Yellow varchar(15), Green varchar(15), Blue varchar(15))");
 
             //Create Table Column
             createTableIfNotExist("Col", "CREATE TABLE Col(Co_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, B_id int CONSTRAINT fk_column REFERENCES Board(B_id),Name varchar(50) NOT NULL,Wip int NOT NULL)");
@@ -68,7 +68,7 @@ public class DatabaseManager {
 
     }
 
-    public void closeConnection() {
+    public static void closeConnection() {
         try {
             con.close();
         } catch (SQLException ex) {
