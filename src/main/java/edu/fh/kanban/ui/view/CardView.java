@@ -39,7 +39,6 @@ public class CardView extends JFrame implements View{
 		DatabaseManager.createConnection();
 		Card c = new Card();
 		cID = c.getId(headline);
-		c.get
 		
 		setBounds(new Rectangle(0,0,455,300));
 		setLocationByPlatform(true);
@@ -71,7 +70,7 @@ public class CardView extends JFrame implements View{
 		
 		JLabel label = new JLabel("CardID:");
 		getContentPane().add(label, "2, 2, right, top");
-		JLabel label_1 = new JLabel(cID);
+		JLabel label_1 = new JLabel(Integer.toString(cID));
 		getContentPane().add(label_1, "4, 2, 3, 1, fill, top");
 		JLabel label_2 = new JLabel("Effort:");
 		getContentPane().add(label_2, "10, 2, left, top");
