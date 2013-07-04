@@ -61,9 +61,7 @@ public class Kanban {
 		JMenuItem card_preferences = new JMenuItem("New Card");
 		card_preferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CardCreateView newCard = new CardCreateView();
-				newCard.getComponent();
-				newCard.setVisible(true);
+				new CardCreateView().getComponent();
 			}
 		});
 		
