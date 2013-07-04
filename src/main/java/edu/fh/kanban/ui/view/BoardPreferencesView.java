@@ -11,9 +11,10 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import edu.fh.kanban.database.Board;
+import edu.fh.kanban.database.Column;
+import edu.fh.kanban.database.DatabaseManager;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -41,6 +42,7 @@ public class BoardPreferencesView extends JFrame implements View{
 	private JTextField txtName;
 	private JPanel panel;
 	private JScrollPane scrollPane;
+	private JToggleButton tglbtnRot, tglbtnGruen, tglbtnGelb, tglbtnBlau; 
 	
 	private int arrayindex=0;
 	private JTextField[] txtColumname = new JTextField[10]; 
@@ -81,49 +83,41 @@ public class BoardPreferencesView extends JFrame implements View{
 				FormFactory.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("23px"),}));
 		
-		JLabel lblName = DefaultComponentFactory.getInstance().createLabel("Name: ");
-		getContentPane().add(lblName, "2, 2, fill, center");
+		getContentPane().add(new JLabel("Name:"), "2, 2, fill, center");
 		
 		txtName = new JTextField();
-		txtName.setText("");
 		getContentPane().add(txtName, "4, 2, 11, 1, fill, top");
 		txtName.setColumns(10);
 		
-		JLabel lblColors = DefaultComponentFactory.getInstance().createLabel("Colors: ");
-		getContentPane().add(lblColors, "2, 4, fill, top");
+		getContentPane().add(new JLabel("Color:"), "2, 4, fill, top");
 		
 		JSeparator separator = new JSeparator();
-		getContentPane().add(separator, "4, 4, 11, 1, fill, bottom");
+		getContentPane().add(separator, "4, 4, 11, 1, fill, Center");
 		
-		JToggleButton tglbtnRot = new JToggleButton("Expedite");
-		//tglbtnRot.setContentAreaFilled(false);
+		tglbtnRot = new JToggleButton("Expedite");
 		tglbtnRot.setOpaque(true);
 		tglbtnRot.setBackground(Color.RED);
 		getContentPane().add(tglbtnRot, "4, 6, fill, top");
 		
-		JToggleButton tglbtnGelb = new JToggleButton("Standard");
-		//tglbtnGelb.setContentAreaFilled(false);
+		tglbtnGelb = new JToggleButton("Standard");
 		tglbtnGelb.setOpaque(true);
 		tglbtnGelb.setBackground(Color.YELLOW);
 		getContentPane().add(tglbtnGelb, "6, 6, fill, top");
 		
-		JToggleButton tglbtnGruen = new JToggleButton("Fixed date");
-		//tglbtnGruen.setContentAreaFilled(false);
+		tglbtnGruen = new JToggleButton("Fixed date");
 		tglbtnGruen.setOpaque(true);
 		tglbtnGruen.setBackground(Color.GREEN);
 		getContentPane().add(tglbtnGruen, "8, 6, fill, top");
 		
-		JToggleButton tglbtnBlau = new JToggleButton("Intangible");
-		//tglbtnBlau.setContentAreaFilled(false);
+		tglbtnBlau = new JToggleButton("Intangible");
 		tglbtnBlau.setOpaque(true);
 		tglbtnBlau.setBackground(Color.BLUE);
 		getContentPane().add(tglbtnBlau, "10, 6, fill, top");
 		
-		JLabel lblColums = DefaultComponentFactory.getInstance().createLabel("Colums: ");
-		getContentPane().add(lblColums, "2, 8, fill, top");
+		getContentPane().add(new JLabel("Colums:"), "2, 8, fill, top");
 		
 		JSeparator separator_1 = new JSeparator();
-		getContentPane().add(separator_1, "4, 8, 11, 1, fill, bottom");
+		getContentPane().add(separator_1, "4, 8, 11, 1, fill, Center");
 		
 		scrollPane = new JScrollPane();
 		getContentPane().add(scrollPane, "2, 10, 13, 1, fill, top");
@@ -170,8 +164,37 @@ public class BoardPreferencesView extends JFrame implements View{
 		JButton btnSpeichern = new JButton("Speichern");
 		btnSpeichern.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
-				//new Board().insertRow(String.na, color);
+				boolean panelfehler = false;
 				
+				for(int i=0; i<10; i++){
+					if(txtColumname[i]!= null){
+						if(txtColumname[i].getText().isEmpty()){
+							txtColumname[i].setBackground(Color.RED);
+							panelfehler = true;
+						}
+						else txtColumname[i].setBackground(Color.WHITE);	
+					}else break;
+				}
+				
+				if(txtName.getText().isEmpty() || (!tglbtnRot.isSelected() && !tglbtnGelb.isSelected() && !tglbtnGruen.isSelected() && !tglbtnBlau.isSelected())){
+					if(txtName.getText().isEmpty()) txtName.setBackground(Color.RED);
+					else txtName.setBackground(Color.WHITE);
+					if(!tglbtnRot.isSelected() && !tglbtnGelb.isSelected() && !tglbtnGruen.isSelected() && !tglbtnBlau.isSelected())
+						System.out.println("Mindestens eine Color MUSS selektiert sein!!!");
+					
+				}else if(panelfehler == false){
+					int b_ID;
+					DatabaseManager.createConnection();
+					Board b = new Board();
+					Column c = new Column();
+					b_ID = b.insertRowAndReturn(txtName.getText(), tglbtnRot.isSelected()? tglbtnRot.getBackground().toString():"null", tglbtnGelb.isSelected()? tglbtnGelb.getBackground().toString():"null", tglbtnGruen.isSelected()? tglbtnGruen.getBackground().toString():"null", tglbtnBlau.isSelected()? tglbtnBlau.getBackground().toString():"null");
+					for(int i = 0; i < 10; i++){
+						if(txtColumname[i] != null){
+							c.insertRow(b_ID, txtColumname[i].getText(), Integer.parseInt(wip[i].getValue().toString()));
+						}else break;
+					}
+					DatabaseManager.closeConnection();
+				}
 			}
 		});
 		

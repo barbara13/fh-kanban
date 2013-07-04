@@ -83,7 +83,7 @@ public class BacklogView implements View{
                         button.setVisible(false);
                     }
                 
-                if(Searchfield.getText().toString() == "")
+                if(Searchfield.getText().toString().equals(""))
                 {
                     button.setVisible(true);
                 }

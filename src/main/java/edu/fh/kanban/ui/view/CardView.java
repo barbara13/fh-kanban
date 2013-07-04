@@ -7,32 +7,54 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+
+import edu.fh.kanban.database.Card;
+import edu.fh.kanban.database.DatabaseManager;
+
 import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+/**
+ * 
+ * @author Maxim
+ *
+ */
 public class CardView extends JFrame implements View{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	public CardView(){
+	
+	private int cID;
+	private String color, effort, value, description;
+	
+	public CardView(String headline){
+		super(headline);
+		
+		DatabaseManager.createConnection();
+		Card c = new Card();
+		cID = c.getId(headline);
+		c.get
+		
+		setBounds(new Rectangle(0,0,455,300));
+		setLocationByPlatform(true);
 		getContentPane().setBackground(Color.YELLOW);
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("44px"),
 				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("51px"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
 				ColumnSpec.decode("95px"),
-				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.UNRELATED_GAP_COLSPEC,
 				ColumnSpec.decode("95px"),
-				ColumnSpec.decode("53px"),
-				ColumnSpec.decode("47px"),
+				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("32px"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("70px"),},
 			new RowSpec[] {
@@ -47,48 +69,50 @@ public class CardView extends JFrame implements View{
 				RowSpec.decode("31px"),
 				RowSpec.decode("23px"),}));
 		
-		JLabel lblCardId = DefaultComponentFactory.getInstance().createLabel("Card ID:");
-		getContentPane().add(lblCardId, "2, 2, right, top");
-		
-		JLabel lblCidfromdb = DefaultComponentFactory.getInstance().createLabel("cIDfromDB");
-		getContentPane().add(lblCidfromdb, "4, 2, fill, top");
-		
-		JLabel lblAufwand = DefaultComponentFactory.getInstance().createLabel("Aufwand:");
-		getContentPane().add(lblAufwand, "8, 2, right, top");
-		
-		JLabel lblAfromdb = DefaultComponentFactory.getInstance().createLabel("AfromDB");
-		getContentPane().add(lblAfromdb, "10, 2, fill, top");
-		
-		JLabel lblWert = DefaultComponentFactory.getInstance().createLabel("Wert:");
-		getContentPane().add(lblWert, "8, 4, right, top");
-		
-		JLabel lblWfromdb = DefaultComponentFactory.getInstance().createLabel("WfromDB");
-		getContentPane().add(lblWfromdb, "10, 4, left, top");
-		
-		JLabel lblBeschreibung = DefaultComponentFactory.getInstance().createLabel("Beschreibung:");
-		getContentPane().add(lblBeschreibung, "2, 6, 3, 1, left, top");
+		JLabel label = new JLabel("CardID:");
+		getContentPane().add(label, "2, 2, right, top");
+		JLabel label_1 = new JLabel(cID);
+		getContentPane().add(label_1, "4, 2, 3, 1, fill, top");
+		JLabel label_2 = new JLabel("Effort:");
+		getContentPane().add(label_2, "10, 2, left, top");
+		JLabel label_3 = new JLabel(effort);
+		getContentPane().add(label_3, "12, 2, fill, top");
+		JLabel label_4 = new JLabel("Value:");
+		getContentPane().add(label_4, "10, 4, right, top");
+		JLabel label_5 = new JLabel(value);
+		getContentPane().add(label_5, "12, 4, left, top");
+		JLabel label_6 = new JLabel("Description");
+		getContentPane().add(label_6, "2, 6, 3, 1, left, top");
 		
 		JScrollPane scrollPane = new JScrollPane();
-		getContentPane().add(scrollPane, "2, 8, 9, 1, fill, fill");
+		getContentPane().add(scrollPane, "2, 8, 11, 1, fill, fill");
 		
-		JLabel lblBfromdb = DefaultComponentFactory.getInstance().createLabel("");
-		scrollPane.setViewportView(lblBfromdb);
+		scrollPane.setViewportView(new JLabel(description));
 		
 		JButton btnCancel = new JButton("Cancel");
-		getContentPane().add(btnCancel, "4, 10, default, top");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		getContentPane().add(btnCancel, "2, 10, 3, 1, fill, top");
 		
 		JButton btnAddCard = new JButton("Add Card");
-		getContentPane().add(btnAddCard, "6, 10, default, top");
+		getContentPane().add(btnAddCard, "8, 10, fill, top");
 		
 		init();
+		
+		JButton btnEdit = new JButton("Edit");
+		getContentPane().add(btnEdit, "6, 10, fill, top");
 	}
 	
-	private void init(){
+	private JComponent init(){
+		
+		return (JComponent) getContentPane();
 		
 	}
 
 	public JComponent getComponent() {
-		return (JComponent) getContentPane();
+		return init();
 	}
-
 }

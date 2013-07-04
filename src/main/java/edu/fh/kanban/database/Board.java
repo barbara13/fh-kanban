@@ -25,20 +25,26 @@ public class Board implements DBFunctions{
     /**
      * Hinzufügen eines Boards in die DB.
      * @param name
-     * @param color 
+     * @param red
+     * @param yellow
+     * @param green
+     * @param blue
      */   
-    public void insertRow(String name, String color) {
-        db.executeUpdateStatementAndReturn("INSERT INTO Board (Name, Color) VALUES('"+name+"','"+color+"')");   
+    public void insertRow(String name, String red, String yellow, String green, String blue) {
+        db.executeUpdateStatementAndReturn("INSERT INTO Board (Name, Red, Yellow, Green, Blue) VALUES('"+name+"','"+red+"','"+yellow+"','"+green+"','"+blue+"')");   
     }
     
     /**
      * Hinzufügen eines Boards in die DB, wobei die id zurückkommt.
      * @param name
-     * @param color
+     * @param red
+     * @param yellow
+     * @param green
+     * @param blue
      * @return Die Id der hinzugefügten Datensatzes
      */
-    public int insertRowAndReturn(String name, String color) {
-        return db.executeUpdateStatementAndReturn("INSERT INTO Board (Name, Color) VALUES('"+name+"','"+color+"')");   
+    public int insertRowAndReturn(String name, String red, String yellow, String green, String blue) {
+        return db.executeUpdateStatementAndReturn("INSERT INTO Board (Name, Red, Yellow, Green, Blue) VALUES('"+name+"','"+red+"','"+yellow+"','"+green+"','"+blue+"')");   
     }
     
     @Override

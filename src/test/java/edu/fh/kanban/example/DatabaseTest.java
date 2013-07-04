@@ -41,9 +41,9 @@ public class DatabaseTest {
     /**
      * Erstellt ein Beispiel Board
      */
-    public void createBoard(){
-        b_id = b.insertRowAndReturn("Board", "Red");
-    }
+//    public void createBoard(){
+//        b_id = b.insertRowAndReturn("Board", "Red");
+//    }
     
     /**
      * Erstellt mehrere Beispiel Spalten (Columns)
