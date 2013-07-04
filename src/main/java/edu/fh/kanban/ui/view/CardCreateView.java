@@ -1,31 +1,28 @@
 package edu.fh.kanban.ui.view;
 
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-
-import javax.swing.JLabel;
-
 import java.awt.Color;
 import java.awt.TextArea;
 import java.awt.Rectangle;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JToggleButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JSeparator;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
 import edu.fh.kanban.database.Card;
-import edu.fh.kanban.database.DatabaseManager;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.JSeparator;
 
 /**
  * 
@@ -42,14 +39,14 @@ public class CardCreateView extends JFrame implements View{
 	private JTextField txtValue;
 	private TextArea textDescription;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JTextField txtHeadline;
 	
 	public CardCreateView(){
-		super("New Card");
+		super("Create New Card");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
 		setResizable(false);
-//		getComponent();
 	}
 	
 	private JComponent init(){
@@ -88,7 +85,31 @@ public class CardCreateView extends JFrame implements View{
 				FormFactory.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("23px"),}));
 		
-		getContentPane().add(new JLabel("Card ID:"), "2, 2, left, center");
+		getContentPane().add(new JLabel("Head Line:"), "1, 2, 3, 1, right, default");
+		
+		txtHeadline = new JTextField();
+		getContentPane().add(txtHeadline, "4, 2, 7, 1, fill, default");
+		txtHeadline.setColumns(10);
+		
+		getContentPane().add(new JLabel("effort:"), "16, 2, right, center");
+		
+		txtEffort = new JTextField();
+		txtEffort.addKeyListener(new KeyListener(){
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+			    if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
+			    	if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')) {  
+			    		e.consume();  //Alles außer Zahlen werden ignoriert
+			    	}
+			    }
+			}
+			public void keyPressed(KeyEvent e){}
+			public void keyReleased(KeyEvent e){}
+		});
+		getContentPane().add(txtEffort, "18, 2, default, top");
+		txtEffort.setColumns(10);
+		
+		getContentPane().add(new JLabel("Card ID:"), "2, 4, left, center");
 		
 		txtCardId = new JTextField();
 		txtCardId.addKeyListener(new KeyListener(){
@@ -103,22 +124,31 @@ public class CardCreateView extends JFrame implements View{
 			public void keyPressed(KeyEvent e){}
 			public void keyReleased(KeyEvent e){}
 		});
-		getContentPane().add(txtCardId, "4, 2, 7, 1, default, top");
+		getContentPane().add(txtCardId, "4, 4, 7, 1, default, top");
 		txtCardId.setColumns(10);
-		
-		getContentPane().add(new JLabel("effort:"), "16, 2, right, center");
-		
-		txtEffort = new JTextField();
-		getContentPane().add(txtEffort, "18, 2, default, top");
-		txtEffort.setColumns(10);
 		
 		getContentPane().add(new JLabel("Value:"), "16, 4, right, center");
 		
 		txtValue = new JTextField();
+		txtValue.addKeyListener(new KeyListener(){
+			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+			    if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
+			    	if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')) {  
+			    		e.consume();  //Alles außer Zahlen werden ignoriert
+			    	}
+			    }
+			}
+			public void keyPressed(KeyEvent e){}
+			public void keyReleased(KeyEvent e){}
+		});
 		getContentPane().add(txtValue, "18, 4, default, top");
 		txtValue.setColumns(10);
 		
 		getContentPane().add(new JLabel("Color:"), "2, 6, left, top");
+
+		JSeparator separator = new JSeparator();
+		getContentPane().add(separator, "4, 6, 15, 1");
 		
 		JToggleButton tglbtnRed = new JToggleButton("Expedite");
 		tglbtnRed.setOpaque(true);
@@ -128,9 +158,6 @@ public class CardCreateView extends JFrame implements View{
 				getContentPane().setBackground(Color.RED);
 			}
 		});
-		
-		JSeparator separator = new JSeparator();
-		getContentPane().add(separator, "4, 6, 15, 1");
 		buttonGroup.add(tglbtnRed);
 		getContentPane().add(tglbtnRed, "4, 8, 5, 1, fill, top");
 		
@@ -184,7 +211,19 @@ public class CardCreateView extends JFrame implements View{
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//new Card().insertRow(Integer.parseInt(txtCardId.getText()), name, description, effort, value, status)
+				if(txtCardId.getText().isEmpty() || txtHeadline.getText().isEmpty() || txtEffort.getText().isEmpty() || txtValue.getText().isEmpty()){
+					if(txtCardId.getText().isEmpty()) txtCardId.setBackground(Color.RED);
+					else txtCardId.setBackground(Color.WHITE);
+					if(txtHeadline.getText().isEmpty()) txtHeadline.setBackground(Color.RED);
+					else txtHeadline.setBackground(Color.WHITE);
+					if(txtEffort.getText().isEmpty()) txtEffort.setBackground(Color.RED);
+					else txtEffort.setBackground(Color.WHITE);
+					if(txtValue.getText().isEmpty()) txtValue.setBackground(Color.RED);
+					else txtValue.setBackground(Color.WHITE);
+				}else{
+					new Card().insertRow(Integer.parseInt(txtCardId.getText()), txtHeadline.getText(), textDescription.getText(), Integer.parseInt(txtEffort.getText()), Integer.parseInt(txtValue.getText()), getBackground().toString());
+					dispose();
+				}	
 			}
 		});
 		getContentPane().add(btnCreate, "8, 14, 4, 1, fill, top");
