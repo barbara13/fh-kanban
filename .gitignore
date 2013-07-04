@@ -14,3 +14,15 @@ db/db.lck
 db/db.lck
 
 db/log/log.ctrl
+
+derby.log
+
+db/log/logmirror.ctrl
+
+db/log/log1.dat
+
+db/log/log.ctrl
+
+db/db.lck
+
+db/db.lck
