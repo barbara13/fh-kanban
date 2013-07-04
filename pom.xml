@@ -57,10 +57,6 @@
             <version>1.1.1</version>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>1</groupId>
-            <artifactId>Derby</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

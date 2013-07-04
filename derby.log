@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Thu Jul 04 11:25:57 CEST 2013 Thread[main,5,main] Ignored duplicate property derby.module.dataDictionary in jar:file:/C:/Users/Babsi/.m2/repository/1/Derby/1/derby-1.jar!/org/apache/derby/modules.properties
 Thu Jul 04 11:25:57 CEST 2013 Thread[main,5,main] Ignored duplicate property derby.module.lockManagerJ1 in jar:file:/C:/Users/Babsi/.m2/repository/1/Derby/1/derby-1.jar!/org/apache/derby/modules.properties
 Thu Jul 04 11:25:57 CEST 2013 Thread[main,5,main] Ignored duplicate property derby.env.classes.dvfJ2 in jar:file:/C:/Users/Babsi/.m2/repository/1/Derby/1/derby-1.jar!/org/apache/derby/modules.properties
@@ -91,3 +92,18 @@ os.arch=amd64
 os.version=6.1
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
+=======
+----------------------------------------------------------------
+Thu Jul 04 00:06:30 CEST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.1 - (1458268): instance a816c00e-013f-a692-8f11-00000478b910 
+on database directory /Users/Ghost/Documents/fh-kanban/db with class loader sun.misc.Launcher$AppClassLoader@37b90b39 
+Loaded from file:/Users/Ghost/Documents/fh-kanban/derby-10.10.1.1.jar
+java.vendor=Apple Inc.
+java.runtime.version=1.6.0_51-b11-457-11M4509
+user.dir=/Users/Ghost/Documents/fh-kanban
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.8.4
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+>>>>>>> 3eecd8cbd72526bc85ed29edd0c4e0f0860f04d2
