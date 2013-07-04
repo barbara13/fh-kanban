@@ -35,7 +35,7 @@ private JPanel bpanel;
 private JButton card1;
 private JLabel label1;
 private JButton b;
-        
+
 
 
     public JComponent getComponent() {
@@ -67,41 +67,19 @@ private JButton b;
         bpanel.add(card1, CC.xy(3, 9));
         bpanel.add(label1, CC.xy(3, 7));
         
-        searchtext.addKeyListener(new KeyListener(){
-          
+        searchtext.addKeyListener(new KeyListener(){    
+            
             @Override
             public void keyTyped(KeyEvent e) {
-                 if(searchtext.getText().toString().regionMatches(true, 1, card1.getText().toString(),1 , 1)){
-                    card1.setVisible(true);
-                }		
-                else
-                {
-                    card1.setVisible(false);
-                }
-                
-                if(searchtext.getText().toString().equals(""))
-                {
-                    card1.setVisible(true);
-                }
-                
 		}
             
-
             @Override
             public void keyPressed(KeyEvent e) {          
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                bpanel.repaint();
-            }
-        });
-        
-	searchtext.addActionListener(new ActionListener() {
-		
-                public void actionPerformed(ActionEvent e) {
-		
-                    if(searchtext.getText().toString().equalsIgnoreCase(card1.getText().toString())){
+                 if(searchtext.getText().toString().regionMatches(true, 0, card1.getText().toString(),0 , 3)){
                     card1.setVisible(true);
                 }		
                 else
@@ -113,10 +91,9 @@ private JButton b;
                 {
                     card1.setVisible(true);
                 }
-                
-		}
-		});
-        
+		}      
+        });
+              
         
         return bpanel;
         
