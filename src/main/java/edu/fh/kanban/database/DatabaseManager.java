@@ -56,7 +56,7 @@ public class DatabaseManager {
             createTableIfNotExist("Col", "CREATE TABLE Col(Co_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, B_id int CONSTRAINT fk_column REFERENCES Board(B_id),Name varchar(50) NOT NULL,Wip int NOT NULL)");
 
             //Create Table Card
-            createTableIfNotExist("Card", "CREATE TABLE Card (Ca_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, Co_id int CONSTRAINT fk_card REFERENCES Col(Co_id), Name varchar(50) NOT NULL, Description varchar(500) NOT NULL, Effort int NOT NULL, Value int NOT NULL, Status varchar(10))");
+            createTableIfNotExist("Card", "CREATE TABLE Card (Ca_id int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, Co_id int CONSTRAINT fk_card REFERENCES Col(Co_id), Name varchar(50) NOT NULL, Description varchar(500) NOT NULL, Effort int NOT NULL, Value int NOT NULL, Status varchar(100) NOT NULL)");
 
         } catch (IOException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);

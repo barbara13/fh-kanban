@@ -15,6 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.Color;
 
+/**
+ * 
+ * @author Maxim
+ *
+ */
 public class CardView extends JFrame implements View{
 	
 	/**
@@ -23,7 +28,10 @@ public class CardView extends JFrame implements View{
 	private static final long serialVersionUID = 1L;
 
 	public CardView(){
-		getContentPane().setBackground(Color.YELLOW);
+		
+		//Datenbank Tupel der Karte Laden und in Variablen Speichern
+		super("HeadLine");	//Headline aus der DB laden
+		getContentPane().setBackground(Color.YELLOW);	//Farbe aus der DB laden
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("44px"),
@@ -47,8 +55,7 @@ public class CardView extends JFrame implements View{
 				RowSpec.decode("31px"),
 				RowSpec.decode("23px"),}));
 		
-		JLabel lblCardId = DefaultComponentFactory.getInstance().createLabel("Card ID:");
-		getContentPane().add(lblCardId, "2, 2, right, top");
+		getContentPane().add(new JLabel("CardID:"), "2, 2, right, top");
 		
 		JLabel lblCidfromdb = DefaultComponentFactory.getInstance().createLabel("cIDfromDB");
 		getContentPane().add(lblCidfromdb, "4, 2, fill, top");
