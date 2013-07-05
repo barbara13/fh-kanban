@@ -4,6 +4,7 @@
  */
 package edu.fh.kanban.ui.controller;
 
+import edu.fh.kanban.dao.XMLBoard;
 import edu.fh.kanban.database.Board;
 import edu.fh.kanban.database.Column;
 import edu.fh.kanban.database.DatabaseManager;
@@ -18,10 +19,12 @@ import java.awt.event.ActionEvent;
 public class BoardPreferencesController extends Controller{
     private Object src;
     private BoardPreferencesView bpv;
+    private XMLBoard xml;
     
     
     public BoardPreferencesController(BoardPreferencesView bpv){
        this.bpv = bpv;
+       xml = new XMLBoard();
     }  
     
     @Override
@@ -49,18 +52,30 @@ public class BoardPreferencesController extends Controller{
 			if(!bpv.getTglbtnRot().isSelected() && !bpv.getTglbtnGelb().isSelected() && !bpv.getTglbtnGruen().isSelected() && !bpv.getTglbtnBlau().isSelected())	
                               System.out.println("Mindestens eine Color MUSS selektiert sein!!!");
 					
-				}else if(panelfehler == false){
-					int b_ID;
-					DatabaseManager.createConnection();
-					Board b = new Board();
-					Column c = new Column();
-					b_ID = b.insertRowAndReturn(bpv.getTxtName().getText(), bpv.getTglbtnRot().isSelected()? bpv.getTglbtnRot().getBackground().toString():"null", bpv.getTglbtnGelb().isSelected()? bpv.getTglbtnGelb().getBackground().toString():"null", bpv.getTglbtnGruen().isSelected()? bpv.getTglbtnGruen().getBackground().toString():"null", bpv.getTglbtnBlau().isSelected()? bpv.getTglbtnBlau().getBackground().toString():"null");
-					for(int i = 0; i < 10; i++){
-						if(bpv.getTxtColumname()[i] != null){
-							c.insertRow(b_ID, bpv.getTxtColumname()[i].getText(), Integer.parseInt(bpv.getWip()[i].getValue().toString()));
-						}else break;
-					}
-					DatabaseManager.closeConnection();
+				}else if(panelfehler == false){ 
+                                   String color = new String();
+                                   
+                                   if(bpv.getTglbtnBlau().isSelected()){ 
+                                       color = (color + " blue ");}
+                                   
+                                   if(bpv.getTglbtnGelb().isSelected()){
+                                       color = (color + " yellow ");}
+                                   
+                                   if(bpv.getTglbtnGruen().isSelected()){
+                                       color = (color + " green ");}
+                                   
+                                   if(bpv.getTglbtnRot().isSelected()){
+                                       color = (color + " red ");}
+                                
+                                    xml.addRoot(bpv.getTxtName().getText().toString(), color);
+                                      
+                                for(int i = 0; i < bpv.getArrayindex(); i++){     
+                                
+                                    xml.addColumn(bpv.getTxtColumname()[i].getText().toString(), bpv.getWip()[i].getValue().toString());
+                                 }
+                                   
+                                xml.createBoard(bpv.getTxtName().getText().toString());
+                                
 				}
         }
         
