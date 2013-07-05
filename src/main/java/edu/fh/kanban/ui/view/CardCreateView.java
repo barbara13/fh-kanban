@@ -22,6 +22,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
+import edu.fh.kanban.ui.controller.CardController;
+
 /**
  * 
  * @author Maxim
@@ -32,15 +34,44 @@ public class CardCreateView extends JFrame implements View{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtCardId;
-	private JTextField txtEffort;
-	private JTextField txtValue;
+
+	private CardController cController = null;
+	
+	private JTextField txtHeadline, txtCardId, txtEffort, txtValue;
 	private TextArea textDescription;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField txtHeadline;
+	private JButton btnCancel, btnCreate;
+	
+	public JTextField getTxtHeadline() {
+		return txtHeadline;
+	}
+	public JTextField getTxtCardId() {
+		return txtCardId;
+	}
+
+	public JTextField getTxtEffort() {
+		return txtEffort;
+	}
+
+	public JTextField getTxtValue() {
+		return txtValue;
+	}
+
+	public TextArea getTextDescription() {
+		return textDescription;
+	}
+	
+	public JButton getBtnCreate() {
+		return btnCreate;
+	}
+
+	public JButton getBtnCancel() {
+		return btnCancel;
+	}
 	
 	public CardCreateView(){
 		super("Create New Card");
+		cController = new CardController(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
@@ -198,32 +229,12 @@ public class CardCreateView extends JFrame implements View{
 		textDescription = new TextArea();
 		getContentPane().add(textDescription, "2, 12, 17, 1, fill, fill");
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(cController);
 		getContentPane().add(btnCancel, "2, 14, 5, 1, fill, top");
 		
-		JButton btnCreate = new JButton("Create");
-		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(txtCardId.getText().isEmpty() || txtHeadline.getText().isEmpty() || txtEffort.getText().isEmpty() || txtValue.getText().isEmpty()){
-					if(txtCardId.getText().isEmpty()) txtCardId.setBackground(Color.RED);
-					else txtCardId.setBackground(Color.WHITE);
-					if(txtHeadline.getText().isEmpty()) txtHeadline.setBackground(Color.RED);
-					else txtHeadline.setBackground(Color.WHITE);
-					if(txtEffort.getText().isEmpty()) txtEffort.setBackground(Color.RED);
-					else txtEffort.setBackground(Color.WHITE);
-					if(txtValue.getText().isEmpty()) txtValue.setBackground(Color.RED);
-					else txtValue.setBackground(Color.WHITE);
-				}else{
-					//Datenbank Eintragen
-					dispose();
-				}	
-			}
-		});
+		btnCreate = new JButton("Create");
+		btnCreate.addActionListener(cController);
 		getContentPane().add(btnCreate, "8, 14, 4, 1, fill, top");
 		
 		setVisible(true);

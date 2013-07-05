@@ -22,21 +22,57 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
+import edu.fh.kanban.ui.controller.CardController;
+
 public class CardEditView extends JFrame{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtHeadline;
-	private JTextField txtCardId;
-	private JTextField txtEffort;
-	private JTextField txtValue;
+
+	private CardController cController = null;
+	
+	private JTextField txtHeadline, txtCardId, txtEffort, txtValue;
 	private TextArea textDescription;
 	private Color tgbtnColor;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JButton btnCancel, btnSave;
 	
+	public JTextField getTxtHeadline() {
+		return txtHeadline;
+	}
+
+	public JTextField getTxtCardId() {
+		return txtCardId;
+	}
+
+	public JTextField getTxtEffort() {
+		return txtEffort;
+	}
+
+	public JTextField getTxtValue() {
+		return txtValue;
+	}
+
+	public TextArea getTextDescription() {
+		return textDescription;
+	}
+
+	public Color getTgbtnColor() {
+		return tgbtnColor;
+	}
+
+	public JButton getBtnCancel() {
+		return btnCancel;
+	}
+
+	public JButton getBtnSave() {
+		return btnSave;
+	}
+
 	public CardEditView(String headline, String cardId, String effort, String value, String description, Color color){
 		super("EDIT: \"" + headline + "\"");
+		cController = new CardController(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
@@ -195,32 +231,12 @@ public class CardEditView extends JFrame{
 		getContentPane().add(new JLabel("Description:"), "2, 10, 5, 1, left, top");
 		getContentPane().add(textDescription, "2, 12, 17, 1, fill, fill");
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(cController);
 		getContentPane().add(btnCancel, "2, 14, 5, 1, fill, top");
 		
-		JButton btnSave = new JButton("Save");
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(txtCardId.getText().isEmpty() || txtHeadline.getText().isEmpty() || txtEffort.getText().isEmpty() || txtValue.getText().isEmpty()){
-					if(txtCardId.getText().isEmpty()) txtCardId.setBackground(Color.RED);
-					else txtCardId.setBackground(Color.WHITE);
-					if(txtHeadline.getText().isEmpty()) txtHeadline.setBackground(Color.RED);
-					else txtHeadline.setBackground(Color.WHITE);
-					if(txtEffort.getText().isEmpty()) txtEffort.setBackground(Color.RED);
-					else txtEffort.setBackground(Color.WHITE);
-					if(txtValue.getText().isEmpty()) txtValue.setBackground(Color.RED);
-					else txtValue.setBackground(Color.WHITE);
-				}else{
-					//Datenbank Eintragen
-					dispose();
-				}	
-			}
-		});
+		btnSave = new JButton("Save");
+		btnSave.addActionListener(cController);
 		getContentPane().add(btnSave, "8, 14, 4, 1, fill, top");
 		
 		setVisible(true);
