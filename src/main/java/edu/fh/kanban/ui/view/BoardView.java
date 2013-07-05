@@ -25,7 +25,7 @@ public void setTitle(JLabel title) {
     }
 
 
-
+//
 // Konstruktor
 private JLabel title;
 private JTextField searchtext;
