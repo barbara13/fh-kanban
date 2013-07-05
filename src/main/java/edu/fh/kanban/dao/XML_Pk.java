@@ -77,7 +77,7 @@ public class XML_Pk extends XML {
      */
     public void setB_id() { 
         doc.getElementsByTagName("board").item(0).getAttributes().getNamedItem("b_id").setTextContent(String.valueOf(this.getB_id() + 1));
-        this.createXML("Pks.xml");
+        this.updateXML("Pks.xml");
     }
     
     /**
@@ -85,7 +85,7 @@ public class XML_Pk extends XML {
      */
     public void setCo_id() {
         doc.getElementsByTagName("column").item(0).getAttributes().getNamedItem("co_id").setTextContent(String.valueOf(this.getCo_id() + 1));
-        this.createXML("Pks.xml");
+        this.updateXML("Pks.xml");
     }
     
     /**
@@ -93,7 +93,7 @@ public class XML_Pk extends XML {
      */
     public void setCa_id() {
         doc.getElementsByTagName("card").item(0).getAttributes().getNamedItem("ca_id").setTextContent(String.valueOf(this.getCa_id() + 1));
-        this.createXML("Pks.xml");
+        this.updateXML("Pks.xml");
     }
     
     public void loadXML(String xmlPath) {

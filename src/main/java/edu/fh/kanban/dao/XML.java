@@ -33,7 +33,7 @@ public class XML {
         return s.substring(s1, s2);
     }
 
-    protected void createXML(String name) {
+    protected void updateXML(String name) {
         try {
             transformerFactory = TransformerFactory.newInstance();
             transformer = transformerFactory.newTransformer();

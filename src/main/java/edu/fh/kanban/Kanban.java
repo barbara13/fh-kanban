@@ -1,6 +1,8 @@
 //Test für Malte
 package edu.fh.kanban;
 
+import edu.fh.kanban.dao.XMLBoard;
+import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.database.DatabaseManager;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -30,6 +32,15 @@ public class Kanban {
         public static void main(String[] args) {
             //Verbindung mit der Datenbank aufbauen
 //            DatabaseManager.createConnection();
+            
+            XMLCard card = new XMLCard();
+            //card.addCard("lawl", "fff", "ffff", "ss", "sss");
+            //card.deleteCard(19);
+            
+            //XMLBoard board = new XMLBoard();
+            //board.loadXML("Board2.xml");
+            //board.addCardToColumn(25, 17);
+            
             
 		LOGGER.info("Starting kanban app.");
 		LOGGER.info("Setting look and feel.");

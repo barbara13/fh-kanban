@@ -20,22 +20,30 @@ import org.xml.sax.SAXException;
  * @author Ronald
  */
 public class XMLCard extends XML {
+
     private DocumentBuilderFactory docBuilderFactory;
     private DocumentBuilder docBuilder;
-    
     private XML_Pk pk;
-    
     private Element cardElement = null;
+    private Element searchedElement = null;
+    private Element rootElement = null;
+    private NodeList rootList = null;
     private NodeList cardList = null;
     private Attr attr;
-    
+
     public XMLCard() {
         try {
             docBuilderFactory = DocumentBuilderFactory.newInstance();
             docBuilder = docBuilderFactory.newDocumentBuilder();
-            
+
             try {
-               doc = docBuilder.parse("cards.xml");
+                //XML Datei laden
+                doc = docBuilder.parse("cards.xml");
+                //Root Element
+                rootElement = (Element) doc.getElementsByTagName("cards").item(0);
+
+                cardList = doc.getElementsByTagName("card");
+
             } catch (SAXException ex) {
                 Logger.getLogger(XMLCard.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -47,59 +55,74 @@ public class XMLCard extends XML {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void addCard(String name, String description, String effort, String value, String status){
+
+    public void addCard(String name, String description, String effort, String value, String status) {
         cardElement = doc.createElement("card");
         doc.getDocumentElement().appendChild(cardElement);
-        
+
         //Attribut ca_id hinzufügen
         attr = doc.createAttribute("ca_id");
         attr.setValue(String.valueOf(pk.getCa_id()));
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut co_id hinzufügen
         attr = doc.createAttribute("co_id");
         attr.setValue("0");
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut name hinzufügen
         attr = doc.createAttribute("name");
         attr.setValue(name);
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut Description hinzufügen
         attr = doc.createAttribute("description");
         attr.setValue(description);
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut Effort hinzufügen
         attr = doc.createAttribute("effort");
         attr.setValue(effort);
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut Value hinzufügen
         attr = doc.createAttribute("value");
         attr.setValue(value);
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut Status hinzufügen
         attr = doc.createAttribute("status");
         attr.setValue(status);
         cardElement.setAttributeNode(attr);
-        
+
         pk.setCa_id();
+        updateXML("cards.xml");
     }
-    
-    public void deleteCard(int ca_id){
-        cardList = doc.getElementsByTagName("card");
-        for(int i = 0; i < cardList.getLength(); i++){
-            //if(cardList.item(i).getAttributes().getNamedItem("ca_id")){
-                System.out.println("f");
-            //}
+
+    public Element searchCard(int ca_id) {
+        for (int i = 0; i < cardList.getLength(); i++) {
+            //Wenn gesuchtes Element gefunden wurde
+            if (Integer.parseInt(this.getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == ca_id) {
+                searchedElement = (Element) cardList.item(i);
+                //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
+                break;
+            }
+        }
+
+        return searchedElement;
+    }
+
+    public void deleteCard(int ca_id) {
+        cardElement = searchCard(ca_id);
+        if (cardElement != null) {
+            //Element aus der Datei löschen
+            rootElement.removeChild(cardElement);
+            //XML Datei aktualisieren
+            updateXML("cards.xml");
         }
     }
-    
-    public void createCard(){
-        this.createXML("cards.xml");
+
+    public void createCard() {
+        this.updateXML("cards.xml");
     }
 }

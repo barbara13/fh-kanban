@@ -35,9 +35,13 @@ public class XMLBoard extends XML{
     private DocumentBuilder docBuilder; 
    // private Document doc;
     
+    private String xmlPath;
+    private XMLCard xmlCard = new XMLCard();
+    
     private Element rootElement;
     private Element columnElement;
     private Element cardElement;
+    private Element searchedElement;
     
     private Node cardNode = null;
     
@@ -62,7 +66,9 @@ public class XMLBoard extends XML{
         try {             
             docBuilderFactory = DocumentBuilderFactory.newInstance();             
             docBuilder = docBuilderFactory.newDocumentBuilder();    
-
+            
+            //Column Elemente parsen
+            //columnList = doc.getElementsByTagName("column");
             
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,6 +77,8 @@ public class XMLBoard extends XML{
     }
           
     public void loadXML(String xmlPath){
+        this.xmlPath = xmlPath;
+        
         String boardName;
         String boardColor;
         
@@ -97,15 +105,13 @@ public class XMLBoard extends XML{
                 //Board in de Datenbank eintragen
                 //b_id = b.insertRowAndReturn(boardName, boardColor);
 
-                
-                //Column Elemente parsen
                 columnList = doc.getElementsByTagName("column");
+                
                 //Anzahl der Columns
                 totalColumns = columnList.getLength();
                 
                 
                 for(int i = 0; i < totalColumns ; i++){
-                    //Card Knoten innerhalb der Columns
                     cardNode = columnList.item(i);
                     
                     columnName = getString(columnList.item(i).getAttributes().getNamedItem("name").toString());
@@ -207,10 +213,79 @@ public class XMLBoard extends XML{
         pk.setCo_id();
     }
     
+    public Element addCard(Element card, String co_id){
+        Element newCardElement;
+        newCardElement = doc.createElement("card");
+        
+        //Attribut ca_id hinzufügen
+        attr = doc.createAttribute("ca_id");
+        attr.setValue(card.getAttribute("ca_id"));
+        newCardElement.setAttributeNode(attr);
+
+        //Attribut co_id hinzufügen
+        attr = doc.createAttribute("co_id");
+        attr.setValue(co_id);
+        newCardElement.setAttributeNode(attr);
+
+        //Attribut name hinzufügen
+        attr = doc.createAttribute("name");
+        attr.setValue(card.getAttribute("name"));
+        newCardElement.setAttributeNode(attr);
+
+        //Attribut Description hinzufügen
+        attr = doc.createAttribute("description");
+        attr.setValue(card.getAttribute("description"));
+        newCardElement.setAttributeNode(attr);
+
+        //Attribut Effort hinzufügen
+        attr = doc.createAttribute("effort");
+        attr.setValue(card.getAttribute("effort"));
+        newCardElement.setAttributeNode(attr);
+
+        //Attribut Value hinzufügen
+        attr = doc.createAttribute("value");
+        attr.setValue(card.getAttribute("value"));
+        newCardElement.setAttributeNode(attr);
+
+        //Attribut Status hinzufügen
+        attr = doc.createAttribute("status");
+        attr.setValue(card.getAttribute("status"));
+        newCardElement.setAttributeNode(attr);
+        
+        return newCardElement;
+    }
     
+    public Element searchColumn(int co_id){
+        columnList = doc.getElementsByTagName("column");
+        for (int i = 0; i < columnList.getLength(); i++) {
+            //Wenn gesuchtes Element gefunden wurde
+            if (Integer.parseInt(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+                searchedElement = (Element) columnList.item(i);
+                //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
+                break;
+            }
+        }
+        
+        return searchedElement;
+    }
+    
+    public void addCardToColumn(int ca_id, int co_id){
+        columnElement = this.searchColumn(co_id);
+        cardElement = xmlCard.searchCard(ca_id);
+        
+        //Wenn die gesuchte card und column gefunden wurde
+        if(cardElement != null && columnElement != null){ 
+            
+            columnElement.appendChild(this.addCard(cardElement, columnElement.getAttribute("co_id")));
+            xmlCard.deleteCard(ca_id);
+            
+            this.updateXML(xmlPath);
+         
+        }
+    }
     
     public void createBoard(String name){
-        this.createXML(name);
+        this.updateXML(name);
         pk.setB_id();
     }
 
