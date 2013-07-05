@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import edu.fh.kanban.database.Board;
 import edu.fh.kanban.database.Column;
 import edu.fh.kanban.database.DatabaseManager;
+import edu.fh.kanban.ui.controller.BoardPreferencesController;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -43,14 +44,66 @@ public class BoardPreferencesView extends JFrame implements View{
 	private JPanel panel;
 	private JScrollPane scrollPane;
 	private JToggleButton tglbtnRot, tglbtnGruen, tglbtnGelb, tglbtnBlau; 
+        private BoardPreferencesController c = null;
 	
+        private JButton btnSpeichern;
+        private JButton btnAbbrechen;
 	private int arrayindex=0;
 	private JTextField[] txtColumname = new JTextField[10]; 
 	private JSpinner[] wip = new JSpinner[10];
 	private JButton[] btnMinus= new JButton[10];
+ 
 
+    public JToggleButton getTglbtnRot() {
+        return tglbtnRot;
+    }
+
+    public JToggleButton getTglbtnGruen() {
+        return tglbtnGruen;
+    }
+
+    public JToggleButton getTglbtnGelb() {
+        return tglbtnGelb;
+    }
+
+    public JToggleButton getTglbtnBlau() {
+        return tglbtnBlau;
+    }
+
+    public JButton[] getBtnMinus() {
+        return btnMinus;
+    }
+
+    public JButton getBtnSpeichern() {
+        return btnSpeichern;
+    }
+
+    public JButton getBtnAbbrechen() {
+        return btnAbbrechen;
+    }
+    
+    public JTextField getTxtName() {
+        return txtName;
+    }
+
+    public JTextField[] getTxtColumname() {
+        return txtColumname;
+    }
+
+    public JSpinner[] getWip() {
+        return wip;
+    }
+
+        
+        
+        
 	public BoardPreferencesView(){
+                
 		super("Board Einstellungen");
+                c = new BoardPreferencesController(this);
+                
+                
+                
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
 		setResizable(false);
@@ -161,51 +214,15 @@ public class BoardPreferencesView extends JFrame implements View{
 	
 		Erweiterung();
 		
-		JButton btnSpeichern = new JButton("Speichern");
-		btnSpeichern.addActionListener(new ActionListener() {	
-			public void actionPerformed(ActionEvent e) {
-				boolean panelfehler = false;
-				
-				for(int i=0; i<10; i++){
-					if(txtColumname[i]!= null){
-						if(txtColumname[i].getText().isEmpty()){
-							txtColumname[i].setBackground(Color.RED);
-							panelfehler = true;
-						}
-						else txtColumname[i].setBackground(Color.WHITE);	
-					}else break;
-				}
-				
-				if(txtName.getText().isEmpty() || (!tglbtnRot.isSelected() && !tglbtnGelb.isSelected() && !tglbtnGruen.isSelected() && !tglbtnBlau.isSelected())){
-					if(txtName.getText().isEmpty()) txtName.setBackground(Color.RED);
-					else txtName.setBackground(Color.WHITE);
-					if(!tglbtnRot.isSelected() && !tglbtnGelb.isSelected() && !tglbtnGruen.isSelected() && !tglbtnBlau.isSelected())
-						System.out.println("Mindestens eine Color MUSS selektiert sein!!!");
-					
-				}else if(panelfehler == false){
-					int b_ID;
-					DatabaseManager.createConnection();
-					Board b = new Board();
-					Column c = new Column();
-					b_ID = b.insertRowAndReturn(txtName.getText(), tglbtnRot.isSelected()? tglbtnRot.getBackground().toString():"null", tglbtnGelb.isSelected()? tglbtnGelb.getBackground().toString():"null", tglbtnGruen.isSelected()? tglbtnGruen.getBackground().toString():"null", tglbtnBlau.isSelected()? tglbtnBlau.getBackground().toString():"null");
-					for(int i = 0; i < 10; i++){
-						if(txtColumname[i] != null){
-							c.insertRow(b_ID, txtColumname[i].getText(), Integer.parseInt(wip[i].getValue().toString()));
-						}else break;
-					}
-					DatabaseManager.closeConnection();
-				}
-			}
-		});
+		btnSpeichern = new JButton("Speichern");
+                btnSpeichern.addActionListener(c);
+         
 		
 		getContentPane().add(btnSpeichern, "10, 12, fill, top");
 			
-		JButton btnAbbrechen = new JButton("Abbrechen");
-		btnAbbrechen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
+		btnAbbrechen = new JButton("Abbrechen");
+                btnAbbrechen.addActionListener(c);
+		
 		getContentPane().add(btnAbbrechen, "12, 12, default, top");	
 	}
 
