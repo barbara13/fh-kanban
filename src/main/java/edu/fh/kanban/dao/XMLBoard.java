@@ -285,7 +285,7 @@ public class XMLBoard extends XML{
     }
     
     public void createBoard(String name){
-        this.updateXML(name);
+        this.updateXML(name + ".xml");
         pk.setB_id();
     }
 

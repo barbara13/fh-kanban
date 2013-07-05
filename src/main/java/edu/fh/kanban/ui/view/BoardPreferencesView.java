@@ -94,6 +94,11 @@ public class BoardPreferencesView extends JFrame implements View{
         return wip;
     }
 
+    public int getArrayindex() {
+        return arrayindex;
+    }
+
+    
         
         
         
@@ -102,7 +107,7 @@ public class BoardPreferencesView extends JFrame implements View{
 		super("Board Einstellungen");
                 c = new BoardPreferencesController(this);
                 
-                
+              
                 
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
@@ -146,9 +151,9 @@ public class BoardPreferencesView extends JFrame implements View{
 		
 		JSeparator separator = new JSeparator();
 		getContentPane().add(separator, "4, 4, 11, 1, fill, Center");
-		
-		tglbtnRot = new JToggleButton("Expedite");
-		tglbtnRot.setOpaque(true);
+		               
+		tglbtnRot = new JToggleButton("Expedite");		
+                tglbtnRot.setOpaque(true);
 		tglbtnRot.setBackground(Color.RED);
 		getContentPane().add(tglbtnRot, "4, 6, fill, top");
 		
@@ -166,6 +171,11 @@ public class BoardPreferencesView extends JFrame implements View{
 		tglbtnBlau.setOpaque(true);
 		tglbtnBlau.setBackground(Color.BLUE);
 		getContentPane().add(tglbtnBlau, "10, 6, fill, top");
+                
+                tglbtnRot.addActionListener(c);
+                tglbtnBlau.addActionListener(c);
+                tglbtnGruen.addActionListener(c);
+                tglbtnGelb.addActionListener(c);
 		
 		getContentPane().add(new JLabel("Colums:"), "2, 8, fill, top");
 		
