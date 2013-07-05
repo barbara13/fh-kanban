@@ -18,6 +18,7 @@ import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
+import edu.fh.kanban.ui.view.CardView;
 import edu.fh.kanban.ui.view.View;
 
 public class Kanban {
@@ -28,7 +29,7 @@ public class Kanban {
 		 */
         public static void main(String[] args) {
             //Verbindung mit der Datenbank aufbauen
-            DatabaseManager.createConnection();
+//            DatabaseManager.createConnection();
             
 		LOGGER.info("Starting kanban app.");
 		LOGGER.info("Setting look and feel.");

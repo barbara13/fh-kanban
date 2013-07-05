@@ -76,14 +76,14 @@ public class BacklogView implements View{
 
                 @Override
                 public void keyReleased(KeyEvent e) {
-                    if(Searchfield.getText().toString().regionMatches(true, 1, button.getText().toString() , 1, 1)){
+                    if(Searchfield.getText().toString().regionMatches(true, 0, button.getText().toString() , 0, 1)){
                         button.setVisible(true);
                     }
                     else {
                         button.setVisible(false);
                     }
                 
-                if(Searchfield.getText().toString() == "")
+                if(Searchfield.getText().toString().equals(""))
                 {
                     button.setVisible(true);
                 }

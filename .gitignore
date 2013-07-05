@@ -4,3 +4,13 @@ target/
 *.DS_Store
 .settings/
 *.pdf
+
+pom.xml
+
+pom.xml
+
+db/db.lck
+
+db/db.lck
+
+db/log/log.ctrl
