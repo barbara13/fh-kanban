@@ -12,9 +12,6 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JLabel;
 
-import edu.fh.kanban.database.Board;
-import edu.fh.kanban.database.Column;
-import edu.fh.kanban.database.DatabaseManager;
 import edu.fh.kanban.ui.controller.BoardPreferencesController;
 
 import javax.swing.JComponent;
