@@ -5,9 +5,6 @@
 package edu.fh.kanban.ui.controller;
 
 import edu.fh.kanban.dao.XMLBoard;
-import edu.fh.kanban.database.Board;
-import edu.fh.kanban.database.Column;
-import edu.fh.kanban.database.DatabaseManager;
 import edu.fh.kanban.ui.view.BoardPreferencesView;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
