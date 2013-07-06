@@ -3,8 +3,6 @@ package edu.fh.kanban.ui.view;
 import java.awt.Color;
 import java.awt.TextArea;
 import java.awt.Rectangle;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -41,7 +39,7 @@ public class CardCreateView extends JFrame implements View{
 	private TextArea textDescription;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JButton btnCancel, btnCreate;
-        private JToggleButton tglbtnRed, tglbtnYellow, tglbtnGreen, tglbtnBlue;
+    private JToggleButton tglbtnRed, tglbtnYellow, tglbtnGreen, tglbtnBlue;
 	
 	public JTextField getTxtHeadline() {
 		return txtHeadline;
@@ -67,21 +65,21 @@ public class CardCreateView extends JFrame implements View{
 		return btnCancel;
 	}
 
-        public JToggleButton getTglbtnRed() {
-                return tglbtnRed;
-        }
+    public JToggleButton getTglbtnRed() {
+            return tglbtnRed;
+    }
 
-        public JToggleButton getTglbtnYellow() {
-                return tglbtnYellow;
-        }
+    public JToggleButton getTglbtnYellow() {
+            return tglbtnYellow;
+    }
 
-        public JToggleButton getTglbtnGreen() {
-                return tglbtnGreen;
-        }
+    public JToggleButton getTglbtnGreen() {
+            return tglbtnGreen;
+    }
 
-        public JToggleButton getTglbtnBlue() {
-                return tglbtnBlue;
-        }
+    public JToggleButton getTglbtnBlue() {
+            return tglbtnBlue;
+    }
 	
         
         
@@ -200,6 +198,7 @@ public class CardCreateView extends JFrame implements View{
 		tglbtnRed = new JToggleButton("Expedite");
 		tglbtnRed.setOpaque(true);
 		tglbtnRed.setBackground(Color.RED);
+        tglbtnRed.addActionListener(cController);
 		/*tglbtnRed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				getContentPane().setBackground(Color.RED);
@@ -211,6 +210,7 @@ public class CardCreateView extends JFrame implements View{
 		tglbtnYellow = new JToggleButton("Standard");
 		tglbtnYellow.setOpaque(true);
 		tglbtnYellow.setBackground(Color.YELLOW);
+        tglbtnYellow.addActionListener(cController);
 		/*tglbtnYellow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().setBackground(Color.YELLOW);
@@ -223,6 +223,7 @@ public class CardCreateView extends JFrame implements View{
 		tglbtnGreen = new JToggleButton("Fixed Date");
 		tglbtnGreen.setOpaque(true);
 		tglbtnGreen.setBackground(Color.GREEN);
+        tglbtnGreen.addActionListener(cController);
 		/*tglbtnGreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().setBackground(Color.GREEN);
@@ -234,6 +235,7 @@ public class CardCreateView extends JFrame implements View{
 		tglbtnBlue = new JToggleButton("Intangible");
 		tglbtnBlue.setOpaque(true);
 		tglbtnBlue.setBackground(Color.BLUE);
+        tglbtnBlue.addActionListener(cController);
 		/*tglbtnBlue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().setBackground(Color.BLUE);
@@ -242,12 +244,6 @@ public class CardCreateView extends JFrame implements View{
 		buttonGroup.add(tglbtnBlue);
 		getContentPane().add(tglbtnBlue, "14, 8, fill, top");
 		
-                tglbtnRed.addActionListener(cController);
-                tglbtnYellow.addActionListener(cController);
-                tglbtnGreen.addActionListener(cController);
-                tglbtnBlue.addActionListener(cController);
-                
-                
 		getContentPane().add(new JLabel("Description:"), "2, 10, 5, 1, left, top");
 		
 		textDescription = new TextArea();

@@ -9,14 +9,9 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import edu.fh.kanban.ui.controller.CardController;
 
-import edu.fh.kanban.ui.controller.CardCreateController;
-
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.text.html.StyleSheet;
-
-import java.awt.Color;
 
 /**
  * 
@@ -32,19 +27,12 @@ public class CardView extends JFrame implements View{
 
 	private CardController cController = null;
 	
-	private StyleSheet s = new StyleSheet();
 	private int cId;
-	private String c, effort, value, description, headline, create, start, done;
+	private String effort, value, description, headline, create, start, done, status;
 	private JButton btnAddCard, btnEdit, btnDelete, btnCancel;
-	
-	private Color color = s.stringToColor(c);
 
 	public int getcID() {
 		return cId;
-	}
-
-	public Color getColor() {
-		return color;
 	}
 
 	public String getEffort() {
@@ -62,9 +50,9 @@ public class CardView extends JFrame implements View{
 	public String getHeadline() {
 		return headline;
 	}
-
-	public String getC() {
-		return c;
+	
+	public String getStatus(){
+		return status;
 	}
 
 	public JButton getBtnAddCard() {
@@ -83,13 +71,11 @@ public class CardView extends JFrame implements View{
 		return btnCancel;
 	}
 
-	public CardView(final String headline){
-		super(headline);
+	public CardView(int cId){
+		super();
 		cController = new CardController(this);
 		setBounds(new Rectangle(0,0,455,300));
 		setLocationByPlatform(true);
-		getContentPane().setBackground(color);
-		this.headline = headline;
 		
 		//Variablen init here--------------------------------------------------------------------------
 	}
@@ -144,10 +130,6 @@ public class CardView extends JFrame implements View{
 		getContentPane().add(new JLabel(create), "2, 12, 3, 1, fill, top");
 		getContentPane().add(new JLabel(start), "6, 12, fill, top");
 		getContentPane().add(new JLabel(done), "8, 12, fill, top");
-		
-		btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(cController);
-		getContentPane().add(btnCancel, "2, 14, 3, 1, fill, top");
 
 		//If Karte bereits on Board soll der Button - btnAddCard.setvivible(false);
 		btnAddCard = new JButton("Add Card");
@@ -161,6 +143,10 @@ public class CardView extends JFrame implements View{
 		btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(cController);
 		getContentPane().add(btnDelete, "6, 14, fill, top");
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(cController);
+		getContentPane().add(btnCancel, "2, 14, 3, 1, fill, top");
 		
 		setVisible(true);
 		
