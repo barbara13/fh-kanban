@@ -7,8 +7,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
-
 import edu.fh.kanban.ui.controller.CardController;
+
+import edu.fh.kanban.ui.controller.CardCreateController;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
