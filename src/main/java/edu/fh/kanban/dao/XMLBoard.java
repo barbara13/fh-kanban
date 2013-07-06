@@ -4,11 +4,14 @@
  */
 package edu.fh.kanban.dao;
 
-import edu.fh.kanban.database.Board;
-import edu.fh.kanban.database.Card;
-import edu.fh.kanban.database.Column;
+import edu.fh.kanban.data.Board;
+import edu.fh.kanban.data.Card;
+import edu.fh.kanban.data.Column;
+import java.awt.List;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Document;
@@ -49,6 +52,10 @@ public class XMLBoard extends XML{
     private NodeList columnList = null;
     private NodeList cardList = null;
     
+    private ArrayList<Column> listColumn = new ArrayList();
+    private  Iterator it = listColumn.iterator();
+    
+    
     private int totalColumns;
     private int totalCards;
     
@@ -66,7 +73,8 @@ public class XMLBoard extends XML{
         try {             
             docBuilderFactory = DocumentBuilderFactory.newInstance();             
             docBuilder = docBuilderFactory.newDocumentBuilder();    
-            
+
+
             //Column Elemente parsen
             //columnList = doc.getElementsByTagName("column");
             
@@ -148,8 +156,33 @@ public class XMLBoard extends XML{
         }
     }
 
-    public void saveXML(){
+    public ArrayList readXML(String name){
+        try {
+            //XML Datei laden
+            doc = docBuilder.parse(name);
+            
+            columnList = doc.getElementsByTagName("column");
+            
+            
+            for(int i = 0; i < columnList.getLength() ; i++){
+                //System.out.println(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString()));
+                //System.out.println(this.getString(columnList.item(i).getAttributes().getNamedItem("name").toString()));
+                //System.out.println(this.getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()));
+                
+                listColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),1, getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));
+                
+                //listColumn.get(0).
+            }
+            
+            
+        } catch (SAXException ex) {
+            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
+                        
+        return listColumn;
     }
     
     
@@ -285,7 +318,7 @@ public class XMLBoard extends XML{
     }
     
     public void createBoard(String name){
-        this.updateXML(name + ".xml");
+        this.updateXML(name);
         pk.setB_id();
     }
 

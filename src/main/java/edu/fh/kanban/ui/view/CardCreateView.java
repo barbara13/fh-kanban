@@ -22,7 +22,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
-import edu.fh.kanban.ui.controller.CardController;
+import edu.fh.kanban.ui.controller.CardCreateController;
 
 /**
  * 
@@ -35,18 +35,16 @@ public class CardCreateView extends JFrame implements View{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private CardController cController = null;
+	private CardCreateController cController = null;
 	
-	private JTextField txtHeadline, txtCardId, txtEffort, txtValue;
+	private JTextField txtHeadline, txtEffort, txtValue;
 	private TextArea textDescription;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JButton btnCancel, btnCreate;
+        private JToggleButton tglbtnRed, tglbtnYellow, tglbtnGreen, tglbtnBlue;
 	
 	public JTextField getTxtHeadline() {
 		return txtHeadline;
-	}
-	public JTextField getTxtCardId() {
-		return txtCardId;
 	}
 
 	public JTextField getTxtEffort() {
@@ -68,10 +66,29 @@ public class CardCreateView extends JFrame implements View{
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
+
+        public JToggleButton getTglbtnRed() {
+                return tglbtnRed;
+        }
+
+        public JToggleButton getTglbtnYellow() {
+                return tglbtnYellow;
+        }
+
+        public JToggleButton getTglbtnGreen() {
+                return tglbtnGreen;
+        }
+
+        public JToggleButton getTglbtnBlue() {
+                return tglbtnBlue;
+        }
 	
+        
+        
+        
 	public CardCreateView(){
 		super("Create New Card");
-		cController = new CardController(this);
+		cController = new CardCreateController(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
@@ -137,7 +154,7 @@ public class CardCreateView extends JFrame implements View{
 		});
 		getContentPane().add(txtEffort, "18, 2, default, top");
 		txtEffort.setColumns(10);
-		
+		/*
 		getContentPane().add(new JLabel("Card ID:"), "2, 4, left, center");
 		
 		txtCardId = new JTextField();
@@ -155,7 +172,7 @@ public class CardCreateView extends JFrame implements View{
 		});
 		getContentPane().add(txtCardId, "4, 4, 7, 1, default, top");
 		txtCardId.setColumns(10);
-		
+		*/
 		getContentPane().add(new JLabel("Value:"), "16, 4, right, center");
 		
 		txtValue = new JTextField();
@@ -178,52 +195,59 @@ public class CardCreateView extends JFrame implements View{
 
 		JSeparator separator = new JSeparator();
 		getContentPane().add(separator, "4, 6, 15, 1");
-		
-		JToggleButton tglbtnRed = new JToggleButton("Expedite");
+                
+                
+		tglbtnRed = new JToggleButton("Expedite");
 		tglbtnRed.setOpaque(true);
 		tglbtnRed.setBackground(Color.RED);
-		tglbtnRed.addActionListener(new ActionListener() {
+		/*tglbtnRed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				getContentPane().setBackground(Color.RED);
 			}
-		});
+		});*/
 		buttonGroup.add(tglbtnRed);
 		getContentPane().add(tglbtnRed, "4, 8, 5, 1, fill, top");
 		
-		JToggleButton tglbtnYellow = new JToggleButton("Standard");
+		tglbtnYellow = new JToggleButton("Standard");
 		tglbtnYellow.setOpaque(true);
 		tglbtnYellow.setBackground(Color.YELLOW);
-		tglbtnYellow.addActionListener(new ActionListener() {
+		/*tglbtnYellow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().setBackground(Color.YELLOW);
 			}
-		});
+		});*/
 		tglbtnYellow.doClick();
 		buttonGroup.add(tglbtnYellow);
 		getContentPane().add(tglbtnYellow, "10, 8, fill, top");
 		
-		JToggleButton tglbtnGreen = new JToggleButton("Fixed Date");
+		tglbtnGreen = new JToggleButton("Fixed Date");
 		tglbtnGreen.setOpaque(true);
 		tglbtnGreen.setBackground(Color.GREEN);
-		tglbtnGreen.addActionListener(new ActionListener() {
+		/*tglbtnGreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().setBackground(Color.GREEN);
 			}
-		});
+		});*/
 		buttonGroup.add(tglbtnGreen);
 		getContentPane().add(tglbtnGreen, "12, 8, fill, top");
 		
-		JToggleButton tglbtnBlue = new JToggleButton("Intangible");
+		tglbtnBlue = new JToggleButton("Intangible");
 		tglbtnBlue.setOpaque(true);
 		tglbtnBlue.setBackground(Color.BLUE);
-		tglbtnBlue.addActionListener(new ActionListener() {
+		/*tglbtnBlue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().setBackground(Color.BLUE);
 			}
-		});
+		});*/
 		buttonGroup.add(tglbtnBlue);
 		getContentPane().add(tglbtnBlue, "14, 8, fill, top");
 		
+                tglbtnRed.addActionListener(cController);
+                tglbtnYellow.addActionListener(cController);
+                tglbtnGreen.addActionListener(cController);
+                tglbtnBlue.addActionListener(cController);
+                
+                
 		getContentPane().add(new JLabel("Description:"), "2, 10, 5, 1, left, top");
 		
 		textDescription = new TextArea();

@@ -22,7 +22,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-import edu.fh.kanban.ui.controller.CardController;
+
+import edu.fh.kanban.ui.controller.CardEditController;
 
 public class CardEditView extends JFrame{
 	/**
@@ -30,7 +31,7 @@ public class CardEditView extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private CardController cController = null;
+	private CardEditController cController = null;
 	
 	private JTextField txtHeadline, txtCardId, txtEffort, txtValue;
 	private TextArea textDescription;
@@ -72,7 +73,7 @@ public class CardEditView extends JFrame{
 
 	public CardEditView(String headline, String cardId, String effort, String value, String description, Color color){
 		super("EDIT: \"" + headline + "\"");
-		cController = new CardController(this);
+		cController = new CardEditController(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
