@@ -29,7 +29,7 @@ public class BoardPreferencesController extends Controller{
     
     public BoardPreferencesController(BoardPreferencesView bpv){
        this.bpv = bpv;
-       xml = new XMLBoard();
+       //xml = new XMLBoard();
     }  
     
     public void actionPerformed(ActionEvent e) {

@@ -4,7 +4,9 @@
  */
 package edu.fh.kanban.dao;
 
+import edu.fh.kanban.data.Card;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -30,6 +32,8 @@ public class XMLCard extends XML {
     private NodeList rootList = null;
     private NodeList cardList = null;
     private Attr attr;
+    
+    private ArrayList <Card> listCard= new ArrayList();
 
     public XMLCard() {
         try {
@@ -124,5 +128,28 @@ public class XMLCard extends XML {
 
     public void createCard() {
         this.updateXML("cards.xml");
+    }
+    
+        
+    public void editCard(int id, String attr, String value){
+        cardList = doc.getElementsByTagName("card");
+        
+        for(int i = 0; i < cardList.getLength(); i++){
+            if(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id){
+                cardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
+                updateXML("cards.xml");
+                break;
+            }
+        }
+    } 
+        
+    public ArrayList readCards(){     
+        listCard.clear();
+        cardList = doc.getElementsByTagName("card");
+        
+        for(int i = 0; i < cardList.getLength() ; i++){
+            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString())));
+         }
+        return listCard;
     }
 }

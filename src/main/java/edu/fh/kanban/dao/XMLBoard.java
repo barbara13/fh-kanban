@@ -52,7 +52,10 @@ public class XMLBoard extends XML{
     private NodeList columnList = null;
     private NodeList cardList = null;
     
-    private ArrayList<Column> listColumn = new ArrayList();
+    private ArrayList <Board> listBoard = new ArrayList();
+    private ArrayList <Column> listColumn = new ArrayList();
+    private ArrayList <Card> listCard= new ArrayList();
+    
     private  Iterator it = listColumn.iterator();
     
     
@@ -69,14 +72,21 @@ public class XMLBoard extends XML{
     
 
     
-    public XMLBoard(){
+    public XMLBoard(String xmlPath){
         try {             
             docBuilderFactory = DocumentBuilderFactory.newInstance();             
             docBuilder = docBuilderFactory.newDocumentBuilder();    
+            try {
+                this.xmlPath = xmlPath;
+                doc = docBuilder.parse(xmlPath);
 
-
-            //Column Elemente parsen
-            //columnList = doc.getElementsByTagName("column");
+                //Column Elemente parsen
+                //columnList = doc.getElementsByTagName("column");
+            } catch (SAXException ex) {
+                Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,35 +166,38 @@ public class XMLBoard extends XML{
         }
     }
 
-    public ArrayList readXML(String name){
-        try {
-            //XML Datei laden
-            doc = docBuilder.parse(name);
-            
-            columnList = doc.getElementsByTagName("column");
-            
-            
-            for(int i = 0; i < columnList.getLength() ; i++){
-                //System.out.println(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString()));
-                //System.out.println(this.getString(columnList.item(i).getAttributes().getNamedItem("name").toString()));
-                //System.out.println(this.getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()));
-                
-                listColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),1, getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));
-                
-                //listColumn.get(0).
-            }
-            
-            
-        } catch (SAXException ex) {
-            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
+    public ArrayList readBoard(){
+        listBoard.clear();
+        boardList = doc.getElementsByTagName("board");
+        
+        for(int i = 0; i < boardList.getLength() ; i++){
+             listBoard.add(new Board(Integer.parseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())),getString(boardList.item(i).getAttributes().getNamedItem("name").toString()), getString(boardList.item(i).getAttributes().getNamedItem("color").toString())));
         }
         
-                        
+        return listBoard;
+    }
+    
+    public ArrayList readColumns(){     
+        listColumn.clear();
+        columnList = doc.getElementsByTagName("column");
+        
+        for(int i = 0; i < columnList.getLength() ; i++){
+            listColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));       
+        }
+        
         return listColumn;
     }
     
+    public ArrayList readCards(){     
+        listCard.clear();
+        cardList = doc.getElementsByTagName("card");
+        
+        for(int i = 0; i < cardList.getLength() ; i++){
+            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString())));
+         }
+        return listCard;
+    }    
+
     
     public void addRoot(String name, String color){  		
         //Wenn kein root existiert
@@ -288,6 +301,9 @@ public class XMLBoard extends XML{
         return newCardElement;
     }
     
+    
+
+    
     public Element searchColumn(int co_id){
         columnList = doc.getElementsByTagName("column");
         for (int i = 0; i < columnList.getLength(); i++) {
@@ -316,6 +332,44 @@ public class XMLBoard extends XML{
          
         }
     }
+    
+       
+    public void editBoard(int id, String attr, String value){
+        boardList = doc.getElementsByTagName("board");
+        
+        for(int i = 0; i < boardList.getLength(); i++){
+            if(Integer.parseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())) == id){
+                boardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
+                updateXML(xmlPath);
+                break;
+            }
+        }
+    }
+    
+        
+    public void editColumn(int id, String attr, String value){
+        columnList = doc.getElementsByTagName("column");
+        
+        for(int i = 0; i < columnList.getLength(); i++){
+            if(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == id){
+                columnList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
+                updateXML(xmlPath);
+                break;
+            }
+        }
+    }
+    
+    public void editCard(int id, String attr, String value){
+        cardList = doc.getElementsByTagName("card");
+        
+        for(int i = 0; i < cardList.getLength(); i++){
+            if(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id){
+                cardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
+                updateXML(xmlPath);
+                break;
+            }
+        }
+    }    
     
     public void createBoard(String name){
         this.updateXML(name);

@@ -39,7 +39,9 @@ public class Kanban {
             //card.addCard("lawl", "fff", "ffff", "ss", "sss");
             //card.deleteCard(19);
             
-            XMLBoard board = new XMLBoard();
+            XMLBoard board = new XMLBoard("Board2.xml");
+            board.editCard(22, "description", "Hallooo");
+            
             //board.loadXML("Board2.xml");
             //board.addCardToColumn(25, 17);
             //ArrayList  listColumn = board.readXML("Board2.xml");
