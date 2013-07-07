@@ -2,6 +2,8 @@ package edu.fh.kanban.ui.view;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+
+import java.awt.Color;
 import java.awt.Rectangle;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -17,6 +19,8 @@ import javax.swing.JButton;
  * 
  * @author Maxim
  *
+ *Die Klasse CardView zeigt die Karte an und bietet JButton's diese
+ *zu verändern, zu löschen oder dem Board zuzuordnen
  */
 public class CardView extends JFrame implements View{
 	
@@ -31,7 +35,7 @@ public class CardView extends JFrame implements View{
 	private String effort, value, description, headline, create, start, done, status;
 	private JButton btnAddCard, btnEdit, btnDelete, btnCancel;
 
-	public int getcID() {
+	public int getcId() {
 		return cId;
 	}
 
@@ -72,15 +76,35 @@ public class CardView extends JFrame implements View{
 	}
 
 	public CardView(int cId){
-		super();
 		cController = new CardController(this);
 		setBounds(new Rectangle(0,0,455,300));
 		setLocationByPlatform(true);
+		setResizable(false);
 		
-		//Variablen init here--------------------------------------------------------------------------
+		this.cId = cId;
+		//Werte werden aus der XMLCard abgefragt und an die Variablen übergeben
+//		DatenBank abfrage über die cId
+//		headline = 
+//		effort = 
+//		value = 
+//		description = 
+//		status = 
+//		create = 
+//		start = 
+//		done = 
+		
 	}
-	
-	private JComponent init(){
+
+	//Methode aus der Klasse View initialsiert das Fenster und gibt getContentPane() zurück
+	public JComponent getComponent() {
+		setTitle(headline);
+
+		//Je nach status wird der Hintergrund des Fensters gesetzt
+		if(status.equals("Expedite")) getContentPane().setBackground(Color.RED);
+		else if(status.equals("Standard")) getContentPane().setBackground(Color.YELLOW);
+		else if(status.equals("Fixed Date")) getContentPane().setBackground(Color.GREEN);
+		else if(status.equals("Intangible")) getContentPane().setBackground(Color.BLUE);
+		
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("44px"),
@@ -120,7 +144,6 @@ public class CardView extends JFrame implements View{
 		
 		JScrollPane scrollPane = new JScrollPane();
 		getContentPane().add(scrollPane, "2, 8, 11, 1, fill, fill");
-		
 		scrollPane.setViewportView(new JLabel(description));
 
 		getContentPane().add(new JLabel("Created"), "2, 10, 3, 1, center, top");
@@ -131,10 +154,10 @@ public class CardView extends JFrame implements View{
 		getContentPane().add(new JLabel(start), "6, 12, fill, top");
 		getContentPane().add(new JLabel(done), "8, 12, fill, top");
 
-		//If Karte bereits on Board soll der Button - btnAddCard.setvivible(false);
 		btnAddCard = new JButton("Add Card");
 		btnAddCard.addActionListener(cController);
 		getContentPane().add(btnAddCard, "10, 14, 3, 1, fill, top");
+		//If Karte bereits on Board soll der Button - btnAddCard.setvivible(false);
 		
 		btnEdit = new JButton("Edit");
 		btnEdit.addActionListener(cController);
@@ -149,11 +172,6 @@ public class CardView extends JFrame implements View{
 		getContentPane().add(btnCancel, "2, 14, 3, 1, fill, top");
 		
 		setVisible(true);
-		
 		return (JComponent) getContentPane();
-	}
-
-	public JComponent getComponent() {
-		return init();
 	}
 }
