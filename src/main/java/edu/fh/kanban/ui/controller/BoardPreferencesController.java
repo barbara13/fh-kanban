@@ -75,7 +75,7 @@ public class BoardPreferencesController extends Controller{
 		if(bpv.getArrayindex() < 10){
 			bpv.getTxtColumname()[bpv.getArrayindex()] = new JTextField();
 			bpv.getWip()[bpv.getArrayindex()] = new JSpinner();
-			((DefaultEditor) bpv.getWip()[bpv.getArrayindex()].getEditor()).getTextField().setEditable(false);
+			((DefaultEditor) bpv.getWip()[bpv.getArrayindex()].getEditor()).getTextField().setEditable(false);	//MANUELLE EINGABE IM JSPINNER AUSSCHALTEN
 			bpv.getBtnMinus()[bpv.getArrayindex()] = new JButton("-");
 			bpv.setArrayindex(bpv.getArrayindex() + 1);
 			aktualisierung();
