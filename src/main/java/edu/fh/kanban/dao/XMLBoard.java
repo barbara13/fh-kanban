@@ -199,7 +199,7 @@ public class XMLBoard extends XML{
     }    
 
     
-    public void addRoot(String name, String color){  		
+    public void addBoard(String name, String color){  		
         //Wenn kein root existiert
         if(rootCount < 1){
             
@@ -371,8 +371,8 @@ public class XMLBoard extends XML{
         }
     }    
     
-    public void createBoard(String name){
-        this.updateXML(name);
+    public void createBoard(){
+        this.updateXML(xmlPath);
         pk.setB_id();
     }
 

@@ -25,6 +25,8 @@ public class XMLCard extends XML {
 
     private DocumentBuilderFactory docBuilderFactory;
     private DocumentBuilder docBuilder;
+    private String xmlPath = "cards.xml";
+    
     private XML_Pk pk;
     private Element cardElement = null;
     private Element searchedElement = null;
@@ -42,7 +44,7 @@ public class XMLCard extends XML {
 
             try {
                 //XML Datei laden
-                doc = docBuilder.parse("cards.xml");
+                doc = docBuilder.parse(xmlPath);
                 //Root Element
                 rootElement = (Element) doc.getElementsByTagName("cards").item(0);
 
@@ -100,7 +102,7 @@ public class XMLCard extends XML {
         cardElement.setAttributeNode(attr);
 
         pk.setCa_id();
-        updateXML("cards.xml");
+        updateXML(xmlPath);
     }
 
     public Element searchCard(int ca_id) {
@@ -122,12 +124,12 @@ public class XMLCard extends XML {
             //Element aus der Datei löschen
             rootElement.removeChild(cardElement);
             //XML Datei aktualisieren
-            updateXML("cards.xml");
+            updateXML(xmlPath);
         }
     }
 
     public void createCard() {
-        this.updateXML("cards.xml");
+        this.updateXML(xmlPath);
     }
     
         
@@ -137,7 +139,7 @@ public class XMLCard extends XML {
         for(int i = 0; i < cardList.getLength(); i++){
             if(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id){
                 cardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
-                updateXML("cards.xml");
+                updateXML(xmlPath);
                 break;
             }
         }

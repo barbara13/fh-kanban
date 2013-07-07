@@ -59,12 +59,12 @@ public class BoardPreferencesController extends Controller{
 				if(bpv.getTglbtnGruen().isSelected())  color = (color + " green ");
 				if(bpv.getTglbtnRot().isSelected())  color = (color + " red ");
 				
-				xml.addRoot(bpv.getTxtName().getText().toString(), color);
+				xml.addBoard(bpv.getTxtName().getText().toString(), color);
 				      
 			   for(int i = 0; i < bpv.getArrayindex(); i++){
 				   xml.addColumn(bpv.getTxtColumname()[i].getText().toString(), bpv.getWip()[i].getValue().toString());
 			   }
-			   xml.createBoard(bpv.getTxtName().getText().toString());          
+			   //xml.createBoard(bpv.getTxtName().getText().toString());          
 			}
         }else if(src == bpv.getBtnAbbrechen()){
             bpv.dispose();

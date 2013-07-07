@@ -35,12 +35,13 @@ public class Kanban {
             //Verbindung mit der Datenbank aufbauen
             //DatabaseManager.createConnection();
             
-            XMLCard card = new XMLCard();
-            //card.addCard("lawl", "fff", "ffff", "ss", "sss");
+
+            
             //card.deleteCard(19);
             
-            XMLBoard board = new XMLBoard("Board2.xml");
-            board.editCard(22, "description", "Hallooo");
+            
+            
+            
             
             //board.loadXML("Board2.xml");
             //board.addCardToColumn(25, 17);
