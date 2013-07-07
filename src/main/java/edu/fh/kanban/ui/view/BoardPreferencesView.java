@@ -183,17 +183,8 @@ public class BoardPreferencesView extends JFrame implements View{
 						System.out.println("Mindestens eine Color MUSS selektiert sein!!!");
 					
 				}else if(panelfehler == false){
-					int b_ID;
-					DatabaseManager.createConnection();
-					Board b = new Board();
-					Column c = new Column();
-					b_ID = b.insertRowAndReturn(txtName.getText(), tglbtnRot.isSelected()? tglbtnRot.getBackground().toString():"null", tglbtnGelb.isSelected()? tglbtnGelb.getBackground().toString():"null", tglbtnGruen.isSelected()? tglbtnGruen.getBackground().toString():"null", tglbtnBlau.isSelected()? tglbtnBlau.getBackground().toString():"null");
-					for(int i = 0; i < 10; i++){
-						if(txtColumname[i] != null){
-							c.insertRow(b_ID, txtColumname[i].getText(), Integer.parseInt(wip[i].getValue().toString()));
-						}else break;
-					}
-					DatabaseManager.closeConnection();
+					dispose();
+					//Änderung
 				}
 			}
 		});
