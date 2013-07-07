@@ -7,15 +7,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+import edu.fh.kanban.ui.controller.CardController;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import javax.swing.text.html.StyleSheet;
-
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * 
@@ -28,36 +24,73 @@ public class CardView extends JFrame implements View{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private CardController cController = null;
 	
-	private StyleSheet s = new StyleSheet();
+	private int cId;
+	private String effort, value, description, headline, create, start, done, status;
+	private JButton btnAddCard, btnEdit, btnDelete, btnCancel;
+
+	public int getcID() {
+		return cId;
+	}
+
+	public String getEffort() {
+		return effort;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getHeadline() {
+		return headline;
+	}
 	
-	private int cID = 0001;
-	private String color, effort, value, description;
-	private String headline;
-	
-	private Color c = s.stringToColor(color);
-	
-	public CardView(final String headline){
-		super(headline);
+	public String getStatus(){
+		return status;
+	}
+
+	public JButton getBtnAddCard() {
+		return btnAddCard;
+	}
+
+	public JButton getBtnEdit() {
+		return btnEdit;
+	}
+
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+
+	public JButton getBtnCancel() {
+		return btnCancel;
+	}
+
+	public CardView(int cId){
+		super();
+		cController = new CardController(this);
 		setBounds(new Rectangle(0,0,455,300));
 		setLocationByPlatform(true);
-		getContentPane().setBackground(c);
-		this.headline = headline;
-		//Variablen init
+		
+		//Variablen init here--------------------------------------------------------------------------
 	}
 	
 	private JComponent init(){
-		
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("44px"),
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("51px"),
-				ColumnSpec.decode("6dlu"),
+				ColumnSpec.decode("55px"),
+				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("101px"),
-				ColumnSpec.decode("6dlu"),
-				ColumnSpec.decode("95px"),
-				ColumnSpec.decode("6dlu"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("101px"),
+				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("32px"),
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("62px"),},
@@ -69,12 +102,16 @@ public class CardView extends JFrame implements View{
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("14px"),
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("119px"),
-				RowSpec.decode("31px"),
+				RowSpec.decode("79px"),
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("14px"),
+				FormFactory.LINE_GAP_ROWSPEC,
+				RowSpec.decode("14px"),
+				RowSpec.decode("27px"),
 				RowSpec.decode("23px"),}));
 		
 		getContentPane().add(new JLabel("CardID:"), "2, 2, right, top");
-		getContentPane().add(new JLabel(Integer.toString(cID)), "4, 2, 3, 1, left, top");
+		getContentPane().add(new JLabel(Integer.toString(cId)), "4, 2, left, top");
 		getContentPane().add(new JLabel("Effort:"), "10, 2, left, top");
 		getContentPane().add(new JLabel(effort), "12, 2, fill, top");
 		getContentPane().add(new JLabel("Value:"), "10, 4, right, top");
@@ -85,40 +122,31 @@ public class CardView extends JFrame implements View{
 		getContentPane().add(scrollPane, "2, 8, 11, 1, fill, fill");
 		
 		scrollPane.setViewportView(new JLabel(description));
+
+		getContentPane().add(new JLabel("Created"), "2, 10, 3, 1, center, top");
+		getContentPane().add(new JLabel("Started"), "6, 10, center, top");
+		getContentPane().add(new JLabel("Done"), "8, 10, center, top");
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
-		getContentPane().add(btnCancel, "2, 10, 3, 1, fill, top");
-		
-		JButton btnAddCard = new JButton("Add Card");
-		btnAddCard.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//Karte soll in den Board rein
-			}
-		});
-		getContentPane().add(btnAddCard, "10, 10, 3, 1, fill, top");
+		getContentPane().add(new JLabel(create), "2, 12, 3, 1, fill, top");
+		getContentPane().add(new JLabel(start), "6, 12, fill, top");
+		getContentPane().add(new JLabel(done), "8, 12, fill, top");
+
 		//If Karte bereits on Board soll der Button - btnAddCard.setvivible(false);
+		btnAddCard = new JButton("Add Card");
+		btnAddCard.addActionListener(cController);
+		getContentPane().add(btnAddCard, "10, 14, 3, 1, fill, top");
 		
-		JButton btnEdit = new JButton("Edit");
-		btnEdit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				new CardEditView(headline, Integer.toString(cID), effort, value, description, c).getComponent();
-				dispose();
-			}
-		});
-		getContentPane().add(btnEdit, "8, 10, fill, top");
+		btnEdit = new JButton("Edit");
+		btnEdit.addActionListener(cController);
+		getContentPane().add(btnEdit, "8, 14, fill, top");
 		
-		JButton btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Karte Löoschen
-			}
-		});
-		getContentPane().add(btnDelete, "6, 10, fill, top");
+		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(cController);
+		getContentPane().add(btnDelete, "6, 14, fill, top");
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(cController);
+		getContentPane().add(btnCancel, "2, 14, 3, 1, fill, top");
 		
 		setVisible(true);
 		

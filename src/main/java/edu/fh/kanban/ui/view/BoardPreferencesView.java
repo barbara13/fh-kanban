@@ -12,9 +12,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JLabel;
 
-import edu.fh.kanban.database.Board;
-import edu.fh.kanban.database.Column;
-import edu.fh.kanban.database.DatabaseManager;
+import edu.fh.kanban.ui.controller.BoardPreferencesController;
 
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -43,14 +41,71 @@ public class BoardPreferencesView extends JFrame implements View{
 	private JPanel panel;
 	private JScrollPane scrollPane;
 	private JToggleButton tglbtnRot, tglbtnGruen, tglbtnGelb, tglbtnBlau; 
+        private BoardPreferencesController c = null;
 	
+        private JButton btnSpeichern;
+        private JButton btnAbbrechen;
 	private int arrayindex=0;
 	private JTextField[] txtColumname = new JTextField[10]; 
 	private JSpinner[] wip = new JSpinner[10];
 	private JButton[] btnMinus= new JButton[10];
+ 
 
+    public JToggleButton getTglbtnRot() {
+        return tglbtnRot;
+    }
+
+    public JToggleButton getTglbtnGruen() {
+        return tglbtnGruen;
+    }
+
+    public JToggleButton getTglbtnGelb() {
+        return tglbtnGelb;
+    }
+
+    public JToggleButton getTglbtnBlau() {
+        return tglbtnBlau;
+    }
+
+    public JButton[] getBtnMinus() {
+        return btnMinus;
+    }
+
+    public JButton getBtnSpeichern() {
+        return btnSpeichern;
+    }
+
+    public JButton getBtnAbbrechen() {
+        return btnAbbrechen;
+    }
+    
+    public JTextField getTxtName() {
+        return txtName;
+    }
+
+    public JTextField[] getTxtColumname() {
+        return txtColumname;
+    }
+
+    public JSpinner[] getWip() {
+        return wip;
+    }
+
+    public int getArrayindex() {
+        return arrayindex;
+    }
+
+    
+        
+        
+        
 	public BoardPreferencesView(){
+                
 		super("Board Einstellungen");
+                c = new BoardPreferencesController(this);
+                
+              
+                
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
 		setResizable(false);
@@ -93,9 +148,9 @@ public class BoardPreferencesView extends JFrame implements View{
 		
 		JSeparator separator = new JSeparator();
 		getContentPane().add(separator, "4, 4, 11, 1, fill, Center");
-		
-		tglbtnRot = new JToggleButton("Expedite");
-		tglbtnRot.setOpaque(true);
+		               
+		tglbtnRot = new JToggleButton("Expedite");		
+                tglbtnRot.setOpaque(true);
 		tglbtnRot.setBackground(Color.RED);
 		getContentPane().add(tglbtnRot, "4, 6, fill, top");
 		
@@ -113,6 +168,11 @@ public class BoardPreferencesView extends JFrame implements View{
 		tglbtnBlau.setOpaque(true);
 		tglbtnBlau.setBackground(Color.BLUE);
 		getContentPane().add(tglbtnBlau, "10, 6, fill, top");
+                
+                tglbtnRot.addActionListener(c);
+                tglbtnBlau.addActionListener(c);
+                tglbtnGruen.addActionListener(c);
+                tglbtnGelb.addActionListener(c);
 		
 		getContentPane().add(new JLabel("Colums:"), "2, 8, fill, top");
 		
@@ -161,6 +221,7 @@ public class BoardPreferencesView extends JFrame implements View{
 	
 		Erweiterung();
 		
+<<<<<<< HEAD
 		JButton btnSpeichern = new JButton("Speichern");
 		btnSpeichern.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
@@ -188,15 +249,17 @@ public class BoardPreferencesView extends JFrame implements View{
 				}
 			}
 		});
+=======
+		btnSpeichern = new JButton("Speichern");
+                btnSpeichern.addActionListener(c);
+         
+>>>>>>> b9d8039d42642c3747f0cd427ffc4c3ded1c1bc3
 		
 		getContentPane().add(btnSpeichern, "10, 12, fill, top");
 			
-		JButton btnAbbrechen = new JButton("Abbrechen");
-		btnAbbrechen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
+		btnAbbrechen = new JButton("Abbrechen");
+                btnAbbrechen.addActionListener(c);
+		
 		getContentPane().add(btnAbbrechen, "12, 12, default, top");	
 	}
 

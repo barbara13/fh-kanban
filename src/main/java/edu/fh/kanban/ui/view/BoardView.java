@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import com.jgoodies.forms.factories.*;
 import com.jgoodies.forms.layout.*;
+import edu.fh.kanban.ui.controller.BoardController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -14,8 +15,13 @@ import javax.swing.table.*;
 
 
 public class BoardView extends JPanel implements View {
-    
+  
+//BoardController definieren    
+ private BoardController c = null;  
+ 
     public BoardView() {
+        //BoardController im Konstruktor
+        c = new BoardController(this);
         getComponents();
     }
 
@@ -24,9 +30,12 @@ public void setTitle(JLabel title) {
         this.title = title;
     }
 
+    public JButton getCard1() {
+        return card1;
+    }
 
 
-// Konstruktor
+  
 private JLabel title;
 private JTextField searchtext;
 private JSeparator separator;
@@ -48,6 +57,8 @@ private JButton b;
         label1 = new JLabel("New");
         card1 = new JButton("Karte 1");
         
+//Dem Button einen ActionListener zuweisen        
+        card1.addActionListener(c);
         
   //Layout
         bpanel.setLayout(new FormLayout(

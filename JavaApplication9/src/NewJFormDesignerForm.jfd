@@ -1,0 +1,31 @@
+JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_25" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "default, labelcompgap, 105dlu, labelcompgap, 169dlu, labelcompgap, 68dlu, labelcompgap, default, labelcompgap, default, labelcompgap, default, labelcompgap, default, labelcompgap, default, labelcompgap, default, labelcompgap, default, labelcompgap, default, labelcompgap, default, labelcompgap, default"
+			"$rowSpecs": "default, linegap, default, linegap, default"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Board - Name"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 10, false )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridWidth": 2
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+				addEvent( new FormEvent( "java.awt.event.KeyListener", "keyReleased", "textField1KeyReleased", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridWidth": 2
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 555, 365 )
+		} )
+	}
+}

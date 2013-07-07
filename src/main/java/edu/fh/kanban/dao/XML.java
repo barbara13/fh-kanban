@@ -4,97 +4,49 @@
  */
 package edu.fh.kanban.dao;
 
-import edu.fh.kanban.database.Board;
-import edu.fh.kanban.database.Card;
-import edu.fh.kanban.database.Column;
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
-import org.w3c.dom.*;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 /**
  *
  * @author Ronald
  */
 public class XML {
-    private DocumentBuilderFactory docBuilderFactory;
-    private DocumentBuilder docBuilder; 
-    private Document doc;
+    protected TransformerFactory transformerFactory;
+    protected Transformer transformer;
+    protected DOMSource source;
+    protected StreamResult result;
+    protected Document doc;
     
-    private NodeList boardList = null;
-    private Node cardNode = null;
-    private Element cardElement = null;
-    private NodeList columnList = null;
-    private NodeList cardList = null;
-    private int totalColumns;
-    private int totalCards;
-    
-    private Board b;
-    private Column co;
-    private Card ca;
-    
-    
-    public XML(String xmlPath){
-        try {             
-            docBuilderFactory = DocumentBuilderFactory.newInstance();             
-            docBuilder = docBuilderFactory.newDocumentBuilder();      
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    protected String getString(String s) {
+        int s1 = s.indexOf("=\"") + 2;
+        int s2 = s.length() - 1;
 
-    }
-          
-    private void parseXML(){
-            doc.getDocumentElement().normalize();
-            
-            boardList = doc.getDocumentElement().getElementsByTagName("board");
-            
-            columnList = doc.getElementsByTagName("column");
-            totalColumns = columnList.getLength();
-
-            for(int i = 0; i < totalColumns ; i++){
-                cardNode = columnList.item(i);
-
-                if(cardNode.getNodeType() == Node.ELEMENT_NODE){
-                    cardElement = (Element)cardNode;
-                    cardList = cardElement.getElementsByTagName("card");
-                    totalCards = cardList.getLength();
-                    
-                    for(int j = 0; j < totalCards ; j++){
-                        System.out.println(cardList.item(j).getAttributes().getNamedItem("name"));
-                    }
-                }//end of if clause
-            }//end of for loop with s var
+        return s.substring(s1, s2);
     }
 
-    public void loadXML(String xmlPath){
+    protected void updateXML(String name) {
         try {
-            doc = docBuilder.parse (new File(xmlPath));
-            parseXML();
-            
-            b = new Board();
-            co = new Column();
-            ca = new Card();
-            
-            
-            
-        } catch (SAXException ex) {
-            Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
+            transformerFactory = TransformerFactory.newInstance();
+            transformer = transformerFactory.newTransformer();
+            source = new DOMSource(doc);
+            result = new StreamResult(new File(name));
+            try {
+                transformer.transform(source, result);
+            } catch (TransformerException ex) {
+                Logger.getLogger(WriteBoard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(WriteBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
-    
-    private void saveXML(){
-
-    } 
-
 }

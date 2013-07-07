@@ -3,8 +3,6 @@ package edu.fh.kanban.ui.view;
 import java.awt.Color;
 import java.awt.TextArea;
 import java.awt.Rectangle;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -22,6 +20,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
+import edu.fh.kanban.ui.controller.CardCreateController;
+
 /**
  * 
  * @author Maxim
@@ -32,15 +32,61 @@ public class CardCreateView extends JFrame implements View{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtCardId;
-	private JTextField txtEffort;
-	private JTextField txtValue;
+
+	private CardCreateController cController = null;
+	
+	private JTextField txtHeadline, txtEffort, txtValue;
 	private TextArea textDescription;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField txtHeadline;
+	private JButton btnCancel, btnCreate;
+    private JToggleButton tglbtnRed, tglbtnYellow, tglbtnGreen, tglbtnBlue;
 	
+	public JTextField getTxtHeadline() {
+		return txtHeadline;
+	}
+
+	public JTextField getTxtEffort() {
+		return txtEffort;
+	}
+
+	public JTextField getTxtValue() {
+		return txtValue;
+	}
+
+	public TextArea getTextDescription() {
+		return textDescription;
+	}
+	
+	public JButton getBtnCreate() {
+		return btnCreate;
+	}
+
+	public JButton getBtnCancel() {
+		return btnCancel;
+	}
+
+    public JToggleButton getTglbtnRed() {
+            return tglbtnRed;
+    }
+
+    public JToggleButton getTglbtnYellow() {
+            return tglbtnYellow;
+    }
+
+    public JToggleButton getTglbtnGreen() {
+            return tglbtnGreen;
+    }
+
+    public JToggleButton getTglbtnBlue() {
+            return tglbtnBlue;
+    }
+	
+        
+        
+        
 	public CardCreateView(){
 		super("Create New Card");
+		cController = new CardCreateController(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
@@ -106,7 +152,7 @@ public class CardCreateView extends JFrame implements View{
 		});
 		getContentPane().add(txtEffort, "18, 2, default, top");
 		txtEffort.setColumns(10);
-		
+		/*
 		getContentPane().add(new JLabel("Card ID:"), "2, 4, left, center");
 		
 		txtCardId = new JTextField();
@@ -124,7 +170,7 @@ public class CardCreateView extends JFrame implements View{
 		});
 		getContentPane().add(txtCardId, "4, 4, 7, 1, default, top");
 		txtCardId.setColumns(10);
-		
+		*/
 		getContentPane().add(new JLabel("Value:"), "16, 4, right, center");
 		
 		txtValue = new JTextField();
@@ -147,49 +193,54 @@ public class CardCreateView extends JFrame implements View{
 
 		JSeparator separator = new JSeparator();
 		getContentPane().add(separator, "4, 6, 15, 1");
-		
-		JToggleButton tglbtnRed = new JToggleButton("Expedite");
+                
+                
+		tglbtnRed = new JToggleButton("Expedite");
 		tglbtnRed.setOpaque(true);
 		tglbtnRed.setBackground(Color.RED);
-		tglbtnRed.addActionListener(new ActionListener() {
+        tglbtnRed.addActionListener(cController);
+		/*tglbtnRed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				getContentPane().setBackground(Color.RED);
 			}
-		});
+		});*/
 		buttonGroup.add(tglbtnRed);
 		getContentPane().add(tglbtnRed, "4, 8, 5, 1, fill, top");
 		
-		JToggleButton tglbtnYellow = new JToggleButton("Standard");
+		tglbtnYellow = new JToggleButton("Standard");
 		tglbtnYellow.setOpaque(true);
 		tglbtnYellow.setBackground(Color.YELLOW);
-		tglbtnYellow.addActionListener(new ActionListener() {
+        tglbtnYellow.addActionListener(cController);
+		/*tglbtnYellow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().setBackground(Color.YELLOW);
 			}
-		});
+		});*/
 		tglbtnYellow.doClick();
 		buttonGroup.add(tglbtnYellow);
 		getContentPane().add(tglbtnYellow, "10, 8, fill, top");
 		
-		JToggleButton tglbtnGreen = new JToggleButton("Fixed Date");
+		tglbtnGreen = new JToggleButton("Fixed Date");
 		tglbtnGreen.setOpaque(true);
 		tglbtnGreen.setBackground(Color.GREEN);
-		tglbtnGreen.addActionListener(new ActionListener() {
+        tglbtnGreen.addActionListener(cController);
+		/*tglbtnGreen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().setBackground(Color.GREEN);
 			}
-		});
+		});*/
 		buttonGroup.add(tglbtnGreen);
 		getContentPane().add(tglbtnGreen, "12, 8, fill, top");
 		
-		JToggleButton tglbtnBlue = new JToggleButton("Intangible");
+		tglbtnBlue = new JToggleButton("Intangible");
 		tglbtnBlue.setOpaque(true);
 		tglbtnBlue.setBackground(Color.BLUE);
-		tglbtnBlue.addActionListener(new ActionListener() {
+        tglbtnBlue.addActionListener(cController);
+		/*tglbtnBlue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getContentPane().setBackground(Color.BLUE);
 			}
-		});
+		});*/
 		buttonGroup.add(tglbtnBlue);
 		getContentPane().add(tglbtnBlue, "14, 8, fill, top");
 		
@@ -198,32 +249,12 @@ public class CardCreateView extends JFrame implements View{
 		textDescription = new TextArea();
 		getContentPane().add(textDescription, "2, 12, 17, 1, fill, fill");
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-			}
-		});
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(cController);
 		getContentPane().add(btnCancel, "2, 14, 5, 1, fill, top");
 		
-		JButton btnCreate = new JButton("Create");
-		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(txtCardId.getText().isEmpty() || txtHeadline.getText().isEmpty() || txtEffort.getText().isEmpty() || txtValue.getText().isEmpty()){
-					if(txtCardId.getText().isEmpty()) txtCardId.setBackground(Color.RED);
-					else txtCardId.setBackground(Color.WHITE);
-					if(txtHeadline.getText().isEmpty()) txtHeadline.setBackground(Color.RED);
-					else txtHeadline.setBackground(Color.WHITE);
-					if(txtEffort.getText().isEmpty()) txtEffort.setBackground(Color.RED);
-					else txtEffort.setBackground(Color.WHITE);
-					if(txtValue.getText().isEmpty()) txtValue.setBackground(Color.RED);
-					else txtValue.setBackground(Color.WHITE);
-				}else{
-					//Datenbank Eintragen
-					dispose();
-				}	
-			}
-		});
+		btnCreate = new JButton("Create");
+		btnCreate.addActionListener(cController);
 		getContentPane().add(btnCreate, "8, 14, 4, 1, fill, top");
 		
 		setVisible(true);
