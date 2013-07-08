@@ -1,5 +1,6 @@
 package edu.fh.kanban.ui.view;
 
+import com.jgoodies.forms.factories.CC;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -7,6 +8,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+import edu.fh.kanban.ui.controller.BacklogController;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JComboBox;
@@ -14,28 +16,35 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
+import javax.swing.JSeparator;
+
+
+
 
 public class BacklogView implements View{
 	private JTextField Searchfield;
-        private JButton button;
-
-	/**
-	 * @author Lorenz
-	 * @wbp.parser.entryPoint
-	 */
+        private BacklogController c = null;
+        private JPanel panel;
+        private JSeparator sep;
+        private JButton[] cards= new JButton[100];
+        
+        
+        
 	@Override
 	public JComponent getComponent() {
-                button = new JButton("Karte1");
-		JPanel panel = new JPanel();
+            
+            
+                c = new BacklogController(this);
+		panel = new JPanel();
 		panel.setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(62dlu;pref)"),
+				ColumnSpec.decode("max(120dlu;pref)"),//61
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(121dlu;pref)"),
+				ColumnSpec.decode("max(120dlu;pref)"),//121
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(57dlu;pref):grow"),
+				ColumnSpec.decode("max(120dlu;pref):grow"),//57
 				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(73dlu;pref)"),
+				ColumnSpec.decode("max(73dlu;pref)"),//73
 				FormFactory.RELATED_GAP_COLSPEC,
 				FormFactory.DEFAULT_COLSPEC,
 				FormFactory.RELATED_GAP_COLSPEC,},
@@ -43,26 +52,34 @@ public class BacklogView implements View{
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(14dlu;default)"),
+				RowSpec.decode("max(16dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("max(16dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(54dlu;default)"),
+				RowSpec.decode("max(16dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(44dlu;default)"),
+				RowSpec.decode("max(16dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(48dlu;default)"),
+				RowSpec.decode("max(16dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(73dlu;default)"),
+				RowSpec.decode("max(16dlu;default)"),
+                                FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(16dlu;default)"),
+                                FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(16dlu;default)"),
+                                FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(16dlu;default)"),
+                                FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(16dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,}));
 		
 		Searchfield = new JTextField();
 		Searchfield.setText("");
 		panel.add(Searchfield, "6, 2, 3, 1, right, default");
 		Searchfield.setColumns(10);
-		
-                 panel.add(button, "2, 8");
-                Searchfield.addKeyListener(new KeyListener(){
+
+		               
+            /*    Searchfield.addKeyListener(new KeyListener(){
 
                 @Override
                 public void keyTyped(KeyEvent e) {
@@ -91,8 +108,8 @@ public class BacklogView implements View{
                 
                  
             
-        });
-                
+        });*/
+                                
 		JLabel lblSortBy = new JLabel("Sort by");
 		panel.add(lblSortBy, "6, 4, right, default");
 		
@@ -101,14 +118,24 @@ public class BacklogView implements View{
 		comboBox.setToolTipText("");
 		panel.add(comboBox, "8, 4, right, default");
 		
-               
+                sep = new JSeparator();
+                panel.add(sep, CC.xywh(1, 5, 10, 1));
                 
-		JScrollBar scrollBar = new JScrollBar();
-		panel.add(scrollBar, "10, 2, 1, 13");
+		//JScrollBar scrollBar = new JScrollBar();
+		//panel.add(scrollBar, "10, 2, 1, 13");
                 
-                
+                c.showCards();
 		return panel;
 	}
+
+    
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    public JButton[] getCards() {
+        return cards;
+    }
 
 	
 
