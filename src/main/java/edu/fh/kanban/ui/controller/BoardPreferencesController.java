@@ -64,6 +64,7 @@ public class BoardPreferencesController extends Controller{
 					if(txtColumname[i].getText().isEmpty()){	//Abfrage wenn nichts eingetragen wurde (Name) wird das Textfeld Rot makiert
 						txtColumname[i].setBackground(Color.RED);
 						panelfehler = true;
+						JOptionPane.showMessageDialog(null, "Es sind nicht alle felder ausgefuehlt!!!", "Fehlermeldung", JOptionPane.WARNING_MESSAGE);
 					}else txtColumname[i].setBackground(Color.WHITE); //Ansonsten bleibt das textfeld weiß
 				}else break;
 			}
@@ -72,7 +73,7 @@ public class BoardPreferencesController extends Controller{
 				if(bpv.getTxtName().getText().isEmpty()) bpv.getTxtName().setBackground(Color.RED);
 				else bpv.getTxtName().setBackground(Color.WHITE);
 				if(!bpv.getTglbtnRot().isSelected() && !bpv.getTglbtnGelb().isSelected() && !bpv.getTglbtnGruen().isSelected() && !bpv.getTglbtnBlau().isSelected())	
-	              System.out.println("Mindestens eine Color MUSS selektiert sein!!!");	
+					JOptionPane.showMessageDialog(null, "Mindestens eine Color MUSS selektiert sein!!!", "Fehlermeldung", JOptionPane.WARNING_MESSAGE);
 			}else if(panelfehler == false){
 				color = new String();
 				 
