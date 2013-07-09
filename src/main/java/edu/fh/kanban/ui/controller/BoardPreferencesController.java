@@ -45,7 +45,7 @@ public class BoardPreferencesController extends Controller{
     
     public BoardPreferencesController(BoardPreferencesView bpv){
        this.bpv = bpv;
-       xml = new XMLBoard();
+       //xml = new XMLBoard();
     }  
     
     public void actionPerformed(ActionEvent e) {
@@ -76,14 +76,22 @@ public class BoardPreferencesController extends Controller{
 				if(bpv.getTglbtnGruen().isSelected())  color = (color + " green ");
 				if(bpv.getTglbtnRot().isSelected())  color = (color + " red ");
 				
+<<<<<<< HEAD
 				//Übergabe, was im Board gespeichert wird und das Fenster wird geschlossen
 				xml.addRoot(bpv.getTxtName().getText().toString(), color);	
+=======
+				xml.addBoard(bpv.getTxtName().getText().toString(), color);
+>>>>>>> 02a313ac3463cd2dabae8325239aa17eae17d973
 				      
 			   for(int i = 0; i < arrayindex; i++){
 				   xml.addColumn(txtColumname[i].getText().toString(), wip[i].getValue().toString());
 			   }
+<<<<<<< HEAD
 			   xml.createBoard(bpv.getTxtName().getText().toString());   
 			   bpv.dispose();
+=======
+			   //xml.createBoard(bpv.getTxtName().getText().toString());          
+>>>>>>> 02a313ac3463cd2dabae8325239aa17eae17d973
 			}
         }else if(src == bpv.getBtnAbbrechen()){	//Wenn Abbrechen Button gedrückt wurde, schließe das fenster
             bpv.dispose();

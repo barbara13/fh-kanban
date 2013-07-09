@@ -3,8 +3,6 @@ package edu.fh.kanban.ui.view;
 import java.awt.Color;
 import java.awt.TextArea;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -26,6 +24,9 @@ import edu.fh.kanban.ui.controller.CardCreateController;
  * 
  * @author Maxim
  *
+ *Die Klasse CardCreateView erstellt ein Fenster der Größe 700x500 mit JTextfield's die der Benutzer
+ *ausfüllen MUSS die JTextArea KANN der Benutzer ausfüllen
+ *Die Werte der JTextfield's werden über die Getter Methoden an den Controller übergeben
  */
 public class CardCreateView extends JFrame implements View{
 	/**
@@ -33,12 +34,13 @@ public class CardCreateView extends JFrame implements View{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private CardCreateController cController = null;
+	private CardCreateController cController = null;	//Controller zur View
 	
 	private JTextField txtHeadline, txtEffort, txtValue;
 	private TextArea textDescription;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JButton btnCancel, btnCreate;
+	
+	private final ButtonGroup buttonGroup = new ButtonGroup();
     private JToggleButton tglbtnRed, tglbtnYellow, tglbtnGreen, tglbtnBlue;
 	
 	public JTextField getTxtHeadline() {
@@ -66,24 +68,22 @@ public class CardCreateView extends JFrame implements View{
 	}
 
     public JToggleButton getTglbtnRed() {
-            return tglbtnRed;
+        return tglbtnRed;
     }
 
     public JToggleButton getTglbtnYellow() {
-            return tglbtnYellow;
+        return tglbtnYellow;
     }
 
     public JToggleButton getTglbtnGreen() {
-            return tglbtnGreen;
+        return tglbtnGreen;
     }
 
     public JToggleButton getTglbtnBlue() {
-            return tglbtnBlue;
+        return tglbtnBlue;
     }
 	
-        
-        
-        
+    //Konstrukor
 	public CardCreateView(){
 		super("Create New Card");
 		cController = new CardCreateController(this);
@@ -92,9 +92,12 @@ public class CardCreateView extends JFrame implements View{
 		setLocationByPlatform(true);
 		setResizable(false);
 	}
-	
-	private JComponent init(){
+
+	//Methode aus der Klasse View initialsiert das Fenster und gibt getContentPane() zurück
+	public JComponent getComponent() {
+		//Das FormLayout aus jgoodies wird verwendet
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
+				//Spalten werden initialisiert
 				FormFactory.UNRELATED_GAP_COLSPEC,
 				ColumnSpec.decode("48px"),
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
@@ -114,6 +117,7 @@ public class CardCreateView extends JFrame implements View{
 				FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
 				ColumnSpec.decode("104px"),},
 			new RowSpec[] {
+				//Zeilen werden initialisiert
 				FormFactory.PARAGRAPH_GAP_ROWSPEC,
 				RowSpec.decode("20px"),
 				FormFactory.LINE_GAP_ROWSPEC,
@@ -138,54 +142,14 @@ public class CardCreateView extends JFrame implements View{
 		getContentPane().add(new JLabel("effort:"), "16, 2, right, center");
 		
 		txtEffort = new JTextField();
-		txtEffort.addKeyListener(new KeyListener(){
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-			    if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
-			    	if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')) {  
-			    		e.consume();  //Alles außer Zahlen werden ignoriert
-			    	}
-			    }
-			}
-			public void keyPressed(KeyEvent e){}
-			public void keyReleased(KeyEvent e){}
-		});
+		txtEffort.addKeyListener(cController);
 		getContentPane().add(txtEffort, "18, 2, default, top");
 		txtEffort.setColumns(10);
-		/*
-		getContentPane().add(new JLabel("Card ID:"), "2, 4, left, center");
 		
-		txtCardId = new JTextField();
-		txtCardId.addKeyListener(new KeyListener(){
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-			    if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
-			    	if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')) {  
-			    		e.consume();  //Alles außer Zahlen werden ignoriert
-			    	}
-			    }
-			}
-			public void keyPressed(KeyEvent e){}
-			public void keyReleased(KeyEvent e){}
-		});
-		getContentPane().add(txtCardId, "4, 4, 7, 1, default, top");
-		txtCardId.setColumns(10);
-		*/
 		getContentPane().add(new JLabel("Value:"), "16, 4, right, center");
 		
 		txtValue = new JTextField();
-		txtValue.addKeyListener(new KeyListener(){
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-			    if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
-			    	if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')) {  
-			    		e.consume();  //Alles außer Zahlen werden ignoriert
-			    	}
-			    }
-			}
-			public void keyPressed(KeyEvent e){}
-			public void keyReleased(KeyEvent e){}
-		});
+		txtValue.addKeyListener(cController);
 		getContentPane().add(txtValue, "18, 4, default, top");
 		txtValue.setColumns(10);
 		
@@ -194,16 +158,10 @@ public class CardCreateView extends JFrame implements View{
 		JSeparator separator = new JSeparator();
 		getContentPane().add(separator, "4, 6, 15, 1");
                 
-                
 		tglbtnRed = new JToggleButton("Expedite");
 		tglbtnRed.setOpaque(true);
 		tglbtnRed.setBackground(Color.RED);
         tglbtnRed.addActionListener(cController);
-		/*tglbtnRed.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				getContentPane().setBackground(Color.RED);
-			}
-		});*/
 		buttonGroup.add(tglbtnRed);
 		getContentPane().add(tglbtnRed, "4, 8, 5, 1, fill, top");
 		
@@ -211,11 +169,6 @@ public class CardCreateView extends JFrame implements View{
 		tglbtnYellow.setOpaque(true);
 		tglbtnYellow.setBackground(Color.YELLOW);
         tglbtnYellow.addActionListener(cController);
-		/*tglbtnYellow.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				getContentPane().setBackground(Color.YELLOW);
-			}
-		});*/
 		tglbtnYellow.doClick();
 		buttonGroup.add(tglbtnYellow);
 		getContentPane().add(tglbtnYellow, "10, 8, fill, top");
@@ -224,11 +177,6 @@ public class CardCreateView extends JFrame implements View{
 		tglbtnGreen.setOpaque(true);
 		tglbtnGreen.setBackground(Color.GREEN);
         tglbtnGreen.addActionListener(cController);
-		/*tglbtnGreen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				getContentPane().setBackground(Color.GREEN);
-			}
-		});*/
 		buttonGroup.add(tglbtnGreen);
 		getContentPane().add(tglbtnGreen, "12, 8, fill, top");
 		
@@ -236,11 +184,6 @@ public class CardCreateView extends JFrame implements View{
 		tglbtnBlue.setOpaque(true);
 		tglbtnBlue.setBackground(Color.BLUE);
         tglbtnBlue.addActionListener(cController);
-		/*tglbtnBlue.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				getContentPane().setBackground(Color.BLUE);
-			}
-		});*/
 		buttonGroup.add(tglbtnBlue);
 		getContentPane().add(tglbtnBlue, "14, 8, fill, top");
 		
@@ -258,11 +201,6 @@ public class CardCreateView extends JFrame implements View{
 		getContentPane().add(btnCreate, "8, 14, 4, 1, fill, top");
 		
 		setVisible(true);
-		
 		return (JComponent) getContentPane();
-	}
-
-	public JComponent getComponent() {
-		return init();
 	}
 }

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -34,11 +35,14 @@ public class Kanban {
             //Verbindung mit der Datenbank aufbauen
             //DatabaseManager.createConnection();
             
-            XMLCard card = new XMLCard();
-            //card.addCard("lawl", "fff", "ffff", "ss", "sss");
+
+            
             //card.deleteCard(19);
             
-            XMLBoard board = new XMLBoard();
+            
+            
+            
+            
             //board.loadXML("Board2.xml");
             //board.addCardToColumn(25, 17);
             //ArrayList  listColumn = board.readXML("Board2.xml");

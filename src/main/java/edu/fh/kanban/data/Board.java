@@ -4,6 +4,8 @@
  */
 package edu.fh.kanban.data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ronald
@@ -20,19 +22,25 @@ public class Board {
         this.color = color;
     }
     
+        
+    public Board() {
+
+    }
+    
 
     public int getB_id() {
         return b_id;
-    }
-
-    public void setB_id(int b_id) {
-        this.b_id = b_id;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    
 
     
     

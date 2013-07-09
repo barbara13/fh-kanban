@@ -4,7 +4,9 @@
  */
 package edu.fh.kanban.dao;
 
+import edu.fh.kanban.data.Card;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -23,6 +25,8 @@ public class XMLCard extends XML {
 
     private DocumentBuilderFactory docBuilderFactory;
     private DocumentBuilder docBuilder;
+    private String xmlPath = "cards.xml";
+    
     private XML_Pk pk;
     private Element cardElement = null;
     private Element searchedElement = null;
@@ -30,6 +34,8 @@ public class XMLCard extends XML {
     private NodeList rootList = null;
     private NodeList cardList = null;
     private Attr attr;
+    
+    private ArrayList <Card> listCard= new ArrayList();
 
     public XMLCard() {
         try {
@@ -38,7 +44,7 @@ public class XMLCard extends XML {
 
             try {
                 //XML Datei laden
-                doc = docBuilder.parse("cards.xml");
+                doc = docBuilder.parse(xmlPath);
                 //Root Element
                 rootElement = (Element) doc.getElementsByTagName("cards").item(0);
 
@@ -96,7 +102,7 @@ public class XMLCard extends XML {
         cardElement.setAttributeNode(attr);
 
         pk.setCa_id();
-        updateXML("cards.xml");
+        updateXML(xmlPath);
     }
 
     public Element searchCard(int ca_id) {
@@ -118,11 +124,34 @@ public class XMLCard extends XML {
             //Element aus der Datei löschen
             rootElement.removeChild(cardElement);
             //XML Datei aktualisieren
-            updateXML("cards.xml");
+            updateXML(xmlPath);
         }
     }
 
     public void createCard() {
-        this.updateXML("cards.xml");
+        this.updateXML(xmlPath);
+    }
+    
+        
+    public void editCard(int id, String attr, String value){
+        cardList = doc.getElementsByTagName("card");
+        
+        for(int i = 0; i < cardList.getLength(); i++){
+            if(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id){
+                cardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
+                updateXML(xmlPath);
+                break;
+            }
+        }
+    } 
+        
+    public ArrayList readCards(){     
+        listCard.clear();
+        cardList = doc.getElementsByTagName("card");
+        
+        for(int i = 0; i < cardList.getLength() ; i++){
+            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString())));
+         }
+        return listCard;
     }
 }

@@ -3,10 +3,6 @@ package edu.fh.kanban.ui.view;
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.TextArea;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -22,9 +18,14 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-
 import edu.fh.kanban.ui.controller.CardEditController;
 
+/**
+ * 
+ * @author Maxim
+ *
+ *In der Klasse CardEditView kann man die Werte in den JTextfield's verändern
+ */
 public class CardEditView extends JFrame{
 	/**
 	 * 
@@ -33,12 +34,17 @@ public class CardEditView extends JFrame{
 
 	private CardEditController cController = null;
 	
+	private int cId;
 	private JTextField txtHeadline, txtCardId, txtEffort, txtValue;
 	private TextArea textDescription;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JToggleButton tglbtnRed, tglbtnYellow, tglbtnGreen, tglbtnBlue;
 	private JButton btnCancel, btnSave;
 	private String status;
+	
+	public int getCId(){
+		return cId;
+	}
 	
 	public JTextField getTxtHeadline() {
 		return txtHeadline;
@@ -68,7 +74,23 @@ public class CardEditView extends JFrame{
 		return btnSave;
 	}
 
-	public CardEditView(String headline, String cardId, String effort, String value, String description, String status){
+    public JToggleButton getTglbtnRed() {
+            return tglbtnRed;
+    }
+
+    public JToggleButton getTglbtnYellow() {
+            return tglbtnYellow;
+    }
+
+    public JToggleButton getTglbtnGreen() {
+            return tglbtnGreen;
+    }
+
+    public JToggleButton getTglbtnBlue() {
+            return tglbtnBlue;
+    }
+    //Konstruktor
+	public CardEditView(String headline, int cardId, String effort, String value, String description, String status){
 		super("EDIT: \"" + headline + "\"");
 		cController = new CardEditController(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -76,6 +98,8 @@ public class CardEditView extends JFrame{
 		setLocationByPlatform(true);
 		setResizable(false);
 
+		//Werte werden initilisiert
+		this.cId = cardId;
 		txtHeadline = new JTextField(headline);
 		txtCardId = new JTextField(cardId);
 		txtEffort = new JTextField(effort);
@@ -83,8 +107,9 @@ public class CardEditView extends JFrame{
 		textDescription = new TextArea(description);
 		this.status = status;
 	}
-	
-	private JComponent init(){
+
+	//Methode aus der Klasse View initialsiert das Fenster und gibt getContentPane() zurück
+	public JComponent getComponent() {
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.UNRELATED_GAP_COLSPEC,
 				ColumnSpec.decode("48px"),
@@ -125,50 +150,17 @@ public class CardEditView extends JFrame{
 		txtHeadline.setColumns(10);
 		
 		getContentPane().add(new JLabel("effort:"), "16, 2, right, center");
-		txtEffort.addKeyListener(new KeyListener(){
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-			    if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
-			    	if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')) {  
-			    		e.consume();  //Alles außer Zahlen werden ignoriert
-			    	}
-			    }
-			}
-			public void keyPressed(KeyEvent e){}
-			public void keyReleased(KeyEvent e){}
-		});
+		txtEffort.addKeyListener(cController);
 		getContentPane().add(txtEffort, "18, 2, default, top");
 		txtEffort.setColumns(10);
 		
 		getContentPane().add(new JLabel("Card ID:"), "2, 4, left, center");
-		txtCardId.addKeyListener(new KeyListener(){
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-			    if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
-			    	if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')) {  
-			    		e.consume();  //Alles außer Zahlen werden ignoriert
-			    	}
-			    }
-			}
-			public void keyPressed(KeyEvent e){}
-			public void keyReleased(KeyEvent e){}
-		});
+		txtCardId.addKeyListener(cController);
 		getContentPane().add(txtCardId, "4, 4, 7, 1, default, top");
 		txtCardId.setColumns(10);
 		
 		getContentPane().add(new JLabel("Value:"), "16, 4, right, center");
-		txtValue.addKeyListener(new KeyListener(){
-			public void keyTyped(KeyEvent e) {
-				char c = e.getKeyChar();
-			    if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
-			    	if (!(c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9')) {  
-			    		e.consume();  //Alles außer Zahlen werden ignoriert
-			    	}
-			    }
-			}
-			public void keyPressed(KeyEvent e){}
-			public void keyReleased(KeyEvent e){}
-		});
+		txtValue.addKeyListener(cController);
 		getContentPane().add(txtValue, "18, 4, default, top");
 		txtValue.setColumns(10);
 		
@@ -179,51 +171,32 @@ public class CardEditView extends JFrame{
 		tglbtnRed = new JToggleButton("Expedite");
 		tglbtnRed.setOpaque(true);
 		tglbtnRed.setBackground(Color.RED);
-		tglbtnRed.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				getContentPane().setBackground(Color.RED);
-				status = tglbtnRed.getToolTipText().toString();
-			}
-		});
+		tglbtnRed.addActionListener(cController);
 		buttonGroup.add(tglbtnRed);
 		getContentPane().add(tglbtnRed, "4, 8, 5, 1, fill, top");
 		
 		tglbtnYellow = new JToggleButton("Standard");
 		tglbtnYellow.setOpaque(true);
 		tglbtnYellow.setBackground(Color.YELLOW);
-		tglbtnYellow.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				getContentPane().setBackground(Color.YELLOW);
-				status = tglbtnYellow.getToolTipText().toString();
-			}
-		});
+		tglbtnYellow.addActionListener(cController);
 		buttonGroup.add(tglbtnYellow);
 		getContentPane().add(tglbtnYellow, "10, 8, fill, top");
 		
 		tglbtnGreen = new JToggleButton("Fixed Date");
 		tglbtnGreen.setOpaque(true);
 		tglbtnGreen.setBackground(Color.GREEN);
-		tglbtnGreen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				getContentPane().setBackground(Color.GREEN);
-				status = tglbtnGreen.getToolTipText().toString();
-			}
-		});
+		tglbtnGreen.addActionListener(cController);
 		buttonGroup.add(tglbtnGreen);
 		getContentPane().add(tglbtnGreen, "12, 8, fill, top");
 		
 		tglbtnBlue = new JToggleButton("Intangible");
 		tglbtnBlue.setOpaque(true);
 		tglbtnBlue.setBackground(Color.BLUE);
-		tglbtnBlue.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				getContentPane().setBackground(Color.BLUE);
-				status = tglbtnBlue.getToolTipText().toString();
-			}
-		});
+		tglbtnBlue.addActionListener(cController);
 		buttonGroup.add(tglbtnBlue);
 		getContentPane().add(tglbtnBlue, "14, 8, fill, top");
 		
+		//Je nach status wird der Hintergrund des Fensters gesetzt
 		if(status.equals("Expedite")) getContentPane().setBackground(Color.RED);
 		else if(status.equals("Standard")) getContentPane().setBackground(Color.YELLOW);
 		else if(status.equals("Fixed Date")) getContentPane().setBackground(Color.GREEN);
@@ -241,11 +214,6 @@ public class CardEditView extends JFrame{
 		getContentPane().add(btnSave, "8, 14, 4, 1, fill, top");
 		
 		setVisible(true);
-		
 		return (JComponent) getContentPane();
-	}
-
-	public JComponent getComponent() {
-		return init();
 	}
 }
