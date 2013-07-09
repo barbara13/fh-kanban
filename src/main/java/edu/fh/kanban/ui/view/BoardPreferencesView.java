@@ -83,6 +83,9 @@ public class BoardPreferencesView extends JFrame implements View{	//Klasse Board
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
 		setResizable(false);
+	}
+
+	public JComponent getComponent() {
 		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("97px"),
@@ -203,10 +206,9 @@ public class BoardPreferencesView extends JFrame implements View{	//Klasse Board
         btnAbbrechen.addActionListener(c);
 		
 		getContentPane().add(btnAbbrechen, "12, 12, default, top");	
-	}
-
-	public JComponent getComponent() {
-		return null;
+		
+		setVisible(true);		
+		return (JComponent) getContentPane();
 	}
 }
 

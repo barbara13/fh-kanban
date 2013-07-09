@@ -55,7 +55,7 @@ public class Kanban {
 		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
 		board_preferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new BoardPreferencesView().setVisible(true);
+				new BoardPreferencesView().getComponent();
 			}
 		});
 		
