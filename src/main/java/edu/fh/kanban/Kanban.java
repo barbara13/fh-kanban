@@ -42,7 +42,9 @@ public class Kanban {
             
             //card.deleteCard(19);
             
-            
+            XMLBoard board = new XMLBoard();
+            board.loadXML("TestBoardfdf.xml");
+            //board.forwardCard(ca_id);
             
             
             
