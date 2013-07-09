@@ -3,13 +3,18 @@
  * and open the template in the editor.
  */
 package edu.fh.kanban.ui.controller;
+import com.jgoodies.forms.factories.CC;
 import edu.fh.kanban.Kanban;
 import edu.fh.kanban.dao.XMLBoard;
+import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Column;
+import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.view.BoardView;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,13 +27,19 @@ public class BoardController extends Controller{
     private BoardView bv;
     private Kanban kbn;
     private XMLBoard xml;
+    private XMLCard cxml;
     private ArrayList <Board> listBoard = new ArrayList();
     private ArrayList <Column> listColumn = new ArrayList();
+    private ArrayList <Card> listCard = new ArrayList();
+    private int j = 0;
+    private int k = 0;
+    private int i;
     
     public BoardController(BoardView bv){
        this.bv = bv;
        kbn = new Kanban();
        xml = new XMLBoard();
+       cxml = new XMLCard();
     }  
     
     @Override
@@ -40,46 +51,34 @@ public class BoardController extends Controller{
    
     }
     
-   public void createBoard(String name){
-        xml.loadXML(kbn.getChooser().getSelectedFile().getName().toString());   
-            
+   public void paintBoard(String name){
+        xml.loadXML(name);
           
         listBoard = xml.readBoard();
         listColumn = xml.readColumns();
-        //Auslesen des boards
-        for(int i = 0; i < listBoard.size(); i++){
-            //ID auslesen
-            System.out.println("Name: ");
-            System.out.println(listBoard.get(i).getB_id());
+        //listCard = cxml.readCards();
+        
+        //for (i = 0; i < listCard.size(); i++) {
+            //int k = 0;
+        //      System.out.println(listCard.get(i).getName());
+        //    bv.getCards()[i] = new JButton(listCard.get(i).getName());
+            //bv.getCards()[i].addActionListener(this);
+            //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
+            JLabel label = new JLabel("Test");
             
-            //Namen auslesen
-            System.out.println("Name: ");
-            System.out.println(listBoard.get(i).getName());
+            //bv.getTitle().setText("fsfe");
+            bv.getBpanel().add(label, CC.xy(3 , 3));
             
-            //Beschreibung 
-            System.out.println("Color: ");
-            System.out.println(listBoard.get(i).getColor());
-  
+
+
+            j++;
+            j++;
+
+            if (j
+                    == 20) {
+                k++;
+                k++;
+                j = 0;
+            }
         }
-        
-        for(int i = 0; i < listColumn.size(); i++){
-            //ID auslesen
-            System.out.println("Name: ");
-            System.out.println(listColumn.get(i).getB_id());
-            
-            //Namen auslesen
-            System.out.println("Name: ");
-            System.out.println(listColumn.get(i).getName());
-            
-            //Beschreibung 
-            System.out.println("Color: ");
-            System.out.println(listColumn.get(i).getWip());
-  
-        }
-        
-        
-        
-        
-          
-      }
-}
+    }

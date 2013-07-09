@@ -25,40 +25,53 @@ public class BoardView extends JPanel implements View {
         getComponents();
     }
 
-//Setter
-public void setTitle(JLabel title) {
-        this.title = title;
+    
+
+
+    
+    public JButton[] getCards() {
+        return cards;
     }
 
-    public JButton getCard1() {
-        return card1;
+    public JLabel[] getColumns() {
+        return columns;
     }
 
+    public JLabel getTitle() {
+        return title;
+    }
+
+    public JPanel getBpanel() {
+        return bpanel;
+    }
+
+    public JTextField getSearchtext() {
+        return searchtext;
+    }
+
+    
 
   
-private JLabel title;
+private JLabel title = new JLabel();
 private JTextField searchtext;
 private JSeparator separator;
 private JScrollPane scrollPane;
-private JPanel bpanel;
-private JButton card1;
+private JPanel bpanel = new JPanel();
 private JLabel label1;
 private JButton b;
+private JButton[] cards= new JButton[100];
+private JLabel[] columns = new JLabel[100];
 
 
 
     public JComponent getComponent() {
  
-        bpanel = new JPanel();
-        title = new JLabel();
+        //bpanel = new JPanel();
         searchtext = new JTextField();
         separator = new JSeparator(); 
         scrollPane = new JScrollPane();
         label1 = new JLabel("New");
-        card1 = new JButton("Karte 1");
-        
-//Dem Button einen ActionListener zuweisen        
-        card1.addActionListener(c);
+
         
   //Layout
         bpanel.setLayout(new FormLayout(
@@ -66,18 +79,15 @@ private JButton b;
             "5*(default, $lgap), default"));
 
         
- //Binden an Panel       
-        title.setText("Board - Name");
-        title.setFont(new Font("Arial", Font.BOLD, 24));
+ //Binden an Panel
+        //title.setFont(new Font("Arial", Font.BOLD, 24));
         bpanel.add(title, CC.xy(3, 3));
         bpanel.add(searchtext, CC.xy(6, 3));
         bpanel.add(separator, CC.xywh(1, 5, 7, 1));
         
-        card1.setBackground(Color.red);
-        card1.setForeground(Color.red);
-        bpanel.add(card1, CC.xy(3, 9));
-        bpanel.add(label1, CC.xy(3, 7));
-        
+      
+        //bpanel.add(label1, CC.xy(3, 7));
+       /* 
         searchtext.addKeyListener(new KeyListener(){    
             
             @Override
@@ -104,7 +114,7 @@ private JButton b;
                 }
 		}      
         });
-              
+        */
         
         return bpanel;
         
