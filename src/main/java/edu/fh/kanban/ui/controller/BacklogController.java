@@ -94,9 +94,14 @@ public class BacklogController extends Controller {
     
     public void actionPerformed(ActionEvent e) {
     	listCard = xml.readCards();
+ //   	ArrayList<Card> sort = new ArrayList<Card>();
     	
-		String s = (String) blv.getSearch().getSelectedItem();
+    	
+    	
+		s = (String) blv.getSearch().getSelectedItem();
+		
 		System.out.println(s);
+		
 		if (s == "Creation time"){
 			for (i = 0; i < listCard.size(); i++) {
 	            //int k = 0;
@@ -104,7 +109,7 @@ public class BacklogController extends Controller {
 	            blv.getCards()[i].addActionListener(this);
 	            blv.getIds()[i] = new JLabel(String.valueOf(listCard.get(i).getCa_id()));
 	            
-//	            Collections.sort(Name);
+//	            Collections.sort((Name).getName());
 
 	            //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
 
