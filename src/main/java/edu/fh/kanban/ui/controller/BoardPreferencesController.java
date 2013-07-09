@@ -44,7 +44,11 @@ public class BoardPreferencesController extends Controller{
     private XMLBoard xml;
     private String color;
     
-    public BoardPreferencesController(BoardPreferencesView bpv){
+    public int getArrayindex() {
+		return arrayindex;
+	}
+
+	public BoardPreferencesController(BoardPreferencesView bpv){
        this.bpv = bpv;
        xml = new XMLBoard();
     }  
@@ -60,6 +64,7 @@ public class BoardPreferencesController extends Controller{
 					if(txtColumname[i].getText().isEmpty()){	//Abfrage wenn nichts eingetragen wurde (Name) wird das Textfeld Rot makiert
 						txtColumname[i].setBackground(Color.RED);
 						panelfehler = true;
+						JOptionPane.showMessageDialog(null, "Es sind nicht alle felder ausgefuehlt!!!", "Fehlermeldung", JOptionPane.WARNING_MESSAGE);
 					}else txtColumname[i].setBackground(Color.WHITE); //Ansonsten bleibt das textfeld weiß
 				}else break;
 			}
@@ -68,7 +73,7 @@ public class BoardPreferencesController extends Controller{
 				if(bpv.getTxtName().getText().isEmpty()) bpv.getTxtName().setBackground(Color.RED);
 				else bpv.getTxtName().setBackground(Color.WHITE);
 				if(!bpv.getTglbtnRot().isSelected() && !bpv.getTglbtnGelb().isSelected() && !bpv.getTglbtnGruen().isSelected() && !bpv.getTglbtnBlau().isSelected())	
-	              System.out.println("Mindestens eine Color MUSS selektiert sein!!!");	
+					JOptionPane.showMessageDialog(null, "Mindestens eine Color MUSS selektiert sein!!!", "Fehlermeldung", JOptionPane.WARNING_MESSAGE);
 			}else if(panelfehler == false){
 				color = new String();
 				 
@@ -107,7 +112,7 @@ public class BoardPreferencesController extends Controller{
 		}
 	}
 	
-	private void loeschung(int i){						//Private Methode "Loeschung" löscht den i-ten Tupel aus dem Array
+	public void loeschung(int i){						//Private Methode "Loeschung" löscht den i-ten Tupel aus dem Array
 		txtColumname[i] = null;	
 		wip[i] = null;
 		btnMinus[i] = null;
@@ -118,7 +123,7 @@ public class BoardPreferencesController extends Controller{
 	
 	private void aktualisierung(){						//Konstruktor für die aktualisierung wird erstellt
 		for(int i = 0; i < 10; i++){					//Es wird überprüft ob i<10, damit es nicht mehr als 10 Tupel gibt			
-			if(txtColumname[i] == null){		//Sortiert das Array aufsteigend
+			if(txtColumname[i] == null){				//Sortiert das Array aufsteigend
 				for(int k = (i+1); k < 10; k++){
 					if(txtColumname != null){
 						txtColumname[i] = txtColumname[k];
@@ -132,7 +137,7 @@ public class BoardPreferencesController extends Controller{
 				}
 			}
 		}
-		if(txtColumname[0] == null) 			//Überprüfung ist an der ersten Stelle des Arrays ein Eintrag vorhanden, sollte kein eintrag vorhanden sein, wird die Methode erweiterung aufgerufen
+		if(txtColumname[0] == null) 					//Überprüfung ist an der ersten Stelle des Arrays ein Eintrag vorhanden, sollte kein eintrag vorhanden sein, wird die Methode erweiterung aufgerufen
 			erweiterung();
 		
 		bpv.getPanel().removeAll();						//kompletter Inhalt des Panels wird entfernt
