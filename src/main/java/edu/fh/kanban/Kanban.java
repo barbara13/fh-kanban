@@ -35,28 +35,7 @@ public class Kanban {
 		/**
 		 * @param args
 		 */
-        public static void main(String[] args) {
-            //Verbindung mit der Datenbank aufbauen
-            //DatabaseManager.createConnection();
-            
-
-            
-            //card.deleteCard(19);
-            
-            XMLBoard board = new XMLBoard();
-            board.loadXML("TestBoardfdf.xml");
-            //board.forwardCard(ca_id);
-            
-            
-            
-            //board.loadXML("Board2.xml");
-            //board.addCardToColumn(25, 17);
-            //ArrayList  listColumn = board.readXML("Board2.xml");
-            //terator it = listColumn.iterator();
-            //System.out.println("ID: "+listColumn.get());
-            
-                    
-                    
+        public static void main(String[] args) {    
             
 		LOGGER.info("Starting kanban app.");
 		LOGGER.info("Setting look and feel.");
