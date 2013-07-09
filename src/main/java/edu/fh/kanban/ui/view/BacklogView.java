@@ -77,7 +77,7 @@ public class BacklogView implements View{
 		
 		searchfield = new JTextField();
 		searchfield.setText("");
-		searchfield.addKeyListener(c);
+		//searchfield.addKeyListener(c);
 		panel.add(searchfield, "6, 2, 3, 1, right, default");
 		searchfield.setColumns(10);
                 

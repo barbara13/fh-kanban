@@ -28,12 +28,12 @@ public class BacklogController extends Controller{
     private CardView cv;
     private XMLCard xml;
     private ArrayList<Card> listCard = new ArrayList();
-    private ArrayList<JLabel> id = new ArrayList();
     private int j = 0;
     private int k = 0;
     private int i;
     private Object src;
     private String s = null;
+    private int id;
 
     public BacklogController(BacklogView blv) {
 
@@ -46,10 +46,9 @@ public class BacklogController extends Controller{
 
         for (i = 0; i < listCard.size(); i++) {
             //int k = 0;
-            blv.getCards()[i] = new JButton(listCard.get(i).getName());
+            
+            blv.getCards()[i] = new JButton(String.valueOf(listCard.get(i).getCa_id())+": "+listCard.get(i).getName());
             blv.getCards()[i].addActionListener(this);
-            blv.getIds()[i] = new JLabel(String.valueOf(listCard.get(i).getCa_id()));
-
             //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
 
             blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
@@ -98,6 +97,7 @@ public class BacklogController extends Controller{
 //        }
 //        }
 //    
+    /*
     public void actionPerformed(ActionEvent e) {
     	listCard = xml.readCards();    	
     	
@@ -118,5 +118,19 @@ public class BacklogController extends Controller{
 			System.out.println("Test4");
 		}
 	}
+*/
+        
+    @Override
+     public void actionPerformed(ActionEvent e) {
+     
+         src = e.getSource();
+         id = parseId(e.getActionCommand());
 
+     }
+    
+    private int parseId(String s){
+        int s1 = s.indexOf(":");
+
+        return Integer.parseInt(s.substring(0, s1));
+    }
 }
