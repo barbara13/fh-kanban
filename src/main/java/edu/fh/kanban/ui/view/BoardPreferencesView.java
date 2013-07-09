@@ -13,11 +13,9 @@ import javax.swing.JLabel;
 import edu.fh.kanban.ui.controller.BoardPreferencesController;
 
 import javax.swing.JComponent;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JToggleButton;
-import javax.swing.JSpinner;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.SpinnerNumberModel;
@@ -33,7 +31,7 @@ import javax.swing.JSpinner.DefaultEditor;
  * @author Barbara
  *
  */
-public class BoardPreferencesView extends JFrame implements View{
+public class BoardPreferencesView extends JFrame implements View{	//Klasse BoardPreferencesView erbt von der JFrame
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField txtName;
@@ -44,66 +42,43 @@ public class BoardPreferencesView extends JFrame implements View{
 	private BoardPreferencesController c = null;
     private JButton btnSpeichern;
     private JButton btnAbbrechen;
-	private int arrayindex=0;
-	private JTextField[] txtColumname = new JTextField[10]; 
-	private JSpinner[] wip = new JSpinner[10];
-	private JButton[] btnMinus= new JButton[10];
  
-    public JToggleButton getTglbtnRot() {
+    public JToggleButton getTglbtnRot() {		//Getter für die Farbe Rot "Expedite" wird erstellt
         return tglbtnRot;
     }
 
-    public JToggleButton getTglbtnGruen() {
+    public JToggleButton getTglbtnGruen() {		//Getter für die Farbe Grün "Fixed Date" wird erstellt
         return tglbtnGruen;
     }
 
-    public JToggleButton getTglbtnGelb() {
+    public JToggleButton getTglbtnGelb() {		//Getter für die Farbe  Gelb "Standard" wird erstellt
         return tglbtnGelb;
     }
 
-    public JToggleButton getTglbtnBlau() {
+    public JToggleButton getTglbtnBlau() {		//Getter für die Farbe Blau "Intangible" wird erstellt
         return tglbtnBlau;
     }
 
-    public JButton[] getBtnMinus() {
-        return btnMinus;
-    }
-
-    public JButton getBtnSpeichern() {
+    public JButton getBtnSpeichern() {			//Getter für den JButton "Speichern" wird erstellt
         return btnSpeichern;
     }
 
-    public JButton getBtnAbbrechen() {
+    public JButton getBtnAbbrechen() {			//Getter für den JButton "Abbrechen" wird erstellt
         return btnAbbrechen;
     }
     
-    public JTextField getTxtName() {
+    public JTextField getTxtName() {			//Getter JTextField für den Namen des Boardes wird erstellt
         return txtName;
     }
 
-    public JTextField[] getTxtColumname() {
-        return txtColumname;
-    }
-
-    public JSpinner[] getWip() {
-        return wip;
-    }
-    
-    public void setArrayindex(int i){
-    	this.arrayindex = i;
-    }
-
-    public int getArrayindex() {
-        return arrayindex;
-    }
-    public JPanel getPanel(){
+    public JPanel getPanel(){					//Getter für das JPanel wird erstellt
     	return panel;
     }
 
-    public BoardPreferencesView(){
+    public BoardPreferencesView(){				//Konstruktor
                 
 		super("Board Einstellungen");
-        c = new BoardPreferencesController(this);
+        c = new BoardPreferencesController(this); //Controller zum BoardPreferencesVontroller wird initialisiert
                         
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
@@ -148,25 +123,25 @@ public class BoardPreferencesView extends JFrame implements View{
 		JSeparator separator = new JSeparator();
 		getContentPane().add(separator, "4, 4, 11, 1, fill, Center");
 		               
-		tglbtnRot = new JToggleButton("Expedite");		
+		tglbtnRot = new JToggleButton("Expedite");		//Button Rot "Expedite" wird initialisiert
         tglbtnRot.setOpaque(true);
 		tglbtnRot.setBackground(Color.RED);
         tglbtnRot.addActionListener(c);
 		getContentPane().add(tglbtnRot, "4, 6, fill, top");
 		
-		tglbtnGelb = new JToggleButton("Standard");
+		tglbtnGelb = new JToggleButton("Standard");		//Button Gelb "Standard" wird initialisiert
 		tglbtnGelb.setOpaque(true);
 		tglbtnGelb.setBackground(Color.YELLOW);
 		tglbtnGelb.addActionListener(c);
 		getContentPane().add(tglbtnGelb, "6, 6, fill, top");
 		
-		tglbtnGruen = new JToggleButton("Fixed date");
+		tglbtnGruen = new JToggleButton("Fixed date");	//Button Grün "Fixed Date" wird erstellt
 		tglbtnGruen.setOpaque(true);
 		tglbtnGruen.setBackground(Color.GREEN);
 		tglbtnGruen.addActionListener(c);
 		getContentPane().add(tglbtnGruen, "8, 6, fill, top");
 		
-		tglbtnBlau = new JToggleButton("Intangible");
+		tglbtnBlau = new JToggleButton("Intangible");	//Butoon Blau "Intangible" wird initialisiert
 		tglbtnBlau.setOpaque(true);
 		tglbtnBlau.setBackground(Color.BLUE);
 		tglbtnBlau.addActionListener(c);
@@ -217,7 +192,7 @@ public class BoardPreferencesView extends JFrame implements View{
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("23px"),}));		
 	
-		c.erweiterung();
+		c.erweiterung();						//Methode aus Controller c.erweiterung wird aufgerufen
 
 		btnSpeichern = new JButton("Speichern");
         btnSpeichern.addActionListener(c);
