@@ -1,5 +1,4 @@
-﻿<<<<<<< HEAD
-﻿# Team project 2013
+﻿﻿# Team project 2013
 Build a Swing application to manage a kanban board. This application provides the basic functionality for the kanban process.
 
 ## Maven
@@ -74,5 +73,3 @@ mvn exec:java
 + Edit dialog for card
 + Backlogs displays cards in 3 columns grid 
 + Backlog can be sorted by creation time (default), headline, value, size
-test
->>>>>>> 54f3450e2ac8600e56ebaf1ce39262460486c810
