@@ -31,6 +31,7 @@ public class BacklogController extends Controller {
     private int k = 0;
     private int i;
     private Object src;
+    private String s = null;
 
     public BacklogController(BacklogView blv) {
 
@@ -79,13 +80,31 @@ public class BacklogController extends Controller {
         }
     }
     
-    @Override
-     public void actionPerformed(ActionEvent e) {
-     
-         src = e.getSource();
-         System.out.println(e.getActionCommand());
-         //System.out.println(blv.getCards()[e.].getText());
+//    @Override
+//     public void actionPerformed(ActionEvent e) {
+//     
+//         src = e.getSource();
+//         System.out.println(e.getActionCommand());
+//         //System.out.println(blv.getCards()[e.].getText());
+//
+//     
+//     }
+    
+    public void actionPerformed(ActionEvent e) {
+		String s = (String) blv.getCombo.getSelectedItem();
+//		System.out.println(s);
+		if (s == "Creation time"){
+			System.out.println("Test");
+		}
+		else if (s == "Headline"){
+			
+		}
+		else if (s == "Value"){
+			
+		}
+		else if (s == "Size"){
+			
+		}
+	}
 
-     
-     }
 }

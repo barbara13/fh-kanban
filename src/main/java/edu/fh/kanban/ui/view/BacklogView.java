@@ -28,6 +28,7 @@ public class BacklogView implements View{
         private JSeparator sep;
         private JButton[] cards= new JButton[100];
         private JLabel[] ids = new JLabel[100];
+        private JComboBox comboBox;
         
         
 	@Override
@@ -116,7 +117,7 @@ public class BacklogView implements View{
 		JLabel lblSortBy = new JLabel("Sort by");
 		panel.add(lblSortBy, "6, 4, right, default");
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Creation time", "Headline", "Value", "Size"}));
 		comboBox.setToolTipText("");
 		panel.add(comboBox, "8, 4, right, default");
@@ -142,6 +143,10 @@ public class BacklogView implements View{
     
     public JLabel[] getIds(){
         return ids;
+    }
+    
+    public JComboBox getSearch(){
+    	return comboBox;
     }
 
 	
