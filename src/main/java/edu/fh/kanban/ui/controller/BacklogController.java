@@ -91,25 +91,68 @@ public class BacklogController extends Controller{
 //     
 //     }
     
-//    public void keyReleased(KeyEvent e) {
-//        if(blv.getSearch().getText().toString() == "Hallo"){
-//        	System.out.println("Suche");
-//        }
-//        }
-//    
-    /*
-    public void actionPerformed(ActionEvent e) {
+ /*   public void keyReleased(KeyEvent e) {
+        if(blv.getSearch().getText().toString() == "Hallo"){
+        	System.out.println("Suche");
+        }
+        }*/
+    
+    
+/*    public void actionPerformed(ActionEvent e) {
     	listCard = xml.readCards();    	
-    	
+
 		s = (String) blv.getSort().getSelectedItem();
 		
 //		System.out.println(s);
 		
 		if (s == "Creation time"){
 			
+			k=0;
+			j=0;
+			
+			listCard = xml.readCards();
+
+	        for (i = 0; i < listCard.size(); i++) {
+	            
+	            blv.getCards()[i] = new JButton(String.valueOf(listCard.get(i).getCa_id())+": "+listCard.get(i).getName());
+	            blv.getCards()[i].addActionListener(this);
+	            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
+	            
+
+	            j++;
+	            j++;
+
+	            if (j== 20) {
+	                k++;
+	                k++;
+	                j = 0;
+	            }
+	        }
 		}
 		else if (s == "Headline"){
-			System.out.println("Test2");
+			
+			k=0;
+			j=0;
+			
+			listCard = xml.readCards();
+
+	        for (i = 0; i < listCard.size(); i++) {
+	            
+	        	Collections.sort();
+	            blv.getCards()[i] = new JButton(String.valueOf(listCard.get(i).getCa_id())+": "+listCard.get(i).getName());
+	            blv.getCards()[i].addActionListener(this);
+	            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
+	            
+
+	            j++;
+	            j++;
+
+	            if (j== 20) {
+	                k++;
+	                k++;
+	                j = 0;
+	            }
+	        }
 		}
 		else if (s == "Value"){
 			System.out.println("Test3");
@@ -117,9 +160,10 @@ public class BacklogController extends Controller{
 		else if (s == "Size"){
 			System.out.println("Test4");
 		}
-	}
-*/
+	}*/
+
         
+    
     @Override
      public void actionPerformed(ActionEvent e) {
      
