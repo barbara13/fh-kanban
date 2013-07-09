@@ -22,7 +22,7 @@ import javax.swing.JLabel;
  *
  * @author KingDCB
  */
-public class BacklogController extends Controller {
+public class BacklogController extends Controller{
 
     private BacklogView blv;
     private CardView cv;
@@ -92,39 +92,20 @@ public class BacklogController extends Controller {
 //     
 //     }
     
+//    public void keyReleased(KeyEvent e) {
+//        if(blv.getSearch().getText().toString() == "Hallo"){
+//        	System.out.println("Suche");
+//        }
+//        }
+//    
     public void actionPerformed(ActionEvent e) {
-    	listCard = xml.readCards();
- //   	ArrayList<Card> sort = new ArrayList<Card>();
+    	listCard = xml.readCards();    	
     	
-    	
-    	
-		s = (String) blv.getSearch().getSelectedItem();
+		s = (String) blv.getSort().getSelectedItem();
 		
-		System.out.println(s);
+//		System.out.println(s);
 		
 		if (s == "Creation time"){
-			for (i = 0; i < listCard.size(); i++) {
-	            //int k = 0;
-	            blv.getCards()[i] = new JButton(listCard.get(i).getName());
-	            blv.getCards()[i].addActionListener(this);
-	            blv.getIds()[i] = new JLabel(String.valueOf(listCard.get(i).getCa_id()));
-	            
-//	            Collections.sort((Name).getName());
-
-	            //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
-
-	            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
-
-	            j++;
-	            j++;
-
-	            if (j
-	                    == 20) {
-	                k++;
-	                k++;
-	                j = 0;
-	            }
-	        }
 			
 		}
 		else if (s == "Headline"){
