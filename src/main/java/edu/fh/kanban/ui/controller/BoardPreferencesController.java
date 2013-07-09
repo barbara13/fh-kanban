@@ -111,7 +111,7 @@ public class BoardPreferencesController extends Controller{
 		}
 	}
 	
-	private void loeschung(int i){						//Private Methode "Loeschung" löscht den i-ten Tupel aus dem Array
+	public void loeschung(int i){						//Private Methode "Loeschung" löscht den i-ten Tupel aus dem Array
 		txtColumname[i] = null;	
 		wip[i] = null;
 		btnMinus[i] = null;

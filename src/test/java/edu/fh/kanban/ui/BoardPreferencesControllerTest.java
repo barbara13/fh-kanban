@@ -18,4 +18,13 @@ public class BoardPreferencesControllerTest {
 		//Überprüfung, ob Arrayindex um 1 erhöht hat
 		assertTrue("ungleich!!", 1==bpc.getArrayindex());
 	}
+	public void testLoeschung(){
+		BoardPreferencesView bpv = new BoardPreferencesView();
+		BoardPreferencesController bpc = new BoardPreferencesController(bpv);
+		bpc.erweiterung();
+		bpc.erweiterung();
+		assertTrue("ungleich bei erweiterung!!", 2==bpc.getArrayindex());
+		bpc.loeschung(1);
+		assertTrue("ungleich bei loeschung!!", 1==bpc.getArrayindex());
+	}
 }
