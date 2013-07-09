@@ -43,7 +43,11 @@ public class BoardPreferencesController extends Controller{
     private BoardPreferencesView bpv;
     private XMLBoard xml;
     
-    public BoardPreferencesController(BoardPreferencesView bpv){
+    public int getArrayindex() {
+		return arrayindex;
+	}
+
+	public BoardPreferencesController(BoardPreferencesView bpv){
        this.bpv = bpv;
        //xml = new XMLBoard();
     }  
@@ -118,7 +122,7 @@ public class BoardPreferencesController extends Controller{
 	
 	private void aktualisierung(){						//Konstruktor für die aktualisierung wird erstellt
 		for(int i = 0; i < 10; i++){					//Es wird überprüft ob i<10, damit es nicht mehr als 10 Tupel gibt			
-			if(txtColumname[i] == null){		//Sortiert das Array aufsteigend
+			if(txtColumname[i] == null){				//Sortiert das Array aufsteigend
 				for(int k = (i+1); k < 10; k++){
 					if(txtColumname != null){
 						txtColumname[i] = txtColumname[k];
@@ -132,7 +136,7 @@ public class BoardPreferencesController extends Controller{
 				}
 			}
 		}
-		if(txtColumname[0] == null) 			//Überprüfung ist an der ersten Stelle des Arrays ein Eintrag vorhanden, sollte kein eintrag vorhanden sein, wird die Methode erweiterung aufgerufen
+		if(txtColumname[0] == null) 					//Überprüfung ist an der ersten Stelle des Arrays ein Eintrag vorhanden, sollte kein eintrag vorhanden sein, wird die Methode erweiterung aufgerufen
 			erweiterung();
 		
 		bpv.getPanel().removeAll();						//kompletter Inhalt des Panels wird entfernt
