@@ -28,9 +28,10 @@ public class BoardController extends Controller{
         src = e.getSource();
         
         //Getter - Methode für den Button und mit src vergleichen
-        if(src == bv.getCard1()){
-            System.out.println("test");
-        }
-        
+   
     }
+    
+   public void createBoard(String name){
+          System.out.println("Hallo");
+      }
 }

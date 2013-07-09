@@ -50,7 +50,7 @@ public class XMLTest {
         /* erster Parameter = Card id
          * zweiter Parameter = Column id   
         */
-        board.addCardToColumn(26, 65);
+        //board.addCardToColumn(26, 65);
     }
     
     /* Card in Board editieren */

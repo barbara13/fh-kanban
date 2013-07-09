@@ -2,13 +2,7 @@
 To change this template, choose Tools | Templates
 and open the template in the editor.
 --><primary_keys>
-<<<<<<< HEAD
-    <board b_id="63"/>
-    <column co_id="84"/>
-    <card ca_id="29"/>
-=======
-    <board b_id="51"/>
-    <column co_id="67"/>
+    <board b_id="53"/>
+    <column co_id="72"/>
     <card ca_id="32"/>
->>>>>>> 02a313ac3463cd2dabae8325239aa17eae17d973
 </primary_keys>

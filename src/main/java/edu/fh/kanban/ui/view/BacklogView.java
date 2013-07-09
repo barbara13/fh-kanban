@@ -22,7 +22,7 @@ import javax.swing.JSeparator;
 
 
 public class BacklogView implements View{
-	private JTextField Searchfield;
+		private JTextField searchfield;
         private BacklogController c = new BacklogController(this);
         private JPanel panel;
         private JSeparator sep;
@@ -75,10 +75,11 @@ public class BacklogView implements View{
 				RowSpec.decode("max(16dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC,}));
 		
-		Searchfield = new JTextField();
-		Searchfield.setText("");
-		panel.add(Searchfield, "6, 2, 3, 1, right, default");
-		Searchfield.setColumns(10);
+		searchfield = new JTextField();
+		searchfield.setText("");
+		//searchfield.addKeyListener(c);
+		panel.add(searchfield, "6, 2, 3, 1, right, default");
+		searchfield.setColumns(10);
                 
                 
 
@@ -145,10 +146,12 @@ public class BacklogView implements View{
         return ids;
     }
     
-    public JComboBox getSearch(){
+    public JComboBox getSort(){
     	return comboBox;
     }
 
-	
+	public JTextField getSearch(){
+		return searchfield;
+	}
 
 }

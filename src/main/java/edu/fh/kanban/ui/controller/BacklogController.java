@@ -22,18 +22,18 @@ import javax.swing.JLabel;
  *
  * @author KingDCB
  */
-public class BacklogController extends Controller {
+public class BacklogController extends Controller{
 
     private BacklogView blv;
     private CardView cv;
     private XMLCard xml;
     private ArrayList<Card> listCard = new ArrayList();
-    private ArrayList<JLabel> id = new ArrayList();
     private int j = 0;
     private int k = 0;
     private int i;
     private Object src;
     private String s = null;
+    private int id;
 
     public BacklogController(BacklogView blv) {
 
@@ -46,10 +46,9 @@ public class BacklogController extends Controller {
 
         for (i = 0; i < listCard.size(); i++) {
             //int k = 0;
-            blv.getCards()[i] = new JButton(listCard.get(i).getName());
+            
+            blv.getCards()[i] = new JButton(String.valueOf(listCard.get(i).getCa_id())+": "+listCard.get(i).getName());
             blv.getCards()[i].addActionListener(this);
-            blv.getIds()[i] = new JLabel(String.valueOf(listCard.get(i).getCa_id()));
-
             //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
 
             blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
@@ -92,34 +91,21 @@ public class BacklogController extends Controller {
 //     
 //     }
     
+//    public void keyReleased(KeyEvent e) {
+//        if(blv.getSearch().getText().toString() == "Hallo"){
+//        	System.out.println("Suche");
+//        }
+//        }
+//    
+    /*
     public void actionPerformed(ActionEvent e) {
-    	listCard = xml.readCards();
+    	listCard = xml.readCards();    	
     	
-		String s = (String) blv.getSearch().getSelectedItem();
-		System.out.println(s);
+		s = (String) blv.getSort().getSelectedItem();
+		
+//		System.out.println(s);
+		
 		if (s == "Creation time"){
-			for (i = 0; i < listCard.size(); i++) {
-	            //int k = 0;
-	            blv.getCards()[i] = new JButton(listCard.get(i).getName());
-	            blv.getCards()[i].addActionListener(this);
-	            blv.getIds()[i] = new JLabel(String.valueOf(listCard.get(i).getCa_id()));
-	            
-//	            Collections.sort(Name);
-
-	            //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
-
-	            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
-
-	            j++;
-	            j++;
-
-	            if (j
-	                    == 20) {
-	                k++;
-	                k++;
-	                j = 0;
-	            }
-	        }
 			
 		}
 		else if (s == "Headline"){
@@ -132,5 +118,19 @@ public class BacklogController extends Controller {
 			System.out.println("Test4");
 		}
 	}
+*/
+        
+    @Override
+     public void actionPerformed(ActionEvent e) {
+     
+         src = e.getSource();
+         id = parseId(e.getActionCommand());
 
+     }
+    
+    private int parseId(String s){
+        int s1 = s.indexOf(":");
+
+        return Integer.parseInt(s.substring(0, s1));
+    }
 }

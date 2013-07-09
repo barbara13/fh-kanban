@@ -136,7 +136,7 @@ public class XMLBoard extends XML{
             pk = new XML_Pk();
             
             // root elements
-            doc = docBuilder.newDocument();
+            //doc = docBuilder.newDocument();
             rootElement = doc.createElement("board");
             doc.appendChild(rootElement);
 
@@ -242,14 +242,34 @@ public class XMLBoard extends XML{
                 searchedElement = (Element) columnList.item(i);
                 //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
                 break;
+            }  
+    }
+        return searchedElement;
+    }
+    
+    public Element searchCard(int ca_id) {
+        cardList = doc.getElementsByTagName("card");
+        for (int i = 0; i < cardList.getLength(); i++) {
+            //Wenn gesuchtes Element gefunden wurde
+            if (Integer.parseInt(this.getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == ca_id) {
+                searchedElement = (Element) cardList.item(i);
+                //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
+                break;
             }
         }
+
+        return searchedElement;
+    }
+    
+    private Element getFirstColumn(){
+        columnList = doc.getElementsByTagName("column");
+        searchedElement = (Element) columnList.item(0);
         
         return searchedElement;
     }
     
-    public void addCardToColumn(int ca_id, int co_id){
-        columnElement = this.searchColumn(co_id);
+    public void addCardToBoard(int ca_id){
+        columnElement = getFirstColumn();
         cardElement = xmlCard.searchCard(ca_id);
         
         //Wenn die gesuchte card und column gefunden wurde
@@ -260,6 +280,55 @@ public class XMLBoard extends XML{
             
             this.updateXML(xmlPath);
          
+        }
+    }
+    
+    public void forwardCard(int ca_id){
+        boolean f = false;
+        Element newColumnElement;
+        
+        cardElement = searchCard(ca_id);
+        co_id = Integer.parseInt(cardElement.getAttribute("co_id"));
+        
+        
+        columnElement = searchColumn(co_id);
+        columnList = doc.getElementsByTagName("column");
+        
+        for(int i = 0; i < columnList.getLength(); i++){
+            //Wenn f == false ist
+            
+            if(f == false){ 
+                if(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id){
+                    //f = true setzen damit im nächsten durchlauf der else Fall eintritt
+                    f = true;
+                }
+            } else{
+                //addCard(cardElement, columnList.item(i).getAttributes().getNamedItem("co_id").toString());
+                newColumnElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+                
+                newColumnElement.appendChild(this.addCard(cardElement, columnElement.getAttribute("co_id")));
+                deleteCard(ca_id);
+                updateXML(xmlPath);
+                break;
+            }
+   
+        }
+        
+        
+    }
+    
+    public void prevCard(int ca_id){
+        
+    }
+    
+       
+    public void deleteCard(int ca_id) {
+        cardElement = searchCard(ca_id);
+        if (cardElement != null) {
+            //Element aus der Datei löschen
+            columnElement.removeChild(cardElement);
+            //XML Datei aktualisieren
+            updateXML(xmlPath);
         }
     }
     

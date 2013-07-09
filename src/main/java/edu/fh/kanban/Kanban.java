@@ -16,6 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
+import edu.fh.kanban.ui.controller.BoardController;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.BoardView;
@@ -24,33 +25,23 @@ import edu.fh.kanban.ui.view.CardView;
 import edu.fh.kanban.ui.view.View;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Kanban {
-
+	
+	private static JFileChooser chooser;
+	
+	public JFileChooser getChooser() {
+		return chooser;
+	}
+	
 	static Logger LOGGER = Logger.getLogger(Kanban.class.getName());
 		/**
 		 * @param args
 		 */
-        public static void main(String[] args) {
-            //Verbindung mit der Datenbank aufbauen
-            //DatabaseManager.createConnection();
-            
-
-            
-            //card.deleteCard(19);
-            
-            
-            
-            
-            
-            //board.loadXML("Board2.xml");
-            //board.addCardToColumn(25, 17);
-            //ArrayList  listColumn = board.readXML("Board2.xml");
-            //terator it = listColumn.iterator();
-            //System.out.println("ID: "+listColumn.get());
-            
-                    
-                    
+        public static void main(String[] args) {    
             
 		LOGGER.info("Starting kanban app.");
 		LOGGER.info("Setting look and feel.");
@@ -74,10 +65,32 @@ public class Kanban {
 				new CardCreateView().getComponent();
 			}
 		});
+                
+                JMenuItem loadBoard = new JMenuItem("Load Board");
+                loadBoard.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                               FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
+                               chooser = new JFileChooser();
+                               chooser.addChoosableFileFilter(filter);
+                               
+                                  int x = chooser.showOpenDialog(null);
+        
+                                if(x == JFileChooser.APPROVE_OPTION)
+                                {  
+                                    //chooser.getSelectedFile().getName();
+                                    BoardView boardView = new BoardView();
+                                    BoardController bc = new BoardController(boardView);
+                                    bc.createBoard(chooser.getSelectedFile().getName());
+                                    
+                                }
+                            
+			}
+                });
 		
 		JMenu file = new JMenu("File");
 		file.add(board_preferences);
 		file.add(card_preferences);
+                file.add(loadBoard);
 		
 		JMenuBar menubar = new JMenuBar();
 		menubar.add(file);
@@ -99,4 +112,6 @@ public class Kanban {
 		frame.add(pane);
 		frame.setVisible(true);
 	}
+        
+        
 }
