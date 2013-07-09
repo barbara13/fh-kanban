@@ -1,8 +1,32 @@
-# Architekturdokumentation
+﻿# Architekturdokumentation
 
 # 1. Einführung und Ziele
 
 ## 1.1. Aufgabenstellung
+Kanbanerstellung mit folgenden anforderungen:
++ Create new kanban boards
++ Open board
++ Save board
++ Save board as…
++ Export to html
+++ Save boards as…
++ Export backlog to csv, pdf
++ Backlogs displays cards in 3 columns grid 
++ Backlog can be sorted by creation time (default), headline, value, size
+++ Backlog can be sorted by creation time (default), headline, value, size
++ Full text search backlog and board by headline, description, CoS, size, value
++ Store board as xml
++ Card properties (uuid, headline, description, size, value, created, started, finished)
+++ Classes of Service (CoS) (Fixed date, standard, intagible, expedite) 
+++ Cards can be created, edited and deleted
++ CoS (Fixed date, standard, intangible, expedite)
++ Classes of Services (CoS) (Fixed date, standard, intangible, expedite) 
+++ Move cards between adjacent columns (supress invalid moves (backward, skipping columns,...))
++ Preferences dialog for colors, name of board, columns, wips
++ Validate on wip limits
++ Warn user if modifications have not been saved
++ Edit dialog for card
++ Tests for allmajor parts of the application
 ## 1.2. Qualitätsziele
 ## 1.3. Stakeholder
 
