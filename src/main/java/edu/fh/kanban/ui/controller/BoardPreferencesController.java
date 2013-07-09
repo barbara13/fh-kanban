@@ -80,10 +80,11 @@ public class BoardPreferencesController extends Controller{
 				
 				//Übergabe, was im Board gespeichert wird und das Fenster wird geschlossen
 				xml.addBoard(bpv.getTxtName().getText().toString(), color);	
-				      
+				xml.addColumn("Next", "50");
 			   for(int i = 0; i < arrayindex; i++){
 				   xml.addColumn(txtColumname[i].getText().toString(), wip[i].getValue().toString());
 			   }
+                                xml.addColumn("Done", "9999");
 			   xml.createBoard();
                            bpv.dispose(); 
 			}

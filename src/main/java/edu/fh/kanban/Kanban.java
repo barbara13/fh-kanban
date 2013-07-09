@@ -16,6 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
+import edu.fh.kanban.ui.controller.BoardController;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.BoardView;
@@ -35,26 +36,7 @@ public class Kanban {
 		 * @param args
 		 */
         public static void main(String[] args) {
-            //Verbindung mit der Datenbank aufbauen
-            //DatabaseManager.createConnection();
-            
-
-            
-            //card.deleteCard(19);
-            
-            
-            
-            
-            
-            //board.loadXML("Board2.xml");
-            //board.addCardToColumn(25, 17);
-            //ArrayList  listColumn = board.readXML("Board2.xml");
-            //terator it = listColumn.iterator();
-            //System.out.println("ID: "+listColumn.get());
-            
-                    
-                    
-            
+           
 		LOGGER.info("Starting kanban app.");
 		LOGGER.info("Setting look and feel.");
 		try {
@@ -84,8 +66,17 @@ public class Kanban {
                                FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
                                JFileChooser chooser = new JFileChooser();
                                chooser.addChoosableFileFilter(filter);
-                                // Dialog zum Oeffnen von Dateien anzeigen
-                                chooser.showOpenDialog(null);
+                               
+                                  int x = chooser.showOpenDialog(null);
+        
+                                if(x == JFileChooser.APPROVE_OPTION)
+                                {  
+                                    //chooser.getSelectedFile().getName();
+                                    BoardView boardView = new BoardView();
+                                    BoardController bc = new BoardController(boardView);
+                                    bc.createBoard(chooser.getSelectedFile().getName());
+                                    
+                                }
                             
 			}
                 });
@@ -115,4 +106,6 @@ public class Kanban {
 		frame.add(pane);
 		frame.setVisible(true);
 	}
+        
+        
 }
