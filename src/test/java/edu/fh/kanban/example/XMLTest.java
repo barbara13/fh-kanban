@@ -103,8 +103,8 @@ public class XMLTest {
     
     /* Beispiel um das Board aus einer xml datei auszulesen */
     public void readBoard(){
-        XMLBoard board = new XMLBoard("Board2.xml");
-        
+        XMLBoard board = new XMLBoard();
+        board.loadXML("Board2.xml");
         listBoard = board.readBoard();
         //Auslesen des boards
         for(int i = 0; i < listBoard.size(); i++){
