@@ -72,96 +72,26 @@ public class XMLBoard extends XML{
     
 
     
-    public XMLBoard(String xmlPath){
-        try {             
-            docBuilderFactory = DocumentBuilderFactory.newInstance();             
-            docBuilder = docBuilderFactory.newDocumentBuilder();    
-            try {
-                this.xmlPath = xmlPath;
-                doc = docBuilder.parse(xmlPath);
+    public XMLBoard(){
 
-                //Column Elemente parsen
-                //columnList = doc.getElementsByTagName("column");
-            } catch (SAXException ex) {
-                Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
     }
+    
+  
           
-    public void loadXML(String xmlPath){
-        this.xmlPath = xmlPath;
-        
-        String boardName;
-        String boardColor;
-        
-        String columnName;
-        String columnWip;
-        
-        String cardName;
-        String cardDescription;
-        String cardEffort;
-        String cardValue;
-        String cardStatus;
-        
+    public void loadXML(String xmlPath) {
         try {
-            doc = docBuilder.parse (new File(xmlPath));    
-            doc.getDocumentElement().normalize();
-                
-                //Root Element parsen
-                //boardList = doc.getDocumentElement().getElementsByTagName("board");
-                boardList = doc.getElementsByTagName("board");
-                
-                boardName = getString(boardList.item(0).getAttributes().getNamedItem("name").toString());
-                boardColor = getString(boardList.item(0).getAttributes().getNamedItem("color").toString());
-                
-                //Board in de Datenbank eintragen
-                //b_id = b.insertRowAndReturn(boardName, boardColor);
-
-                columnList = doc.getElementsByTagName("column");
-                
-                //Anzahl der Columns
-                totalColumns = columnList.getLength();
-                
-                
-                for(int i = 0; i < totalColumns ; i++){
-                    cardNode = columnList.item(i);
-                    
-                    columnName = getString(columnList.item(i).getAttributes().getNamedItem("name").toString());
-                    columnWip = getString(columnList.item(i).getAttributes().getNamedItem("wip").toString());
-                    
-                    //Column in die Datenbank eintragen
-                    //co_id = co.insertRowAndReturn(b_id, columnName, Integer.parseInt(columnWip));
-                    
-                    if(cardNode.getNodeType() == Node.ELEMENT_NODE){
-                        //Card Element
-                        cardElement = (Element)cardNode;
-                        //Card Elemente parsen
-                        cardList = cardElement.getElementsByTagName("card");
-                        //Anzahl der Cards
-                        totalCards = cardList.getLength();
-                        
-                        for(int j = 0; j < totalCards ; j++){
-                                    
-                            cardName = getString(cardList.item(j).getAttributes().getNamedItem("name").toString());
-                            cardDescription = getString(cardList.item(j).getAttributes().getNamedItem("description").toString());
-                            cardEffort = getString(cardList.item(j).getAttributes().getNamedItem("effort").toString());
-                            cardValue = getString(cardList.item(j).getAttributes().getNamedItem("value").toString());
-                            cardStatus = getString(cardList.item(j).getAttributes().getNamedItem("status").toString());
-       
-                            //ca.insertRow(co_id, cardName, cardDescription, Integer.parseInt(cardEffort), Integer.parseInt(cardValue), cardStatus);
-             
-                        }
-                    }//end of if clause
-                }//end of for loop with s var
+            
+            docBuilderFactory = DocumentBuilderFactory.newInstance();             
+            docBuilder = docBuilderFactory.newDocumentBuilder();
+            this.xmlPath = xmlPath;
+            doc = docBuilder.parse(xmlPath);
+            
         } catch (SAXException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
+            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

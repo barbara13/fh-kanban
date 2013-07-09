@@ -23,15 +23,16 @@ import javax.swing.JSeparator;
 
 public class BacklogView implements View{
 	private JTextField Searchfield;
-        private BacklogController c = null;
+        private BacklogController c = new BacklogController(this);
         private JPanel panel;
         private JSeparator sep;
         private JButton[] cards= new JButton[100];
-        
+        private JLabel[] ids = new JLabel[100];
         
         
 	@Override
 	public JComponent getComponent() {
+                
             
             
                 c = new BacklogController(this);
@@ -77,6 +78,8 @@ public class BacklogView implements View{
 		Searchfield.setText("");
 		panel.add(Searchfield, "6, 2, 3, 1, right, default");
 		Searchfield.setColumns(10);
+                
+                
 
 		               
             /*    Searchfield.addKeyListener(new KeyListener(){
@@ -135,6 +138,10 @@ public class BacklogView implements View{
 
     public JButton[] getCards() {
         return cards;
+    }
+    
+    public JLabel[] getIds(){
+        return ids;
     }
 
 	

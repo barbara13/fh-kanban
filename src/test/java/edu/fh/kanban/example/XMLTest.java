@@ -22,7 +22,8 @@ public class XMLTest {
     
     /* Board erstellen */
     public void createBoard(){
-            XMLBoard board = new XMLBoard("Board99.xml");
+            XMLBoard board = new XMLBoard();
+            board.loadXML("Board99.xml");
             board.addBoard("Board99", "red");
             board.addColumn("Column1", "2");
             board.addColumn("Column2", "2");
@@ -43,7 +44,8 @@ public class XMLTest {
     
     /* Card zu einer Column bzw ein Board zuweisen */
     public void cardToColumn(){
-        XMLBoard board = new XMLBoard("Board99.xml");
+        XMLBoard board = new XMLBoard();
+        board.loadXML("Board99.xml");
         
         /* erster Parameter = Card id
          * zweiter Parameter = Column id   
@@ -53,7 +55,8 @@ public class XMLTest {
     
     /* Card in Board editieren */
     public void editCardInBoard(){
-        XMLBoard board = new XMLBoard("Board2.xml");
+        XMLBoard board = new XMLBoard();
+        board.loadXML("Board2.xml");
         
         /* erster Parameter = id der card welche geändert werden soll
          * zweiter Parameter = Attribut welcher geändert werden soll z.B. name oder description etc
