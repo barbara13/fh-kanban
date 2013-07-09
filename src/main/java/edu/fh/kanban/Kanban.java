@@ -30,7 +30,13 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Kanban {
-
+	
+	private static JFileChooser chooser;
+	
+	public JFileChooser getChooser() {
+		return chooser;
+	}
+	
 	static Logger LOGGER = Logger.getLogger(Kanban.class.getName());
 		/**
 		 * @param args
@@ -64,7 +70,7 @@ public class Kanban {
                 loadBoard.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
                                FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
-                               JFileChooser chooser = new JFileChooser();
+                               chooser = new JFileChooser();
                                chooser.addChoosableFileFilter(filter);
                                
                                   int x = chooser.showOpenDialog(null);
