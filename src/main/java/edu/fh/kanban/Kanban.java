@@ -80,8 +80,8 @@ public class Kanban {
                                     //chooser.getSelectedFile().getName();
                                     BoardView boardView = new BoardView();
                                     BoardController bc = new BoardController(boardView);
-                                    bc.createBoard(chooser.getSelectedFile().getName());
-                                    
+                                    bc.paintBoard(chooser.getSelectedFile().getName());
+                                    boardView.repaint();
                                 }
                             
 			}
