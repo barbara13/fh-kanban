@@ -118,10 +118,10 @@ public class BacklogView implements View{
 		panel.add(lblSortBy, "6, 4, right, default");
 		
 		comboBox = new JComboBox();
+		comboBox.addActionListener(c);
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Creation time", "Headline", "Value", "Size"}));
 		comboBox.setToolTipText("");
 		panel.add(comboBox, "8, 4, right, default");
-		
                 sep = new JSeparator();
                 panel.add(sep, CC.xywh(1, 5, 10, 1));
                 

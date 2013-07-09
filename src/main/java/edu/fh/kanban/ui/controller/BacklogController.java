@@ -12,6 +12,8 @@ import edu.fh.kanban.ui.view.CardView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -91,19 +93,43 @@ public class BacklogController extends Controller {
 //     }
     
     public void actionPerformed(ActionEvent e) {
-		String s = (String) blv.getCombo.getSelectedItem();
-//		System.out.println(s);
+    	listCard = xml.readCards();
+    	
+		String s = (String) blv.getSearch().getSelectedItem();
+		System.out.println(s);
 		if (s == "Creation time"){
-			System.out.println("Test");
+			for (i = 0; i < listCard.size(); i++) {
+	            //int k = 0;
+	            blv.getCards()[i] = new JButton(listCard.get(i).getName());
+	            blv.getCards()[i].addActionListener(this);
+	            blv.getIds()[i] = new JLabel(String.valueOf(listCard.get(i).getCa_id()));
+	            
+//	            Collections.sort(Name);
+
+	            //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
+
+	            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
+
+	            j++;
+	            j++;
+
+	            if (j
+	                    == 20) {
+	                k++;
+	                k++;
+	                j = 0;
+	            }
+	        }
+			
 		}
 		else if (s == "Headline"){
-			
+			System.out.println("Test2");
 		}
 		else if (s == "Value"){
-			
+			System.out.println("Test3");
 		}
 		else if (s == "Size"){
-			
+			System.out.println("Test4");
 		}
 	}
 
