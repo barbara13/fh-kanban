@@ -90,7 +90,7 @@ public class CardEditView extends JFrame{
             return tglbtnBlue;
     }
     //Konstruktor
-	public CardEditView(String headline, int cardId, String effort, String value, String description, String status){
+	public CardEditView(String headline, int cardId, int effort, int value, String description, String status){
 		super("EDIT: \"" + headline + "\"");
 		cController = new CardEditController(this);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -5,10 +5,15 @@ import javax.swing.JFrame;
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+
+import edu.fh.kanban.dao.XMLCard;
+import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.controller.CardController;
 
 import javax.swing.JLabel;
@@ -32,18 +37,22 @@ public class CardView extends JFrame implements View{
 	private CardController cController = null;
 	
 	private int cId;
-	private String effort, value, description, headline, create, start, done, status;
+	int effort, value;
+
+	private String description, headline, create, start, done, status;
 	private JButton btnAddCard, btnEdit, btnDelete, btnCancel;
+	
+    private ArrayList <Card> listCard = new ArrayList();
 
 	public int getcId() {
 		return cId;
 	}
 
-	public String getEffort() {
+	public int getEffort() {
 		return effort;
 	}
 
-	public String getValue() {
+	public int getValue() {
 		return value;
 	}
 
@@ -76,23 +85,30 @@ public class CardView extends JFrame implements View{
 	}
 
 	public CardView(int cId){
+
 		cController = new CardController(this);
 		setBounds(new Rectangle(0,0,455,300));
 		setLocationByPlatform(true);
 		setResizable(false);
 		
 		this.cId = cId;
-		//Werte werden aus der XMLCard abgefragt und an die Variablen übergeben
-//		DatenBank abfrage über die cId
-//		headline = 
-//		effort = 
-//		value = 
-//		description = 
-//		status = 
-//		create = 
-//		start = 
-//		done = 
-		
+		XMLCard card = new XMLCard();
+        listCard = card.readCards();
+
+        //Auslesen der cards
+        for(int i = 0; i < listCard.size(); i++){
+        	if(listCard.get(i).getCa_id() == cId){
+        		headline = listCard.get(i).getName();
+        		effort = listCard.get(i).getEffort();
+        		value = listCard.get(i).getValue();
+        		description = listCard.get(i).getDescription();
+        		status = listCard.get(i).getStatus();
+//        		create = listCard.get(i).getCreateDate();
+//        		start = listCard.get(i).getStartDate()
+//        		done = listCard.get(i).getDoneDate()
+        		break;
+        	}
+        }
 	}
 
 	//Methode aus der Klasse View initialsiert das Fenster und gibt getContentPane() zurück
@@ -137,9 +153,9 @@ public class CardView extends JFrame implements View{
 		getContentPane().add(new JLabel("CardID:"), "2, 2, right, top");
 		getContentPane().add(new JLabel(Integer.toString(cId)), "4, 2, left, top");
 		getContentPane().add(new JLabel("Effort:"), "10, 2, left, top");
-		getContentPane().add(new JLabel(effort), "12, 2, fill, top");
+		getContentPane().add(new JLabel(Integer.toString(effort)), "12, 2, fill, top");
 		getContentPane().add(new JLabel("Value:"), "10, 4, right, top");
-		getContentPane().add(new JLabel(value), "12, 4, left, top");
+		getContentPane().add(new JLabel(Integer.toString(value)), "12, 4, left, top");
 		getContentPane().add(new JLabel("Description"), "2, 6, 3, 1, left, top");
 		
 		JScrollPane scrollPane = new JScrollPane();
