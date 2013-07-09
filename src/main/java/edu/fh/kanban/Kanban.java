@@ -24,6 +24,9 @@ import edu.fh.kanban.ui.view.CardView;
 import edu.fh.kanban.ui.view.View;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Kanban {
 
@@ -74,10 +77,23 @@ public class Kanban {
 				new CardCreateView().getComponent();
 			}
 		});
+                
+                JMenuItem loadBoard = new JMenuItem("Load Board");
+                loadBoard.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e) {
+                               FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
+                               JFileChooser chooser = new JFileChooser();
+                               chooser.addChoosableFileFilter(filter);
+                                // Dialog zum Oeffnen von Dateien anzeigen
+                                chooser.showOpenDialog(null);
+                            
+			}
+                });
 		
 		JMenu file = new JMenu("File");
 		file.add(board_preferences);
 		file.add(card_preferences);
+                file.add(loadBoard);
 		
 		JMenuBar menubar = new JMenuBar();
 		menubar.add(file);

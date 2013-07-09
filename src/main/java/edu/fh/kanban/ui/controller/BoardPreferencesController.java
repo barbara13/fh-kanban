@@ -42,16 +42,18 @@ public class BoardPreferencesController extends Controller{
     private Object src;
     private BoardPreferencesView bpv;
     private XMLBoard xml;
+    private String color;
     
     public BoardPreferencesController(BoardPreferencesView bpv){
        this.bpv = bpv;
-       //xml = new XMLBoard();
+       xml = new XMLBoard();
     }  
     
     public void actionPerformed(ActionEvent e) {
         src = e.getSource();
         
-        if(src == bpv.getBtnSpeichern()){         
+        if(src == bpv.getBtnSpeichern()){
+                xml.loadXML(bpv.getTxtName().getText().toString() + ".xml");
 	       	boolean panelfehler = false;
 			for(int i=0; i<10; i++){                          
 				if(txtColumname[i]!= null){
@@ -68,13 +70,13 @@ public class BoardPreferencesController extends Controller{
 				if(!bpv.getTglbtnRot().isSelected() && !bpv.getTglbtnGelb().isSelected() && !bpv.getTglbtnGruen().isSelected() && !bpv.getTglbtnBlau().isSelected())	
 	              System.out.println("Mindestens eine Color MUSS selektiert sein!!!");	
 			}else if(panelfehler == false){
-				String color = new String();
+				color = new String();
 				 
 				//Abfrage, welcher "Farb"Button gedrückt wurde
-				if(bpv.getTglbtnBlau().isSelected()) color = (color + " blue ");
-				if(bpv.getTglbtnGelb().isSelected()) color = (color + " yellow ");
-				if(bpv.getTglbtnGruen().isSelected())  color = (color + " green ");
-				if(bpv.getTglbtnRot().isSelected())  color = (color + " red ");
+				if(bpv.getTglbtnBlau().isSelected()) color = (color + "blue ");
+				if(bpv.getTglbtnGelb().isSelected()) color = (color + "yellow ");
+				if(bpv.getTglbtnGruen().isSelected())  color = (color + "green ");
+				if(bpv.getTglbtnRot().isSelected())  color = (color + "red ");
 				
 				//Übergabe, was im Board gespeichert wird und das Fenster wird geschlossen
 				xml.addBoard(bpv.getTxtName().getText().toString(), color);	
@@ -82,11 +84,8 @@ public class BoardPreferencesController extends Controller{
 			   for(int i = 0; i < arrayindex; i++){
 				   xml.addColumn(txtColumname[i].getText().toString(), wip[i].getValue().toString());
 			   }
-//			   xml.createBoard(bpv.getTxtName().getText().toString());   
-			   bpv.dispose();
-
-			   //xml.createBoard(bpv.getTxtName().getText().toString());          
-
+			   xml.createBoard();
+                           bpv.dispose(); 
 			}
         }else if(src == bpv.getBtnAbbrechen()){	//Wenn Abbrechen Button gedrückt wurde, schließe das fenster
             bpv.dispose();
