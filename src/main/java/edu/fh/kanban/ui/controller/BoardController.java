@@ -16,7 +16,10 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -35,6 +38,9 @@ public class BoardController extends Controller{
     private int j = 0;
     private int k = 0;
     private int i;
+    private String[] columnNames;
+    private static TableModel tableModel;
+    private JTable table;
     
     public BoardController(BoardView bv){
        this.bv = bv;
@@ -58,29 +64,49 @@ public class BoardController extends Controller{
         listBoard = xml.readBoard();
         listColumn = xml.readColumns();
         //listCard = cxml.readCards();
-        //for (i = 0; i < listCard.size(); i++) {
-            //int k = 0;
-        //      System.out.println(listCard.get(i).getName());
-        //    bv.getCards()[i] = new JButton(listCard.get(i).getName());
-            //bv.getCards()[i].addActionListener(this);
-            //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
-            //bv.getComponent();
+        columnNames = new String[listColumn.size()];
+        
+        JLabel title = new JLabel(listBoard.get(i).getName());
+        title.setFont(new Font("Arial", Font.BOLD, 24));
+           
+      for (i = 0; i < listColumn.size(); i++) {
+           columnNames[i] = listColumn.get(i).getName().toString();
+           System.out.println(columnNames[i]);  
+           
+         }       
+        
+        
+        tableModel = new DefaultTableModel(
+            new Object [][] {
+                
+            },
+            columnNames) 
+        {
             
-            JLabel title = new JLabel(listBoard.get(i).getName());
-            title.setFont(new Font("Arial", Font.BOLD, 24));
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             
-            bv.getBpanel().add(title, CC.xy(2 , 2));
-            
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
+           public Class getColumnClass(int columnIndex) {
+               return types [columnIndex];
+           }
 
-            j++;
-            j++;
-
-            if (j
-                    == 20) {
-                k++;
-                k++;
-                j = 0;
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
+        };
+        
+        table = new JTable(tableModel);
+     
+        JScrollPane scrollPane = new JScrollPane(table);
+        table.setFillsViewportHeight(true);   
+        
+        //An das Board Panel binden
+        bv.getBpanel().add(scrollPane, CC.xywh(2, 6, 9, 10));
+        bv.getBpanel().add(title, CC.xy(2 , 2));
         }
     }
