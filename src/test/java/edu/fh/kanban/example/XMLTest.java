@@ -28,7 +28,7 @@ public class XMLTest {
             board.addColumn("Column1", "2");
             board.addColumn("Column2", "2");
             //Muss ausgeführt werden um die xml Datei zu erstellen
-            board.createBoard();
+            //board.createBoard();
     }
     
     /* Card erstellen */

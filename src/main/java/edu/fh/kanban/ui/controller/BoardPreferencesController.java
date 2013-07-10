@@ -90,7 +90,7 @@ public class BoardPreferencesController extends Controller{
 				   xml.addColumn(txtColumname[i].getText().toString(), wip[i].getValue().toString());
 			   }
                                 xml.addColumn("Done", "9999");
-			   xml.createBoard();
+			   xml.createBoard(bpv.getTxtName().getText().toString() + ".xml");
                            bpv.dispose(); 
 			}
         }else if(src == bpv.getBtnAbbrechen()){	//Wenn Abbrechen Button gedrückt wurde, schließe das fenster
