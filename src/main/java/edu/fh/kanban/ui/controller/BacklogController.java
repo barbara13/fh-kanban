@@ -107,18 +107,23 @@ public class BacklogController extends Controller{
 		
 		if (s == "Creation time"){
 			
-			k=0;
-			j=0;
+			Collections.addAll(listCard);
+			System.out.println(listCard);
+			
+			k=2;
+			j=2;
 			
 			listCard = xml.readCards();
-
+//			blv.getPanel().removeAll();
+			blv.getPanel().revalidate();
+			
 	        for (i = 0; i < listCard.size(); i++) {
 	            
 	            blv.getCards()[i] = new JButton(String.valueOf(listCard.get(i).getCa_id())+": "+listCard.get(i).getName());
 	            blv.getCards()[i].addActionListener(this);
 	            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
 	            
-
+	            
 	            j++;
 	            j++;
 
@@ -130,7 +135,7 @@ public class BacklogController extends Controller{
 	        }
 		}
 		else if (s == "Headline"){
-		
+			System.out.println("Test2");
 		}
 		else if (s == "Value"){
 			System.out.println("Test3");
@@ -139,6 +144,10 @@ public class BacklogController extends Controller{
 			System.out.println("Test4");
 		}
 	}*/
+
+
+    
+
 
         
     
