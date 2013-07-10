@@ -18,8 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JSeparator;
 
-
-
+/**
+*
+* @author Lorenz
+*/
 
 public class BacklogView implements View{
 		private JTextField searchfield;
@@ -31,6 +33,9 @@ public class BacklogView implements View{
         private JComboBox comboBox;
         
         
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	public JComponent getComponent() {
                 
@@ -77,7 +82,7 @@ public class BacklogView implements View{
 		
 		searchfield = new JTextField();
 		searchfield.setText("");
-		//searchfield.addKeyListener(c);
+//		searchfield.addKeyListener(c);
 		panel.add(searchfield, "6, 2, 3, 1, right, default");
 		searchfield.setColumns(10);
                 

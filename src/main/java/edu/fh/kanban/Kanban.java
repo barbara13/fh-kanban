@@ -31,7 +31,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.w3c.dom.Element;
 
 public class Kanban {
-
+	
+	private static JFileChooser chooser;
+	
+	public JFileChooser getChooser() {
+		return chooser;
+	}
+	
 	static Logger LOGGER = Logger.getLogger(Kanban.class.getName());
 		/**
 		 * @param args
@@ -84,7 +90,7 @@ public class Kanban {
 		JMenuItem board_preferences = new JMenuItem("Board Prenferences");
 		board_preferences.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new BoardPreferencesView().setVisible(true);
+				new BoardPreferencesView().getComponent();
 			}
 		});
 		
@@ -99,7 +105,7 @@ public class Kanban {
                 loadBoard.addActionListener(new ActionListener(){
                         public void actionPerformed(ActionEvent e) {
                                FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
-                               JFileChooser chooser = new JFileChooser();
+                               chooser = new JFileChooser();
                                chooser.addChoosableFileFilter(filter);
                                
                                   int x = chooser.showOpenDialog(null);
@@ -109,8 +115,8 @@ public class Kanban {
                                     //chooser.getSelectedFile().getName();
                                     BoardView boardView = new BoardView();
                                     BoardController bc = new BoardController(boardView);
-                                    bc.createBoard(chooser.getSelectedFile().getName());
-                                    
+                                    bc.paintBoard(chooser.getSelectedFile().getName());
+                                    boardView.repaint();
                                 }
                             
 			}
