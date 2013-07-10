@@ -11,6 +11,7 @@ import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Column;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.view.BoardView;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -57,17 +58,18 @@ public class BoardController extends Controller{
         listBoard = xml.readBoard();
         listColumn = xml.readColumns();
         //listCard = cxml.readCards();
-        
         //for (i = 0; i < listCard.size(); i++) {
             //int k = 0;
         //      System.out.println(listCard.get(i).getName());
         //    bv.getCards()[i] = new JButton(listCard.get(i).getName());
             //bv.getCards()[i].addActionListener(this);
             //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
-            JLabel label = new JLabel("Test");
+            //bv.getComponent();
             
-            //bv.getTitle().setText("fsfe");
-            bv.getBpanel().add(label, CC.xy(3 , 3));
+            JLabel title = new JLabel(listBoard.get(i).getName());
+            title.setFont(new Font("Arial", Font.BOLD, 24));
+            
+            bv.getBpanel().add(title, CC.xy(2 , 2));
             
 
 

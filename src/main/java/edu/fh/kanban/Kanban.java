@@ -33,7 +33,12 @@ import org.w3c.dom.Element;
 public class Kanban {
 	
 	private static JFileChooser chooser;
-	
+	private static JTabbedPane pane;
+
+        public JTabbedPane getPane() {
+        return pane;
+        }
+        
 	public JFileChooser getChooser() {
 		return chooser;
 	}
@@ -106,17 +111,14 @@ public class Kanban {
                         public void actionPerformed(ActionEvent e) {
                                FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
                                chooser = new JFileChooser();
+                               BoardView boardView = new BoardView();
                                chooser.addChoosableFileFilter(filter);
                                
                                   int x = chooser.showOpenDialog(null);
         
                                 if(x == JFileChooser.APPROVE_OPTION)
                                 {  
-                                    //chooser.getSelectedFile().getName();
-                                    BoardView boardView = new BoardView();
-                                    BoardController bc = new BoardController(boardView);
-                                    bc.paintBoard(chooser.getSelectedFile().getName());
-                                    boardView.repaint();
+                                    boardView.getComponent();
                                 }
                             
 			}
@@ -133,9 +135,9 @@ public class Kanban {
 		View backlogView = new BacklogView();
 		View boardView = new BoardView();
 	
-		JTabbedPane pane = new JTabbedPane();
+		pane = new JTabbedPane();
 		pane.addTab("Backlog", backlogView.getComponent());
-		pane.addTab("Board", boardView.getComponent());
+		//pane.addTab("Board", boardView.getComponent());
                                 
 		JFrame frame = new JFrame();
 		frame.setJMenuBar(menubar);
