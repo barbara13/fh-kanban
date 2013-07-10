@@ -28,6 +28,7 @@ import java.util.Iterator;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.w3c.dom.Element;
 
 public class Kanban {
 
@@ -36,7 +37,41 @@ public class Kanban {
 		 * @param args
 		 */
         public static void main(String[] args) {    
+    
+            XMLBoard board = new XMLBoard();
+            XMLCard card = new XMLCard();
             
+            /*
+            card.addCard("Card", "fff", "2", "3", "Fixed");
+            card.addCard("Card2", "fff", "2", "3", "Fixed");
+            card.addCard("Card3", "fff", "2", "3", "Fixed");
+            */
+            
+            /*
+            board.addBoard("test2", "d");
+            board.addNewColumn("test", "d");
+            board.addNewColumn("Hallo", "3");
+            board.createBoard("board5.xml");
+            */
+            
+            board.loadXML("board5.xml");
+            //board.addCardToBoard(46);
+            //board.addCardToBoard(42);
+            //board.forwardCard(43);
+            
+            //board.createNewBoard();
+            //Element el = board.searchCard(29);
+            //System.out.println(el.g));
+            //board.forwardCard(29);
+            //ArrayList list = board.readBoard();
+            
+            
+            //board.forwardCard(22);
+            //board.addBoard("test", "Red");
+            //board.addNewColumn("Penis", "2");
+            //board.addColumn("ddd", "f");
+            //board.createBoard();
+                    
 		LOGGER.info("Starting kanban app.");
 		LOGGER.info("Setting look and feel.");
 		try {

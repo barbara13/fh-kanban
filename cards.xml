@@ -3,4 +3,4 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 --><cards>
     
-<card ca_id="26" co_id="0" description="Hallo Test" effort="45" name="Test" status="Expedite" value="12"/><card ca_id="27" co_id="0" description="Hallo 2. Test" effort="45" name="Test 2" status="Intangible" value="75"/><card ca_id="28" co_id="0" description="sddsa" effort="23" name="Test11" status="Expedite" value="3"/><card ca_id="29" co_id="0" description="Beschreinung" effort="2" name="Card1" status="Fixed" value="3"/><card ca_id="30" co_id="0" description="Beschreinung" effort="5" name="Card2" status="Fixed" value="2"/><card ca_id="31" co_id="0" description="Beschreinung" effort="8" name="Card3" status="Fixed" value="2"/></cards>
+<card ca_id="44" co_id="0" description="fff" effort="2" name="Card" status="Fixed" value="3"/><card ca_id="45" co_id="0" description="fff" effort="2" name="Card2" status="Fixed" value="3"/></cards>

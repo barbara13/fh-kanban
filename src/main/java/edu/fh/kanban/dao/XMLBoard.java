@@ -43,8 +43,10 @@ public class XMLBoard extends XML{
     
     private Element rootElement;
     private Element columnElement;
+    private Element subColumnElement1;
+    private Element subColumnElement2;
     private Element cardElement;
-    private Element searchedElement;
+    private Element searchedElement = null;
     
     private Node cardNode = null;
     
@@ -58,7 +60,6 @@ public class XMLBoard extends XML{
     
     private  Iterator it = listColumn.iterator();
     
-    
     private int totalColumns;
     private int totalCards;
     
@@ -66,14 +67,25 @@ public class XMLBoard extends XML{
     
     private int b_id;
     private int co_id;
+    private int ca_id;
     
     private int rootCount = 0;
     private Attr attr;
+    private Attr attr1;
+    private Attr attr2;//
     
-
+    private DocumentBuilderFactory docFactory;
+    //private Document doc;
     
     public XMLBoard(){
-
+        try {
+            docBuilderFactory = DocumentBuilderFactory.newInstance();          
+            docBuilder = docBuilderFactory.newDocumentBuilder();
+            doc = docBuilder.newDocument();
+   
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
     
@@ -81,17 +93,13 @@ public class XMLBoard extends XML{
           
     public void loadXML(String xmlPath) {
         try {
-            
-            docBuilderFactory = DocumentBuilderFactory.newInstance();             
-            docBuilder = docBuilderFactory.newDocumentBuilder();
             this.xmlPath = xmlPath;
-            doc = docBuilder.parse(xmlPath);
+            doc = docBuilder.parse (new File(xmlPath));
+            doc.getDocumentElement().normalize();
             
         } catch (SAXException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -131,8 +139,8 @@ public class XMLBoard extends XML{
     
     public void addBoard(String name, String color){  		
         //Wenn kein root existiert
-        if(rootCount < 1){
-            
+        
+            //doc = docBuilder.newDocument();
             pk = new XML_Pk();
             
             // root elements
@@ -155,12 +163,87 @@ public class XMLBoard extends XML{
             attr.setValue(color);
             rootElement.setAttributeNode(attr);    
             
-            rootCount++;
             
-        }
+            
+        
 
 
     }
+    
+    public void addNewColumn(String name, String wip){
+       
+        columnElement = doc.createElement("columns");
+        subColumnElement1 = doc.createElement("column");
+        subColumnElement2 = doc.createElement("column");
+        
+        rootElement.appendChild(columnElement);
+        columnElement.appendChild(subColumnElement1);
+        columnElement.appendChild(subColumnElement2);
+        
+        /* Attribut co_id hinzufügen */
+        //Column
+        attr = doc.createAttribute("co_id");
+        attr.setValue(String.valueOf(pk.getCo_id()));
+        pk.setCo_id();
+        columnElement.setAttributeNode(attr);
+        //SubColumn1
+        attr1 = doc.createAttribute("co_id");
+        attr1.setValue(String.valueOf(pk.getCo_id()));
+        pk.setCo_id();
+        subColumnElement1.setAttributeNode(attr1);
+        //SubColumn2
+        attr2 = doc.createAttribute("co_id");
+        attr2.setValue(String.valueOf(pk.getCo_id()));
+        pk.setCo_id();
+        subColumnElement2.setAttributeNode(attr2);
+        
+        
+        /* Attribut b_id hinzufügen */
+        //Column
+        attr = doc.createAttribute("b_id");
+        attr.setValue(String.valueOf(pk.getB_id()));
+        columnElement.setAttributeNode(attr);
+        //SubColumn1
+        attr1 = doc.createAttribute("b_id");
+        attr1.setValue(String.valueOf(pk.getB_id()));
+        subColumnElement1.setAttributeNode(attr1);
+        //SubColumn2
+        attr2 = doc.createAttribute("b_id");
+        attr2.setValue(String.valueOf(pk.getB_id()));
+        subColumnElement2.setAttributeNode(attr2);
+        
+        /* Attribut name hinzufügen */
+        //Column
+        attr = doc.createAttribute("name");
+        attr.setValue(name);
+        columnElement.setAttributeNode(attr);
+        //SubColumn1
+        attr1 = doc.createAttribute("name");
+        attr1.setValue("Do");
+        subColumnElement1.setAttributeNode(attr1);
+        //SubColumn2
+        attr2 = doc.createAttribute("name");
+        attr2.setValue("Done");
+        subColumnElement2.setAttributeNode(attr2);
+        
+        /* Attribut wip hinzufügen */
+        //SubColumn
+        attr = doc.createAttribute("wip");
+        attr.setValue(wip);
+        columnElement.setAttributeNode(attr);
+        //SubColumn1
+        attr1 = doc.createAttribute("wip");
+        attr1.setValue(wip);
+        subColumnElement1.setAttributeNode(attr1);
+        //SubColumn2
+        attr2 = doc.createAttribute("wip");
+        attr2.setValue(wip);
+        subColumnElement2.setAttributeNode(attr2);
+        
+        //pk.setCo_id();
+    }
+    
+
     
     public void addColumn(String name, String wip){
         columnElement = doc.createElement("column");
@@ -235,7 +318,7 @@ public class XMLBoard extends XML{
 
     
     public Element searchColumn(int co_id){
-        columnList = doc.getElementsByTagName("column");
+        columnList = doc.getElementsByTagName("columns");
         for (int i = 0; i < columnList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
             if (Integer.parseInt(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
@@ -248,10 +331,13 @@ public class XMLBoard extends XML{
     }
     
     public Element searchCard(int ca_id) {
+        //doc = docBuilder.newDocument();
         cardList = doc.getElementsByTagName("card");
+        
         for (int i = 0; i < cardList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
             if (Integer.parseInt(this.getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == ca_id) {
+                //cardList.item(i).getAttributes().getNamedItem("name");
                 searchedElement = (Element) cardList.item(i);
                 //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
                 break;
@@ -262,6 +348,7 @@ public class XMLBoard extends XML{
     }
     
     private Element getFirstColumn(){
+        //doc.getDocumentElement();
         columnList = doc.getElementsByTagName("column");
         searchedElement = (Element) columnList.item(0);
         
@@ -271,15 +358,24 @@ public class XMLBoard extends XML{
     public void addCardToBoard(int ca_id){
         columnElement = getFirstColumn();
         cardElement = xmlCard.searchCard(ca_id);
+        boolean existFirstCard = false;
+
+        //Überprüfen ob schon eine card in der ersten Column existiert
+        cardList = doc.getElementsByTagName("card");
+        for (int i = 0; i < cardList.getLength(); i++) {
+ 
+            if(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString()).equals(columnElement.getAttribute("co_id").toString())){
+                existFirstCard = true;
+            }
+        }
         
-        //Wenn die gesuchte card und column gefunden wurde
-        if(cardElement != null && columnElement != null){ 
-            
+        //Wenn die gesuchte card und column gefunden wurde oder keine firstcard exisitiert
+        if(cardElement != null && columnElement != null && existFirstCard == false){ 
+
             columnElement.appendChild(this.addCard(cardElement, columnElement.getAttribute("co_id")));
             xmlCard.deleteCard(ca_id);
             
-            this.updateXML(xmlPath);
-         
+            updateXML(xmlPath);
         }
     }
     
@@ -288,15 +384,16 @@ public class XMLBoard extends XML{
         Element newColumnElement;
         
         cardElement = searchCard(ca_id);
-        co_id = Integer.parseInt(cardElement.getAttribute("co_id"));
-        
+
+        this.ca_id = Integer.parseInt(cardElement.getAttribute("ca_id"));
         
         columnElement = searchColumn(co_id);
+        co_id = Integer.parseInt(columnElement.getAttribute("co_id"));
+        
         columnList = doc.getElementsByTagName("column");
         
         for(int i = 0; i < columnList.getLength(); i++){
             //Wenn f == false ist
-            
             if(f == false){ 
                 if(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id){
                     //f = true setzen damit im nächsten durchlauf der else Fall eintritt
@@ -307,7 +404,7 @@ public class XMLBoard extends XML{
                 newColumnElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
                 
                 newColumnElement.appendChild(this.addCard(cardElement, columnElement.getAttribute("co_id")));
-                deleteCard(ca_id);
+                //deleteCard(ca_id);
                 updateXML(xmlPath);
                 break;
             }
@@ -368,10 +465,25 @@ public class XMLBoard extends XML{
                 break;
             }
         }
-    }    
+    }   
     
-    public void createBoard(){
-        this.updateXML(xmlPath);
+    public void createNewBoard(){
+        try {
+            transformerFactory = TransformerFactory.newInstance();
+               transformer = transformerFactory.newTransformer();
+               source = new DOMSource(doc);
+               result = new StreamResult(new File(xmlPath));
+               transformer.transform(source, result);
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+
+    public void createBoard(String xmlPath){
+        updateXML(xmlPath);
         pk.setB_id();
     }
 

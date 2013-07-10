@@ -26,7 +26,7 @@ import org.xml.sax.SAXException;
  * @author Ronald
  */
 public class XML_Pk extends XML {
-    
+    //private Document doc;
     private DocumentBuilderFactory docBuilderFactory;
     private DocumentBuilder docBuilder;
 
