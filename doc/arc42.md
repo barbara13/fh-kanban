@@ -40,7 +40,7 @@ Konfigurations- und Versionsverwaltung: GitHub
 Entwicklungswerkzeuge: Java-Quelltexte werden in Eclipse oder NetBeans erstellt.
 Testwerkzeuge und -prozesse: JUnit
 
-Alle Entscheidungen für die Realisierung des Projektes wurde gemeinsam beschlossen.
+Alle Entscheidungen für die Realisierung des Projektes wurden gemeinsam beschlossen.
 
 ## 2.3. Konventionen
 Architekturdokumentation: Gliederung nach dem deutschen arc42-Template
@@ -77,7 +77,7 @@ Zugrunde liegt das MVC-Modell
 
 
 
-Die Klasse "Kanban" beinhaltet die mainfunktion, diese Initialisiert das Hauptfenster zur Programsteuerung.
+Die Klasse "Kanban" beinhaltet die mainfunktion, diese Initialisiert das Hauptfenster zur Programmsteuerung.
 
 Das Interface "View" stellt eine initMethode zu Verfügung um eine JFrame zu initialisieren.
 
@@ -102,17 +102,29 @@ Die Klasse "CardView" implementiert die View und erbt von JFrame. Diese zeigt ei
 Dieser Abschnitt beschreibt allgemeine Strukturen und Aspekte, die systemweit gelten. Darüber hinaus stellt er verschiedene technische Lösungskonzepte vor.
 
 ## 7.1 Fachliche Strukturen
-## 7.2 Typische Muster und Strukturen
-## 7.3. Ausnahme- und Fehlerbehandlung
-## 7.4. Bedienoberfläche
-## 7.5. Ergonomie
-## 7.6. Geschäftsregeln
-## 7.7. Konfiguration
-## 7.8. Logging, Protokollierung
-## 7.9. Management und Administrierbarkeit
-## 7.10. Persistenz
 
+## 7.2 Typische Muster und Strukturen
+
+## 7.3. Ausnahme- und Fehlerbehandlung
+Exception Handling.
+
+## 7.4. Bedienoberfläche
+Grafische Benutzeroberfläche mittels Swing
+
+## 7.5. Ergonomie
+
+## 7.6. Geschäftsregeln
+
+## 7.7. Konfiguration
+
+## 7.8. Logging, Protokollierung
+Auftretende Exceptions werden in einer Log File gespeichert.
+
+## 7.9. Management und Administrierbarkeit
+
+## 7.10. Persistenz
 Speicherung aller relevanten Daten in XML Dateien.
 
 ## 7.11. Plausibilisierung und Validierung
+
 ## 7.12. Transaktionsbehandlung
