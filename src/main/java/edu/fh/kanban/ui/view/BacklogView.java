@@ -36,7 +36,7 @@ public class BacklogView implements View{
         private JButton[] cards= new JButton[100];
         private JLabel[] ids = new JLabel[100];
         private JComboBox comboBox;
-        
+        private int i = 0;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -94,7 +94,7 @@ public class BacklogView implements View{
                 
 
 		               
-            /*    Searchfield.addKeyListener(new KeyListener(){
+                searchfield.addKeyListener(new KeyListener(){
 
                 @Override
                 public void keyTyped(KeyEvent e) {
@@ -108,22 +108,26 @@ public class BacklogView implements View{
 
                 @Override
                 public void keyReleased(KeyEvent e) {
-                    if(Searchfield.getText().toString().regionMatches(true, 0, button.getText().toString() , 0, 1)){
-                        button.setVisible(true);
-                    }
-                    else {
-                        button.setVisible(false);
-                    }
+                if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+                    i--;
+                    i--;
+                } 
                 
-                if(Searchfield.getText().toString().equals(""))
+                if(searchfield.getText().toString().regionMatches(true, 0+ i, cards[0].getText().toString() , 0 + i, 1)){
+                        cards[0].setVisible(true);
+                        i++;
+                    }
+                else {
+                        cards[0].setVisible(false);
+                        i++;
+                    }
+                if(searchfield.getText().toString().equals(""))
                 {
-                    button.setVisible(true);
+                    i = 0;
+                    cards[0].setVisible(true);
                 }
-                }
-                
-                 
-            
-        });*/
+                }  
+        });
                                 
 		JLabel lblSortBy = new JLabel("Sort by");
 		panel.add(lblSortBy, "6, 4, right, default");

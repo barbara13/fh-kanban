@@ -34,7 +34,7 @@ public class Kanban {
 	
 	private static JFileChooser chooser;
 	private static JTabbedPane pane;
-        
+        private static boolean firstBoard = true;
         public static String xmlPath = null;
         
         public JTabbedPane getPane() {
@@ -113,16 +113,23 @@ public class Kanban {
                         public void actionPerformed(ActionEvent e) {
                                FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
                                chooser = new JFileChooser();
-                               BoardView boardView = new BoardView();
                                chooser.addChoosableFileFilter(filter);
-                               
+                               BoardView boardView = new BoardView();
                                   int x = chooser.showOpenDialog(null);
         
                                 if(x == JFileChooser.APPROVE_OPTION)
                                 {   
                                     xmlPath  = chooser.getSelectedFile().getPath();
                                     xmlPath = xmlPath.replaceAll("\\\\", "\\\\\\\\");
-                                    boardView.getComponent();
+                                    //boardView.getComponent();
+                                    if(firstBoard == true){
+                                    pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), boardView.getComponent());
+                                    firstBoard = false;
+                                     }
+                                    else if(firstBoard == false){
+                                    pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), boardView.getComponent());
+                                    pane.removeTabAt(1);
+                                    }
                                 }
                             
 			}

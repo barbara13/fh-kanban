@@ -31,7 +31,6 @@ import javax.swing.table.TableModel;
 public class BoardController extends Controller{
     private Object src;
     private BoardView bv;
-    private Kanban kbn;
     private XMLBoard xml;
     private XMLCard cxml;
     private ArrayList <Board> listBoard = new ArrayList();
@@ -39,16 +38,14 @@ public class BoardController extends Controller{
     private ArrayList <Card> listCard = new ArrayList();
     private int j = 0;
     private int k = 0;
-    private int i;
+    private int i = 0;
     private String[] columnNames;
     private static TableModel tableModel, tableModel2;
     private JTable tableMain, tableSub;
-    //private TableCellRenderer weirdRenderer;
     
     
     public BoardController(BoardView bv){
        this.bv = bv;
-       kbn = new Kanban();
        xml = new XMLBoard();
        cxml = new XMLCard();
     }  

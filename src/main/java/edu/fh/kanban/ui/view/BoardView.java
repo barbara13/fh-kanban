@@ -48,16 +48,6 @@ public class BoardView extends JPanel implements View {
         return searchtext;
     }
 
-    public void setLoadNewBoard(boolean loadNewBoard) {
-        this.loadNewBoard = loadNewBoard;
-    }
-
-
-
-    
-
-  
-
 private JPanel bpanel;
 private JTextField searchtext;
 private JSeparator separator;
@@ -65,7 +55,7 @@ private JScrollPane scrollPane;
 private JButton[] cards= new JButton[100];
 private JLabel[] columns = new JLabel[100];
 private boolean firstBoard = true;
-private boolean loadNewBoard = false;
+
 
 
     public JComponent getComponent() {
@@ -154,14 +144,6 @@ private boolean loadNewBoard = false;
         
         
         c.paintBoard(Kanban.xmlPath);
-        if(firstBoard == true){
-        kn.getPane().addTab("Board: " + kn.getChooser().getSelectedFile().getName().substring(0, kn.getChooser().getSelectedFile().getName().lastIndexOf(46)), bpanel);
-        firstBoard = false;
-        }
-        else if(firstBoard = false){
-        kn.getPane().removeTabAt(0);
-        kn.getPane().addTab("Board: " + kn.getChooser().getSelectedFile().getName().substring(0, kn.getChooser().getSelectedFile().getName().lastIndexOf(46)), bpanel);
-        }
         return bpanel;
        
     }
