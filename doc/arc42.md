@@ -5,28 +5,49 @@ Dieser Abschnitt führt in die Aufgabenstellung ein und skizziert die Ziele, die
 
 ## 1.1. Aufgabenstellung
 Erstellen Sie eine Swing-Anwendung, um eine Kanban-Board zu verwalten. Diese Anwendung soll die grundlegenden Funktionen für den Kanban-Prozess bieten.
+Wesentliche Features: 	Create new kanban boards
+			Open board
+			Save board
+			Save as…
+			Export to html
+			Export backlog to csv, pdf
+			Warn user if modifications have not been saved
+			Preferences dialog for colors, name of board, columns, wips
+			CoS (Fixed date, standard, intagible, expedite)
+			Card properties (uuid, headline, description, size, value, created, started, finished)
+			Validate on wip limits
+			Move cards between adjacent columns
+			Full text search backlog and board by headline, description, CoS, size, value
+			Store board as xml
+			Tests for all major parts of the application
+			Edit dialog for card
+			Backlogs displays cards in 3 columns grid
 
 # 2. Randbedingungen
-Beim Lösungsentwurf sind verschiedene Randbedingungen zu beachten. Dieser Abschnitt stellt sie dar und erklärt auch, wenn nötig, deren Motivation.
+Beim Lösungsentwurf sind verschiedene Randbedingungen zu beachten. Dieser Abschnitt stellt sie diese dar.
 
 ## 2.1. Technische Randbedingungen
-Die Programmiersprache "JAVA" wurde benutzt um das Projekt zu realisieren. Die Datenspeicherung erfolgt in einer "XML-Tabellenstruktur". Zur Standartisierung der Software wurde die "Mavenstruktur" verwendet. Als Versionsverwaltung des Projektes wird "GitHub" verwendet. Als Layoutgrundlage wurde JGoodies verwendet.
+Die Implementierung des Porgammes soll in Java erfolgen.
+Die Datenspeicherung erfolgt anhand auf dem System liegender XML Dateien. 
+Zur Standartisierung des Programmes wurde das Build-Management Tool "Maven" verwendet. 
+Als Layoutgrundlage wurde JGoodies verwendet.
 
 
 ## 2.2. Organisatorische Randbedingungen
+Team: Barbara Ploschka, Maxim Moshkov, Lorenz Gaßmann, Malte Tönjes, David Fahr
+Zeitplan: Beginn der Entwicklung 01.07.2013, Fertigstellung 14.07.2013 (Gesamtzeit 14 Tage)
+Konfigurations- und Versionsverwaltung: GitHub
+Entwicklungswerkzeuge: Java-Quelltexte werden in Eclipse oder NetBeans erstellt.
+Testwerkzeuge und -prozesse: JUnit
 
-Es gab eine Zeitvorgabe, dass das Projekt in 14 Tagen erstellt werden soll.
 Alle Entscheidungen für die Realisierung des Projektes wurde gemeinsam beschlossen.
 
-Um das Programm zu Testen wurde JUnit-Framework verwendet.
-
 ## 2.3. Konventionen
-
-Die Aufgaben für die Realisierung des Projektes wurde in der Gruppe aufgeteilt.
+Architekturdokumentation: Gliederung nach dem deutschen arc42-Template
+Sprache: Im Java-Quelltext werden englische Bezeichner für Klassen, Methoden etc. verwendet.
 
 # 3. Kontextabgrenzung
-
-Dieser Abschnitt stellt das Umfeld von DokChess dar. Für welche Benutzer ist es da, und mit welchen Fremdsystemen interagiert es?
+Dieser Abschnitt stellt das Umfeld vom Team-Projekt 2013 dar. Für welche Benutzer ist es da, und mit welchen Fremdsystemen interagiert es?
 
 ## 3.1. Fachlicher Kontext
 
