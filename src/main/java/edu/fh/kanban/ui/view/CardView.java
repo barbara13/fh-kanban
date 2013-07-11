@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+import edu.fh.kanban.Kanban;
 
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.data.Card;
@@ -173,6 +174,12 @@ public class CardView extends JFrame implements View{
 		btnAddCard = new JButton("Add Card");
 		btnAddCard.addActionListener(cController);
 		getContentPane().add(btnAddCard, "10, 14, 3, 1, fill, top");
+                if(Kanban.xmlPath == null){
+                    btnAddCard.setEnabled(false);
+                } else {
+                    btnAddCard.setEnabled(true);
+                }
+                    
 		//If Karte bereits on Board soll der Button - btnAddCard.setvivible(false);
 		
 		btnEdit = new JButton("Edit");
