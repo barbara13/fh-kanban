@@ -49,6 +49,8 @@ Sprache: Im Java-Quelltext werden englische Bezeichner für Klassen, Methoden et
 # 3. Kontextabgrenzung
 Dieser Abschnitt stellt das Umfeld vom Team-Projekt 2013 dar. Für welche Benutzer ist es da, und mit welchen Fremdsystemen interagiert es?
 
+		-- gemeinsam klären--
+
 ## 3.1. Fachlicher Kontext
 
 -> Festlegung aller1 Nachbarsysteme des betrachteten Systems mit Spezifikation aller fachlichen Daten, die mit diesen ausgetauscht werden. Zusätzlich evtl. Datenformate und Protokolle der Kommunikation mit Nachbarsystemen und der Umwelt (falls diese nicht erst bei den spezifischen Bausteinen präzisiert wird.
@@ -74,7 +76,6 @@ Zugrunde liegt das MVC-Modell
 
 # 5. Bausteinsicht
 Statische Zerlegung des Systems in Bausteine (Module, Komponenten, Subsysteme, Teilsysteme, Klassen, Interfaces, Pakete, Bibliotheken, Frameworks, Schichten, Partitionen, Tiers, Funktionen, Makros, Operationen, Datenstrukturen...) sowie deren Beziehungen.
-
 
 
 Die Klasse "Kanban" beinhaltet die mainfunktion, diese Initialisiert das Hauptfenster zur Programmsteuerung.
