@@ -51,7 +51,7 @@ public class BacklogController extends Controller{
             blv.getCards()[i].addActionListener(this);
             //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
 
-            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
+            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1, 1));
             
             
             /*
@@ -72,8 +72,7 @@ public class BacklogController extends Controller{
             j++;
             j++;
 
-            if (j
-                    == 20) {
+            if (j == 6) {
                 k++;
                 k++;
                 j = 0;
