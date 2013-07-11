@@ -237,7 +237,7 @@ public class XMLBoard extends XML{
         subColumnElement1.setAttributeNode(attr1);
         //SubColumn2
         attr2 = doc.createAttribute("wip");
-        attr2.setValue(wip);
+        attr2.setValue("9999");
         subColumnElement2.setAttributeNode(attr2);
         
         //pk.setCo_id();
@@ -283,7 +283,7 @@ public class XMLBoard extends XML{
 
         //Attribut co_id hinzufügen
         attr = doc.createAttribute("co_id");
-        attr.setValue(co_id);
+        attr.setValue(card.getAttribute("co_id"));
         newCardElement.setAttributeNode(attr);
 
         //Attribut name hinzufügen
@@ -318,6 +318,20 @@ public class XMLBoard extends XML{
 
     
     public Element searchColumn(int co_id){
+        columnList = doc.getElementsByTagName("column");
+        for (int i = 0; i < columnList.getLength(); i++) {
+            //Wenn gesuchtes Element gefunden wurde
+            if (Integer.parseInt(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+                searchedElement = (Element) columnList.item(i);
+                //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
+                break;
+            }  
+    }
+        return searchedElement;
+    }
+    
+       
+    public Element searchColumns(int co_id){
         columnList = doc.getElementsByTagName("columns");
         for (int i = 0; i < columnList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
@@ -358,19 +372,10 @@ public class XMLBoard extends XML{
     public void addCardToBoard(int ca_id){
         columnElement = getFirstColumn();
         cardElement = xmlCard.searchCard(ca_id);
-        boolean existFirstCard = false;
 
-        //Überprüfen ob schon eine card in der ersten Column existiert
-        cardList = doc.getElementsByTagName("card");
-        for (int i = 0; i < cardList.getLength(); i++) {
- 
-            if(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString()).equals(columnElement.getAttribute("co_id").toString())){
-                existFirstCard = true;
-            }
-        }
         
         //Wenn die gesuchte card und column gefunden wurde oder keine firstcard exisitiert
-        if(cardElement != null && columnElement != null && existFirstCard == false){ 
+        if(cardElement != null && columnElement != null){ 
 
             columnElement.appendChild(this.addCard(cardElement, columnElement.getAttribute("co_id")));
             xmlCard.deleteCard(ca_id);
@@ -381,46 +386,99 @@ public class XMLBoard extends XML{
     
     public void forwardCard(int ca_id){
         boolean f = false;
-        Element newColumnElement;
+        Element targetCardElement;
+        Element targetColumnElement;
         
         cardElement = searchCard(ca_id);
 
         this.ca_id = Integer.parseInt(cardElement.getAttribute("ca_id"));
-        
-        columnElement = searchColumn(co_id);
-        co_id = Integer.parseInt(columnElement.getAttribute("co_id"));
-        
+        this.co_id = Integer.parseInt(cardElement.getAttribute("co_id"));
+         
         columnList = doc.getElementsByTagName("column");
         
+        /* Es erst nach der Column gesucht in der sich die Card befindet, dann wird f == true gesetzt
+         * damit die Schleife noch einmal durchlaufen wird, dann befindet man sich in der Ziel Column
+        */
         for(int i = 0; i < columnList.getLength(); i++){
             //Wenn f == false ist
             if(f == false){ 
                 if(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id){
                     //f = true setzen damit im nächsten durchlauf der else Fall eintritt
                     f = true;
+                    
                 }
             } else{
-                //addCard(cardElement, columnList.item(i).getAttributes().getNamedItem("co_id").toString());
-                newColumnElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
                 
-                newColumnElement.appendChild(this.addCard(cardElement, columnElement.getAttribute("co_id")));
-                //deleteCard(ca_id);
+                targetColumnElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+                targetCardElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+     
+                cardElement.getAttribute("co_id");
+               
+                targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
+                deleteCard(ca_id, this.co_id);
+ 
+                editCard(Integer.parseInt(cardElement.getAttribute("ca_id")), "co_id",targetColumnElement.getAttribute("co_id"));
+            
                 updateXML(xmlPath);
                 break;
             }
-   
-        }
-        
-        
+        } 
     }
     
     public void prevCard(int ca_id){
+        boolean f = false;
+        int count = 0;
+        Element targetCardElement;
+        Element targetColumnElement;
         
+        cardElement = searchCard(ca_id);
+        
+        this.ca_id = Integer.parseInt(cardElement.getAttribute("ca_id"));
+        this.co_id = Integer.parseInt(cardElement.getAttribute("co_id"));
+        
+        columnList = doc.getElementsByTagName("column");
+
+        for(int i = columnList.getLength()-1; i >= 0; i--){
+           if(f == false){
+             if(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id){               
+                //f = true setzen damit im nächsten durchlauf der else Fall eintritt
+                //System.out.println("test");    
+                f = true;
+                     
+            }  
+           } else{
+               count++; 
+           }
+            
+            if(count == 2){
+                          
+                targetColumnElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+                targetCardElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+     
+                cardElement.getAttribute("co_id");
+                
+                deleteCard(ca_id, this.co_id);
+                targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
+                
+ 
+                editCard(Integer.parseInt(cardElement.getAttribute("ca_id")), "co_id",targetColumnElement.getAttribute("co_id"));
+            
+                updateXML(xmlPath);
+                break;
+            }
+            
+            
+        }
     }
     
        
-    public void deleteCard(int ca_id) {
+    public void deleteCard(int ca_id, int co_id) {
         cardElement = searchCard(ca_id);
+        columnElement = searchColumn(co_id);
+        System.out.println("Ca_id: "+ca_id);
+        System.out.println("Co_id: "+co_id);
+        
+        //System.out.println("CARD: "+ cardElement.getAttribute("name"));
         if (cardElement != null) {
             //Element aus der Datei löschen
             columnElement.removeChild(cardElement);

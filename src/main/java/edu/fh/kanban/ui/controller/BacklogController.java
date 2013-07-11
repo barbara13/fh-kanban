@@ -156,7 +156,8 @@ public class BacklogController extends Controller{
      
          src = e.getSource();
          id = parseId(e.getActionCommand());
-
+         cv = new CardView(id);
+         cv.getComponent();
      }
     
     private int parseId(String s){
