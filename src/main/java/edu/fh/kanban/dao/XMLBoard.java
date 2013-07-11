@@ -10,7 +10,9 @@ import edu.fh.kanban.data.Column;
 import java.awt.List;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +38,6 @@ import org.xml.sax.SAXParseException;
 public class XMLBoard extends XML{
     private DocumentBuilderFactory docBuilderFactory;
     private DocumentBuilder docBuilder; 
-   // private Document doc;
     
     private String xmlPath;
     private XMLCard xmlCard = new XMLCard();
@@ -48,8 +49,6 @@ public class XMLBoard extends XML{
     private Element cardElement;
     private Element searchedElement = null;
     
-    private Node cardNode = null;
-    
     private NodeList boardList = null;
     private NodeList columnList = null;
     private NodeList cardList = null;
@@ -58,24 +57,24 @@ public class XMLBoard extends XML{
     private ArrayList <Column> listColumn = new ArrayList();
     private ArrayList <Card> listCard= new ArrayList();
     
-    private  Iterator it = listColumn.iterator();
-    
     private int totalColumns;
     private int totalCards;
     
     private XML_Pk pk;
     
+    private SimpleDateFormat sd = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+    private String dateString; 
+    private Date date;
+    
     private int b_id;
     private int co_id;
     private int ca_id;
     
-    private int rootCount = 0;
     private Attr attr;
     private Attr attr1;
-    private Attr attr2;//
+    private Attr attr2;
     
-    private DocumentBuilderFactory docFactory;
-    //private Document doc;
+
     
     public XMLBoard(){
         try {

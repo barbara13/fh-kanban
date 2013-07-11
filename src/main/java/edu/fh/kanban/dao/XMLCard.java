@@ -103,6 +103,23 @@ public class XMLCard extends XML {
         attr = doc.createAttribute("status");
         attr.setValue(status);
         cardElement.setAttributeNode(attr);
+        
+        //Attribut Created hinzufügen
+        attr = doc.createAttribute("created");
+        attr.setValue("");
+        cardElement.setAttributeNode(attr);
+        
+        //Attribut Started hinzufügen
+        attr = doc.createAttribute("started");
+        attr.setValue("");
+        cardElement.setAttributeNode(attr);
+        
+        //Attribut Done hinzufügen
+        attr = doc.createAttribute("done");
+        attr.setValue("");
+        cardElement.setAttributeNode(attr);
+
+
 
         pk.setCa_id();
         updateXML(xmlPath);
