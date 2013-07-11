@@ -33,7 +33,7 @@ public class CardController extends Controller {
         src = e.getSource();
 
         if (src == cView.getBtnAddCard()) {
-            xmlb.loadXML("board5.xml");	//Hier Statischen Pfad
+            xmlb.loadXML("C:\\Users\\Ronald\\Documents\\NetBeansProjects\\fh-kanban\\board5.xml");	//Hier Statischen Pfad
             xmlb.addCardToBoard(cView.getcId());
         } else if (src == cView.getBtnEdit()) {
             new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription(), cView.getStatus());

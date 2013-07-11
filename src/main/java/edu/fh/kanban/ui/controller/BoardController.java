@@ -62,7 +62,7 @@ public class BoardController extends Controller{
         xml.loadXML(name);
           
         listBoard = xml.readBoard();
-        listColumn = xml.readMainColumns();
+        listColumn = xml.readSubColumns();
         //listCard = cxml.readCards();
         columnNames = new String[listColumn.size()];
         

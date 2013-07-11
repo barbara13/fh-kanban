@@ -115,7 +115,7 @@ public class XMLBoard extends XML{
         return listBoard;
     }
     
-    public ArrayList readMainColumns(){     
+    public ArrayList readSubColumns(){     
         listColumn.clear();
         columnList = doc.getElementsByTagName("column");
         
@@ -126,7 +126,7 @@ public class XMLBoard extends XML{
         return listColumn;
     }
     
-        public ArrayList readSubColumns(){     
+        public ArrayList readMainColumns(){     
         listColumn.clear();
         columnList = doc.getElementsByTagName("columns");
         
