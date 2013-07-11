@@ -6,7 +6,9 @@ package edu.fh.kanban.dao;
 
 import edu.fh.kanban.data.Card;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -37,8 +39,10 @@ public class XMLCard extends XML {
     private Attr attr;
     
     private ArrayList <Card> listCard= new ArrayList();
-
    
+    private SimpleDateFormat sd = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+    private String dateString; 
+    private Date date;
     
     public XMLCard() {
         try {
@@ -106,7 +110,7 @@ public class XMLCard extends XML {
         
         //Attribut Created hinzufügen
         attr = doc.createAttribute("created");
-        attr.setValue("");
+        attr.setValue(sd.format(new Date()));
         cardElement.setAttributeNode(attr);
         
         //Attribut Started hinzufügen
@@ -164,13 +168,14 @@ public class XMLCard extends XML {
             }
         }
     } 
+    
         
     public ArrayList readCards(){     
         listCard.clear();
         cardList = doc.getElementsByTagName("card");
         
         for(int i = 0; i < cardList.getLength() ; i++){
-            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString())));
+            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString())));
          }
         return listCard;
     }

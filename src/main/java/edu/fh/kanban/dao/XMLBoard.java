@@ -62,10 +62,6 @@ public class XMLBoard extends XML{
     
     private XML_Pk pk;
     
-    private SimpleDateFormat sd = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    private String dateString; 
-    private Date date;
-    
     private int b_id;
     private int co_id;
     private int ca_id;
@@ -141,7 +137,7 @@ public class XMLBoard extends XML{
         cardList = doc.getElementsByTagName("card");
         
         for(int i = 0; i < cardList.getLength() ; i++){
-            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString())));
+            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString())));
          }
         return listCard;
     }    

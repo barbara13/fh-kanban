@@ -16,8 +16,11 @@ public class Card {
     private int effort;
     private int value;
     private String status;
+    private String createdDate;
+    private String startedDate;
+    private String doneDate;
 
-    public Card(int ca_id, int co_id, String name, String description, int effort, int value, String status) {
+    public Card(int ca_id, int co_id, String name, String description, int effort, int value, String status, String createdDate) {
         this.ca_id = ca_id;
         this.co_id = co_id;
         this.name = name;
@@ -25,6 +28,7 @@ public class Card {
         this.effort = effort;
         this.value = value;
         this.status = status;
+        this.createdDate = createdDate;
     }
 
     public int getCa_id() {
@@ -53,6 +57,18 @@ public class Card {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public String getStartedDate() {
+        return startedDate;
+    }
+
+    public String getDoneDate() {
+        return doneDate;
     }
     
     
