@@ -115,9 +115,20 @@ public class XMLBoard extends XML{
         return listBoard;
     }
     
-    public ArrayList readColumns(){     
+    public ArrayList readMainColumns(){     
         listColumn.clear();
         columnList = doc.getElementsByTagName("column");
+        
+        for(int i = 0; i < columnList.getLength() ; i++){
+            listColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));       
+        }
+        
+        return listColumn;
+    }
+    
+        public ArrayList readSubColumns(){     
+        listColumn.clear();
+        columnList = doc.getElementsByTagName("columns");
         
         for(int i = 0; i < columnList.getLength() ; i++){
             listColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));       

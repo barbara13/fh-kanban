@@ -48,7 +48,7 @@ public class Data {
         }
         
         else if(type.equals("column")){
-            listColumn = board.readColumns();
+            listColumn = board.readMainColumns();
         }
         
         else if(type.equals("card")){   

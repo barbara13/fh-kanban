@@ -3,4 +3,4 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 --><cards>
     
-<card ca_id="44" co_id="0" description="fff" effort="2" name="Card" status="Fixed" value="3"/><card ca_id="45" co_id="0" description="fff" effort="2" name="Card2" status="Fixed" value="3"/></cards>
+</cards>

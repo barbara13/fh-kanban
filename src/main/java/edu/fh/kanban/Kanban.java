@@ -34,7 +34,9 @@ public class Kanban {
 	
 	private static JFileChooser chooser;
 	private static JTabbedPane pane;
-
+        
+        public static String xmlPath;
+        
         public JTabbedPane getPane() {
         return pane;
         }
@@ -65,7 +67,7 @@ public class Kanban {
             board.createBoard("board5.xml");
             */
             
-            board.loadXML("board5.xml");
+            board.loadXML("Board2.xml");
             //board.addCardToBoard(46);
             //board.addCardToBoard(42);
             //board.forwardCard(43);
@@ -119,6 +121,7 @@ public class Kanban {
                                 if(x == JFileChooser.APPROVE_OPTION)
                                 {  
                                     boardView.getComponent();
+                                    xmlPath = chooser.getSelectedFile().getPath();
                                 }
                             
 			}
