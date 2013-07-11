@@ -67,7 +67,7 @@ public class Kanban {
             board.createBoard("board5.xml");
             */
             
-            board.loadXML("Board2.xml");
+            //board.loadXML("Board2.xml");
             //board.addCardToBoard(46);
             //board.addCardToBoard(42);
             //board.forwardCard(43);

@@ -61,7 +61,17 @@ public class CardEditController implements ActionListener, KeyListener {
                 } else {
                     cEditView.getTxtValue().setBackground(Color.WHITE);
                 }
-            } else {
+                if (cEditView.getTextDescription().getText().isEmpty()) {
+                    cEditView.getTextDescription().setBackground(Color.RED);
+                } else {
+                    cEditView.getTextDescription().setBackground(Color.WHITE);
+                }
+            } else {   
+                card.editCard(cEditView.getCId(), "name", cEditView.getTxtHeadline().getText().toString());
+                card.editCard(cEditView.getCId(), "effort", cEditView.getTxtEffort().getText().toString());
+                card.editCard(cEditView.getCId(), "value", cEditView.getTxtValue().getText().toString());
+                card.editCard(cEditView.getCId(), "description", cEditView.getTextDescription().getText().toString());
+                card.editCard(cEditView.getCId(), "status", status);
                 cEditView.dispose();
                 //Datenbank Eintrag ändern der cId --> cEditView.getCId()
             }
