@@ -20,6 +20,7 @@ public class CardController extends Controller {
 
     private Object src;
     private CardView cView;
+    private CardEditView ceView;
     private XMLCard xml;
     private XMLBoard xmlb;
 
@@ -37,8 +38,9 @@ public class CardController extends Controller {
             xmlb.addCardToBoard(cView.getcId());
             cView.dispose();
         } else if (src == cView.getBtnEdit()) {
-            new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription(), cView.getStatus());
-            cView.dispose();
+            ceView = new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription(), cView.getStatus());
+                ceView.getComponent();
+            //cView.dispose();
         } else if (src == cView.getBtnDelete()) {
             xml.deleteCard(cView.getcId());
             cView.dispose();

@@ -1,5 +1,6 @@
 package edu.fh.kanban.ui.controller;
 
+import edu.fh.kanban.Kanban;
 import edu.fh.kanban.dao.XMLBoard;
 import edu.fh.kanban.ui.view.BoardPreferencesView;
 import java.awt.Color;
@@ -57,6 +58,7 @@ public class BoardPreferencesController extends Controller {
 
         if (src == bpv.getBtnSpeichern()) {
             boolean panelfehler = false;
+            xml.loadXML(Kanban.xmlPath);
             for (int i = 0; i < 10; i++) {
                 if (txtColumname[i] != null) {
                     if (txtColumname[i].getText().isEmpty()) {	//Abfrage wenn nichts eingetragen wurde (Name) wird das Textfeld Rot makiert

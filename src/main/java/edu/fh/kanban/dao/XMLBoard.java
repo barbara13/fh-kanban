@@ -89,6 +89,7 @@ public class XMLBoard extends XML{
     public void loadXML(String xmlPath) {
         try {
             this.xmlPath = xmlPath;
+            
             doc = docBuilder.parse (new File(xmlPath));
             doc.getDocumentElement().normalize();
             
