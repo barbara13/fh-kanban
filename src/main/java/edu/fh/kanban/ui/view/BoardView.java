@@ -154,7 +154,7 @@ private boolean loadNewBoard = false;
         
         
         c.paintBoard(Kanban.xmlPath);
-            
+       
         kn.getPane().addTab("Board: " + kn.getChooser().getSelectedFile().getName().substring(0, kn.getChooser().getSelectedFile().getName().lastIndexOf(46)), bpanel);
         
         return bpanel;

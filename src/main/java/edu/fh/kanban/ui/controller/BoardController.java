@@ -43,7 +43,7 @@ public class BoardController extends Controller{
     private String[] columnNames;
     private static TableModel tableModel, tableModel2;
     private JTable tableMain, tableSub;
-    private TableCellRenderer weirdRenderer;
+    //private TableCellRenderer weirdRenderer;
     
     
     public BoardController(BoardView bv){
@@ -57,8 +57,6 @@ public class BoardController extends Controller{
     public void actionPerformed(ActionEvent e) {
         
         src = e.getSource();
-        
-        //Getter - Methode für den Button und mit src vergleichen
    
     }
     

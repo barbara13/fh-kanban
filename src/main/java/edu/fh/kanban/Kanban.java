@@ -119,10 +119,10 @@ public class Kanban {
                                   int x = chooser.showOpenDialog(null);
         
                                 if(x == JFileChooser.APPROVE_OPTION)
-                                {  
-                                    boardView.getComponent();
+                                {   
                                     xmlPath  = chooser.getSelectedFile().getPath();
                                     xmlPath = xmlPath.replaceAll("\\\\", "\\\\\\\\");
+                                    boardView.getComponent();
                                 }
                             
 			}

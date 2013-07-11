@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 
 import edu.fh.kanban.ui.view.CardCreateView;
 import edu.fh.kanban.dao.XMLCard;
+import edu.fh.kanban.ui.view.BacklogView;
 
 
 /**
@@ -20,6 +21,7 @@ import edu.fh.kanban.dao.XMLCard;
 public class CardCreateController implements ActionListener, KeyListener{
 	private Object src;
 	private CardCreateView cCreateView;
+        private BacklogView bv;
     private XMLCard xml;
     private String status = "Standard";
 	
@@ -27,6 +29,8 @@ public class CardCreateController implements ActionListener, KeyListener{
 	public CardCreateController(CardCreateView cCreateView){
 		this.cCreateView = cCreateView;
         xml = new XMLCard();
+        bv = new BacklogView();
+        
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -63,6 +67,7 @@ public class CardCreateController implements ActionListener, KeyListener{
 	            xml.addCard(cCreateView.getTxtHeadline().getText().toString(), cCreateView.getTextDescription().getText().toString(), cCreateView.getTxtEffort().getText().toString(), cCreateView.getTxtValue().getText().toString(), status);
 	            xml.createCard();
 	            cCreateView.dispose();
+                    bv.getComponent();
 			}
 		//Cancel Button schließt das Fenster ohne änderungen vorzunehmen
 		}else if(src == cCreateView.getBtnCancel()){
