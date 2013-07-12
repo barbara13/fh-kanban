@@ -319,6 +319,11 @@ public class XMLBoard extends XML{
         attr.setValue(card.getAttribute("status"));
         newCardElement.setAttributeNode(attr);
         
+        //Attribut Created hinzufügen
+        attr = doc.createAttribute("created");
+        attr.setValue(card.getAttribute("created"));
+        newCardElement.setAttributeNode(attr);
+        
         return newCardElement;
     }
     
@@ -386,6 +391,8 @@ public class XMLBoard extends XML{
         if(cardElement != null && columnElement != null){ 
 
             columnElement.appendChild(this.addCard(cardElement, columnElement.getAttribute("co_id")));
+            this.editCard(ca_id, "co_id", columnElement.getAttribute("co_id"));
+            
             xmlCard.deleteCard(ca_id);
             
             updateXML(xmlPath);
