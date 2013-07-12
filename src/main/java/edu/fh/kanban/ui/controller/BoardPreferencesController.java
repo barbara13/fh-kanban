@@ -58,7 +58,7 @@ public class BoardPreferencesController extends Controller {
 
         if (src == bpv.getBtnSpeichern()) {
             boolean panelfehler = false;
-            xml.loadXML(Kanban.xmlPath);
+            //xml.loadXML(Kanban.xmlPath);
             for (int i = 0; i < 10; i++) {
                 if (txtColumname[i] != null) {
                     if (txtColumname[i].getText().isEmpty()) {	//Abfrage wenn nichts eingetragen wurde (Name) wird das Textfeld Rot makiert

@@ -54,7 +54,8 @@ public class XMLBoard extends XML{
     private NodeList cardList = null;
     
     private ArrayList <Board> listBoard = new ArrayList();
-    private ArrayList <Column> listColumn = new ArrayList();
+    private ArrayList <Column> listMainColumn = new ArrayList();
+    private ArrayList <Column> listSubColumn = new ArrayList();
     private ArrayList <Card> listCard= new ArrayList();
     
     private int totalColumns;
@@ -112,25 +113,25 @@ public class XMLBoard extends XML{
     }
     
     public ArrayList readSubColumns(){     
-        listColumn.clear();
+        listSubColumn.clear();
         columnList = doc.getElementsByTagName("column");
         
         for(int i = 0; i < columnList.getLength() ; i++){
-            listColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));       
+            listSubColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));       
         }
         
-        return listColumn;
+        return listSubColumn;
     }
     
         public ArrayList readMainColumns(){     
-        listColumn.clear();
+        listMainColumn.clear();
         columnList = doc.getElementsByTagName("columns");
         
         for(int i = 0; i < columnList.getLength() ; i++){
-            listColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));       
+            listMainColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));       
         }
         
-        return listColumn;
+        return listMainColumn;
     }
     
     public ArrayList readCards(){     
