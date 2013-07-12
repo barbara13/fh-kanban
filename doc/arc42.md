@@ -53,15 +53,15 @@ Dieser Abschnitt stellt das Umfeld vom Team-Projekt 2013 dar. Für welche Benutz
 
 ## 3.1. Fachlicher Kontext
 
--> Festlegung aller1 Nachbarsysteme des betrachteten Systems mit Spezifikation aller fachlichen Daten, die mit diesen ausgetauscht werden. Zusätzlich evtl. Datenformate und Protokolle der Kommunikation mit Nachbarsystemen und der Umwelt (falls diese nicht erst bei den spezifischen Bausteinen präzisiert wird.
+--
 
 ## 3.2. Technischer Kontext
 
--> Festlegung der Kanäle zwischen Ihrem System, den Nachbarsystemen und der Umwelt
+--
 
 ## 3.3. Externe Schnittstellen
 
--> 
+--
 
 # 4. Lösungsstrategie
 
