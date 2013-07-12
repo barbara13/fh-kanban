@@ -134,7 +134,7 @@ public class XMLBoard extends XML{
         return listMainColumn;
     }
     
-    public ArrayList readCards(){     
+    public ArrayList readCards(){
         listCard.clear();
         cardList = doc.getElementsByTagName("card");
         

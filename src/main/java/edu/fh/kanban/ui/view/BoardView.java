@@ -7,9 +7,9 @@ import com.jgoodies.forms.layout.*;
 import edu.fh.kanban.Kanban;
 import edu.fh.kanban.dao.XMLBoard;
 import edu.fh.kanban.data.Board;
+import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
 import edu.fh.kanban.ui.controller.BoardController;
-import static java.awt.Component.CENTER_ALIGNMENT;
 import java.util.ArrayList;
 
 
@@ -22,6 +22,7 @@ public class BoardView extends JPanel implements View {
  private ArrayList <Column> listSubColumns = new ArrayList();
  private ArrayList <Column> listMainColumns = new ArrayList();
  private ArrayList <Board> listBoard = new ArrayList();
+ private ArrayList <Card> listCards = new ArrayList();
  
     public BoardView() {
      //BoardController im Konstruktor
@@ -105,6 +106,11 @@ private JLabel title;
         bpanel.add(title, CC.xywh(2 , 2, y , 1));
     }
 
+    public void createCards(ArrayList<Card> cards){
+        
+    }
+    
+    
     public JComponent getComponent() {
         int i = 0;
         xml.loadXML(Kanban.xmlPath);
@@ -112,12 +118,14 @@ private JLabel title;
         listBoard = xml.readBoard();
         listMainColumns = xml.readMainColumns();
         listSubColumns = xml.readSubColumns();
+        listCards = xml.readCards();
  
         bpanel = new JPanel();
         searchtext = new JTextField();
         columnSize = new String("5dlu, 50dlu, ");
         rowSize = new String("5dlu, 20dlu, ");
-        
+ 
+        System.out.println(listCards.get(0).getName());
         
         title = new JLabel(listBoard.get(i).getName());
         title.setFont(new Font("Arial", Font.BOLD, 24));

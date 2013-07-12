@@ -1,1 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><board b_id="81" color="red " name="Test123"><column b_id="81" co_id="252" name="Next" wip="50"/><columns b_id="81" co_id="253" name="12" wip="1"><column b_id="81" co_id="254" name="Do" wip="1"/><column b_id="81" co_id="255" name="Done" wip="9999"/></columns><column b_id="81" co_id="256" name="Done" wip="9999"/></board>
