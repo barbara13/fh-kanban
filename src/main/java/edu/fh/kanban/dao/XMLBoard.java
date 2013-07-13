@@ -146,7 +146,7 @@ public class XMLBoard extends XML{
     
     public ArrayList readCardsFromColumn(int co_id){
         listCard.clear();
-        listSubColumn.clear();
+        //listSubColumn.clear();
         
         cardList = doc.getElementsByTagName("card");
         columnList = doc.getElementsByTagName("column");

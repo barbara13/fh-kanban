@@ -53,28 +53,11 @@ public class BacklogController extends Controller{
 
             blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1, 1));
             
-            
-            /*
-            blv.getCards()[i].addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println();
-                    src[i] = e.getSource();
-                    
-                    if (src[i] == blv.getCards()[i]) {
-                        System.out.println("test");
-                        //System.out.println(blv.getCards()[i].getText());
 
-                    }
-                }
-            });
-            */
-
-            j++;
-            j++;
+            j+=2;
 
             if (j == 6) {
-                k++;
-                k++;
+                k+=2;
                 j = 0;
             }
         }

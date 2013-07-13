@@ -68,6 +68,9 @@ public class CardCreateController implements ActionListener, KeyListener{
 	            xml.createCard();
 	            cCreateView.dispose();
                     bv.getComponent();
+                    //bv.getPanel().repaint();
+                    //bv.getPanel().revalidate();
+                    //bv.getPanel().updateUI();
 			}
 		//Cancel Button schließt das Fenster ohne änderungen vorzunehmen
 		}else if(src == cCreateView.getBtnCancel()){
