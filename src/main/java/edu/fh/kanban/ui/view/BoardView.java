@@ -83,7 +83,7 @@ private JLabel title;
     private void showColumns(ArrayList<Column> mainColumns, ArrayList<Column> subColumns) {
         int y = 4;
 	int x = 4;
-        int columncount = 1;
+        int columncount = 0;
         int list = subColumns.size();
         JLabel NextLabel = new JLabel(subColumns.get(0).getName());
         showCards(subColumns.get(0), 2, 0);
@@ -151,8 +151,6 @@ private JLabel title;
         bpanel.setLayout(new FormLayout(getColumns(listSubColumns.size()), getRows(15)));
         
         showColumns(listMainColumns, listSubColumns);
-        //showCards();
-        
         
         return bpanel;
        
