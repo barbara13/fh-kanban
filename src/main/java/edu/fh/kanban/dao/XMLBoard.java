@@ -134,7 +134,7 @@ public class XMLBoard extends XML{
         return listMainColumn;
     }
     
-    public ArrayList readCards(){
+    public ArrayList readCards(){     
         listCard.clear();
         cardList = doc.getElementsByTagName("card");
         
@@ -143,7 +143,22 @@ public class XMLBoard extends XML{
          }
         return listCard;
     }    
-
+    
+    public ArrayList readCardsFromColumn(int co_id){
+        listCard.clear();
+        listSubColumn.clear();
+        
+        cardList = doc.getElementsByTagName("card");
+        columnList = doc.getElementsByTagName("column");
+        
+        for(int i = 0; i < cardList.getLength() ; i++){
+            if(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id){       
+                listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString())));
+            }
+        }
+        
+        return listCard;
+    }
     
     public void addBoard(String name, String color){  		
         //Wenn kein root existiert

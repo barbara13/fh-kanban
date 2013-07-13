@@ -45,26 +45,36 @@ public class HTML extends XML {
     private Element bodyTag;
     private Element tableElement;
     private Element mainTableElement;
-    private Element subTableElement;
+    //private Element subTableElement;
     private Element rowHeadElement;
     private Element rowElement;
     private Element colElement;
     private Element firstColumnElement;
     private Element lastColumnElement;
-    private ArrayList<Element> columnElements = new ArrayList();
-    private ArrayList<Element> rowElements = new ArrayList();
+    private ArrayList <Element> columnElements = new ArrayList();
+    private ArrayList <Element> rowElements = new ArrayList();
     private XMLBoard xml = new XMLBoard();
     
     
-    private Element trElement;
-    private Element tdElement;
+    private ArrayList <Element> trElement = new ArrayList();
+    private ArrayList <Element> tdElement = new ArrayList();
+    
+    private Element[] tr;
+    private Element[][] td;
+    
+    private ArrayList <Element> subTableElement = new ArrayList();
+    private ArrayList <Element> tdSubElement = new ArrayList();
+    private ArrayList <Element> trSubElement = new ArrayList();
+    
     private Attr attr;
 
     public HTML() {
         try {
+            
             docBuilderFactory = DocumentBuilderFactory.newInstance();
             docBuilder = docBuilderFactory.newDocumentBuilder();
             doc = docBuilder.newDocument();
+            
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(HTML.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,15 +95,51 @@ public class HTML extends XML {
         
         loadXML();
         
+        tr = new Element[listSubColumn.size()+2];
+        td = new Element[(listMainColumn.size()+2)*3 + listCard.size()][(listMainColumn.size()+2)*3 + listCard.size()];
         
-        for(int i = 0; i < 10; i++){
-            trElement = createTrElement(mainTableElement);
-            
-            for(int j = 0; j < listMainColumn.size(); j++){
-                tdElement = createTdElement(trElement, listMainColumn.get(j).getName());
+        
+        //Next Spalte
+        trElement.add(createTrElement(mainTableElement));
+        tdElement.add(createTdElement(trElement.get(0), listSubColumn.get(0).getName().toString()));
+        
+        //Main Spalten
+        for(int i = 0; i < listMainColumn.size(); i++){
+            tdElement.add(createTdElement(trElement.get(0), listMainColumn.get(i).getName().toString()));
+        }
+        
+        
+        trElement.add(createTrElement(mainTableElement));
+        //Platzhalter für NextSpalte
+        tdElement.add(createTdElement(trElement.get(1), " "));
+        
+        //Untertabelle Do und Done
+        for(int j = 0; j < listMainColumn.size(); j++){
+            //System.out.println("tttt");
+            //Untertabelle
+            tdElement.add(createTdElement(trElement.get(1), " "));
+            subTableElement.add(createSubTable(tdElement.get(tdElement.size()-1)));
+            trElement.add(createTrElement(subTableElement.get(j)));
+            tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Do"));
+            tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Done"));   
+        }
+        
+        
+        
+        //Done Spalte
+        tdElement.add(createTdElement(trElement.get(0), listSubColumn.get(listSubColumn.size()-1).getName().toString()));
+        
+        //Platzhalter
+        tdElement.add(createTdElement(trElement.get(trElement.size()-1), " "));
+            for(int j = 0; j < listSubColumn.size(); j++){
+                //System.out.println(listMainColumn.get(j).getName().toString());
+                //trElement = createTrElement(mainTableElement);
+                //tdElement = createTdElement(trElement, listMainColumn.get(j).getName());
             }
             
-        }
+            
+        
+        
         
         //listBoard.get(0)
 
@@ -102,7 +148,7 @@ public class HTML extends XML {
     }
 
     private void loadXML() {
-        xml.loadXML("Test123.xml");
+        xml.loadXML("NocheinTest.xml");
 
         listBoard = xml.readBoard();
         listMainColumn = xml.readMainColumns();
@@ -123,11 +169,11 @@ public class HTML extends XML {
     }
 
     private Element createSubTable(Element td) {
+        Element table;
+        table = createTable();
+        td.appendChild(table);
 
-        subTableElement = createTable();
-        subTableElement.appendChild(td);
-
-        return subTableElement;
+        return table;
         //rowElement = doc.createElement("tr");
         //colElement = doc.createElement("th");
     }
@@ -150,6 +196,7 @@ public class HTML extends XML {
         colElement = doc.createElement("td");
         tr.appendChild(colElement);
         colElement.setTextContent(name);
+        
         return colElement;
     }
 }
