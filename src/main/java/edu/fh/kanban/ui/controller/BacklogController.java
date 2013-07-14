@@ -10,13 +10,9 @@ import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.CardView;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
-
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+
 
 /**
  *
@@ -43,16 +39,17 @@ public class BacklogController extends Controller{
 
     public void showCards() {
         listCard = xml.readCards();
-
+        //blv.getPanel().removeAll();
+        
         for (i = 0; i < listCard.size(); i++) {
             //int k = 0;
-            
+            //blv.getPanel().removeAll();
             blv.getCards()[i] = new JButton(String.valueOf(listCard.get(i).getCa_id())+": "+listCard.get(i).getName());
             blv.getCards()[i].addActionListener(this);
             //JButton[listCard.size] = new JButton[i](listCard.get(i).getName());
 
             blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1, 1));
-            
+            //blv.getPanel().removeAll();
 
             j+=2;
 

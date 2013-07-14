@@ -155,9 +155,7 @@ private JLabel title;
         
         
         bpanel.setLayout(new FormLayout(getColumns(listSubColumns.size()), getRows(15)));
-        
         showColumns(listMainColumns, listSubColumns);
-        
         return bpanel;
        
     }   

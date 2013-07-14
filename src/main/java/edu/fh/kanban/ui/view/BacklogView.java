@@ -28,11 +28,11 @@ import java.util.ArrayList;
  *
  * @author Lorenz
  */
-public class BacklogView implements View {
+public class BacklogView extends JPanel implements View {
 
     private JTextField searchfield;
-    private BacklogController c = new BacklogController(this);
-    private JPanel panel;
+    private BacklogController c;
+    private JPanel panel = new JPanel();;
     private JSeparator sep;
     private JButton[] cards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
@@ -42,13 +42,18 @@ public class BacklogView implements View {
     /**
      * @wbp.parser.entryPoint
      */
+  public BacklogView() {
+     //BoardController im Konstruktor
+        c = new BacklogController(this);
+        //xml = new XMLBoard();
+        getComponents();
+    }
 
     
-    @Override
     public  JComponent getComponent() {
 
         c = new BacklogController(this);
-        panel = new JPanel();
+        
         panel.setLayout(new FormLayout(new ColumnSpec[]{
             FormFactory.RELATED_GAP_COLSPEC,
             ColumnSpec.decode("max(120dlu;pref)"),//61
@@ -136,7 +141,7 @@ public class BacklogView implements View {
 
         //JScrollBar scrollBar = new JScrollBar();
         //panel.add(scrollBar, "10, 2, 1, 13");
-
+        
         c.showCards();
         return panel;
     }

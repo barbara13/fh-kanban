@@ -1,5 +1,6 @@
 package edu.fh.kanban.ui.controller;
 
+import com.jgoodies.forms.factories.CC;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import java.awt.event.KeyListener;
 import edu.fh.kanban.ui.view.CardCreateView;
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.ui.view.BacklogView;
+import javax.swing.JButton;
 
 /**
  *
@@ -29,7 +31,6 @@ public class CardCreateController implements ActionListener, KeyListener {
         this.cCreateView = cCreateView;
         xml = new XMLCard();
         this.bv = bv;
-
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -75,14 +76,10 @@ public class CardCreateController implements ActionListener, KeyListener {
                 xml.addCard(cCreateView.getTxtHeadline().getText().toString(), cCreateView.getTextDescription().getText().toString(), cCreateView.getTxtEffort().getText().toString(), cCreateView.getTxtValue().getText().toString(), status);
                 xml.createCard();
                 cCreateView.dispose();
+                bv.getPanel().removeAll();
+                bv.getComponent();
+                bv.getPanel().updateUI();
 
-                //bv.getPanel().removeAll();
-                //bv.getPanel().repaint();
-
-                //bv.getComponent();
-                //bv.getPanel().repaint();
-                //bv.getPanel().revalidate();
-                //bv.getPanel().updateUI();
             }
             //Cancel Button schließt das Fenster ohne änderungen vorzunehmen
         } else if (src == cCreateView.getBtnCancel()) {
