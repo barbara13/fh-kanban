@@ -116,10 +116,15 @@ private JLabel title;
         
         try{  
         listCards = xml.readCardsFromColumn(column.getCo_id());
+        int k = 0;
+        System.out.println(column.getName());
+        for(int i = 0; i < listCards.size(); i++){
+        cards[i] = new JButton(String.valueOf(listCards.get(i).getCa_id())+": " + listCards.get(i).getName());
+        cards[i].addActionListener(c);
         
-        cards[columncount] = new JButton(String.valueOf(listCards.get(columncount).getCa_id())+": " + listCards.get(columncount).getName());
-        cards[columncount].addActionListener(c);
-        bpanel.add(cards[columncount], CC.xy(sameColumn, 8, CC.CENTER, CC.CENTER));
+        bpanel.add(cards[i], CC.xy(sameColumn, 8 + k, CC.CENTER, CC.CENTER));
+        k+=2;
+        }
         
         }catch (java.lang.IndexOutOfBoundsException exc){
               return;
