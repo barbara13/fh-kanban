@@ -32,12 +32,11 @@ Die Datenspeicherung erfolgt anhand auf dem System liegender XML Dateien.
 Zur Standartisierung des Programmes wurde das Build-Management Tool "Maven" verwendet. 
 Als Layoutgrundlage wurde JGoodies verwendet.
 
-
 ## 2.2. Organisatorische Randbedingungen
 Team: Barbara Ploschka, Maxim Moshkov, Lorenz Gaßmann, Malte Tönjes, David Fahr
 Zeitplan: Beginn der Entwicklung 01.07.2013, Fertigstellung 14.07.2013 (Gesamtzeit 14 Tage)
 Konfigurations- und Versionsverwaltung: GitHub
-Entwicklungswerkzeuge: Java-Quelltexte werden in Eclipse oder NetBeans erstellt.
+Entwicklungswerkzeuge: Java-Quelltexte werden in Eclipse oder NetBeans erstellt
 Testwerkzeuge und -prozesse: JUnit
 
 Alle Entscheidungen für die Realisierung des Projektes wurden gemeinsam beschlossen.
@@ -48,17 +47,15 @@ Sprache: Im Java-Quelltext werden englische Bezeichner für Klassen, Methoden et
 
 # 3. Kontextabgrenzung
 Dieser Abschnitt stellt das Umfeld vom Team-Projekt 2013 dar. Für welche Benutzer ist es da, und mit welchen Fremdsystemen interagiert es?
+Entfällt, da keine Nachbarsysteme vorhanden.
 
 ## 3.1. Fachlicher Kontext
-
 --
 
 ## 3.2. Technischer Kontext
-
 --
 
 ## 3.3. Externe Schnittstellen
-
 --
 
 # 4. Lösungsstrategie
@@ -97,7 +94,6 @@ siehe Diagramme
 
 
 # 6. Laufzeitsicht
-
 --
 
 # 7. Konzepte
