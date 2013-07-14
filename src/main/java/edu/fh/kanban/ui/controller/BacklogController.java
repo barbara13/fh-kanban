@@ -75,6 +75,8 @@ public class BacklogController extends Controller{
          id = parseId(e.getActionCommand());
          cv = new CardView(id, listCard);
          cv.getComponent();
+         cv.getBtnBackward().setVisible(false);
+         cv.getBtnForward().setVisible(false);
      }
     
     private int parseId(String s){

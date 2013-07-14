@@ -39,7 +39,7 @@ public class CardView extends JFrame implements View {
     private int cId;
     int effort, value;
     private String description, headline, create, start, done, status;
-    private JButton btnAddCard, btnEdit, btnDelete, btnCancel;
+    private JButton btnAddCard, btnEdit, btnDelete, btnCancel, btnForward, btnBackward;
     //private ArrayList<Card> listCard = new ArrayList();
 
     public int getcId() {
@@ -82,6 +82,15 @@ public class CardView extends JFrame implements View {
         return btnCancel;
     }
 
+    public JButton getBtnForward() {
+        return btnForward;
+    }
+
+    public JButton getBtnBackward() {
+        return btnBackward;
+    }
+   
+    
    /* 
     public void getBoardCards(){
         XMLCard card = new XMLCard();
@@ -194,9 +203,16 @@ public class CardView extends JFrame implements View {
         } else {
             btnAddCard.setEnabled(true);
         }
+        
+        btnForward = new JButton("Forward");
+        btnForward.addActionListener(cController);
+        getContentPane().add(btnForward, "10, 14, 3, 1, fill, top");
 
         //If Karte bereits on Board soll der Button - btnAddCard.setvivible(false);
-
+        btnBackward = new JButton("Back");
+        btnBackward.addActionListener(cController);
+        getContentPane().add(btnBackward, "8, 14, fill, top");
+                
         btnEdit = new JButton("Edit");
         btnEdit.addActionListener(cController);
         getContentPane().add(btnEdit, "8, 14, fill, top");

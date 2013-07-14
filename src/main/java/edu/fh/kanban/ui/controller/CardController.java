@@ -46,6 +46,13 @@ public class CardController extends Controller {
             cView.dispose();
         } else if (src == cView.getBtnCancel()) {
             cView.dispose();
+        } else if (src == cView.getBtnBackward()){
+            xmlb.prevCard(cView.getcId());
+            cView.dispose();
+        } else if (src == cView.getBtnForward()){
+            xmlb.forwardCard(cView.getcId());
+            cView.dispose();
         }
+            
     }
 }

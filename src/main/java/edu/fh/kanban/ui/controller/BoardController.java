@@ -52,11 +52,12 @@ public class BoardController extends Controller{
      public void actionPerformed(ActionEvent e) {
          xml.loadXML(Kanban.xmlPath);
          listCard = xml.readCards();
-         System.out.println(listCard.get(0).getName());
          src = e.getSource();
          id = parseId(e.getActionCommand());
          cv = new CardView(id, listCard);
          cv.getComponent();
+         cv.getBtnEdit().setVisible(false);
+         cv.getBtnAddCard().setVisible(false);
      }
     
     private int parseId(String s){
