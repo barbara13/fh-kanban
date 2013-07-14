@@ -122,7 +122,7 @@ private JLabel title;
         bpanel.add(cards[columncount], CC.xy(sameColumn, 8, CC.CENTER, CC.CENTER));
         
         }catch (java.lang.IndexOutOfBoundsException exc){
-              System.out.println("keine karte");
+              return;
         }
    } 
     
