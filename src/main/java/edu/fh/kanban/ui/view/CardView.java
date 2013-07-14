@@ -123,8 +123,8 @@ public class CardView extends JFrame implements View {
                 description = listCard.get(i).getDescription();
                 status = listCard.get(i).getStatus();
                 create = listCard.get(i).getCreatedDate();
-//        		start = listCard.get(i).getStartDate()
-//        		done = listCard.get(i).getDoneDate()
+        	start = listCard.get(i).getStartedDate();
+        	done = listCard.get(i).getDoneDate();
                 break;
             }
         }

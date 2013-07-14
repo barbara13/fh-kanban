@@ -67,6 +67,7 @@ public class XMLBoard extends XML {
     private int wip;
     private boolean wipCheck = false;
     private int wipCount;
+    private SimpleDateFormat sd = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
     public XMLBoard() {
         try {
@@ -99,7 +100,7 @@ public class XMLBoard extends XML {
         boardList = doc.getElementsByTagName("board");
 
         for (int i = 0; i < boardList.getLength(); i++) {
-            listBoard.add(new Board(Integer.parseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(boardList.item(i).getAttributes().getNamedItem("name").toString()), getString(boardList.item(i).getAttributes().getNamedItem("color").toString())));
+            listBoard.add(new Board(Kanban.tryParseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(boardList.item(i).getAttributes().getNamedItem("name").toString()), getString(boardList.item(i).getAttributes().getNamedItem("color").toString())));
         }
 
         return listBoard;
@@ -110,7 +111,7 @@ public class XMLBoard extends XML {
         columnList = doc.getElementsByTagName("column");
 
         for (int i = 0; i < columnList.getLength(); i++) {
-            listSubColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));
+            listSubColumn.add(new Column(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())), Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));
         }
 
         return listSubColumn;
@@ -121,7 +122,7 @@ public class XMLBoard extends XML {
         columnList = doc.getElementsByTagName("columns");
 
         for (int i = 0; i < columnList.getLength(); i++) {
-            listMainColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));
+            listMainColumn.add(new Column(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())), Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));
         }
 
         return listMainColumn;
@@ -131,8 +132,8 @@ public class XMLBoard extends XML {
         listCard.clear();
         cardList = doc.getElementsByTagName("card");
 
-        for (int i = 0; i < cardList.getLength(); i++) {
-            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())), getString(cardList.item(i).getAttributes().getNamedItem("name").toString()), getString(cardList.item(i).getAttributes().getNamedItem("description").toString()), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())), getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString())));
+        for (int i = 0; i < cardList.getLength(); i++) {      
+            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString()), getString(cardList.item(i).getAttributes().getNamedItem("started").toString()), getString(cardList.item(i).getAttributes().getNamedItem("done").toString())));
         }
         return listCard;
     }
@@ -145,9 +146,9 @@ public class XMLBoard extends XML {
         columnList = doc.getElementsByTagName("column");
 
         for (int i = 0; i < cardList.getLength(); i++) {
-            if (Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
-                listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())), getString(cardList.item(i).getAttributes().getNamedItem("name").toString()), getString(cardList.item(i).getAttributes().getNamedItem("description").toString()), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())), getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString())));
-            }
+            if (Kanban.tryParseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+                listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString()), getString(cardList.item(i).getAttributes().getNamedItem("started").toString()), getString(cardList.item(i).getAttributes().getNamedItem("done").toString())));
+           }
         }
 
         return listCard;
@@ -326,6 +327,16 @@ public class XMLBoard extends XML {
         attr = doc.createAttribute("created");
         attr.setValue(card.getAttribute("created"));
         newCardElement.setAttributeNode(attr);
+        
+        //Attribut Started hinzufügen
+        attr = doc.createAttribute("started");
+        attr.setValue(card.getAttribute("created"));
+        newCardElement.setAttributeNode(attr);
+        
+        //Attribut Started hinzufügen
+        attr = doc.createAttribute("done");
+        attr.setValue(card.getAttribute(""));
+        newCardElement.setAttributeNode(attr);
 
         return newCardElement;
     }
@@ -334,7 +345,7 @@ public class XMLBoard extends XML {
         columnList = doc.getElementsByTagName("column");
         for (int i = 0; i < columnList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
-            if (Integer.parseInt(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+            if (Kanban.tryParseInt(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
                 searchedElement = (Element) columnList.item(i);
                 //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
                 break;
@@ -347,7 +358,7 @@ public class XMLBoard extends XML {
         columnList = doc.getElementsByTagName("columns");
         for (int i = 0; i < columnList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
-            if (Integer.parseInt(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+            if (Kanban.tryParseInt(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
                 searchedElement = (Element) columnList.item(i);
                 //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
                 break;
@@ -362,7 +373,7 @@ public class XMLBoard extends XML {
 
         for (int i = 0; i < cardList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
-            if (Integer.parseInt(this.getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == ca_id) {
+            if (Kanban.tryParseInt(this.getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == ca_id) {
                 //cardList.item(i).getAttributes().getNamedItem("name");
                 searchedElement = (Element) cardList.item(i);
                 //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
@@ -391,6 +402,8 @@ public class XMLBoard extends XML {
 
             columnElement.appendChild(this.addCard(cardElement, columnElement.getAttribute("co_id")));
             this.editCard(ca_id, "co_id", columnElement.getAttribute("co_id"));
+            editCard(ca_id, "started", sd.format(new Date()));
+            
             xmlCard.deleteCard(ca_id);
 
             updateXML(xmlPath);
@@ -405,9 +418,9 @@ public class XMLBoard extends XML {
 
         cardElement = searchCard(ca_id);
 
-        this.ca_id = Integer.parseInt(cardElement.getAttribute("ca_id"));
-        this.co_id = Integer.parseInt(cardElement.getAttribute("co_id"));
-        
+        this.ca_id = Kanban.tryParseInt(cardElement.getAttribute("ca_id"));
+        this.co_id = Kanban.tryParseInt(cardElement.getAttribute("co_id"));
+
         columnList = doc.getElementsByTagName("column");
 
         /* Es erst nach der Column gesucht in der sich die Card befindet, dann wird f == true gesetzt
@@ -416,29 +429,35 @@ public class XMLBoard extends XML {
         for (int i = 0; i < columnList.getLength(); i++) {
             //Wenn f == false ist
             if (f == false) {
-                if (Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
-                    //f = true setzen damit im nächsten durchlauf der else Fall eintritt
+                if (Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+             
                     f = true;
 
                 }
             } else {
 
-                targetColumnElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
-                targetCardElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+                targetColumnElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+                targetCardElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
 
                 cardElement.getAttribute("co_id");
-                System.out.println("ID: "+targetColumnElement.getAttribute("co_id"));
+
                 if (checkWip(Kanban.tryParseInt(targetColumnElement.getAttribute("co_id"))) == true) {
                     
                     targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
                     deleteCard(ca_id, this.co_id);
-                    editCard(Integer.parseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));
-
-                    updateXML(xmlPath);
+                    editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));
                     
+                    //Überprüfen ob Done oder nicht
+                    if(targetColumnElement.getAttribute("name").equals("Done")){
+                        editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "done", sd.format(new Date()));
+                    }else{
+                        editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "done", "");
+                    }
+                    
+                    updateXML(xmlPath);
+
                 }
                 break;
-
             }
         }
     }
@@ -447,29 +466,28 @@ public class XMLBoard extends XML {
         boolean f = false;
         int count = 0;
         int maxCount;
-        
+
         Element targetCardElement;
         Element targetColumnElement;
 
         cardElement = searchCard(ca_id);
 
-        this.ca_id = Integer.parseInt(cardElement.getAttribute("ca_id"));
-        this.co_id = Integer.parseInt(cardElement.getAttribute("co_id"));
-       
+        this.ca_id = Kanban.tryParseInt(cardElement.getAttribute("ca_id"));
+        this.co_id = Kanban.tryParseInt(cardElement.getAttribute("co_id"));
+
         columnElement = searchColumn(co_id);
-        if(columnElement.getAttribute("name").equals("Done")){
+        if (columnElement.getAttribute("name").equals("Done")) {
             maxCount = 1;
-        }else{
+        } else {
             maxCount = 2;
         }
-                
+
         columnList = doc.getElementsByTagName("column");
 
         for (int i = columnList.getLength() - 1; i >= 0; i--) {
             if (f == false) {
-                if (Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
-                    //f = true setzen damit im nächsten durchlauf der else Fall eintritt
-                    //System.out.println("test");    
+                if (Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+        
                     f = true;
 
                 }
@@ -479,22 +497,24 @@ public class XMLBoard extends XML {
 
             if (count == maxCount) {
 
-                targetColumnElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
-                targetCardElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+                targetColumnElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+                targetCardElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
 
                 cardElement.getAttribute("co_id");
+                if (checkWip(Kanban.tryParseInt(targetColumnElement.getAttribute("co_id"))) == true) {
+                   
+                    deleteCard(ca_id, this.co_id);
+                    targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
+                    editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));
+                    
 
-                deleteCard(ca_id, this.co_id);
-                targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
+                     
+                    updateXML(xmlPath);
+                    break;
+                }
 
 
-                editCard(Integer.parseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));
-
-                updateXML(xmlPath);
-                break;
             }
-
-
         }
     }
 
@@ -514,7 +534,7 @@ public class XMLBoard extends XML {
         boardList = doc.getElementsByTagName("board");
 
         for (int i = 0; i < boardList.getLength(); i++) {
-            if (Integer.parseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())) == id) {
+            if (Kanban.tryParseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())) == id) {
                 boardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
                 updateXML(xmlPath);
                 break;
@@ -526,7 +546,7 @@ public class XMLBoard extends XML {
         columnList = doc.getElementsByTagName("column");
 
         for (int i = 0; i < columnList.getLength(); i++) {
-            if (Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == id) {
+            if (Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == id) {
                 columnList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
                 updateXML(xmlPath);
                 break;
@@ -538,7 +558,7 @@ public class XMLBoard extends XML {
         cardList = doc.getElementsByTagName("card");
 
         for (int i = 0; i < cardList.getLength(); i++) {
-            if (Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id) {
+            if (Kanban.tryParseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id) {
                 cardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
                 updateXML(xmlPath);
                 break;
@@ -564,12 +584,12 @@ public class XMLBoard extends XML {
     private boolean checkWip(int co_id) {
         searchedElement = this.searchColumn(co_id);
         wip = Kanban.tryParseInt(searchedElement.getAttribute("wip"));
-        
+
         NodeList cList = doc.getElementsByTagName("card");
 
         for (int i = 0; i < cList.getLength(); i++) {
-            
-            if (Integer.parseInt(getString(cList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+
+            if (Kanban.tryParseInt(getString(cList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
                 wipCount++;
             }
         }

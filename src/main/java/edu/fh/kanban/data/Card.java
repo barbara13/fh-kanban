@@ -20,7 +20,7 @@ public class Card {
     private String startedDate;
     private String doneDate;
 
-    public Card(int ca_id, int co_id, String name, String description, int effort, int value, String status, String createdDate) {
+    public Card(int ca_id, int co_id, String name, String description, int effort, int value, String status, String createdDate, String startedDate, String doneDate) {
         this.ca_id = ca_id;
         this.co_id = co_id;
         this.name = name;
@@ -29,6 +29,8 @@ public class Card {
         this.value = value;
         this.status = status;
         this.createdDate = createdDate;
+        this.startedDate = startedDate;
+        this.doneDate = doneDate;
     }
 
     public int getCa_id() {

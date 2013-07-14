@@ -37,19 +37,20 @@ public class XML {
 
 
     protected void updateXML(String name) {
-        try {
+        try {        
             transformerFactory = TransformerFactory.newInstance();
             transformer = transformerFactory.newTransformer();
             source = new DOMSource(doc);
             result = new StreamResult(new File(name));
-            try {
-                transformer.transform(source, result);
-            } catch (TransformerException ex) {
-                Logger.getLogger(WriteBoard.class.getName()).log(Level.SEVERE, null, ex);
-            }
+          
+                
+            transformer.transform(source, result);
         } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(WriteBoard.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 
     }
 }
