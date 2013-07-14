@@ -51,6 +51,7 @@ public class XMLBoard extends XML {
     private NodeList boardList = null;
     private NodeList columnList = null;
     private NodeList cardList = null;
+    private NodeList cl = null;
     private ArrayList<Board> listBoard = new ArrayList();
     private ArrayList<Column> listMainColumn = new ArrayList();
     private ArrayList<Column> listSubColumn = new ArrayList();
@@ -439,7 +440,7 @@ public class XMLBoard extends XML {
                 targetColumnElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
                 targetCardElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
 
-                cardElement.getAttribute("co_id");
+                
 
                 if (checkWip(Kanban.tryParseInt(targetColumnElement.getAttribute("co_id"))) == true) {
                     
@@ -447,8 +448,12 @@ public class XMLBoard extends XML {
                     deleteCard(ca_id, this.co_id);
                     editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));
                     
-                    //Überprüfen ob Done oder nicht
-                    if(targetColumnElement.getAttribute("name").equals("Done")){
+                    cl= doc.getElementsByTagName("columns");
+                    //Letztes Element der Liste
+                     Element doneElement = (Element) columnList.item(columnList.getLength()-1);
+                    
+                     //Überprüfen ob Done oder nicht
+                    if(targetColumnElement == doneElement){
                         editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "done", sd.format(new Date()));
                     }else{
                         editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "done", "");
@@ -506,7 +511,6 @@ public class XMLBoard extends XML {
                     deleteCard(ca_id, this.co_id);
                     targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
                     editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));
-                    
 
                      
                     updateXML(xmlPath);
