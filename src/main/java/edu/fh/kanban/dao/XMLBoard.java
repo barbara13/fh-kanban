@@ -252,7 +252,7 @@ public class XMLBoard extends XML {
         subColumnElement1.setAttributeNode(attr1);
         //SubColumn2
         attr2 = doc.createAttribute("wip");
-        attr2.setValue("9999");
+        attr2.setValue("100");
         subColumnElement2.setAttributeNode(attr2);
 
         //pk.setCo_id();

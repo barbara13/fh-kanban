@@ -105,7 +105,7 @@ public class BoardPreferencesController extends Controller {
                 for (int i = 0; i < arrayindex; i++) {
                     xml.addNewColumn(txtColumname[i].getText().toString(), wip[i].getValue().toString());
                 }
-                xml.addColumn("Done", "9999");
+                xml.addColumn("Done", "100");
                 xml.createBoard(bpv.getTxtName().getText().toString() + ".xml");
                 bpv.dispose();
             }
