@@ -33,7 +33,6 @@ public class CardController extends Controller {
         this.cView = cView;
         this.bv = bv;
         this.blv = blv;
-        System.out.println("CardController: " + bv);
         xml = new XMLCard();
         xmlb = new XMLBoard();
     }
@@ -42,43 +41,45 @@ public class CardController extends Controller {
     public void actionPerformed(ActionEvent e) {
         src = e.getSource();
         if (src == cView.getBtnAddCard()) {
-           xmlb.loadXML(Kanban.xmlPath);
+            xmlb.loadXML(Kanban.xmlPath);
             xmlb.addCardToBoard(cView.getcId());
-            blv.getPanel().removeAll();
-            blv.getComponent();
-            blv.getPanel().updateUI();
-            System.out.println("CardController: " + bv);
-            bv.getBpanel().removeAll();
-            bv.getComponent();
-            bv.getBpanel().updateUI();
+            
+            refreshBoard();
+            refreshBacklog();
             cView.dispose();
+            
         } else if (src == cView.getBtnEdit()) {
             ceView = new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription(), cView.getStatus());
-                ceView.getComponent();
-            
+            ceView.getComponent();
+           
         } else if (src == cView.getBtnDelete()) {
             xml.deleteCard(cView.getcId());
-            blv.getPanel().removeAll();
-            blv.getComponent();
-            blv.getPanel().updateUI();
+            refreshBacklog();
             cView.dispose();
         } else if (src == cView.getBtnCancel()) {
             cView.dispose();
         } else if (src == cView.getBtnBackward()){
             xmlb.loadXML(Kanban.xmlPath);
             xmlb.prevCard(cView.getcId());
-            bv.getBpanel().removeAll();
-            bv.getComponent();
-            bv.getBpanel().updateUI();
+            refreshBoard();
             cView.dispose();
         } else if (src == cView.getBtnForward()){
             xmlb.loadXML(Kanban.xmlPath);
             xmlb.forwardCard(cView.getcId());
+            refreshBoard();
+            cView.dispose();
+        }
+    }
+
+        public void refreshBoard(){
             bv.getBpanel().removeAll();
             bv.getComponent();
             bv.getBpanel().updateUI();
-            cView.dispose();
         }
-            
-    }
+        
+        public void refreshBacklog(){
+            blv.getPanel().removeAll();
+            blv.getComponent();
+            blv.getPanel().updateUI();
+        }
 }

@@ -98,29 +98,28 @@ public class Kanban {
         }
         LOGGER.info("Creating UI components.");
 
-        JMenuItem board_preferences = new JMenuItem("Board Prenferences");
+        JMenuItem board_preferences = new JMenuItem("New Board...");
         board_preferences.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new BoardPreferencesView().getComponent();
             }
         });
-
+        
         
         final BacklogView backlogView = new BacklogView();
         BoardView boardView = new BoardView(backlogView);
         backlogView.setBv(boardView);
-        System.out.println("Kanban: " + boardView);
         
-        final CardCreateView cardCreateView = new CardCreateView(backlogView);
+        //final CardCreateView cardCreateView = new CardCreateView(backlogView);
                 
-        JMenuItem card_preferences = new JMenuItem("New Card");
+        JMenuItem card_preferences = new JMenuItem("New Card...");
         card_preferences.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cardCreateView.getComponent();
+                new CardCreateView(backlogView).getComponent();
             }
         });
 
-        JMenuItem loadBoard = new JMenuItem("Load Board");
+        JMenuItem loadBoard = new JMenuItem("Load Board...");
         loadBoard.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
