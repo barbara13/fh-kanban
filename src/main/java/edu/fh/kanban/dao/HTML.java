@@ -161,7 +161,7 @@ public class HTML extends XML {
     }
 
     private void loadXML() {
-        //xml.loadXML("NocheinTest.xml");
+        xml.loadXML(Kanban.xmlPath);
 
         listBoard = xml.readBoard();
         listMainColumn = xml.readMainColumns();

@@ -115,22 +115,29 @@ public class BacklogView extends JPanel implements View {
 
             @Override
             public void keyReleased(KeyEvent e) {
+                try{
                 if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
                     i--;
                     i--;
                 }
-
-                if (searchfield.getText().toString().regionMatches(true, 0 + i, cards[0].getText().toString(), 0 + i, 1)) {
-                    cards[0].setVisible(true);
+                
+                for(int j = 0; j < cards.length; j++){
+                if (searchfield.getText().toString().regionMatches(true, 0 + i, cards[j].getText().toString(), 0 + i, 1)) {
+                    cards[j].setVisible(true);
                     i++;
                 } else {
-                    cards[0].setVisible(false);
+                    cards[j].setVisible(false);
                     i++;
                 }
                 if (searchfield.getText().toString().equals("")) {
-                    i = 0;
-                    cards[0].setVisible(true);
+                    
+                    cards[j].setVisible(true);
                 }
+                }
+                } catch(NullPointerException exc){
+                   return;
+                }
+                
             }
         });
 

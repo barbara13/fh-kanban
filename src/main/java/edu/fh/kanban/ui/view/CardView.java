@@ -215,7 +215,7 @@ public class CardView extends JFrame implements View {
         btnEdit = new JButton("Edit");
         btnEdit.addActionListener(cController);
         getContentPane().add(btnEdit, "8, 14, fill, top");
-
+        
         btnDelete = new JButton("Delete");
         btnDelete.addActionListener(cController);
         getContentPane().add(btnDelete, "6, 14, fill, top");

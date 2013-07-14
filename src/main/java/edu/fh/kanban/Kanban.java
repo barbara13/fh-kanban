@@ -1,4 +1,3 @@
-//Test für Malte
 package edu.fh.kanban;
 
 import edu.fh.kanban.dao.HTML;
@@ -52,42 +51,6 @@ public class Kanban {
      */
     public static void main(String[] args) {
 
-        HTML html = new HTML();
-        //html.createHTML();
-        /*
-         XMLBoard board = new XMLBoard();
-         XMLCard card = new XMLCard();
-            
-            
-         card.addCard("Card", "fff", "2", "3", "Fixed");
-         card.addCard("Card2", "fff", "2", "3", "Fixed");
-         card.addCard("Card3", "fff", "2", "3", "Fixed");
-         */
-
-        /*
-         board.addBoard("test2", "d");
-         board.addNewColumn("test", "d");
-         board.addNewColumn("Hallo", "3");
-         board.createBoard("board5.xml");
-         */
-
-        //board.loadXML("Board2.xml");
-        //board.addCardToBoard(46);
-        //board.addCardToBoard(42);
-        //board.forwardCard(43);
-
-        //board.createNewBoard();
-        //Element el = board.searchCard(29);
-        //System.out.println(el.g));
-        //board.forwardCard(29);
-        //ArrayList list = board.readBoard();
-
-
-        //board.forwardCard(22);
-        //board.addBoard("test", "Red");
-        //board.addNewColumn("Penis", "2");
-        //board.addColumn("ddd", "f");
-        //board.createBoard();
 
         LOGGER.info("Starting kanban app.");
         LOGGER.info("Setting look and feel.");
@@ -105,12 +68,17 @@ public class Kanban {
             }
         });
         
+        final JMenuItem html = new JMenuItem("Export to HTML...");
+        html.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new HTML().createHTML();
+            }
+        });
         
         final BacklogView backlogView = new BacklogView();
         BoardView boardView = new BoardView(backlogView);
         backlogView.setBv(boardView);
         
-        //final CardCreateView cardCreateView = new CardCreateView(backlogView);
                 
         JMenuItem card_preferences = new JMenuItem("New Card...");
         card_preferences.addActionListener(new ActionListener() {
@@ -136,9 +104,11 @@ public class Kanban {
                     if (firstBoard == true) {
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), boardView.getComponent());
                         firstBoard = false;
+                        html.setEnabled(true);
                     } else if (firstBoard == false) {
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), boardView.getComponent());
                         pane.removeTabAt(1);
+                        
                     }
                 }
 
@@ -149,6 +119,8 @@ public class Kanban {
         file.add(board_preferences);
         file.add(card_preferences);
         file.add(loadBoard);
+        file.add(html);
+        html.setEnabled(false);
 
         JMenuBar menubar = new JMenuBar();
         menubar.add(file);

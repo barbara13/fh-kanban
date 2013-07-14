@@ -60,6 +60,7 @@ public class BoardController extends Controller{
          cv.getComponent();
          cv.getBtnEdit().setVisible(false);
          cv.getBtnAddCard().setVisible(false);
+         cv.getBtnDelete().setVisible(false);
      }
     
     private int parseId(String s){
