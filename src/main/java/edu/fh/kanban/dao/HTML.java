@@ -83,7 +83,6 @@ public class HTML extends XML {
     }
 
     public void createHTML() {
-        //loadXML();
         
         htmlTag = doc.createElement("html");
         doc.appendChild(htmlTag);
@@ -95,10 +94,7 @@ public class HTML extends XML {
         bodyTag.appendChild(mainTableElement);
         
         loadXML();
-        
-        //tr = new Element[listSubColumn.size()+2];
-        //td = new Element[(listMainColumn.size()+2)*3 + listCard.size()][(listMainColumn.size()+2)*3 + listCard.size()];
-        
+             
         
         //Next Spalte
         trElement.add(createTrElement(mainTableElement));
@@ -152,13 +148,13 @@ public class HTML extends XML {
             }        
                   
         }
-            
         
-        //listBoard.get(0)
+        //System.out.println(Kanban.xmlName);
 
-
-        this.updateXML("HTMLTEST.html");
+        this.updateXML(Kanban.xmlName.substring(0, Kanban.xmlName.lastIndexOf(46))+".html");
     }
+    
+
 
     private void loadXML() {
         xml.loadXML(Kanban.xmlPath);
