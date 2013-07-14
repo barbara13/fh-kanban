@@ -49,8 +49,6 @@ Sprache: Im Java-Quelltext werden englische Bezeichner für Klassen, Methoden et
 # 3. Kontextabgrenzung
 Dieser Abschnitt stellt das Umfeld vom Team-Projekt 2013 dar. Für welche Benutzer ist es da, und mit welchen Fremdsystemen interagiert es?
 
-		-- gemeinsam klären--
-
 ## 3.1. Fachlicher Kontext
 
 --
@@ -95,9 +93,12 @@ Die Klasse "CardEditView" implementiert die View und erbt von JFrame. Diese bein
 Die Klasse "CardView" implementiert die View und erbt von JFrame. Diese zeigt einer aus dem Backlog selektierte Karte mit all ihren Parametern und bietet durch die Referenzierung auf den "CardController" diese Karte zu editieren, auf das Board zu verschieben oder diese zu löschen.
 
 
+siehe Diagramme
+
+
 # 6. Laufzeitsicht
 
-	-- hier nicht zu gebrauchen, da Grafik benötigt wird --
+--
 
 # 7. Konzepte
 Dieser Abschnitt beschreibt allgemeine Strukturen und Aspekte, die systemweit gelten. Darüber hinaus stellt er verschiedene technische Lösungskonzepte vor.
