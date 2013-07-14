@@ -32,24 +32,26 @@ public class CardController extends Controller {
 
     public void actionPerformed(ActionEvent e) {
         src = e.getSource();
-
+        xmlb.loadXML(Kanban.xmlPath);
         if (src == cView.getBtnAddCard()) {
-            xmlb.loadXML(Kanban.xmlPath);	
+           
             xmlb.addCardToBoard(cView.getcId());
             cView.dispose();
         } else if (src == cView.getBtnEdit()) {
             ceView = new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription(), cView.getStatus());
                 ceView.getComponent();
-            //cView.dispose();
+            
         } else if (src == cView.getBtnDelete()) {
             xml.deleteCard(cView.getcId());
             cView.dispose();
         } else if (src == cView.getBtnCancel()) {
             cView.dispose();
         } else if (src == cView.getBtnBackward()){
+            //xmlb.loadXML(Kanban.xmlPath);
             xmlb.prevCard(cView.getcId());
             cView.dispose();
         } else if (src == cView.getBtnForward()){
+            
             xmlb.forwardCard(cView.getcId());
             cView.dispose();
         }

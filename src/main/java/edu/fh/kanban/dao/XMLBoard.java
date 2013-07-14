@@ -573,8 +573,6 @@ public class XMLBoard extends XML {
                 wipCount++;
             }
         }
-        System.out.println("WIP: "+wip);
-        System.out.println("WIPCOUNT: "+wipCount);
         if (wip <= wipCount) {
             wipCheck = false;
         } else {
