@@ -10,7 +10,7 @@ import java.awt.event.KeyListener;
 
 /**
  *
- * @author Maxim
+ * @author Maxim, David, Malte
  *
  * die Klasse CardEditControllerist ist der Controller für die Klasse
  * CardEditView Diese Händelt die Button Klicks und die JTextfield Einträge

@@ -14,7 +14,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author Maxim
+ * @author Maxim, David, Malte
  *
  * Die Klasse CardCreateContoller ist der Controller für die Klasse
  * CardCreateView Diese Händelt die Button Klicks und die JTextfield Einträge

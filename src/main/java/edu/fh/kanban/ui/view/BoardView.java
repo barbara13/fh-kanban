@@ -12,7 +12,11 @@ import edu.fh.kanban.data.Column;
 import edu.fh.kanban.ui.controller.BoardController;
 import java.util.ArrayList;
 
-
+/**
+ *
+ * @author David
+ *
+ */
 
 public class BoardView extends JPanel implements View {
   
@@ -143,12 +147,6 @@ private JLabel title;
         listBoard = xml.readBoard();
         listMainColumns = xml.readMainColumns();
         listSubColumns = xml.readSubColumns();
-        
-        
-        //System.out.println(listSubColumns.get(i).getCo_id());
-        
-        
-        
         searchtext = new JTextField();
         columnSize = new String("5dlu, 50dlu, ");
         rowSize = new String("5dlu, 20dlu, ");

@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Lorenz
+ * @author David, Lorenz
  */
 public class BacklogView extends JPanel implements View {
 
@@ -50,10 +50,6 @@ public class BacklogView extends JPanel implements View {
     
     
   public BacklogView() {
-     //BoardController im Konstruktor
-        
-       
-        //xml = new XMLBoard();
         getComponents();
     }
 
@@ -151,9 +147,6 @@ public class BacklogView extends JPanel implements View {
         panel.add(comboBox, "8, 4, right, default");
         sep = new JSeparator();
         panel.add(sep, CC.xywh(1, 5, 10, 1));
-
-        //JScrollBar scrollBar = new JScrollBar();
-        //panel.add(scrollBar, "10, 2, 1, 13");
         
         c.showCards();
         return panel;

@@ -13,7 +13,7 @@ import javax.net.ssl.SSLEngineResult.Status;
 
 /**
  *
- * @author Maxim
+ * @author Maxim, David, Malte
  *
  * Die Klasse CardController ist der Controller für die Klasse CardView Diese
  * Händelt die Button Klicks
