@@ -126,6 +126,7 @@ public class Kanban {
                 chooser = new JFileChooser();
                 chooser.addChoosableFileFilter(filter);
                 BoardView boardView = new BoardView(backlogView);
+                backlogView.setBv(boardView);
                 int x = chooser.showOpenDialog(null);
 
                 if (x == JFileChooser.APPROVE_OPTION) {

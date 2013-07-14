@@ -89,8 +89,6 @@ private JLabel title;
         int list = subColumns.size();
         JLabel NextLabel = new JLabel(subColumns.get(0).getName());
         showCards(subColumns.get(0), 2, 0);
-        JLabel DoneLabel = new JLabel(subColumns.get(list-1).getName());
-        showCards(subColumns.get(0), 2, subColumns.size());
         
         for (int j = 0; j < mainColumns.size(); j++){
             JLabel columnMainLabel = new JLabel(mainColumns.get(j).getName());
@@ -99,12 +97,16 @@ private JLabel title;
         }	
         
         for (int i = 1; i < subColumns.size() - 1; i++){
-            JLabel columnSubLabel = new JLabel(subColumns.get(i).getName());
+            JLabel columnSubLabel = new JLabel(subColumns.get(i).getName() + " (" + subColumns.get(i).getWip() + ")");
             bpanel.add(columnSubLabel, CC.xy(x, 6, CC.CENTER, CC.CENTER));
             showCards(subColumns.get(i), x, columncount); 
             columncount ++;
             x+=2;
         }
+        
+        JLabel DoneLabel = new JLabel(subColumns.get(list-1).getName());
+        showCards(subColumns.get(list-1), x, columncount);
+        
         
         bpanel.add(NextLabel, CC.xy(2 , 4, CC.CENTER, CC.CENTER));
         bpanel.add(DoneLabel, CC.xy(y , 4, CC.CENTER, CC.CENTER));
