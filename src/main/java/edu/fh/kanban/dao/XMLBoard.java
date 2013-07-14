@@ -4,6 +4,7 @@
  */
 package edu.fh.kanban.dao;
 
+import edu.fh.kanban.Kanban;
 import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
@@ -35,65 +36,57 @@ import org.xml.sax.SAXParseException;
  *
  * @author Ronald
  */
-public class XMLBoard extends XML{
+public class XMLBoard extends XML {
+
     private DocumentBuilderFactory docBuilderFactory;
-    private DocumentBuilder docBuilder; 
-    
+    private DocumentBuilder docBuilder;
     private String xmlPath;
     private XMLCard xmlCard = new XMLCard();
-    
     private Element rootElement;
     private Element columnElement;
     private Element subColumnElement1;
     private Element subColumnElement2;
     private Element cardElement;
     private Element searchedElement = null;
-    
     private NodeList boardList = null;
     private NodeList columnList = null;
     private NodeList cardList = null;
-    
-    private ArrayList <Board> listBoard = new ArrayList();
-    private ArrayList <Column> listMainColumn = new ArrayList();
-    private ArrayList <Column> listSubColumn = new ArrayList();
-    private ArrayList <Card> listCard= new ArrayList();
-    
+    private ArrayList<Board> listBoard = new ArrayList();
+    private ArrayList<Column> listMainColumn = new ArrayList();
+    private ArrayList<Column> listSubColumn = new ArrayList();
+    private ArrayList<Card> listCard = new ArrayList();
     private int totalColumns;
     private int totalCards;
-    
     private XML_Pk pk;
-    
     private int b_id;
     private int co_id;
     private int ca_id;
-    
     private Attr attr;
     private Attr attr1;
     private Attr attr2;
-    
+    private int wip;
+    private boolean wipCheck = false;
+    private int wipCount;
 
-    
-    public XMLBoard(){
+    public XMLBoard() {
         try {
-            docBuilderFactory = DocumentBuilderFactory.newInstance();          
+            docBuilderFactory = DocumentBuilderFactory.newInstance();
             docBuilder = docBuilderFactory.newDocumentBuilder();
             doc = docBuilder.newDocument();
-   
+
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
-  
-          
+
     public void loadXML(String xmlPath) {
         try {
             this.xmlPath = xmlPath;
-            
-            doc = docBuilder.parse (new File(xmlPath));
+
+            doc = docBuilder.parse(new File(xmlPath));
             doc.getDocumentElement().normalize();
-            
+
         } catch (SAXException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -101,108 +94,105 @@ public class XMLBoard extends XML{
         }
     }
 
-    public ArrayList readBoard(){
+    public ArrayList readBoard() {
         listBoard.clear();
         boardList = doc.getElementsByTagName("board");
-        
-        for(int i = 0; i < boardList.getLength() ; i++){
-             listBoard.add(new Board(Integer.parseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())),getString(boardList.item(i).getAttributes().getNamedItem("name").toString()), getString(boardList.item(i).getAttributes().getNamedItem("color").toString())));
+
+        for (int i = 0; i < boardList.getLength(); i++) {
+            listBoard.add(new Board(Integer.parseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(boardList.item(i).getAttributes().getNamedItem("name").toString()), getString(boardList.item(i).getAttributes().getNamedItem("color").toString())));
         }
-        
+
         return listBoard;
     }
-    
-    public ArrayList readSubColumns(){     
+
+    public ArrayList readSubColumns() {
         listSubColumn.clear();
         columnList = doc.getElementsByTagName("column");
-        
-        for(int i = 0; i < columnList.getLength() ; i++){
-            listSubColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));       
+
+        for (int i = 0; i < columnList.getLength(); i++) {
+            listSubColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));
         }
-        
+
         return listSubColumn;
     }
-    
-        public ArrayList readMainColumns(){     
+
+    public ArrayList readMainColumns() {
         listMainColumn.clear();
         columnList = doc.getElementsByTagName("columns");
-        
-        for(int i = 0; i < columnList.getLength() ; i++){
-            listMainColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())),Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));       
+
+        for (int i = 0; i < columnList.getLength(); i++) {
+            listMainColumn.add(new Column(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(columnList.item(i).getAttributes().getNamedItem("name").toString()), Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("wip").toString()))));
         }
-        
+
         return listMainColumn;
     }
-    
-    public ArrayList readCards(){     
+
+    public ArrayList readCards() {
         listCard.clear();
         cardList = doc.getElementsByTagName("card");
-        
-        for(int i = 0; i < cardList.getLength() ; i++){
-            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString())));
-         }
+
+        for (int i = 0; i < cardList.getLength(); i++) {
+            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())), getString(cardList.item(i).getAttributes().getNamedItem("name").toString()), getString(cardList.item(i).getAttributes().getNamedItem("description").toString()), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())), getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString())));
+        }
         return listCard;
-    }    
-    
-    public ArrayList readCardsFromColumn(int co_id){
+    }
+
+    public ArrayList readCardsFromColumn(int co_id) {
         listCard.clear();
         //listSubColumn.clear();
-        
+
         cardList = doc.getElementsByTagName("card");
         columnList = doc.getElementsByTagName("column");
-        
-        for(int i = 0; i < cardList.getLength() ; i++){
-            if(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id){       
-                listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString())));
+
+        for (int i = 0; i < cardList.getLength(); i++) {
+            if (Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+                listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())), getString(cardList.item(i).getAttributes().getNamedItem("name").toString()), getString(cardList.item(i).getAttributes().getNamedItem("description").toString()), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())), getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString())));
             }
         }
-        
+
         return listCard;
     }
-    
-    public void addBoard(String name, String color){  		
+
+    public void addBoard(String name, String color) {
         //Wenn kein root existiert
-        
-            //doc = docBuilder.newDocument();
-            pk = new XML_Pk();
-            
-            // root elements
-            //doc = docBuilder.newDocument();
-            rootElement = doc.createElement("board");
-            doc.appendChild(rootElement);
 
-            //Attribut b_id hinzufügen
-            attr = doc.createAttribute("b_id");
-            attr.setValue(String.valueOf(pk.getB_id()));
-            rootElement.setAttributeNode(attr);
+        //doc = docBuilder.newDocument();
+        pk = new XML_Pk();
 
-            //Attribut name hinzufügen
-            attr = doc.createAttribute("name");
-            attr.setValue(name);
-            rootElement.setAttributeNode(attr);
+        // root elements
+        //doc = docBuilder.newDocument();
+        rootElement = doc.createElement("board");
+        doc.appendChild(rootElement);
 
-            //Attribut color hinzufügen
-            attr = doc.createAttribute("color");
-            attr.setValue(color);
-            rootElement.setAttributeNode(attr);    
-            
-            
-            
-        
+        //Attribut b_id hinzufügen
+        attr = doc.createAttribute("b_id");
+        attr.setValue(String.valueOf(pk.getB_id()));
+        rootElement.setAttributeNode(attr);
+
+        //Attribut name hinzufügen
+        attr = doc.createAttribute("name");
+        attr.setValue(name);
+        rootElement.setAttributeNode(attr);
+
+        //Attribut color hinzufügen
+        attr = doc.createAttribute("color");
+        attr.setValue(color);
+        rootElement.setAttributeNode(attr);
+
 
 
     }
-    
-    public void addNewColumn(String name, String wip){
-       
+
+    public void addNewColumn(String name, String wip) {
+
         columnElement = doc.createElement("columns");
         subColumnElement1 = doc.createElement("column");
         subColumnElement2 = doc.createElement("column");
-        
+
         rootElement.appendChild(columnElement);
         columnElement.appendChild(subColumnElement1);
         columnElement.appendChild(subColumnElement2);
-        
+
         /* Attribut co_id hinzufügen */
         //Column
         attr = doc.createAttribute("co_id");
@@ -219,8 +209,8 @@ public class XMLBoard extends XML{
         attr2.setValue(String.valueOf(pk.getCo_id()));
         pk.setCo_id();
         subColumnElement2.setAttributeNode(attr2);
-        
-        
+
+
         /* Attribut b_id hinzufügen */
         //Column
         attr = doc.createAttribute("b_id");
@@ -234,7 +224,7 @@ public class XMLBoard extends XML{
         attr2 = doc.createAttribute("b_id");
         attr2.setValue(String.valueOf(pk.getB_id()));
         subColumnElement2.setAttributeNode(attr2);
-        
+
         /* Attribut name hinzufügen */
         //Column
         attr = doc.createAttribute("name");
@@ -248,7 +238,7 @@ public class XMLBoard extends XML{
         attr2 = doc.createAttribute("name");
         attr2.setValue("Done");
         subColumnElement2.setAttributeNode(attr2);
-        
+
         /* Attribut wip hinzufügen */
         //SubColumn
         attr = doc.createAttribute("wip");
@@ -262,43 +252,41 @@ public class XMLBoard extends XML{
         attr2 = doc.createAttribute("wip");
         attr2.setValue("9999");
         subColumnElement2.setAttributeNode(attr2);
-        
+
         //pk.setCo_id();
     }
-    
 
-    
-    public void addColumn(String name, String wip){
+    public void addColumn(String name, String wip) {
         columnElement = doc.createElement("column");
         rootElement.appendChild(columnElement);
-        
+
         //Attribut co_id hinzufügen
         attr = doc.createAttribute("co_id");
         attr.setValue(String.valueOf(pk.getCo_id()));
         columnElement.setAttributeNode(attr);
-        
+
         //Attribut b_id hinzufügen
         attr = doc.createAttribute("b_id");
         attr.setValue(String.valueOf(pk.getB_id()));
         columnElement.setAttributeNode(attr);
-        
+
         //Attribut name hinzufügen
         attr = doc.createAttribute("name");
         attr.setValue(name);
         columnElement.setAttributeNode(attr);
-        
+
         //Attribut wip hinzufügen
         attr = doc.createAttribute("wip");
         attr.setValue(wip);
         columnElement.setAttributeNode(attr);
-        
+
         pk.setCo_id();
     }
-    
-    public Element addCard(Element card, String co_id){
+
+    public Element addCard(Element card, String co_id) {
         Element newCardElement;
         newCardElement = doc.createElement("card");
-        
+
         //Attribut ca_id hinzufügen
         attr = doc.createAttribute("ca_id");
         attr.setValue(card.getAttribute("ca_id"));
@@ -333,19 +321,16 @@ public class XMLBoard extends XML{
         attr = doc.createAttribute("status");
         attr.setValue(card.getAttribute("status"));
         newCardElement.setAttributeNode(attr);
-        
+
         //Attribut Created hinzufügen
         attr = doc.createAttribute("created");
         attr.setValue(card.getAttribute("created"));
         newCardElement.setAttributeNode(attr);
-        
+
         return newCardElement;
     }
-    
-    
 
-    
-    public Element searchColumn(int co_id){
+    public Element searchColumn(int co_id) {
         columnList = doc.getElementsByTagName("column");
         for (int i = 0; i < columnList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
@@ -353,13 +338,12 @@ public class XMLBoard extends XML{
                 searchedElement = (Element) columnList.item(i);
                 //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
                 break;
-            }  
-    }
+            }
+        }
         return searchedElement;
     }
-    
-       
-    public Element searchColumns(int co_id){
+
+    public Element searchColumns(int co_id) {
         columnList = doc.getElementsByTagName("columns");
         for (int i = 0; i < columnList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
@@ -367,15 +351,15 @@ public class XMLBoard extends XML{
                 searchedElement = (Element) columnList.item(i);
                 //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
                 break;
-            }  
-    }
+            }
+        }
         return searchedElement;
     }
-    
+
     public Element searchCard(int ca_id) {
         //doc = docBuilder.newDocument();
         cardList = doc.getElementsByTagName("card");
-        
+
         for (int i = 0; i < cardList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
             if (Integer.parseInt(this.getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == ca_id) {
@@ -388,127 +372,125 @@ public class XMLBoard extends XML{
 
         return searchedElement;
     }
-    
-    private Element getFirstColumn(){
+
+    private Element getFirstColumn() {
         //doc.getDocumentElement();
         columnList = doc.getElementsByTagName("column");
         searchedElement = (Element) columnList.item(0);
-        
+
         return searchedElement;
     }
-    
-    public void addCardToBoard(int ca_id){
+
+    public void addCardToBoard(int ca_id) {
         columnElement = getFirstColumn();
         cardElement = xmlCard.searchCard(ca_id);
 
-        
+
         //Wenn die gesuchte card und column gefunden wurde oder keine firstcard exisitiert
-        if(cardElement != null && columnElement != null){ 
+        if (cardElement != null && columnElement != null) {
 
             columnElement.appendChild(this.addCard(cardElement, columnElement.getAttribute("co_id")));
             this.editCard(ca_id, "co_id", columnElement.getAttribute("co_id"));
-            
             xmlCard.deleteCard(ca_id);
-            
+
             updateXML(xmlPath);
         }
     }
-    
-    public void forwardCard(int ca_id){
+
+    public void forwardCard(int ca_id) {
         boolean f = false;
         Element targetCardElement;
         Element targetColumnElement;
-        
+
+
         cardElement = searchCard(ca_id);
 
         this.ca_id = Integer.parseInt(cardElement.getAttribute("ca_id"));
         this.co_id = Integer.parseInt(cardElement.getAttribute("co_id"));
-         
+
         columnList = doc.getElementsByTagName("column");
-        
+
         /* Es erst nach der Column gesucht in der sich die Card befindet, dann wird f == true gesetzt
          * damit die Schleife noch einmal durchlaufen wird, dann befindet man sich in der Ziel Column
-        */
-        for(int i = 0; i < columnList.getLength(); i++){
+         */
+        for (int i = 0; i < columnList.getLength(); i++) {
             //Wenn f == false ist
-            if(f == false){ 
-                if(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id){
+            if (f == false) {
+                if (Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
                     //f = true setzen damit im nächsten durchlauf der else Fall eintritt
                     f = true;
-                    
+
                 }
-            } else{
-                
+            } else {
+
                 targetColumnElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
                 targetCardElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
-     
+
                 cardElement.getAttribute("co_id");
-               
-                targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
-                deleteCard(ca_id, this.co_id);
- 
-                editCard(Integer.parseInt(cardElement.getAttribute("ca_id")), "co_id",targetColumnElement.getAttribute("co_id"));
-            
-                updateXML(xmlPath);
-                break;
+
+                if (checkWip(Kanban.tryParseInt(getString(targetColumnElement.getAttribute("co_id")))) == true) {
+                    targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
+                    deleteCard(ca_id, this.co_id);
+                    editCard(Integer.parseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));
+
+                    updateXML(xmlPath);
+                    break;
+                }
+
             }
-        } 
+        }
     }
-    
-    public void prevCard(int ca_id){
+
+    public void prevCard(int ca_id) {
         boolean f = false;
         int count = 0;
         Element targetCardElement;
         Element targetColumnElement;
-        
+
         cardElement = searchCard(ca_id);
-        
+
         this.ca_id = Integer.parseInt(cardElement.getAttribute("ca_id"));
         this.co_id = Integer.parseInt(cardElement.getAttribute("co_id"));
-        
+
         columnList = doc.getElementsByTagName("column");
 
-        for(int i = columnList.getLength()-1; i >= 0; i--){
-           if(f == false){
-             if(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id){               
-                //f = true setzen damit im nächsten durchlauf der else Fall eintritt
-                //System.out.println("test");    
-                f = true;
-                     
-            }  
-           } else{
-               count++; 
-           }
-            
-            if(count == 2){
-                          
+        for (int i = columnList.getLength() - 1; i >= 0; i--) {
+            if (f == false) {
+                if (Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
+                    //f = true setzen damit im nächsten durchlauf der else Fall eintritt
+                    //System.out.println("test");    
+                    f = true;
+
+                }
+            } else {
+                count++;
+            }
+
+            if (count == 2) {
+
                 targetColumnElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
                 targetCardElement = searchColumn(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
-     
+
                 cardElement.getAttribute("co_id");
-                
+
                 deleteCard(ca_id, this.co_id);
                 targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
-                
- 
-                editCard(Integer.parseInt(cardElement.getAttribute("ca_id")), "co_id",targetColumnElement.getAttribute("co_id"));
-            
+
+
+                editCard(Integer.parseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));
+
                 updateXML(xmlPath);
                 break;
             }
-            
-            
+
+
         }
     }
-    
-       
+
     public void deleteCard(int ca_id, int co_id) {
         cardElement = searchCard(ca_id);
         columnElement = searchColumn(co_id);
-        System.out.println("Ca_id: "+ca_id);
-        System.out.println("Co_id: "+co_id);
-        
-        //System.out.println("CARD: "+ cardElement.getAttribute("name"));
+
         if (cardElement != null) {
             //Element aus der Datei löschen
             columnElement.removeChild(cardElement);
@@ -516,64 +498,81 @@ public class XMLBoard extends XML{
             updateXML(xmlPath);
         }
     }
-    
-       
-    public void editBoard(int id, String attr, String value){
+
+    public void editBoard(int id, String attr, String value) {
         boardList = doc.getElementsByTagName("board");
-        
-        for(int i = 0; i < boardList.getLength(); i++){
-            if(Integer.parseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())) == id){
+
+        for (int i = 0; i < boardList.getLength(); i++) {
+            if (Integer.parseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())) == id) {
                 boardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
                 updateXML(xmlPath);
                 break;
             }
         }
     }
-    
-        
-    public void editColumn(int id, String attr, String value){
+
+    public void editColumn(int id, String attr, String value) {
         columnList = doc.getElementsByTagName("column");
-        
-        for(int i = 0; i < columnList.getLength(); i++){
-            if(Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == id){
+
+        for (int i = 0; i < columnList.getLength(); i++) {
+            if (Integer.parseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == id) {
                 columnList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
                 updateXML(xmlPath);
                 break;
             }
         }
     }
-    
-    public void editCard(int id, String attr, String value){
+
+    public void editCard(int id, String attr, String value) {
         cardList = doc.getElementsByTagName("card");
-        
-        for(int i = 0; i < cardList.getLength(); i++){
-            if(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id){
+
+        for (int i = 0; i < cardList.getLength(); i++) {
+            if (Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id) {
                 cardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
                 updateXML(xmlPath);
                 break;
             }
         }
-    }   
-    
-    public void createNewBoard(){
+    }
+
+    public void createNewBoard() {
         try {
             transformerFactory = TransformerFactory.newInstance();
-               transformer = transformerFactory.newTransformer();
-               source = new DOMSource(doc);
-               result = new StreamResult(new File(xmlPath));
-               transformer.transform(source, result);
+            transformer = transformerFactory.newTransformer();
+            source = new DOMSource(doc);
+            result = new StreamResult(new File(xmlPath));
+            transformer.transform(source, result);
         } catch (TransformerConfigurationException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
+
     }
 
-    public void createBoard(String xmlPath){
+    private boolean checkWip(int co_id) {
+        searchedElement = this.searchColumn(co_id);
+        wip = Kanban.tryParseInt(searchedElement.getAttribute("wip"));
+
+        NodeList cList = doc.getElementsByTagName("card");
+
+        for (int i = 0; i < cList.getLength(); i++) {
+            if (Kanban.tryParseInt(cList.item(i).getAttributes().getNamedItem("co_id").toString()) == co_id) {
+                wipCount++;
+            }
+        }
+
+        if (wip <= wipCount) {
+            wipCheck = true;
+        } else {
+            wipCheck = false;
+        }
+
+        return wipCheck;
+    }
+
+    public void createBoard(String xmlPath) {
         updateXML(xmlPath);
         pk.setB_id();
     }
-
-
 }

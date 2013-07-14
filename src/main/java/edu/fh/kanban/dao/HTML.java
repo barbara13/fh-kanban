@@ -57,10 +57,11 @@ public class HTML extends XML {
     
     
     private ArrayList <Element> trElement = new ArrayList();
-    private ArrayList <Element> tdElement = new ArrayList();
+    private ArrayList <Td> tdElement = new ArrayList();
     
     private Element[] tr;
     private Element[][] td;
+    private int td_i = 0;
     
     private ArrayList <Element> subTableElement = new ArrayList();
     private ArrayList <Element> tdSubElement = new ArrayList();
@@ -95,51 +96,63 @@ public class HTML extends XML {
         
         loadXML();
         
-        tr = new Element[listSubColumn.size()+2];
-        td = new Element[(listMainColumn.size()+2)*3 + listCard.size()][(listMainColumn.size()+2)*3 + listCard.size()];
+        //tr = new Element[listSubColumn.size()+2];
+        //td = new Element[(listMainColumn.size()+2)*3 + listCard.size()][(listMainColumn.size()+2)*3 + listCard.size()];
         
         
         //Next Spalte
         trElement.add(createTrElement(mainTableElement));
-        tdElement.add(createTdElement(trElement.get(0), listSubColumn.get(0).getName().toString()));
+        //tdElement.add(createTdElement(trElement.get(0), listSubColumn.get(0).getName().toString()));
+        tdElement.add(new Td(createTdElement(trElement.get(0), listSubColumn.get(0).getName().toString()),listSubColumn.get(0).getCo_id()));
+
         
         //Main Spalten
         for(int i = 0; i < listMainColumn.size(); i++){
-            tdElement.add(createTdElement(trElement.get(0), listMainColumn.get(i).getName().toString()));
+            //tdElement.add(createTdElement(trElement.get(0), listMainColumn.get(i).getName().toString()));
+            tdElement.add(new Td(createTdElement(trElement.get(0), listMainColumn.get(i).getName().toString()), listMainColumn.get(i).getCo_id()));
         }
         
         
         trElement.add(createTrElement(mainTableElement));
         //Platzhalter für NextSpalte
-        tdElement.add(createTdElement(trElement.get(1), " "));
-        
+        //tdElement.add(createTdElement(trElement.get(1), " "));
+        tdElement.add(new Td(createTdElement(trElement.get(1), " "), 0));
+                
         //Untertabelle Do und Done
         for(int j = 0; j < listMainColumn.size(); j++){
             //System.out.println("tttt");
             //Untertabelle
-            tdElement.add(createTdElement(trElement.get(1), " "));
-            subTableElement.add(createSubTable(tdElement.get(tdElement.size()-1)));
+            //tdElement.add(createTdElement(trElement.get(1), " "));
+            tdElement.add(new Td(createTdElement(trElement.get(1), " "), 0));
+            subTableElement.add(createSubTable(tdElement.get(tdElement.size()-1).getTdElement()));
             trElement.add(createTrElement(subTableElement.get(j)));
-            tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Do"));
-            tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Done"));   
+            //tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Do"));
+            tdElement.add(new Td(createTdElement(trElement.get(trElement.size()-1), "Do"),listMainColumn.get(j).getCo_id()+1));
+            //System.out.println(listMainColumn.get(j).getCo_id());
+            
+            //tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Done"));   
+            tdElement.add(new Td(createTdElement(trElement.get(trElement.size()-1), "Done"),listMainColumn.get(j).getCo_id()+2));
         }
         
         
         
         //Done Spalte
-        tdElement.add(createTdElement(trElement.get(0), listSubColumn.get(listSubColumn.size()-1).getName().toString()));
+        //tdElement.add(createTdElement(trElement.get(0), listSubColumn.get(listSubColumn.size()-1).getName().toString()));
+        tdElement.add(new Td(createTdElement(trElement.get(0), listSubColumn.get(listSubColumn.size()-1).getName().toString()),0));
         
         //Platzhalter
-        tdElement.add(createTdElement(trElement.get(trElement.size()-1), " "));
-            for(int j = 0; j < listSubColumn.size(); j++){
-                //System.out.println(listMainColumn.get(j).getName().toString());
-                //trElement = createTrElement(mainTableElement);
-                //tdElement = createTdElement(trElement, listMainColumn.get(j).getName());
-            }
+        //tdElement.add(createTdElement(trElement.get(trElement.size()-1), " "));
             
+        for(int k = 0; k < listCard.size(); k++){
+            int id = listCard.get(k).getCo_id();
             
-        
-        
+            if(tdElement.get(k).getCo_id() == id){
+                System.out.println("ELEMENT: " +tdElement.get(k).getTdElement().getTextContent());
+                trElement.add(createTrElement(mainTableElement));
+            }        
+                  
+        }
+            
         
         //listBoard.get(0)
 
@@ -198,5 +211,26 @@ public class HTML extends XML {
         colElement.setTextContent(name);
         
         return colElement;
+    }
+    
+    
+    class Td{
+        private Element tdElement;
+        private int co_id;
+
+        public Td(Element tdElement, int co_id) {
+            this.tdElement = tdElement;
+            this.co_id = co_id;
+        }
+
+        public Element getTdElement() {
+            return tdElement;
+        }
+
+        public int getCo_id() {
+            return co_id;
+        }
+        
+        
     }
 }

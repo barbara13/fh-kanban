@@ -15,6 +15,7 @@ import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Column;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.view.BoardView;
+import edu.fh.kanban.ui.view.CardView;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,8 @@ import javax.swing.table.TableModel;
 public class BoardController extends Controller{
     private Object src;
     private BoardView bv;
+    private CardView cv;
+    private int id;
     private XMLBoard xml;
     private XMLCard cxml;
     
@@ -45,10 +48,19 @@ public class BoardController extends Controller{
        cxml = new XMLCard();
     }  
     
-    @Override
-    public void actionPerformed(ActionEvent e) {
         
-        src = e.getSource();
-   
-    } 
+    @Override
+     public void actionPerformed(ActionEvent e) {
+         System.out.println("test");
+         src = e.getSource();
+         id = parseId(e.getActionCommand());
+         cv = new CardView(id);
+         cv.getComponent();
+     }
+    
+    private int parseId(String s){
+        int s1 = s.indexOf(":");
+
+        return Integer.parseInt(s.substring(0, s1));
+    }
 }

@@ -118,6 +118,7 @@ private JLabel title;
         listCards = xml.readCardsFromColumn(column.getCo_id());
         
         cards[columncount] = new JButton(String.valueOf(listCards.get(columncount).getCa_id())+": " + listCards.get(columncount).getName());
+        cards[columncount].addActionListener(c);
         bpanel.add(cards[columncount], CC.xy(sameColumn, 8, CC.CENTER, CC.CENTER));
         
         }catch (java.lang.IndexOutOfBoundsException exc){

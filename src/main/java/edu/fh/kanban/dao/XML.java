@@ -20,18 +20,21 @@ import org.w3c.dom.Document;
  * @author Ronald
  */
 public class XML {
+
     protected TransformerFactory transformerFactory;
     protected Transformer transformer;
     protected DOMSource source;
     protected StreamResult result;
     protected Document doc;
-    
+
     protected String getString(String s) {
         int s1 = s.indexOf("=\"") + 2;
         int s2 = s.length() - 1;
 
         return s.substring(s1, s2);
     }
+
+
 
     protected void updateXML(String name) {
         try {
