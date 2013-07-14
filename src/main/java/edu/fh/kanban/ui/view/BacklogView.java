@@ -12,6 +12,7 @@ import com.jgoodies.forms.factories.FormFactory;
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.controller.BacklogController;
+import edu.fh.kanban.ui.controller.CardCreateController;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JComboBox;
@@ -31,7 +32,7 @@ public class BacklogView implements View {
 
     private JTextField searchfield;
     private BacklogController c = new BacklogController(this);
-    public  JPanel panel;
+    private JPanel panel;
     private JSeparator sep;
     private JButton[] cards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
@@ -41,10 +42,10 @@ public class BacklogView implements View {
     /**
      * @wbp.parser.entryPoint
      */
+
+    
     @Override
-    public JComponent getComponent() {
-
-
+    public  JComponent getComponent() {
 
         c = new BacklogController(this);
         panel = new JPanel();
@@ -90,9 +91,6 @@ public class BacklogView implements View {
 //		searchfield.addKeyListener(c);
         panel.add(searchfield, "6, 2, 3, 1, right, default");
         searchfield.setColumns(10);
-
-
-
 
 
         searchfield.addKeyListener(new KeyListener() {

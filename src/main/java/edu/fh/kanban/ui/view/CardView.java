@@ -89,7 +89,7 @@ public class CardView extends JFrame implements View {
     }
     
     
-    public void getCards(){
+    public void getCards(){RF
         XMLBoard board = new XMLBoard();
         listCard = board.readCards();
     }*/

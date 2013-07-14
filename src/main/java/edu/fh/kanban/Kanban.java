@@ -105,10 +105,15 @@ public class Kanban {
             }
         });
 
+        
+        BacklogView backlogView = new BacklogView();
+        View boardView = new BoardView();
+        final CardCreateView cardCreateView = new CardCreateView(backlogView);
+                
         JMenuItem card_preferences = new JMenuItem("New Card");
         card_preferences.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new CardCreateView().getComponent();
+                cardCreateView.getComponent();
             }
         });
 
@@ -145,8 +150,6 @@ public class Kanban {
         JMenuBar menubar = new JMenuBar();
         menubar.add(file);
 
-        View backlogView = new BacklogView();
-        View boardView = new BoardView();
 
         pane = new JTabbedPane();
         pane.addTab("Backlog", backlogView.getComponent());
