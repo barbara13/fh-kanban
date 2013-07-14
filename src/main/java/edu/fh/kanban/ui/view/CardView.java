@@ -12,6 +12,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import edu.fh.kanban.Kanban;
+import edu.fh.kanban.dao.XMLBoard;
 
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.data.Card;
@@ -39,7 +40,7 @@ public class CardView extends JFrame implements View {
     int effort, value;
     private String description, headline, create, start, done, status;
     private JButton btnAddCard, btnEdit, btnDelete, btnCancel;
-    private ArrayList<Card> listCard = new ArrayList();
+    //private ArrayList<Card> listCard = new ArrayList();
 
     public int getcId() {
         return cId;
@@ -81,7 +82,19 @@ public class CardView extends JFrame implements View {
         return btnCancel;
     }
 
-    public CardView(int cId) {
+   /* 
+    public void getBoardCards(){
+        XMLCard card = new XMLCard();
+        listCard = card.readCards();
+    }
+    
+    
+    public void getCards(){
+        XMLBoard board = new XMLBoard();
+        listCard = board.readCards();
+    }*/
+    
+    public CardView(int cId, ArrayList<Card> listCard) {
 
         cController = new CardController(this);
         setBounds(new Rectangle(0, 0, 455, 300));
@@ -89,8 +102,9 @@ public class CardView extends JFrame implements View {
         setResizable(false);
 
         this.cId = cId;
-        XMLCard card = new XMLCard();
-        listCard = card.readCards();
+       
+        
+        
 
         //Auslesen der cards
         for (int i = 0; i < listCard.size(); i++) {

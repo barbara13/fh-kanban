@@ -39,22 +39,23 @@ public class BoardController extends Controller{
     private CardView cv;
     private int id;
     private XMLBoard xml;
-    private XMLCard cxml;
+    private ArrayList<Card> listCard = new ArrayList();
     
     
     public BoardController(BoardView bv){
        this.bv = bv;
        xml = new XMLBoard();
-       cxml = new XMLCard();
     }  
     
         
     @Override
      public void actionPerformed(ActionEvent e) {
-         System.out.println("test");
+         xml.loadXML(Kanban.xmlPath);
+         listCard = xml.readCards();
+         System.out.println(listCard.get(0).getName());
          src = e.getSource();
          id = parseId(e.getActionCommand());
-         cv = new CardView(id);
+         cv = new CardView(id, listCard);
          cv.getComponent();
      }
     

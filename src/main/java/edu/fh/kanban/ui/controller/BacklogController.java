@@ -62,71 +62,6 @@ public class BacklogController extends Controller{
             }
         }
     }
-    
-//    @Override
-//     public void actionPerformed(ActionEvent e) {
-//     
-//         src = e.getSource();
-//         System.out.println(e.getActionCommand());
-//         //System.out.println(blv.getCards()[e.].getText());
-//
-//     
-//     }
-    
- /*   public void keyReleased(KeyEvent e) {
-        if(blv.getSearch().getText().toString() == "Hallo"){
-        	System.out.println("Suche");
-        }
-        }*/
-    
-    
-/*    public void actionPerformed(ActionEvent e) {
-    	listCard = xml.readCards();    	
-
-		s = (String) blv.getSort().getSelectedItem();
-		
-//		System.out.println(s);
-		
-		if (s == "Creation time"){
-			
-			Collections.addAll(listCard);
-			System.out.println(listCard);
-			
-			k=2;
-			j=2;
-			
-			listCard = xml.readCards();
-//			blv.getPanel().removeAll();
-			blv.getPanel().revalidate();
-			
-	        for (i = 0; i < listCard.size(); i++) {
-	            
-	            blv.getCards()[i] = new JButton(String.valueOf(listCard.get(i).getCa_id())+": "+listCard.get(i).getName());
-	            blv.getCards()[i].addActionListener(this);
-	            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + k, 6 + j, 1, 1));
-	            
-	            
-	            j++;
-	            j++;
-
-	            if (j== 20) {
-	                k++;
-	                k++;
-	                j = 0;
-	            }
-	        }
-		}
-		else if (s == "Headline"){
-			System.out.println("Test2");
-		}
-		else if (s == "Value"){
-			System.out.println("Test3");
-		}
-		else if (s == "Size"){
-			System.out.println("Test4");
-		}
-	}*/
-
 
     
 
@@ -138,7 +73,7 @@ public class BacklogController extends Controller{
      
          src = e.getSource();
          id = parseId(e.getActionCommand());
-         cv = new CardView(id);
+         cv = new CardView(id, listCard);
          cv.getComponent();
      }
     
