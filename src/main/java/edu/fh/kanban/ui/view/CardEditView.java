@@ -101,9 +101,9 @@ public class CardEditView extends JFrame{
 		//Werte werden initilisiert
 		this.cId = cardId;
 		txtHeadline = new JTextField(headline);
-		txtCardId = new JTextField(cardId);
-		txtEffort = new JTextField(effort);
-		txtValue = new JTextField(value);
+		txtCardId = new JTextField("" + cardId);
+		txtEffort = new JTextField("" + effort);
+		txtValue = new JTextField("" + value);
 		textDescription = new TextArea(description);
 		this.status = status;
 	}
@@ -158,6 +158,7 @@ public class CardEditView extends JFrame{
 		txtCardId.addKeyListener(cController);
 		getContentPane().add(txtCardId, "4, 4, 7, 1, default, top");
 		txtCardId.setColumns(10);
+                txtCardId.setEditable(false);
 		
 		getContentPane().add(new JLabel("Value:"), "16, 4, right, center");
 		txtValue.addKeyListener(cController);
