@@ -32,28 +32,34 @@ public class BacklogView extends JPanel implements View {
 
     private JTextField searchfield;
     private BacklogController c;
-    private JPanel panel = new JPanel();;
+    private JPanel panel = new JPanel();
     private JSeparator sep;
     private JButton[] cards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
     private JComboBox comboBox;
     private int i = 0;
+    private BoardView bv;
 
     /**
      * @wbp.parser.entryPoint
      */
+    public void setBv(BoardView bv) {
+        this.bv = bv;
+    }
+
+    
+    
   public BacklogView() {
      //BoardController im Konstruktor
-        c = new BacklogController(this);
+        
+       
         //xml = new XMLBoard();
         getComponents();
     }
 
     
     public  JComponent getComponent() {
-
-        c = new BacklogController(this);
-        
+            c = new BacklogController(this, bv);
         panel.setLayout(new FormLayout(new ColumnSpec[]{
             FormFactory.RELATED_GAP_COLSPEC,
             ColumnSpec.decode("max(120dlu;pref)"),//61

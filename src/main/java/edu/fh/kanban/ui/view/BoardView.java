@@ -19,15 +19,17 @@ public class BoardView extends JPanel implements View {
 //BoardController definieren    
  private BoardController c = null;
  private XMLBoard xml;
+ private BacklogView blv;
  private ArrayList <Column> listSubColumns = new ArrayList();
  private ArrayList <Column> listMainColumns = new ArrayList();
  private ArrayList <Board> listBoard = new ArrayList();
  private ArrayList <Card> listCards = new ArrayList();
+ private JPanel bpanel = new JPanel();
  
- 
-    public BoardView() {
+    public BoardView(BacklogView blv) {
      //BoardController im Konstruktor
         c = new BoardController(this);
+        this.blv = blv;
         xml = new XMLBoard();
         getComponents();
     }
@@ -52,7 +54,7 @@ public class BoardView extends JPanel implements View {
     
     
 
-private JPanel bpanel;
+
 private JTextField searchtext;
 private JButton[] cards= new JButton[100];
 private JLabel[] columns = new JLabel[100];
@@ -144,7 +146,7 @@ private JLabel title;
         //System.out.println(listSubColumns.get(i).getCo_id());
         
         
-        bpanel = new JPanel();
+        
         searchtext = new JTextField();
         columnSize = new String("5dlu, 50dlu, ");
         rowSize = new String("5dlu, 20dlu, ");

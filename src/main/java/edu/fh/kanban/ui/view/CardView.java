@@ -103,13 +103,12 @@ public class CardView extends JFrame implements View {
         listCard = board.readCards();
     }*/
     
-    public CardView(int cId, ArrayList<Card> listCard) {
+    public CardView(int cId, ArrayList<Card> listCard, BacklogView blv, BoardView bv) {
 
-        cController = new CardController(this);
+        cController = new CardController(this, blv, bv);
         setBounds(new Rectangle(0, 0, 455, 300));
         setLocationByPlatform(true);
         setResizable(false);
-
         this.cId = cId;
        
         

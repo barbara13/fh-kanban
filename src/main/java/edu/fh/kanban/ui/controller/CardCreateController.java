@@ -23,7 +23,7 @@ public class CardCreateController implements ActionListener, KeyListener {
 
     private Object src;
     private CardCreateView cCreateView;
-    public  BacklogView bv;
+    private  BacklogView bv;
     private XMLCard xml;
     private String status = "Standard";
 

@@ -8,6 +8,7 @@ import com.jgoodies.forms.factories.CC;
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.view.BacklogView;
+import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ import javax.swing.JButton;
  * @author KingDCB
  */
 public class BacklogController extends Controller{
-
+    
+    private BoardView bv;
     private BacklogView blv;
     private CardView cv;
     private XMLCard xml;
@@ -30,9 +32,11 @@ public class BacklogController extends Controller{
     private Object src;
     private String s = null;
     private int id;
+    
+    
 
-    public BacklogController(BacklogView blv) {
-
+    public BacklogController(BacklogView blv, BoardView bv) {
+        this.bv = bv;
         this.blv = blv;
         xml = new XMLCard();
     }
@@ -70,7 +74,7 @@ public class BacklogController extends Controller{
      
          src = e.getSource();
          id = parseId(e.getActionCommand());
-         cv = new CardView(id, listCard);
+         cv = new CardView(id, listCard, blv, bv);
          cv.getComponent();
          cv.getBtnBackward().setVisible(false);
          cv.getBtnForward().setVisible(false);

@@ -14,6 +14,7 @@ import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Column;
 import edu.fh.kanban.data.Card;
+import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
 import java.awt.Component;
@@ -36,6 +37,7 @@ import javax.swing.table.TableModel;
 public class BoardController extends Controller{
     private Object src;
     private BoardView bv;
+    private BacklogView blv;
     private CardView cv;
     private int id;
     private XMLBoard xml;
@@ -54,7 +56,7 @@ public class BoardController extends Controller{
          listCard = xml.readCards();
          src = e.getSource();
          id = parseId(e.getActionCommand());
-         cv = new CardView(id, listCard);
+         cv = new CardView(id, listCard, blv, bv);
          cv.getComponent();
          cv.getBtnEdit().setVisible(false);
          cv.getBtnAddCard().setVisible(false);

@@ -106,8 +106,11 @@ public class Kanban {
         });
 
         
-        BacklogView backlogView = new BacklogView();
-        View boardView = new BoardView();
+        final BacklogView backlogView = new BacklogView();
+        BoardView boardView = new BoardView(backlogView);
+        backlogView.setBv(boardView);
+        System.out.println("Kanban: " + boardView);
+        
         final CardCreateView cardCreateView = new CardCreateView(backlogView);
                 
         JMenuItem card_preferences = new JMenuItem("New Card");
@@ -123,7 +126,7 @@ public class Kanban {
                 FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
                 chooser = new JFileChooser();
                 chooser.addChoosableFileFilter(filter);
-                BoardView boardView = new BoardView();
+                BoardView boardView = new BoardView(backlogView);
                 int x = chooser.showOpenDialog(null);
 
                 if (x == JFileChooser.APPROVE_OPTION) {
