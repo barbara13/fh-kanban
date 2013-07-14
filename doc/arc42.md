@@ -114,6 +114,7 @@ Exception Handling.
 Grafische Benutzeroberfläche mittels Swing
 
 ## 7.5. Ergonomie
+Einsatz einer GUI.
 
 ## 7.6. Geschäftsregeln
 
@@ -123,6 +124,7 @@ Grafische Benutzeroberfläche mittels Swing
 Auftretende Exceptions werden in einer Log File gespeichert.
 
 ## 7.9. Management und Administrierbarkeit
+--
 
 ## 7.10. Persistenz
 Speicherung aller Daten in XML Dateien.
