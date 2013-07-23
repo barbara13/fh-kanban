@@ -51,8 +51,7 @@ public class Kanban {
      * @param args
      */
     public static void main(String[] args) {
-
-
+    	
         LOGGER.info("Starting kanban app.");
         LOGGER.info("Setting look and feel.");
         try {
