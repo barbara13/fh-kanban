@@ -2,11 +2,12 @@ package edu.fh.kanban.ui.controller;
 
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.ui.view.CardEditView;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +20,6 @@ public class CardEditController implements ActionListener, KeyListener {
 
     private Object src;
     private CardEditView cEditView;
-    private String status = "Standard";
     private XMLCard card = new XMLCard();
 
     //Konstruktor
@@ -30,48 +30,14 @@ public class CardEditController implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         src = e.getSource();
 
-        if (cEditView.getTglbtnRed().isSelected()) {
-            status = ("Expedite");
-            cEditView.getContentPane().setBackground(Color.RED);
-        } else if (cEditView.getTglbtnYellow().isSelected()) {
-            status = ("Standard");
-            cEditView.getContentPane().setBackground(Color.YELLOW);
-        } else if (cEditView.getTglbtnGreen().isSelected()) {
-            status = ("Fixed Date");
-            cEditView.getContentPane().setBackground(Color.GREEN);
-        } else if (cEditView.getTglbtnBlue().isSelected()) {
-            status = ("Intangible");
-            cEditView.getContentPane().setBackground(Color.BLUE);
-        }
-
         if (src == cEditView.getBtnSave()) {
-            if (cEditView.getTxtHeadline().getText().isEmpty() || cEditView.getTxtCardId().getText().isEmpty() || cEditView.getTxtEffort().getText().isEmpty() || cEditView.getTxtValue().getText().isEmpty()) {
-                if (cEditView.getTxtHeadline().getText().isEmpty()) {
-                    cEditView.getTxtHeadline().setBackground(Color.RED);
-                } else {
-                    cEditView.getTxtHeadline().setBackground(Color.WHITE);
-                }
-                if (cEditView.getTxtEffort().getText().isEmpty()) {
-                    cEditView.getTxtEffort().setBackground(Color.RED);
-                } else {
-                    cEditView.getTxtEffort().setBackground(Color.WHITE);
-                }
-                if (cEditView.getTxtValue().getText().isEmpty()) {
-                    cEditView.getTxtValue().setBackground(Color.RED);
-                } else {
-                    cEditView.getTxtValue().setBackground(Color.WHITE);
-                }
-                if (cEditView.getTextDescription().getText().isEmpty()) {
-                    cEditView.getTextDescription().setBackground(Color.RED);
-                } else {
-                    cEditView.getTextDescription().setBackground(Color.WHITE);
-                }
+            if (cEditView.getTxtHeadline().isEmpty() || cEditView.getTxtEffort().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "nicht alle Felder sind ausgefüllt", "Fehlermelung", JOptionPane.WARNING_MESSAGE);
             } else {
-                card.editCard(cEditView.getCId(), "name", cEditView.getTxtHeadline().getText().toString());
-                card.editCard(cEditView.getCId(), "effort", cEditView.getTxtEffort().getText().toString());
-                card.editCard(cEditView.getCId(), "value", cEditView.getTxtValue().getText().toString());
-                card.editCard(cEditView.getCId(), "description", cEditView.getTextDescription().getText().toString());
-                card.editCard(cEditView.getCId(), "status", status);
+                card.editCard(cEditView.getCId(), "name", cEditView.getTxtHeadline());
+                card.editCard(cEditView.getCId(), "effort", cEditView.getTxtEffort());
+                card.editCard(cEditView.getCId(), "value", cEditView.getValue());
+                card.editCard(cEditView.getCId(), "description", cEditView.getTextDescription());
                 cEditView.dispose();
                 //Datenbank Eintrag ändern der cId --> cEditView.getCId()
             }
@@ -80,12 +46,8 @@ public class CardEditController implements ActionListener, KeyListener {
         }
     }
 
-    public void keyPressed(KeyEvent e) {
-    }
-
-    public void keyReleased(KeyEvent e) {
-    }
-
+    public void keyPressed(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
         if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {

@@ -33,7 +33,7 @@ public class CardEditView extends JFrame{
 	private CardEditController cController = null;
 	
 	private int cId;
-	private JTextField txtHeadline, txtCardId, txtEffort, txtValue;
+	private JTextField txtHeadline, txtEffort;
 	private TextArea textDescription;
 	private JButton btnCancel, btnSave;
     private JComboBox<String> comboBoxValue;
@@ -56,13 +56,10 @@ public class CardEditView extends JFrame{
 		//Werte werden initilisiert
 		this.cId = cardId;
 		txtHeadline = new JTextField(headline);
-		txtCardId = new JTextField("" + cardId);
 		txtEffort = new JTextField("" + effort);
 		textDescription = new TextArea(description);
 		comboBoxValue = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"Standart", "Expedite", "Fixed Date", "Intangible"}));
 		comboBoxValue.setSelectedIndex(index);
-		
-		getComponent();
 	}
 
 	//Methode aus der Klasse View initialsiert das Fenster und gibt getContentPane() zurück
@@ -125,24 +122,20 @@ public class CardEditView extends JFrame{
 		return cId;
 	}
 	
-	public JTextField getTxtHeadline() {
-		return txtHeadline;
+	public String getTxtHeadline() {
+		return txtHeadline.getText().toString();
 	}
 
-	public JTextField getTxtCardId() {
-		return txtCardId;
+	public String getTxtEffort() {
+		return txtEffort.getText().toString();
 	}
 
-	public JTextField getTxtEffort() {
-		return txtEffort;
+	public String getValue() {
+		return comboBoxValue.getSelectedItem().toString();
 	}
 
-	public JTextField getTxtValue() {
-		return txtValue;
-	}
-
-	public TextArea getTextDescription() {
-		return textDescription;
+	public String getTextDescription() {
+		return textDescription.getText().toString();
 	}
 
 	public JButton getBtnCancel() {
