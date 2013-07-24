@@ -53,6 +53,7 @@ public class CardCreateController implements ActionListener, KeyListener {
                 }
             } else {
                 //Eintrag in die XMLCard
+            	System.out.println(cCreateView.getComboBoxValue());
 //                xml.addCard(cCreateView.getTxtHeadline().getText().toString(), cCreateView.getTextDescription().getText().toString(), cCreateView.getTxtEffort().getText().toString(), cCreateView.getTxtValue().getText().toString(), status);
                 xml.createCard();
                 cCreateView.dispose();
