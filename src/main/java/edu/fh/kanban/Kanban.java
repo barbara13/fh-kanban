@@ -75,6 +75,7 @@ public class Kanban {
             }
         });
         
+        
         final BacklogView backlogView = new BacklogView();
         BoardView boardView = new BoardView(backlogView);
         backlogView.setBv(boardView);
