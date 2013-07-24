@@ -21,7 +21,7 @@ public class CardEditController implements ActionListener, KeyListener {
     private CardEditView cEditView;
     private String status = "Standard";
     private XMLCard card = new XMLCard();
-    
+
     //Konstruktor
     public CardEditController(CardEditView cEditView) {
         this.cEditView = cEditView;
@@ -66,7 +66,7 @@ public class CardEditController implements ActionListener, KeyListener {
                 } else {
                     cEditView.getTextDescription().setBackground(Color.WHITE);
                 }
-            } else {   
+            } else {
                 card.editCard(cEditView.getCId(), "name", cEditView.getTxtHeadline().getText().toString());
                 card.editCard(cEditView.getCId(), "effort", cEditView.getTxtEffort().getText().toString());
                 card.editCard(cEditView.getCId(), "value", cEditView.getTxtValue().getText().toString());

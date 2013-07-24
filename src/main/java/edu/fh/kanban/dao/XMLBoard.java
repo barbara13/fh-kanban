@@ -101,7 +101,7 @@ public class XMLBoard extends XML {
         boardList = doc.getElementsByTagName("board");
 
         for (int i = 0; i < boardList.getLength(); i++) {
-            listBoard.add(new Board(Kanban.tryParseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(boardList.item(i).getAttributes().getNamedItem("name").toString()), getString(boardList.item(i).getAttributes().getNamedItem("color").toString())));
+            listBoard.add(new Board(Kanban.tryParseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(boardList.item(i).getAttributes().getNamedItem("name").toString()), getString(boardList.item(i).getAttributes().getNamedItem("expedite").toString()),getString(boardList.item(i).getAttributes().getNamedItem("standart").toString()), getString(boardList.item(i).getAttributes().getNamedItem("fixedDate").toString()), getString(boardList.item(i).getAttributes().getNamedItem("intangible").toString())));
         }
 
         return listBoard;
@@ -155,7 +155,7 @@ public class XMLBoard extends XML {
         return listCard;
     }
 
-    public void addBoard(String name, String color) {
+    public void addBoard(String name, String expedite, String standart, String fixedDate, String intangible) {
         //Wenn kein root existiert
 
         //doc = docBuilder.newDocument();
@@ -176,10 +176,26 @@ public class XMLBoard extends XML {
         attr.setValue(name);
         rootElement.setAttributeNode(attr);
 
-        //Attribut color hinzufügen
-        attr = doc.createAttribute("color");
-        attr.setValue(color);
+        //Attribut expedite hinzufügen
+        attr = doc.createAttribute("expedite");
+        attr.setValue(expedite);
         rootElement.setAttributeNode(attr);
+        
+        //Attribut standart hinzufügen
+        attr = doc.createAttribute("standart");
+        attr.setValue(standart);
+        rootElement.setAttributeNode(attr);
+        
+        //Attribut fixedDate hinzufügen
+        attr = doc.createAttribute("fixedDate");
+        attr.setValue(fixedDate);
+        rootElement.setAttributeNode(attr);
+        
+        //Attribut intangible hinzufügen
+        attr = doc.createAttribute("intangible");
+        attr.setValue(intangible);
+        rootElement.setAttributeNode(attr);
+
 
 
 

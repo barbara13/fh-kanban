@@ -40,6 +40,7 @@ public class CardCreateController implements ActionListener, KeyListener {
         //über die Methode addCard die Karte hinzugefügt
         //Sollte das nicht der Fall sein wird das Feld ROT markiert das nicht ausgefüllt ist
         if (src == cCreateView.getBtnCreate()) {
+            
             if (cCreateView.getTxtHeadline().getText().isEmpty() || cCreateView.getTxtEffort().getText().isEmpty()) {
                 if (cCreateView.getTxtHeadline().getText().isEmpty()) {
                     cCreateView.getTxtHeadline().setBackground(Color.RED);
@@ -52,6 +53,7 @@ public class CardCreateController implements ActionListener, KeyListener {
                     cCreateView.getTxtEffort().setBackground(Color.WHITE);
                 }
             } else {
+    
                 //Eintrag in die XMLCard
 //                xml.addCard(cCreateView.getTxtHeadline().getText().toString(), cCreateView.getTextDescription().getText().toString(), cCreateView.getTxtEffort().getText().toString(), cCreateView.getTxtValue().getText().toString(), status);
                 xml.createCard();
@@ -59,7 +61,6 @@ public class CardCreateController implements ActionListener, KeyListener {
                 bv.getPanel().removeAll();
                 bv.getComponent();
                 bv.getPanel().updateUI();
-
             }
             //Cancel Button schließt das Fenster ohne änderungen vorzunehmen
         } else if (src == cCreateView.getBtnCancel()) {
