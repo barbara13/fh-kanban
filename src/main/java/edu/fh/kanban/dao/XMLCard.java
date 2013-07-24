@@ -69,7 +69,7 @@ public class XMLCard extends XML {
         }
     }
 
-    public void addCard(String name, String description, String effort, String value, String status) {
+    public void addCard(String name, String description, String effort, String value, String blocker, String blocker_tooltip) {
         cardElement = doc.createElement("card");
         doc.getDocumentElement().appendChild(cardElement);
 
@@ -103,9 +103,14 @@ public class XMLCard extends XML {
         attr.setValue(value);
         cardElement.setAttributeNode(attr);
 
-        //Attribut Status hinzufügen
-        attr = doc.createAttribute("status");
-        attr.setValue(status);
+        //Attribut Blocker hinzufügen
+        attr = doc.createAttribute("blocker");
+        attr.setValue(blocker);
+        cardElement.setAttributeNode(attr);
+        
+        //Attribut Blocker_Tooltip hinzufügen
+        attr = doc.createAttribute("blocker_tooltip");
+        attr.setValue(blocker_tooltip);
         cardElement.setAttributeNode(attr);
         
         //Attribut Created hinzufügen
@@ -175,7 +180,7 @@ public class XMLCard extends XML {
         cardList = doc.getElementsByTagName("card");
         
         for(int i = 0; i < cardList.getLength() ; i++){
-            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("status").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString()), getString(cardList.item(i).getAttributes().getNamedItem("started").toString()), getString(cardList.item(i).getAttributes().getNamedItem("done").toString())));
+            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("value").toString())),getString(cardList.item(i).getAttributes().getNamedItem("blocker").toString()), getString(cardList.item(i).getAttributes().getNamedItem("blocker_tooltip").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString()), getString(cardList.item(i).getAttributes().getNamedItem("started").toString()), getString(cardList.item(i).getAttributes().getNamedItem("done").toString())));
          }
         return listCard;
     }
