@@ -14,14 +14,14 @@ public class Card {
     private String name;
     private String description;
     private int effort;
-    private int value;
+    private String value;
     private String blocker;
     private String blocker_tooltip;
     private String createdDate;
     private String startedDate;
     private String doneDate;
 
-    public Card(int ca_id, int co_id, String name, String description, int effort, int value, String blocker, String blocker_tooltip,String createdDate, String startedDate, String doneDate) {
+    public Card(int ca_id, int co_id, String name, String description, int effort, String value, String blocker, String blocker_tooltip,String createdDate, String startedDate, String doneDate) {
         this.ca_id = ca_id;
         this.co_id = co_id;
         this.name = name;
@@ -55,7 +55,7 @@ public class Card {
         return effort;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 
