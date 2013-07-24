@@ -36,26 +36,11 @@ public class CardCreateController implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         src = e.getSource();	//welcher Button gedrückt wurde wird im src gespeichert
 
-        //Je nachdem welcher JToggleButton betätigt wird, wird der status verändert und der Hintergrung gesetzt
-        if (cCreateView.getTglbtnRed().isSelected()) {
-            status = ("Expedite");
-            cCreateView.getContentPane().setBackground(Color.RED);
-        } else if (cCreateView.getTglbtnYellow().isSelected()) {
-            status = ("Standard");
-            cCreateView.getContentPane().setBackground(Color.YELLOW);
-        } else if (cCreateView.getTglbtnGreen().isSelected()) {
-            status = ("Fixed Date");
-            cCreateView.getContentPane().setBackground(Color.GREEN);
-        } else if (cCreateView.getTglbtnBlue().isSelected()) {
-            status = ("Intangible");
-            cCreateView.getContentPane().setBackground(Color.BLUE);
-        }
-
         //Create Button überprüft zunächst ob alle einträge vorhanden sind ist das der Fall wird in die XMLCard 
         //über die Methode addCard die Karte hinzugefügt
         //Sollte das nicht der Fall sein wird das Feld ROT markiert das nicht ausgefüllt ist
         if (src == cCreateView.getBtnCreate()) {
-            if (cCreateView.getTxtHeadline().getText().isEmpty() || cCreateView.getTxtEffort().getText().isEmpty() || cCreateView.getTxtValue().getText().isEmpty()) {
+            if (cCreateView.getTxtHeadline().getText().isEmpty() || cCreateView.getTxtEffort().getText().isEmpty()) {
                 if (cCreateView.getTxtHeadline().getText().isEmpty()) {
                     cCreateView.getTxtHeadline().setBackground(Color.RED);
                 } else {
@@ -66,14 +51,9 @@ public class CardCreateController implements ActionListener, KeyListener {
                 } else {
                     cCreateView.getTxtEffort().setBackground(Color.WHITE);
                 }
-                if (cCreateView.getTxtValue().getText().isEmpty()) {
-                    cCreateView.getTxtValue().setBackground(Color.RED);
-                } else {
-                    cCreateView.getTxtValue().setBackground(Color.WHITE);
-                }
             } else {
                 //Eintrag in die XMLCard
-                xml.addCard(cCreateView.getTxtHeadline().getText().toString(), cCreateView.getTextDescription().getText().toString(), cCreateView.getTxtEffort().getText().toString(), cCreateView.getTxtValue().getText().toString(), status);
+//                xml.addCard(cCreateView.getTxtHeadline().getText().toString(), cCreateView.getTextDescription().getText().toString(), cCreateView.getTxtEffort().getText().toString(), cCreateView.getTxtValue().getText().toString(), status);
                 xml.createCard();
                 cCreateView.dispose();
                 bv.getPanel().removeAll();
