@@ -34,35 +34,11 @@ public class CardCreateView extends JFrame implements View {
      */
     private static final long serialVersionUID = 1L;
     private CardCreateController cController = null;	//Controller zur View
-//    private BacklogView bv;
+    private BacklogView bv;
     private JTextField txtHeadline, txtEffort;
     private TextArea textDescription;
     private JButton btnCancel, btnCreate;
     private JComboBox<String> comboBoxValue;
-
-    public JTextField getTxtHeadline() {
-        return txtHeadline;
-    }
-
-    public JTextField getTxtEffort() {
-        return txtEffort;
-    }
-
-    public String getComboBoxValue() {
-        return comboBoxValue.getSelectedItem().toString();
-    }
-
-    public TextArea getTextDescription() {
-        return textDescription;
-    }
-
-    public JButton getBtnCreate() {
-        return btnCreate;
-    }
-
-    public JButton getBtnCancel() {
-        return btnCancel;
-    }
 
     //Konstrukor
     public CardCreateView(BacklogView bv) {
@@ -74,8 +50,6 @@ public class CardCreateView extends JFrame implements View {
         setBounds(new Rectangle(0, 0, 700, 500));
         setLocationByPlatform(true);
         setResizable(false);
-        
-        getComponent();
     }
 
     //Methode aus der Klasse View initialsiert das Fenster und gibt getContentPane() zurück
@@ -140,5 +114,29 @@ public class CardCreateView extends JFrame implements View {
 
         setVisible(true);
         return (JComponent) getContentPane();
+    }
+    
+    public String getTxtHeadline() {
+        return txtHeadline.getText().toString();
+    }
+
+    public String getTxtEffort() {
+        return txtEffort.getText().toString();
+    }
+
+    public String getValue() {
+        return comboBoxValue.getSelectedItem().toString();
+    }
+
+    public String getTextDescription() {
+        return textDescription.getText().toString();
+    }
+
+    public JButton getBtnCreate() {
+        return btnCreate;
+    }
+
+    public JButton getBtnCancel() {
+        return btnCancel;
     }
 }

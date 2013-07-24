@@ -1,20 +1,20 @@
 package edu.fh.kanban.ui.controller;
 
-import com.jgoodies.forms.factories.CC;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JOptionPane;
+
 import edu.fh.kanban.ui.view.CardCreateView;
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.ui.view.BacklogView;
-import javax.swing.JButton;
 
 /**
  *
- * @author Maxim, David, Malte
+ * @author Maxim
  *
  * Die Klasse CardCreateContoller ist der Controller für die Klasse
  * CardCreateView Diese Händelt die Button Klicks und die JTextfield Einträge
@@ -25,7 +25,6 @@ public class CardCreateController implements ActionListener, KeyListener {
     private CardCreateView cCreateView;
     private  BacklogView bv;
     private XMLCard xml;
-    private String status = "Standard";
 
     public CardCreateController(CardCreateView cCreateView, BacklogView bv) {
         this.cCreateView = cCreateView;
@@ -36,25 +35,16 @@ public class CardCreateController implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         src = e.getSource();	//welcher Button gedrückt wurde wird im src gespeichert
 
+
         //Create Button überprüft zunächst ob alle einträge vorhanden sind ist das der Fall wird in die XMLCard 
         //über die Methode addCard die Karte hinzugefügt
         //Sollte das nicht der Fall sein wird das Feld ROT markiert das nicht ausgefüllt ist
-        if (src == cCreateView.getBtnCreate()) {
-            if (cCreateView.getTxtHeadline().getText().isEmpty() || cCreateView.getTxtEffort().getText().isEmpty()) {
-                if (cCreateView.getTxtHeadline().getText().isEmpty()) {
-                    cCreateView.getTxtHeadline().setBackground(Color.RED);
-                } else {
-                    cCreateView.getTxtHeadline().setBackground(Color.WHITE);
-                }
-                if (cCreateView.getTxtEffort().getText().isEmpty()) {
-                    cCreateView.getTxtEffort().setBackground(Color.RED);
-                } else {
-                    cCreateView.getTxtEffort().setBackground(Color.WHITE);
-                }
-            } else {
+        if(src == cCreateView.getBtnCreate()){
+            if (cCreateView.getTxtHeadline().isEmpty() || cCreateView.getTxtEffort().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "nicht alle Felder sind ausgefüllt", "Fehlermelung", JOptionPane.WARNING_MESSAGE);
+            }else{
                 //Eintrag in die XMLCard
-            	System.out.println(cCreateView.getComboBoxValue());
-//                xml.addCard(cCreateView.getTxtHeadline().getText().toString(), cCreateView.getTextDescription().getText().toString(), cCreateView.getTxtEffort().getText().toString(), cCreateView.getTxtValue().getText().toString(), status);
+                xml.addCard(cCreateView.getTxtHeadline(), cCreateView.getTextDescription(), cCreateView.getTxtEffort(), cCreateView.getValue(), "false", "");
                 xml.createCard();
                 cCreateView.dispose();
                 bv.getPanel().removeAll();
@@ -69,12 +59,8 @@ public class CardCreateController implements ActionListener, KeyListener {
     }
 
     //In bestimmten JTextfield's werden nur Zahlen aktzeptiert diese sorgt dafür
-    public void keyPressed(KeyEvent e) {
-    }
-
-    public void keyReleased(KeyEvent e) {
-    }
-
+    public void keyPressed(KeyEvent e) {}
+    public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
         if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
