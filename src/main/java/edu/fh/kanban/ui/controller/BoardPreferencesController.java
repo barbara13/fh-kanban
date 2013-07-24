@@ -72,31 +72,14 @@ public class BoardPreferencesController extends Controller {
                 }
             }
 
-            if (bpv.getTxtName().getText().isEmpty() || (!bpv.getTglbtnRot().isSelected() && !bpv.getTglbtnGelb().isSelected() && !bpv.getTglbtnGruen().isSelected() && !bpv.getTglbtnBlau().isSelected())) {
+            if (bpv.getTxtName().getText().isEmpty()) {
                 if (bpv.getTxtName().getText().isEmpty()) {
                     bpv.getTxtName().setBackground(Color.RED);
                 } else {
                     bpv.getTxtName().setBackground(Color.WHITE);
                 }
-                if (!bpv.getTglbtnRot().isSelected() && !bpv.getTglbtnGelb().isSelected() && !bpv.getTglbtnGruen().isSelected() && !bpv.getTglbtnBlau().isSelected()) {
-                    JOptionPane.showMessageDialog(null, "Mindestens eine Color MUSS selektiert sein!!!", "Fehlermeldung", JOptionPane.WARNING_MESSAGE);
-                }
             } else if (panelfehler == false) {
                 color = new String();
-
-                //Abfrage, welcher "Farb"Button gedrückt wurde
-                if (bpv.getTglbtnBlau().isSelected()) {
-                    color = (color + "blue ");
-                }
-                if (bpv.getTglbtnGelb().isSelected()) {
-                    color = (color + "yellow ");
-                }
-                if (bpv.getTglbtnGruen().isSelected()) {
-                    color = (color + "green ");
-                }
-                if (bpv.getTglbtnRot().isSelected()) {
-                    color = (color + "red ");
-                }
 
                 //Übergabe, was im Board gespeichert wird und das Fenster wird geschlossen
                 xml.addBoard(bpv.getTxtName().getText().toString(), color);

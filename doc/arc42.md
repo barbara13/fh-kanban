@@ -1,27 +1,27 @@
-# Architekturdokumentation
+﻿# Architekturdokumentation
 
 # 1. Einführung und Ziele
 Dieser Abschnitt führt in die Aufgabenstellung ein und skizziert die Ziele, die das Team-Projekt 2013 verfolgt.
 
 ## 1.1. Aufgabenstellung
 Erstellen Sie eine Swing-Anwendung, um eine Kanban-Board zu verwalten. Diese Anwendung soll die grundlegenden Funktionen für den Kanban-Prozess bieten.
-Wesentliche Features: 	Create new kanban boards
-			Open board
-			Save board
-			Save as…
-			Export to html
-			Export backlog to csv, pdf
-			Warn user if modifications have not been saved
-			Preferences dialog for colors, name of board, columns, wips
-			CoS (Fixed date, standard, intagible, expedite)
-			Card properties (uuid, headline, description, size, value, created, started, finished)
-			Validate on wip limits
-			Move cards between adjacent columns
-			Full text search backlog and board by headline, description, CoS, size, value
-			Store board as xml
-			Tests for all major parts of the application
-			Edit dialog for card
-			Backlogs displays cards in 3 columns grid
+Wesentliche Features: Create new kanban boards
+, Open board
+, Save board
+, Save as…
+, Export to html
+, Export backlog to csv, pdf
+, Warn user if modifications have not been saved
+	Preferences dialog for colors, name of board, columns, wips
+, CoS (Fixed date, standard, intagible, expedite)
+, Card properties (uuid, headline, description, size, value, created, started, finished)
+, Validate on wip limits
+, Move cards between adjacent columns
+, Full text search backlog and board by headline, description, CoS, size, value
+, Store board as xml
+, Tests for all major parts of the application
+, Edit dialog for card
+, Backlogs displays cards in 3 columns grid
 
 # 2. Randbedingungen
 Beim Lösungsentwurf sind verschiedene Randbedingungen zu beachten. Dieser Abschnitt stellt sie diese dar.

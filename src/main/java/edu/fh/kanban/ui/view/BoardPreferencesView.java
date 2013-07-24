@@ -2,25 +2,20 @@ package edu.fh.kanban.ui.view;
 
 import javax.swing.JFrame;
 
-import java.awt.Color;
 import java.awt.Rectangle;
+import edu.fh.kanban.ui.controller.BoardPreferencesController;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JLabel;
-
-import edu.fh.kanban.ui.controller.BoardPreferencesController;
-
 import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
-import javax.swing.JToggleButton;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner.DefaultEditor;
+
 
 /**
  * + Preferences dialog for colors, name of board, columns(10), wips(10) +
@@ -36,27 +31,12 @@ public class BoardPreferencesView extends JFrame implements View {	//Klasse Boar
     private JTextField txtName;
     private JPanel panel;
     private JScrollPane scrollPane;
-    private JToggleButton tglbtnRot, tglbtnGruen, tglbtnGelb, tglbtnBlau;
+    private JLabel tglbtnRot, tglbtnGruen, tglbtnGelb, tglbtnBlau;
     private BoardPreferencesController c = null;
     private JButton btnSpeichern;
     private JButton btnAbbrechen;
-
-    public JToggleButton getTglbtnRot() {		//Getter für die Farbe Rot "Expedite" wird erstellt
-        return tglbtnRot;
-    }
-
-    public JToggleButton getTglbtnGruen() {		//Getter für die Farbe Grün "Fixed Date" wird erstellt
-        return tglbtnGruen;
-    }
-
-    public JToggleButton getTglbtnGelb() {		//Getter für die Farbe  Gelb "Standard" wird erstellt
-        return tglbtnGelb;
-    }
-
-    public JToggleButton getTglbtnBlau() {		//Getter für die Farbe Blau "Intangible" wird erstellt
-        return tglbtnBlau;
-    }
-
+    private BoardColorsTest comboBoxStandart, comboBoxFixedDate, comboBoxExpedite, comboBoxIntangible;
+   
     public JButton getBtnSpeichern() {			//Getter für den JButton "Speichern" wird erstellt
         return btnSpeichern;
     }
@@ -81,83 +61,85 @@ public class BoardPreferencesView extends JFrame implements View {	//Klasse Boar
         setBounds(new Rectangle(0, 0, 700, 500));
         setLocationByPlatform(true);
         setResizable(false);
+        
+       // getComponent();// 
     }
-
+    
     public JComponent getComponent() {
-        getContentPane().setLayout(new FormLayout(new ColumnSpec[]{
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("97px"),
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("97px"),
-            FormFactory.UNRELATED_GAP_COLSPEC,
-            ColumnSpec.decode("97px"),
-            FormFactory.UNRELATED_GAP_COLSPEC,
-            ColumnSpec.decode("97px"),
-            FormFactory.UNRELATED_GAP_COLSPEC,
-            ColumnSpec.decode("97px"),
-            FormFactory.UNRELATED_GAP_COLSPEC,
-            ColumnSpec.decode("97px"),
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("33px"),},
-                new RowSpec[]{
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("20px"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("14px"),
-            FormFactory.UNRELATED_GAP_ROWSPEC,
-            RowSpec.decode("23px"),
-            FormFactory.UNRELATED_GAP_ROWSPEC,
-            RowSpec.decode("14px"),
-            FormFactory.UNRELATED_GAP_ROWSPEC,
-            RowSpec.decode("292px"),
-            FormFactory.UNRELATED_GAP_ROWSPEC,
-            RowSpec.decode("23px"),}));
+    	
+        getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("97px"),
+        		FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
+        		ColumnSpec.decode("99px"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("97px"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("97px"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("99px"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("138px"),},
+        	new RowSpec[] {
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("20px"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("14px"),
+        		FormFactory.LINE_GAP_ROWSPEC,
+        		RowSpec.decode("23px"),
+        		RowSpec.decode("20px"),
+        		FormFactory.PARAGRAPH_GAP_ROWSPEC,
+        		RowSpec.decode("14px"),
+        		FormFactory.UNRELATED_GAP_ROWSPEC,
+        		RowSpec.decode("292px"),
+        		FormFactory.UNRELATED_GAP_ROWSPEC,
+        		RowSpec.decode("23px"),}));
 
-        getContentPane().add(new JLabel("Name:"), "2, 2, fill, center");
+        JLabel label = new JLabel("Name:");
+        getContentPane().add(label, "2, 2, fill, center");
 
         txtName = new JTextField();
-        getContentPane().add(txtName, "4, 2, 11, 1, fill, top");
+        getContentPane().add(txtName, "4, 2, 9, 1, fill, top");
         txtName.setColumns(10);
 
-        getContentPane().add(new JLabel("Color:"), "2, 4, fill, top");
+        JLabel label_1 = new JLabel("Color:");
+        getContentPane().add(label_1, "2, 4, fill, top");
 
         JSeparator separator = new JSeparator();
-        getContentPane().add(separator, "4, 4, 11, 1, fill, Center");
+        getContentPane().add(separator, "4, 4, 9, 1, fill, center");
 
-        tglbtnRot = new JToggleButton("Expedite");		//Button Rot "Expedite" wird initialisiert
-        tglbtnRot.setOpaque(true);
-        tglbtnRot.setBackground(Color.RED);
-        tglbtnRot.addActionListener(c);
-        getContentPane().add(tglbtnRot, "4, 6, fill, top");
+        getContentPane().add(new JLabel("Standard"), "4, 6, center, fill");
+        getContentPane().add(new JLabel("Expedite"), "6, 6, center, fill");
+        getContentPane().add(new JLabel("Fixed date"), "10, 6, center, fill");
+        getContentPane().add(new JLabel("Intangible"), "8, 6, center, fill");
+        
+        comboBoxStandart = new BoardColorsTest();
+        comboBoxStandart.setSelectedIndex(8);
+        getContentPane().add(comboBoxStandart, "4, 7, fill, top");
+        
+        comboBoxFixedDate = new BoardColorsTest();
+        comboBoxFixedDate.setSelectedIndex(3);
+        getContentPane().add(comboBoxFixedDate, "6, 7, fill, top");
+        
+        comboBoxExpedite = new BoardColorsTest();
+        comboBoxExpedite.setSelectedIndex(7);
+        getContentPane().add(comboBoxExpedite, "8, 7, fill, top");
+        
+        comboBoxIntangible = new BoardColorsTest();
+        comboBoxIntangible.setSelectedIndex(0);
+        getContentPane().add(comboBoxIntangible, "10, 7, fill, top");
 
-        tglbtnGelb = new JToggleButton("Standard");		//Button Gelb "Standard" wird initialisiert
-        tglbtnGelb.setOpaque(true);
-        tglbtnGelb.setBackground(Color.YELLOW);
-        tglbtnGelb.addActionListener(c);
-        getContentPane().add(tglbtnGelb, "6, 6, fill, top");
-
-        tglbtnGruen = new JToggleButton("Fixed date");	//Button Grün "Fixed Date" wird erstellt
-        tglbtnGruen.setOpaque(true);
-        tglbtnGruen.setBackground(Color.GREEN);
-        tglbtnGruen.addActionListener(c);
-        getContentPane().add(tglbtnGruen, "8, 6, fill, top");
-
-        tglbtnBlau = new JToggleButton("Intangible");	//Butoon Blau "Intangible" wird initialisiert
-        tglbtnBlau.setOpaque(true);
-        tglbtnBlau.setBackground(Color.BLUE);
-        tglbtnBlau.addActionListener(c);
-        getContentPane().add(tglbtnBlau, "10, 6, fill, top");
-
-        getContentPane().add(new JLabel("Colums:"), "2, 8, fill, top");
+        JLabel label_2 = new JLabel("Colums:");
+        getContentPane().add(label_2, "2, 9, fill, top");
 
         JSeparator separator_1 = new JSeparator();
-        getContentPane().add(separator_1, "4, 8, 11, 1, fill, Center");
+        getContentPane().add(separator_1, "4, 9, 9, 1, fill, bottom");
 
         scrollPane = new JScrollPane();
-        getContentPane().add(scrollPane, "2, 10, 13, 1, fill, top");
+        getContentPane().add(scrollPane, "2, 11, 11, 1, fill, top");
 
         panel = new JPanel();
-        scrollPane.setViewportView(panel);
+        scrollPane.setColumnHeaderView(panel);
         panel.setLayout(new FormLayout(new ColumnSpec[]{
             FormFactory.RELATED_GAP_COLSPEC,
             ColumnSpec.decode("44px"),
@@ -198,12 +180,12 @@ public class BoardPreferencesView extends JFrame implements View {	//Klasse Boar
         btnSpeichern = new JButton("Speichern");
         btnSpeichern.addActionListener(c);
 
-        getContentPane().add(btnSpeichern, "10, 12, fill, top");
+        getContentPane().add(btnSpeichern, "10, 13, fill, top");
 
         btnAbbrechen = new JButton("Abbrechen");
         btnAbbrechen.addActionListener(c);
 
-        getContentPane().add(btnAbbrechen, "12, 12, default, top");
+        getContentPane().add(btnAbbrechen, "12, 13, left, top");
 
         setVisible(true);
         return (JComponent) getContentPane();
