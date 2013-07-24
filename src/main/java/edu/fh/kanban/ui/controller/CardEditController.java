@@ -38,6 +38,9 @@ public class CardEditController implements ActionListener, KeyListener {
                 card.editCard(cEditView.getCId(), "effort", cEditView.getTxtEffort());
                 card.editCard(cEditView.getCId(), "value", cEditView.getValue());
                 card.editCard(cEditView.getCId(), "description", cEditView.getTextDescription());
+//                bv.getPanel().removeAll();
+//                bv.getComponent();
+//                bv.getPanel().updateUI();
                 cEditView.dispose();
                 //Datenbank Eintrag ändern der cId --> cEditView.getCId()
             }
