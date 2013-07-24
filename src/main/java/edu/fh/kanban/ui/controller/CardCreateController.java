@@ -39,10 +39,28 @@ public class CardCreateController implements ActionListener, KeyListener {
         //Create Button überprüft zunächst ob alle einträge vorhanden sind ist das der Fall wird in die XMLCard 
         //über die Methode addCard die Karte hinzugefügt
         //Sollte das nicht der Fall sein wird das Feld ROT markiert das nicht ausgefüllt ist
+<<<<<<< HEAD
         if(src == cCreateView.getBtnCreate()){
             if (cCreateView.getTxtHeadline().isEmpty() || cCreateView.getTxtEffort().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "nicht alle Felder sind ausgefüllt", "Fehlermelung", JOptionPane.WARNING_MESSAGE);
             }else{
+=======
+        if (src == cCreateView.getBtnCreate()) {
+            
+            if (cCreateView.getTxtHeadline().getText().isEmpty() || cCreateView.getTxtEffort().getText().isEmpty()) {
+                if (cCreateView.getTxtHeadline().getText().isEmpty()) {
+                    cCreateView.getTxtHeadline().setBackground(Color.RED);
+                } else {
+                    cCreateView.getTxtHeadline().setBackground(Color.WHITE);
+                }
+                if (cCreateView.getTxtEffort().getText().isEmpty()) {
+                    cCreateView.getTxtEffort().setBackground(Color.RED);
+                } else {
+                    cCreateView.getTxtEffort().setBackground(Color.WHITE);
+                }
+            } else {
+    
+>>>>>>> 8fcf0be48da6bb2baf19b844004a5a7b048b5185
                 //Eintrag in die XMLCard
                 xml.addCard(cCreateView.getTxtHeadline(), cCreateView.getTextDescription(), cCreateView.getTxtEffort(), cCreateView.getValue(), "false", "");
                 xml.createCard();
@@ -50,7 +68,6 @@ public class CardCreateController implements ActionListener, KeyListener {
                 bv.getPanel().removeAll();
                 bv.getComponent();
                 bv.getPanel().updateUI();
-
             }
             //Cancel Button schließt das Fenster ohne änderungen vorzunehmen
         } else if (src == cCreateView.getBtnCancel()) {
