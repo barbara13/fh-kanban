@@ -1,24 +1,31 @@
-package edu.fh.kanban.ui.controller;
+package edu.fh.kanban.ui.view;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
 
-/**
- * 
- * @author Barbara
- *
- */
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 
-class BoardColorsTest extends JComboBox{
-    private final Icon[] COLOR_ICONS;
+
+public class BoardColor extends JComboBox<Object>{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final Icon[] COLOR_ICONS;
     public final String LABELS[] = {
-        "BLUE","CYAN","GRAY","GREEN","MAGENTA","ORANGE","PINK","RED","WHITE","YELLOW"
+        "BLUE","CYAN","GRAY","GREEN","MAGENTA","ORANGE","PINK","RED","YELLOW"
     };
     public final Color COLORS[] = {
-        Color.BLUE,Color.CYAN,Color.GRAY,Color.GREEN,Color.MAGENTA,Color.ORANGE,Color.PINK,Color.RED,Color.WHITE,Color.YELLOW
+        Color.BLUE,Color.CYAN,Color.GRAY,Color.GREEN,Color.MAGENTA,Color.ORANGE,Color.PINK,Color.RED,Color.YELLOW
     };
-    public BoardColorsTest(){
+    public BoardColor(){
         super();
         //Load the COLOR_ICONS and create an array of indexes:
         COLOR_ICONS = new Icon[LABELS.length];
@@ -27,11 +34,15 @@ class BoardColorsTest extends JComboBox{
             INT_ARRAY[i] = new Integer(i);
             COLOR_ICONS[i] = new ColorIcon(COLORS[i], new Dimension(100, 20));
         }
-        setModel(new DefaultComboBoxModel(INT_ARRAY));
+        setModel(new DefaultComboBoxModel<Object>(INT_ARRAY));
         setRenderer(new ComboBoxRenderer());
     }
     class ComboBoxRenderer extends JLabel implements ListCellRenderer {
-        public ComboBoxRenderer() {setOpaque(true);}
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		public ComboBoxRenderer() {setOpaque(true);}
         public Component getListCellRendererComponent(
                 final JList list, final Object value, final int index,
                 final boolean isSelected, final boolean cellHasFocus) {

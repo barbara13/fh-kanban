@@ -35,7 +35,7 @@ public class BoardPreferencesView extends JFrame implements View {	//Klasse Boar
     private BoardPreferencesController c = null;
     private JButton btnSpeichern;
     private JButton btnAbbrechen;
-    private BoardColorsTest comboBoxStandart, comboBoxFixedDate, comboBoxExpedite, comboBoxIntangible;
+    private BoardColor comboBoxStandart, comboBoxFixedDate, comboBoxExpedite, comboBoxIntangible;
    
     public JButton getBtnSpeichern() {			//Getter für den JButton "Speichern" wird erstellt
         return btnSpeichern;
@@ -113,19 +113,19 @@ public class BoardPreferencesView extends JFrame implements View {	//Klasse Boar
         getContentPane().add(new JLabel("Fixed date"), "10, 6, center, fill");
         getContentPane().add(new JLabel("Intangible"), "8, 6, center, fill");
         
-        comboBoxStandart = new BoardColorsTest();
+        comboBoxStandart = new BoardColor();
         comboBoxStandart.setSelectedIndex(8);
         getContentPane().add(comboBoxStandart, "4, 7, fill, top");
         
-        comboBoxFixedDate = new BoardColorsTest();
+        comboBoxFixedDate = new BoardColor();
         comboBoxFixedDate.setSelectedIndex(3);
         getContentPane().add(comboBoxFixedDate, "6, 7, fill, top");
         
-        comboBoxExpedite = new BoardColorsTest();
+        comboBoxExpedite = new BoardColor();
         comboBoxExpedite.setSelectedIndex(7);
         getContentPane().add(comboBoxExpedite, "8, 7, fill, top");
         
-        comboBoxIntangible = new BoardColorsTest();
+        comboBoxIntangible = new BoardColor();
         comboBoxIntangible.setSelectedIndex(0);
         getContentPane().add(comboBoxIntangible, "10, 7, fill, top");
 
