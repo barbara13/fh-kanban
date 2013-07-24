@@ -75,6 +75,7 @@ public class Kanban {
             }
         });
         
+        
         final BacklogView backlogView = new BacklogView();
         BoardView boardView = new BoardView(backlogView);
         backlogView.setBv(boardView);
@@ -89,6 +90,7 @@ public class Kanban {
 
         JMenuItem loadBoard = new JMenuItem("Load Board...");
         loadBoard.addActionListener(new ActionListener() {
+            
             public void actionPerformed(ActionEvent e) {
                 FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
                 chooser = new JFileChooser();

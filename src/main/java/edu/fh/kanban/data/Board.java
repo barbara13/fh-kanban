@@ -13,13 +13,19 @@ import java.util.ArrayList;
 public class Board {
     private int b_id;
     private String name;
-    private String color;
+    private String expedite;
+    private String standart;
+    private String fixedDate;
+    private String intangible;
 
     
-    public Board(int b_id, String name, String color) {
+    public Board(int b_id, String name, String expedite, String standart, String fixedDate, String intangible) {
         this.b_id = b_id;
         this.name = name;
-        this.color = color;
+        this.expedite = expedite;
+        this.standart = standart;
+        this.fixedDate = fixedDate;
+        this.intangible = intangible;
     }
     
         
@@ -36,9 +42,26 @@ public class Board {
         return name;
     }
 
-    public String getColor() {
-        return color;
+    public String getExpedite() {
+        return expedite;
     }
+
+    public String getFixedDate() {
+        return fixedDate;
+    }
+
+    public String getIntangible() {
+        return intangible;
+    }
+
+    public String getStandart() {
+        return standart;
+    }
+    
+    
+
+    
+    
 
     
 

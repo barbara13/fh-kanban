@@ -8,8 +8,8 @@ import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardEditView;
 import edu.fh.kanban.ui.view.CardView;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.net.ssl.SSLEngineResult.Status;
 
 /**
  *
@@ -18,7 +18,7 @@ import javax.net.ssl.SSLEngineResult.Status;
  * Die Klasse CardController ist der Controller für die Klasse CardView Diese
  * Händelt die Button Klicks
  */
-public class CardController extends Controller {
+public class CardController implements ActionListener {
 
     private Object src;
     private CardView cView;
@@ -36,10 +36,10 @@ public class CardController extends Controller {
         xml = new XMLCard();
         xmlb = new XMLBoard();
     }
-    
-@Override
+
     public void actionPerformed(ActionEvent e) {
         src = e.getSource();
+        
         if (src == cView.getBtnAddCard()) {
             xmlb.loadXML(Kanban.xmlPath);
             xmlb.addCardToBoard(cView.getcId());
@@ -49,7 +49,7 @@ public class CardController extends Controller {
             cView.dispose();
             
         } else if (src == cView.getBtnEdit()) {
-            ceView = new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription(), cView.getStatus());
+            ceView = new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription());
             ceView.getComponent();
            
         } else if (src == cView.getBtnDelete()) {

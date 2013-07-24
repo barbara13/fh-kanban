@@ -101,6 +101,7 @@ public class BoardPreferencesController extends Controller {
             //erstelle weitere Tupel
             txtColumname[arrayindex] = new JTextField();
             wip[arrayindex] = new JSpinner();
+            wip[arrayindex].setModel(new SpinnerNumberModel(1, 1, 10, 1));
             ((JSpinner.DefaultEditor) wip[arrayindex].getEditor()).getTextField().setEditable(false);	//MANUELLE EINGABE IM JSPINNER AUSSCHALTEN
             btnMinus[arrayindex] = new JButton("-");	//JButons werden einzeln initialisiert, damit man weiß, welcher Button genau gedrückt wird
             arrayindex++;
@@ -152,7 +153,6 @@ public class BoardPreferencesController extends Controller {
 
                 bpv.getPanel().add(new JLabel("Wip:"), "6, " + k + ", right, center");
 
-                wip[i].setModel(new SpinnerNumberModel(1, 1, 10, 1));
                 bpv.getPanel().add(wip[i], "8, " + k + ", fill, center");
 
                 JButton btnPlus = new JButton("+");
