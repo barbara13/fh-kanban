@@ -7,6 +7,7 @@ import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 
@@ -43,7 +44,16 @@ public class BacklogController extends Controller{
         for (i = 0; i < listCard.size(); i++) {
            
             blv.getCards()[i] = new JButton(String.valueOf(listCard.get(i).getCa_id())+": "+listCard.get(i).getName());
-            blv.getCards()[i].addActionListener(this);
+            blv.getCards()[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i <= blv.getCards().length; i++){
+						if(e.getSource() == blv.getCards()[i]){
+							new CardView(listCard.get(i).getCa_id(), listCard, blv, bv).getComponent();
+							break;
+						}
+					}
+				}
+			});
             blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1, 1));
 
             j+=2;
