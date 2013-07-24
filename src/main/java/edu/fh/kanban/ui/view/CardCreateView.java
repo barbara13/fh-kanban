@@ -34,7 +34,7 @@ public class CardCreateView extends JFrame implements View {
      */
     private static final long serialVersionUID = 1L;
     private CardCreateController cController = null;	//Controller zur View
-    private BacklogView bv;
+//    private BacklogView bv;
     private JTextField txtHeadline, txtEffort;
     private TextArea textDescription;
     private JButton btnCancel, btnCreate;
