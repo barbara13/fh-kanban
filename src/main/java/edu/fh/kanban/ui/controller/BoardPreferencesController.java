@@ -1,30 +1,17 @@
 package edu.fh.kanban.ui.controller;
 
-import edu.fh.kanban.Kanban;
 import edu.fh.kanban.dao.XMLBoard;
 import edu.fh.kanban.ui.view.BoardPreferencesView;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
-import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
-
-import nu.xom.Attribute;
-import nu.xom.Builder;
-import nu.xom.Document;
-import nu.xom.Element;
-import nu.xom.Serializer;
-
-import org.junit.Test;
 
 /**
  *
@@ -33,7 +20,7 @@ import org.junit.Test;
  * Die Klasse BoardPreferencesontroller ist der Controller zur Klasse
  * BoardPreferencesView
  */
-public class BoardPreferencesController extends Controller {
+public class BoardPreferencesController implements ActionListener {
 
     private int arrayindex = 0;
     private JTextField[] txtColumname = new JTextField[10];
@@ -42,7 +29,6 @@ public class BoardPreferencesController extends Controller {
     private Object src;
     private BoardPreferencesView bpv;
     private XMLBoard xml;
-    private String color;
 
     public int getArrayindex() {
         return arrayindex;
@@ -79,10 +65,9 @@ public class BoardPreferencesController extends Controller {
                     bpv.getTxtName().setBackground(Color.WHITE);
                 }
             } else if (panelfehler == false) {
-                color = new String();
 
                 //Übergabe, was im Board gespeichert wird und das Fenster wird geschlossen
-                xml.addBoard(bpv.getTxtName().getText().toString(), color);
+                xml.addBoard(bpv.getTxtName().getText().toString(), bpv.getComboBoxExpedite().COLORS[bpv.getComboBoxExpedite().getSelectedIndex()].toString(), bpv.getComboBoxStandart().COLORS[bpv.getComboBoxStandart().getSelectedIndex()].toString(), bpv.getComboBoxFixedDate().COLORS[bpv.getComboBoxFixedDate().getSelectedIndex()].toString(), bpv.getComboBoxIntangible().COLORS[bpv.getComboBoxIntangible().getSelectedIndex()].toString());
                 xml.addColumn("Next", "50");
                 for (int i = 0; i < arrayindex; i++) {
                     xml.addNewColumn(txtColumname[i].getText().toString(), wip[i].getValue().toString());

@@ -3,6 +3,7 @@ package edu.fh.kanban.ui.view;
 import javax.swing.JFrame;
 
 import java.awt.Rectangle;
+
 import edu.fh.kanban.ui.controller.BoardPreferencesController;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -31,7 +32,6 @@ public class BoardPreferencesView extends JFrame implements View {	//Klasse Boar
     private JTextField txtName;
     private JPanel panel;
     private JScrollPane scrollPane;
-    private JLabel tglbtnRot, tglbtnGruen, tglbtnGelb, tglbtnBlau;
     private BoardPreferencesController c = null;
     private JButton btnSpeichern;
     private JButton btnAbbrechen;
@@ -53,7 +53,23 @@ public class BoardPreferencesView extends JFrame implements View {	//Klasse Boar
         return panel;
     }
 
-    public BoardPreferencesView() {				//Konstruktor
+    public BoardColor getComboBoxStandart() {
+		return comboBoxStandart;
+	}
+
+	public BoardColor getComboBoxFixedDate() {
+		return comboBoxFixedDate;
+	}
+
+	public BoardColor getComboBoxExpedite() {
+		return comboBoxExpedite;
+	}
+
+	public BoardColor getComboBoxIntangible() {
+		return comboBoxIntangible;
+	}
+
+	public BoardPreferencesView() {				//Konstruktor
 
         super("Board Einstellungen");
         c = new BoardPreferencesController(this); //Controller zum BoardPreferencesVontroller wird initialisiert
