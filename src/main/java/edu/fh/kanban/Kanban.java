@@ -1,6 +1,7 @@
 package edu.fh.kanban;
 
 import edu.fh.kanban.dao.HTML;
+import edu.fh.kanban.dao.Export;
 import edu.fh.kanban.dao.XMLBoard;
 import edu.fh.kanban.dao.XMLCard;
 import java.awt.BorderLayout;
@@ -75,6 +76,15 @@ public class Kanban {
             }
         });
         
+        //Klasse SaveAll
+        final JMenuItem saveAs = new JMenuItem("Export to...");
+        saveAs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new Export();
+				
+			}
+		});
+        
         
         final BacklogView backlogView = new BacklogView();
         BoardView boardView = new BoardView(backlogView);
@@ -123,6 +133,7 @@ public class Kanban {
         file.add(card_preferences);
         file.add(loadBoard);
         file.add(html);
+        file.add(saveAs);
         html.setEnabled(false);
 
         JMenuBar menubar = new JMenuBar();
