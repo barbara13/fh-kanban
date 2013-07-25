@@ -126,7 +126,7 @@ private JLabel title;
         listCards = xml.readCardsFromColumn(column.getCo_id());
         int k = 0;
         
-        for(int i = 0; i < listCards.size(); i++){
+        for(int i = 0; i < listCards.size(); i++){   
         cards[i] = new JButton(String.valueOf(listCards.get(i).getCa_id())+": " + listCards.get(i).getName());
         cards[i].addActionListener(c);
         

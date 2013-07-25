@@ -34,7 +34,9 @@ public class BacklogView extends JPanel implements View {
     private BacklogController c;
     private JPanel panel = new JPanel();
     private JSeparator sep;
-    private JButton[] cards = new JButton[100];
+    private JPanel[] cards = new JPanel[100];
+    private JButton[] showcards = new JButton[100];
+    private JButton[] addcards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
     private JComboBox comboBox;
     private int i = 0;
@@ -99,7 +101,7 @@ public class BacklogView extends JPanel implements View {
         panel.add(searchfield, "6, 2, 3, 1, right, default");
         searchfield.setColumns(10);
 
-
+/*
         searchfield.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -118,6 +120,7 @@ public class BacklogView extends JPanel implements View {
                 }
                 
                 for(int j = 0; j < cards.length; j++){
+                    
                 if (searchfield.getText().toString().regionMatches(true, 0 + i, cards[j].getText().toString(), 0 + i, 1)) {
                     cards[j].setVisible(true);
                     i++;
@@ -135,7 +138,7 @@ public class BacklogView extends JPanel implements View {
                 }
                 
             }
-        });
+        });*/
 
         JLabel lblSortBy = new JLabel("Sort by");
         panel.add(lblSortBy, "6, 4, right, default");
@@ -156,7 +159,7 @@ public class BacklogView extends JPanel implements View {
         return panel;
     }
 
-    public JButton[] getCards() {
+    public JPanel[] getCards() {
         return cards;
     }
 
@@ -171,4 +174,14 @@ public class BacklogView extends JPanel implements View {
     public JTextField getSearch() {
         return searchfield;
     }
+
+    public JButton[] getShowcards() {
+        return showcards;
+    }
+
+    public JButton[] getAddcards() {
+        return addcards;
+    }
+    
+    
 }

@@ -1,15 +1,22 @@
 package edu.fh.kanban.ui.controller;
 
 import com.jgoodies.forms.factories.CC;
+import edu.fh.kanban.Kanban;
+import edu.fh.kanban.dao.XMLBoard;
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
+import edu.fh.kanban.ui.view.SimpleCardView;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 
 /**
@@ -22,6 +29,7 @@ public class BacklogController extends Controller{
     private BacklogView blv;
     private CardView cv;
     private XMLCard xml;
+    private XMLBoard xmlb;
     private ArrayList<Card> listCard = new ArrayList();
     private int j = 0;
     private int k = 0;
@@ -29,31 +37,52 @@ public class BacklogController extends Controller{
     private Object src;
     private String s = null;
     private int id;
-    
+    private SimpleCardView cards;
+    private JTextArea description;
     
 
     public BacklogController(BacklogView blv, BoardView bv) {
         this.bv = bv;
         this.blv = blv;
         xml = new XMLCard();
-        
+        xmlb = new XMLBoard();
     }
 
     public void showCards() {
         listCard = xml.readCards();
         
         for (i = 0; i < listCard.size(); i++) {
+            cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+            
+            description = new JTextArea(listCard.get(i).getDescription());
+            description.setEnabled(false);
+            blv.getCards()[i] = new SimpleCardView().getComponent();
+            blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
+            blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
+            blv.getShowcards()[i]= new JButton("SHOW");
+            blv.getAddcards()[i]= new JButton("To Board");
+            
+            blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
+            blv.getCards()[i].add(blv.getShowcards()[i], CC.xy(6, 2));
+            
            
-            blv.getCards()[i] = new JButton(String.valueOf(listCard.get(i).getCa_id())+": "+listCard.get(i).getName());
-            blv.getCards()[i].addActionListener(new ActionListener() {
+            blv.getAddcards()[i].addActionListener(new ActionListener(){
+               public void actionPerformed(ActionEvent c) {
+                   xmlb.loadXML(Kanban.xmlPath);
+                   xmlb.addCardToBoard(cv.getcId());
+               } 
+            });
+            
+            
+            blv.getShowcards()[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					for(int i = 0; i <= blv.getCards().length; i++){
-						if(e.getSource() == blv.getCards()[i]){
-                                                    
-							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+                                            
+						if(e.getSource() == blv.getShowcards()[i]){
+                                                     cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
                                                         cv.getComponent();
                                                          src = e.getSource();
-                                                         id = parseId(e.getActionCommand());
+                                                         //id = parseId(e.getActionCommand());
                                                          cv.getBtnBackward().setVisible(false);
                                                          cv.getBtnForward().setVisible(false);
 							break;
@@ -61,8 +90,12 @@ public class BacklogController extends Controller{
 					}
 				}
 			});
-            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1, 1));
-
+            
+            //listCard.get(i).getCa_id();
+            //blv.getCards()[i] = cards.getPanel().add(cv);
+            
+            
+            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1 , 1));
             j+=2;
 
             if (j == 6) {
