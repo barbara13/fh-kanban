@@ -10,6 +10,8 @@ import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
 import edu.fh.kanban.ui.controller.BoardController;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -29,6 +31,7 @@ public class BoardView extends JPanel implements View {
  private ArrayList <Board> listBoard = new ArrayList();
  private ArrayList <Card> listCards = new ArrayList();
  private JPanel bpanel = new JPanel();
+ private CardView cv;
  
     public BoardView(BacklogView blv) {
      //BoardController im Konstruktor
@@ -37,10 +40,7 @@ public class BoardView extends JPanel implements View {
         xml = new XMLBoard();
         getComponents();
     }
-    
-    public JButton[] getCards() {
-        return cards;
-    }
+
 
     public JLabel[] getColumns() {
         return columns;
@@ -60,13 +60,18 @@ public class BoardView extends JPanel implements View {
 
 
 private JTextField searchtext;
-private JButton[] cards= new JButton[100];
+private JButton[] showCards = new JButton[100];
+private JButton[] forward = new JButton[100];
+private JButton[] backward = new JButton[100];
+private JPanel[] cardpanel = new JPanel[100];
 private JLabel[] columns = new JLabel[100];
 private String columnSize, rowSize;
 private JLabel title;
+private JTextArea description;
+private BoardView bv = this;
 
     private String getRows(int rows) {
-        String row = "4dlu, 20dlu, ";
+        String row = "4dlu, 100dlu, ";
 			
         for (int i = 0; i < rows; i++){
             rowSize = rowSize + row;
@@ -77,7 +82,7 @@ private JLabel title;
 
         
     private String getColumns(int columns){
-        String column = "4dlu, 50dlu, ";
+        String column = "4dlu, 130dlu, ";
 
         for (int i = 0; i < columns; i++){
             columnSize = columnSize + column;
@@ -126,12 +131,35 @@ private JLabel title;
         listCards = xml.readCardsFromColumn(column.getCo_id());
         int k = 0;
         
-        for(int i = 0; i < listCards.size(); i++){   
-        cards[i] = new JButton(String.valueOf(listCards.get(i).getCa_id())+": " + listCards.get(i).getName());
-        cards[i].addActionListener(c);
-        
-        bpanel.add(cards[i], CC.xy(sameColumn, 8 + k, CC.CENTER, CC.CENTER));
-        k+=2;
+        for (int i = 0; i < listCards.size(); i++) {
+            cv = new CardView(listCards.get(i).getCa_id(), listCards, blv, this);
+            
+            description = new JTextArea(listCards.get(i).getDescription());
+            description.setEnabled(false);
+            cardpanel[i] = new SimpleCardView().getComponent();
+            cardpanel[i].add(description, CC.xywh(2, 3, 5, 2)); 
+            cardpanel[i].add(new JLabel("" + listCards.get(i).getCa_id()), CC.xy(4, 2));
+            showCards[i]= new JButton("SHOW");
+            forward[i] = new JButton("Forward");
+            backward[i] = new JButton("Back");
+            
+            
+            
+            
+           //cardpanel[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
+           cardpanel[i].add(showCards[i], CC.xy(6, 2));
+           cardpanel[i].add(backward[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
+           cardpanel[i].add(forward[i], CC.xy(6, 6, CC.CENTER, CC.CENTER));
+            
+            
+            
+            showCards[i].addActionListener(c);
+            
+            
+            
+            
+         bpanel.add(cardpanel[i], CC.xy(sameColumn, 8 + k, CC.CENTER, CC.CENTER));
+         k+=2;
         }
         
         }catch (java.lang.IndexOutOfBoundsException exc){
@@ -148,8 +176,8 @@ private JLabel title;
         listMainColumns = xml.readMainColumns();
         listSubColumns = xml.readSubColumns();
         searchtext = new JTextField();
-        columnSize = new String("5dlu, 50dlu, ");
-        rowSize = new String("5dlu, 20dlu, ");
+        columnSize = new String("5dlu, 130dlu, ");
+        rowSize = new String("5dlu, 20dlu, 5dlu, 20dlu, 5dlu, 20dlu, ");
  
         
         title = new JLabel(listBoard.get(i).getName());
