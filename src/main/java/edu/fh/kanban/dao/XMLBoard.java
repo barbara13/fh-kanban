@@ -343,11 +343,16 @@ public class XMLBoard extends XML {
         attr.setValue(card.getAttribute("value"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut Status hinzufügen
-        attr = doc.createAttribute("status");
-        attr.setValue(card.getAttribute("status"));
+        //Attribut Blocker hinzufügen
+        attr = doc.createAttribute("blocker");
+        attr.setValue(card.getAttribute("blocker"));
         newCardElement.setAttributeNode(attr);
         
+        //Attribut Blocker_Tooltip hinzufügen
+        attr = doc.createAttribute("blocker_tooltip");
+        attr.setValue(card.getAttribute("blocker_tooltip"));
+        newCardElement.setAttributeNode(attr);
+
         //Attribut Created hinzufügen
         attr = doc.createAttribute("created");
         attr.setValue(card.getAttribute("created"));
