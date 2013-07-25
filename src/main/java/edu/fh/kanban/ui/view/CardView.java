@@ -18,6 +18,8 @@ import edu.fh.kanban.ui.controller.CardController;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JToggleButton;
+import java.awt.Color;
 
 /**
  *
@@ -36,6 +38,7 @@ public class CardView extends JFrame implements View {
     private int cId, effort;
     private String description, headline, value, create, start, done;
     private JButton btnAddCard, btnEdit, btnDelete, btnCancel, btnForward, btnBackward;
+    private JToggleButton tglbtnBlocker = new JToggleButton("Blocker");;
     
    /* 
     public void getBoardCards(){
@@ -52,7 +55,7 @@ public class CardView extends JFrame implements View {
     public CardView(int cId, ArrayList<Card> listCard, BacklogView blv, BoardView bv) {
 
         cController = new CardController(this, blv, bv);
-        setBounds(new Rectangle(0, 0, 455, 300));
+        setBounds(new Rectangle(0, 0, 500, 300));
         setLocationByPlatform(true);
         setResizable(false);
         this.cId = cId;
@@ -67,6 +70,9 @@ public class CardView extends JFrame implements View {
 	            create = listCard.get(i).getCreatedDate();
 	        	start = listCard.get(i).getStartedDate();
 	        	done = listCard.get(i).getDoneDate();
+	        	if(listCard.get(i).getBlocker().equals("true"))
+	        		tglbtnBlocker.doClick();
+	        	tglbtnBlocker.setToolTipText(listCard.get(i).getBlocker_tooltip());
 	            break;
             }
         }
@@ -76,38 +82,45 @@ public class CardView extends JFrame implements View {
     public JComponent getComponent() {
         setTitle(headline);
 
-        getContentPane().setLayout(new FormLayout(new ColumnSpec[]{
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("44px"),
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("55px"),
-            FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-            ColumnSpec.decode("101px"),
-            FormFactory.UNRELATED_GAP_COLSPEC,
-            ColumnSpec.decode("101px"),
-            FormFactory.LABEL_COMPONENT_GAP_COLSPEC,
-            ColumnSpec.decode("32px"),
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("62px"),},
-                new RowSpec[]{
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("14px"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("14px"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("14px"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("79px"),
-            FormFactory.UNRELATED_GAP_ROWSPEC,
-            RowSpec.decode("14px"),
-            FormFactory.LINE_GAP_ROWSPEC,
-            RowSpec.decode("14px"),
-            RowSpec.decode("27px"),
-            RowSpec.decode("23px"),}));
+        getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("50px"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("50px"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("107px"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("107px"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("50px"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("50px"),},
+        	new RowSpec[] {
+        		FormFactory.UNRELATED_GAP_ROWSPEC,
+        		RowSpec.decode("14px"),
+        		FormFactory.UNRELATED_GAP_ROWSPEC,
+        		RowSpec.decode("14px"),
+        		FormFactory.UNRELATED_GAP_ROWSPEC,
+        		RowSpec.decode("14px"),
+        		FormFactory.UNRELATED_GAP_ROWSPEC,
+        		RowSpec.decode("79px"),
+        		FormFactory.UNRELATED_GAP_ROWSPEC,
+        		RowSpec.decode("14px"),
+        		FormFactory.UNRELATED_GAP_ROWSPEC,
+        		RowSpec.decode("14px"),
+        		FormFactory.UNRELATED_GAP_ROWSPEC,
+        		RowSpec.decode("23px"),}));
 
         getContentPane().add(new JLabel("CardID:"), "2, 2, right, top");
         getContentPane().add(new JLabel(Integer.toString(cId)), "4, 2, left, top");
-        getContentPane().add(new JLabel("Effort:"), "10, 2, left, top");
+        
+        tglbtnBlocker.setForeground(Color.RED);
+        tglbtnBlocker.setOpaque(true);
+        tglbtnBlocker.setBackground(Color.RED);
+        getContentPane().add(tglbtnBlocker, "6, 2, 1, 3");
+        tglbtnBlocker.addActionListener(cController);
+        
+        getContentPane().add(new JLabel("Effort:"), "10, 2, right, top");
         getContentPane().add(new JLabel(Integer.toString(effort)), "12, 2, fill, top");
         getContentPane().add(new JLabel("Value:"), "10, 4, right, top");
         getContentPane().add(new JLabel(value), "12, 4, left, top");
@@ -179,7 +192,11 @@ public class CardView extends JFrame implements View {
         return headline;
     }
 
-    public JButton getBtnAddCard() {
+    public JToggleButton getTglbtnBlocker() {
+		return tglbtnBlocker;
+	}
+
+	public JButton getBtnAddCard() {
         return btnAddCard;
     }
 

@@ -3,4 +3,4 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 --><cards>
     
-</cards>
+<card blocker="false" blocker_tooltip="" ca_id="13" co_id="0" created="25.07.2013 09:22:37" description="Mit dieser Karte wird in der CardView der Blocker getestet" done="" effort="10" name="BlockerTest" started="" value="Standart"/></cards>
