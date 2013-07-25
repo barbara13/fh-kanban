@@ -76,6 +76,7 @@ public class CardView extends JFrame implements View {
 	            break;
             }
         }
+        getComponent();
     }
 
     //Methode aus der Klasse View initialsiert das Fenster und gibt getContentPane() zurück
@@ -107,9 +108,11 @@ public class CardView extends JFrame implements View {
         		FormFactory.UNRELATED_GAP_ROWSPEC,
         		RowSpec.decode("14px"),
         		FormFactory.UNRELATED_GAP_ROWSPEC,
-        		RowSpec.decode("14px"),
+        		RowSpec.decode("23px"),
         		FormFactory.UNRELATED_GAP_ROWSPEC,
-        		RowSpec.decode("23px"),}));
+        		RowSpec.decode("23px"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,}));
 
         getContentPane().add(new JLabel("CardID:"), "2, 2, right, top");
         getContentPane().add(new JLabel(Integer.toString(cId)), "4, 2, left, top");
@@ -141,20 +144,21 @@ public class CardView extends JFrame implements View {
         //If Karte bereits on Board soll der Button - btnAddCard.setvivible(false);
         btnAddCard = new JButton("Add Card");
         btnAddCard.addActionListener(cController);
+        
+        btnForward = new JButton("Forward");
+        btnForward.addActionListener(cController);
+        getContentPane().add(btnForward, "10, 12, 3, 1, fill, top");
+
+        btnBackward = new JButton("Back");
+        btnBackward.addActionListener(cController);
+        getContentPane().add(btnBackward, "10, 14, 3, 1, fill, top");
+        
         getContentPane().add(btnAddCard, "10, 14, 3, 1, fill, top");
         if (Kanban.xmlPath == null) {
             btnAddCard.setEnabled(false);
         } else {
             btnAddCard.setEnabled(true);
         }
-        
-//        btnForward = new JButton("Forward");
-//        btnForward.addActionListener(cController);
-//        getContentPane().add(btnForward, "10, 14, 3, 1, fill, top");
-//
-//        btnBackward = new JButton("Back");
-//        btnBackward.addActionListener(cController);
-//        getContentPane().add(btnBackward, "8, 14, fill, top");
                 
         btnEdit = new JButton("Edit");
         btnEdit.addActionListener(cController);
