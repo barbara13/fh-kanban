@@ -2,7 +2,7 @@
 To change this template, choose Tools | Templates
 and open the template in the editor.
 --><primary_keys>
-    <board b_id="5"/>
-    <column co_id="48"/>
+    <board b_id="6"/>
+    <column co_id="62"/>
     <card ca_id="14"/>
 </primary_keys>
