@@ -36,6 +36,7 @@ public class BacklogController extends Controller{
         this.bv = bv;
         this.blv = blv;
         xml = new XMLCard();
+        
     }
 
     public void showCards() {
@@ -48,7 +49,13 @@ public class BacklogController extends Controller{
 				public void actionPerformed(ActionEvent e) {
 					for(int i = 0; i <= blv.getCards().length; i++){
 						if(e.getSource() == blv.getCards()[i]){
-							new CardView(listCard.get(i).getCa_id(), listCard, blv, bv).getComponent();
+                                                    
+							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+                                                        cv.getComponent();
+                                                         src = e.getSource();
+                                                         id = parseId(e.getActionCommand());
+                                                         cv.getBtnBackward().setVisible(false);
+                                                         cv.getBtnForward().setVisible(false);
 							break;
 						}
 					}
@@ -68,13 +75,7 @@ public class BacklogController extends Controller{
     
     @Override
      public void actionPerformed(ActionEvent e) {
-     
-         src = e.getSource();
-         id = parseId(e.getActionCommand());
-         cv = new CardView(id, listCard, blv, bv);
-         cv.getComponent();
-         cv.getBtnBackward().setVisible(false);
-         cv.getBtnForward().setVisible(false);
+       
      }
     
     private int parseId(String s){

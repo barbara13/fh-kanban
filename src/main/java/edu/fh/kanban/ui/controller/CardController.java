@@ -10,6 +10,8 @@ import edu.fh.kanban.ui.view.CardView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -39,8 +41,16 @@ public class CardController implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         src = e.getSource();
-        
-        if (src == cView.getBtnAddCard()) {
+        if(src == cView.getTglbtnBlocker()){
+        	if(cView.getTglbtnBlocker().isSelected()){
+            	cView.getTglbtnBlocker().setToolTipText(JOptionPane.showInputDialog("Block Message"));
+            	xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
+            	xml.editCard(cView.getcId(), "blocker_tooltip", cView.getTglbtnBlocker().getToolTipText().toString());
+        	}else{
+            	xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
+            	xml.editCard(cView.getcId(), "blocker_tooltip", "");
+        	}
+        }else if (src == cView.getBtnAddCard()) {
             xmlb.loadXML(Kanban.xmlPath);
             xmlb.addCardToBoard(cView.getcId());
             
@@ -51,7 +61,6 @@ public class CardController implements ActionListener {
         } else if (src == cView.getBtnEdit()) {
             ceView = new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription());
             ceView.getComponent();
-           
         } else if (src == cView.getBtnDelete()) {
             xml.deleteCard(cView.getcId());
             refreshBacklog();
