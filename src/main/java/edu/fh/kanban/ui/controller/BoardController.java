@@ -55,9 +55,7 @@ public class BoardController extends Controller{
          id = parseId(e.getActionCommand());
          cv = new CardView(id, listCard, blv, bv);
          cv.getComponent();
-         cv.getBtnEdit().setVisible(false);
          cv.getBtnAddCard().setVisible(false);
-         cv.getBtnDelete().setVisible(false);
      }
     
     private int parseId(String s){

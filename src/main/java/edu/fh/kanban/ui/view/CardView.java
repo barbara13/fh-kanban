@@ -76,7 +76,7 @@ public class CardView extends JFrame implements View {
 	            break;
             }
         }
-        getComponent();
+        //getComponent();
     }
 
     //Methode aus der Klasse View initialsiert das Fenster und gibt getContentPane() zurück
