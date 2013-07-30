@@ -143,6 +143,7 @@ public class XMLBoard extends XML {
         listCard.clear();
         //listSubColumn.clear();
 
+        
         cardList = doc.getElementsByTagName("card");
         columnList = doc.getElementsByTagName("column");
 
