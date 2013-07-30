@@ -1,9 +1,13 @@
 package edu.fh.kanban.dao;
 
-	import java.io.File;
-	import javax.swing.JFileChooser;
-	import javax.swing.JFrame;
-	import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.itextpdf.text.DocumentException;
 		
 	/**
 	 * 
@@ -18,18 +22,14 @@ package edu.fh.kanban.dao;
 
 	    public Export(){
 			
-	    	JFileChooser chooser;
 	    	String path = System.getProperty("user.home");
-	        this.file = new File(path.trim());
+//	        this.file = new File(path.trim());
 
-	        chooser = new JFileChooser(path);
+	    	JFileChooser chooser = new JFileChooser(path);
 	        chooser.setDialogType(JFileChooser.SAVE_DIALOG);
-	        FileNameExtensionFilter csv = new FileNameExtensionFilter(
-	        		"CSV", "csv");
-	        FileNameExtensionFilter pdf = new FileNameExtensionFilter(
-	        		"PDF", "pdf");
-	        FileNameExtensionFilter html = new FileNameExtensionFilter(
-	        		"HTML", "html");
+	        FileNameExtensionFilter csv = new FileNameExtensionFilter("CSV", ".csv");
+	        FileNameExtensionFilter pdf = new FileNameExtensionFilter("PDF", ".pdf");
+	        FileNameExtensionFilter html = new FileNameExtensionFilter("HTML", ".html");
 	        	 		
 	        chooser.removeChoosableFileFilter(chooser.getAcceptAllFileFilter());
 	        chooser.setFileFilter(csv);
@@ -41,18 +41,18 @@ package edu.fh.kanban.dao;
 
 	        if (result == JFileChooser.APPROVE_OPTION) {
 
-	            path = chooser.getSelectedFile().toString();
+	           path = chooser.getSelectedFile().toString();
 
 	            chooser.setVisible(false);
 	        }
-	        this.file = new File(path);
+//	        this.file = new File(path);
 	        chooser.setVisible(false);
+	        
+	        new TestPdfErstellen(path);
+	        
 	    }
-
 	    public File getFile() {
 	    	return this.file;
 	    }
+	    
 	}
-
-
-

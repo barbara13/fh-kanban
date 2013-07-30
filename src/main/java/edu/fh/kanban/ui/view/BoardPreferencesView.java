@@ -78,7 +78,7 @@ public class BoardPreferencesView extends JFrame implements View {	//Klasse Boar
         setLocationByPlatform(true);
         setResizable(false);
         
-       // getComponent();// 
+        getComponent();
     }
     
     public JComponent getComponent() {

@@ -3,4 +3,4 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 --><cards>
     
-<card blocker="true" blocker_tooltip="" ca_id="19" co_id="0" created="25.07.2013 13:55:06" description="3" done="" effort="2" name="Test 2" started="" value="Standart"/><card blocker="false" blocker_tooltip="" ca_id="20" co_id="0" created="25.07.2013 16:34:11" description="Test" done="" effort="22" name="TestCard" started="" value="Expedite"/><card blocker="false" blocker_tooltip="" ca_id="21" co_id="0" created="25.07.2013 16:43:04" description="123" done="" effort="2" name="Hallo" started="" value="Standart"/></cards>
+<card blocker="false" blocker_tooltip="" ca_id="19" co_id="0" created="25.07.2013 13:55:06" description="3" done="" effort="2" name="Test 2" started="" value="Standart"/><card blocker="false" blocker_tooltip="" ca_id="20" co_id="0" created="25.07.2013 16:34:11" description="Test" done="" effort="22" name="TestCard" started="" value="Expedite"/><card blocker="false" blocker_tooltip="" ca_id="21" co_id="0" created="25.07.2013 16:43:04" description="123" done="" effort="2" name="Hallo" started="" value="Standart"/></cards>

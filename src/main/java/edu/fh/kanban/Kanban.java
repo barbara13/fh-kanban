@@ -2,6 +2,8 @@ package edu.fh.kanban;
 
 import edu.fh.kanban.dao.HTML;
 import edu.fh.kanban.dao.Export;
+import edu.fh.kanban.dao.TestPdfErstellen;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -75,8 +77,7 @@ public class Kanban {
 				
 			}
 		});
-        
-        
+             
         final BacklogView backlogView = new BacklogView();
         BoardView boardView = new BoardView(backlogView);
         backlogView.setBv(boardView);
@@ -109,6 +110,7 @@ public class Kanban {
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), boardView.getComponent());
                         firstBoard = false;
                         html.setEnabled(true);
+                        saveAs.setEnabled(true);
                     } else if (firstBoard == false) {
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), boardView.getComponent());
                         pane.removeTabAt(1);
@@ -126,6 +128,7 @@ public class Kanban {
         file.add(html);
         file.add(saveAs);
         html.setEnabled(false);
+        saveAs.setEnabled(false);
 
         JMenuBar menubar = new JMenuBar();
         menubar.add(file);
