@@ -2,14 +2,11 @@ package edu.fh.kanban;
 
 import edu.fh.kanban.dao.HTML;
 import edu.fh.kanban.dao.Export;
-import edu.fh.kanban.dao.XMLBoard;
-import edu.fh.kanban.dao.XMLCard;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -17,19 +14,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
-import edu.fh.kanban.ui.controller.BoardController;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
-import edu.fh.kanban.ui.view.CardView;
-import edu.fh.kanban.ui.view.View;
-import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.w3c.dom.Element;
 
 public class Kanban {
 

@@ -96,7 +96,7 @@ public class XMLBoard extends XML {
         }
     }
 
-    public ArrayList readBoard() {
+    public ArrayList<Board> readBoard() {
         listBoard.clear();
         boardList = doc.getElementsByTagName("board");
 
@@ -107,7 +107,7 @@ public class XMLBoard extends XML {
         return listBoard;
     }
 
-    public ArrayList readSubColumns() {
+    public ArrayList<Column> readSubColumns() {
         listSubColumn.clear();
         columnList = doc.getElementsByTagName("column");
 
@@ -118,7 +118,7 @@ public class XMLBoard extends XML {
         return listSubColumn;
     }
 
-    public ArrayList readMainColumns() {
+    public ArrayList<Column> readMainColumns() {
         listMainColumn.clear();
         columnList = doc.getElementsByTagName("columns");
 
@@ -129,7 +129,7 @@ public class XMLBoard extends XML {
         return listMainColumn;
     }
 
-    public ArrayList readCards() {
+    public ArrayList<Card> readCards() {
         listCard.clear();
         cardList = doc.getElementsByTagName("card");
 
@@ -139,7 +139,7 @@ public class XMLBoard extends XML {
         return listCard;
     }
 
-    public ArrayList readCardsFromColumn(int co_id) {
+    public ArrayList<Card> readCardsFromColumn(int co_id) {
         listCard.clear();
         //listSubColumn.clear();
 

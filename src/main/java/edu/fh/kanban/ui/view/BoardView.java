@@ -10,8 +10,8 @@ import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
 import edu.fh.kanban.ui.controller.BoardController;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -22,14 +22,19 @@ import java.util.ArrayList;
 
 public class BoardView extends JPanel implements View {
   
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 //BoardController definieren    
  private BoardController c = null;
  private XMLBoard xml;
  private BacklogView blv;
- private ArrayList <Column> listSubColumns = new ArrayList();
- private ArrayList <Column> listMainColumns = new ArrayList();
- private ArrayList <Board> listBoard = new ArrayList();
- private ArrayList <Card> listCards = new ArrayList();
+ private ArrayList<Column> listSubColumns = new ArrayList<Column>();
+ private ArrayList<Column> listMainColumns = new ArrayList<Column>();
+ private ArrayList<Board> listBoard = new ArrayList<Board>();
+ private ArrayList<Card> listCards = new ArrayList<Card>();
  private JPanel bpanel = new JPanel();
  private CardView cv;
  

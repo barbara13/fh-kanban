@@ -9,20 +9,20 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 
-import edu.fh.kanban.dao.XMLCard;
-import edu.fh.kanban.data.Card;
+//import edu.fh.kanban.dao.XMLCard;
+//import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.controller.BacklogController;
-import edu.fh.kanban.ui.controller.CardCreateController;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+//import edu.fh.kanban.ui.controller.CardCreateController;
+//import java.awt.event.KeyEvent;
+//import java.awt.event.KeyListener;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+//import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JScrollBar;
+//import javax.swing.JScrollBar;
 import javax.swing.JSeparator;
-import java.awt.event.KeyAdapter;
-import java.util.ArrayList;
+//import java.awt.event.KeyAdapter;
+//import java.util.ArrayList;
 
 /**
  *
@@ -30,16 +30,21 @@ import java.util.ArrayList;
  */
 public class BacklogView extends JPanel implements View {
 
-    private JTextField searchfield;
-    private BacklogController c;
-    private JPanel panel = new JPanel();
-    private JSeparator sep;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private JTextField searchfield;
+    private BacklogController c = null;
+//    private JPanel panel = new JPanel();
+//    private JSeparator sep;
     private JPanel[] cards = new JPanel[100];
     private JButton[] showcards = new JButton[100];
     private JButton[] addcards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
-    private JComboBox comboBox;
-    private int i = 0;
+    private JComboBox<String> comboBox;
+//    private int i = 0;
     private BoardView bv;
 
     /**
@@ -49,16 +54,14 @@ public class BacklogView extends JPanel implements View {
         this.bv = bv;
     }
 
-    
-    
-  public BacklogView() {
+    public BacklogView() {
         getComponents();
     }
-
     
     public  JComponent getComponent() {
-            c = new BacklogController(this, bv);
-        panel.setLayout(new FormLayout(new ColumnSpec[]{
+    	c = new BacklogController(this, bv);
+            
+        setLayout(new FormLayout(new ColumnSpec[]{
             FormFactory.RELATED_GAP_COLSPEC,
             ColumnSpec.decode("max(120dlu;pref)"),//61
             FormFactory.RELATED_GAP_COLSPEC,
@@ -70,7 +73,7 @@ public class BacklogView extends JPanel implements View {
             FormFactory.RELATED_GAP_COLSPEC,
             FormFactory.DEFAULT_COLSPEC,
             FormFactory.RELATED_GAP_COLSPEC,},
-                new RowSpec[]{
+            new RowSpec[]{
             FormFactory.RELATED_GAP_ROWSPEC,
             FormFactory.DEFAULT_ROWSPEC,
             FormFactory.RELATED_GAP_ROWSPEC,
@@ -96,9 +99,8 @@ public class BacklogView extends JPanel implements View {
             FormFactory.RELATED_GAP_ROWSPEC,}));
 
         searchfield = new JTextField();
-        searchfield.setText("");
 //		searchfield.addKeyListener(c);
-        panel.add(searchfield, "6, 2, 3, 1, right, default");
+        add(searchfield, "6, 2, 3, 1, right, default");
         searchfield.setColumns(10);
 
 /*
@@ -140,23 +142,20 @@ public class BacklogView extends JPanel implements View {
             }
         });*/
 
-        JLabel lblSortBy = new JLabel("Sort by");
-        panel.add(lblSortBy, "6, 4, right, default");
+        add(new JLabel("Sort by"), "6, 4, right, default");
 
-        comboBox = new JComboBox();
+        comboBox = new JComboBox<String>(new String[]{"Creation time", "Headline", "Value", "Size"});
         comboBox.addActionListener(c);
-        comboBox.setModel(new DefaultComboBoxModel(new String[]{"Creation time", "Headline", "Value", "Size"}));
-        comboBox.setToolTipText("");
-        panel.add(comboBox, "8, 4, right, default");
-        sep = new JSeparator();
-        panel.add(sep, CC.xywh(1, 5, 10, 1));
+
+        add(comboBox, "8, 4, right, default");
+        add(new JSeparator(), CC.xywh(1, 5, 10, 1));
         
         c.showCards();
-        return panel;
+        return this;
     }
 
     public JPanel getPanel() {
-        return panel;
+        return this;
     }
 
     public JPanel[] getCards() {
@@ -167,7 +166,7 @@ public class BacklogView extends JPanel implements View {
         return ids;
     }
 
-    public JComboBox getSort() {
+    public JComboBox<String> getSort() {
         return comboBox;
     }
 

@@ -9,13 +9,11 @@ import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
 import edu.fh.kanban.ui.view.SimpleCardView;
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 
@@ -30,14 +28,14 @@ public class BacklogController extends Controller{
     private CardView cv;
     private XMLCard xml;
     private XMLBoard xmlb;
-    private ArrayList<Card> listCard = new ArrayList();
+    private ArrayList<Card> listCard = new ArrayList<Card>();
     private int j = 0;
     private int k = 0;
     private int i;
-    private Object src;
-    private String s = null;
-    private int id;
-    private SimpleCardView cards;
+//    private Object src;
+//    private String s = null;
+//    private int id;
+//    private SimpleCardView cards;
     private JTextArea description;
     
 
@@ -56,7 +54,7 @@ public class BacklogController extends Controller{
             
             description = new JTextArea(listCard.get(i).getDescription());
             description.setEnabled(false);
-            blv.getCards()[i] = new SimpleCardView().getComponent();
+            blv.getCards()[i] = new SimpleCardView();
             blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
             blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
             blv.getShowcards()[i]= new JButton("SHOW");
@@ -77,14 +75,13 @@ public class BacklogController extends Controller{
             blv.getShowcards()[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					for(int i = 0; i <= blv.getCards().length; i++){
-                                            
 						if(e.getSource() == blv.getShowcards()[i]){
-                                                     cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
-                                                        cv.getComponent();
-                                                         src = e.getSource();
-                                                         //id = parseId(e.getActionCommand());
-                                                         cv.getBtnBackward().setVisible(false);
-                                                         cv.getBtnForward().setVisible(false);
+							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+			                cv.getComponent();
+//			                src = e.getSource();
+//			                id = parseId(e.getActionCommand());
+//			                cv.getBtnBackward().setVisible(false);
+//			                cv.getBtnForward().setVisible(false);
 							break;
 						}
 					}
@@ -105,15 +102,16 @@ public class BacklogController extends Controller{
         }
     }
     
+//    
+//    @Override
+//     public void actionPerformed(ActionEvent e) {
+//       
+//     }
     
-    @Override
-     public void actionPerformed(ActionEvent e) {
-       
-     }
+//    private int parseId(String s){
+//        int s1 = s.indexOf(":");
+//
+//        return Integer.parseInt(s.substring(0, s1));
+//    }
     
-    private int parseId(String s){
-        int s1 = s.indexOf(":");
-
-        return Integer.parseInt(s.substring(0, s1));
-    }
 }

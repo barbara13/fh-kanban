@@ -175,7 +175,7 @@ public class XMLCard extends XML {
     } 
     
         
-    public ArrayList readCards(){     
+    public ArrayList<Card> readCards(){     
         listCard.clear();
         cardList = doc.getElementsByTagName("card");
         
