@@ -191,7 +191,7 @@ private BoardView bv = this;
         
         bpanel.setLayout(new FormLayout(getColumns(listSubColumns.size()), getRows(15)));
         showColumns(listMainColumns, listSubColumns);
-        System.out.println();
+        System.out.println(listSubColumns.size() + "::" + listMainColumns + "::" + listSubColumns);
         return bpanel;
        
     }   

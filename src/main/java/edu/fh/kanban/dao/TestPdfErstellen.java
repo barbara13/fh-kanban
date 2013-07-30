@@ -45,7 +45,7 @@ public class TestPdfErstellen {
 	        Document document = new Document();
 	        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filename));
 	        
-	        int i = 0;
+	        int k = 0;
 	        xml.loadXML(Kanban.xmlPath);
 	        listBoard = xml.readBoard();
 	        listMainColumns = xml.readMainColumns();
@@ -59,9 +59,11 @@ public class TestPdfErstellen {
 	        cb.beginText();
 	        cb.setFontAndSize(bf, 12);
 	        cb.moveText(20, 800);
-	        cb.showText(listBoard.get(i).getName());
-	        
-	        cb.moveText(0, -12);
+	        cb.showText(listBoard.get(k).getName());
+	        cb.moveText(0, -20);
+	        for(int i = 0; i < listSubColumns.size(); i++){
+	        	cb.showText(listMainColumns.get(k).getName());
+	        }
 //	        cb.setCharacterSpacing(2);
 //	        cb.setWordSpacing(12);
 //	        cb.showText("Erst recht auch jeden kleineren.");
