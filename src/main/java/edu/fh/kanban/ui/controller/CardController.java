@@ -41,9 +41,15 @@ public class CardController implements ActionListener {
         src = e.getSource();
         if(src == cView.getTglbtnBlocker()){
         	if(cView.getTglbtnBlocker().isSelected()){
-            	cView.getTglbtnBlocker().setToolTipText(JOptionPane.showInputDialog("Block Message"));
-            	xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
-            	xml.editCard(cView.getcId(), "blocker_tooltip", cView.getTglbtnBlocker().getToolTipText().toString());
+        		String message = JOptionPane.showInputDialog("Block Message");
+        		if(message != null){
+        			cView.getTglbtnBlocker().setToolTipText(message);
+                	xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
+                	xml.editCard(cView.getcId(), "blocker_tooltip", cView.getTglbtnBlocker().getToolTipText().toString());
+        		}else{
+        			cView.getTglbtnBlocker().doClick();
+        		}
+            	
         	}else{
             	xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
             	xml.editCard(cView.getcId(), "blocker_tooltip", "");

@@ -4,5 +4,5 @@ and open the template in the editor.
 --><primary_keys>
     <board b_id="10"/>
     <column co_id="79"/>
-    <card ca_id="22"/>
+    <card ca_id="23"/>
 </primary_keys>
