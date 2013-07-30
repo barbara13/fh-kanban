@@ -17,6 +17,7 @@ import edu.fh.kanban.Kanban;
 import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
+import edu.fh.kanban.ui.view.BoardView;
 
 public class TestPdfErstellen {
 	
@@ -59,6 +60,7 @@ public class TestPdfErstellen {
 	        cb.setFontAndSize(bf, 12);
 	        cb.moveText(20, 800);
 	        cb.showText(listBoard.get(i).getName());
+	        
 	        cb.moveText(0, -12);
 //	        cb.setCharacterSpacing(2);
 //	        cb.setWordSpacing(12);
