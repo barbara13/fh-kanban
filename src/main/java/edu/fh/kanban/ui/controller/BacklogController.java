@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import java.util.Iterator;
+import java.util.List;
 
 
 /**
@@ -33,7 +35,7 @@ public class BacklogController extends Controller{
     private int k = 0;
     private int i;
 //    private Object src;
-//    private String s = null;
+    private String s = null;
 //    private int id;
 //    private SimpleCardView cards;
     private JTextArea description;
@@ -102,11 +104,28 @@ public class BacklogController extends Controller{
         }
     }
     
-//    
-//    @Override
-//     public void actionPerformed(ActionEvent e) {
-//       
-//     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+   	listCard = xml.readCards();
+      	
+   	s = (String) blv.getSort().getSelectedItem();
+   	System.out.println(s);
+   	
+   	if (s == "Creation time"){
+   		System.out.println("Test");
+   	}
+//   	else if (s == "Headline"){
+//   		List Card = Sort.sortByHeadline(listCard);
+//   		
+//   		Iterator<Card> test3 = Card.iterator();
+//     		while(test3.hasNext()){
+//     			Card c = test3.next();
+//     		}
+//     		
+//   		System.out.println("Test2");
+//   	}
+
+    }
     
 //    private int parseId(String s){
 //        int s1 = s.indexOf(":");

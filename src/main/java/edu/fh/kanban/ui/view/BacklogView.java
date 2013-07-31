@@ -43,7 +43,7 @@ public class BacklogView extends JPanel implements View {
     private JButton[] showcards = new JButton[100];
     private JButton[] addcards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
-    private JComboBox<String> comboBox;
+    private JComboBox comboBox;
 //    private int i = 0;
     private BoardView bv;
 
@@ -144,7 +144,7 @@ public class BacklogView extends JPanel implements View {
 
         add(new JLabel("Sort by"), "6, 4, right, default");
 
-        comboBox = new JComboBox<String>(new String[]{"Creation time", "Headline", "Value", "Size"});
+        comboBox = new JComboBox(new String[]{"Creation time", "Headline", "Value", "Size"});
         comboBox.addActionListener(c);
 
         add(comboBox, "8, 4, right, default");
@@ -166,7 +166,7 @@ public class BacklogView extends JPanel implements View {
         return ids;
     }
 
-    public JComboBox<String> getSort() {
+    public JComboBox getSort() {
         return comboBox;
     }
 
