@@ -36,7 +36,7 @@ public class BoardView extends JPanel implements View {
  private ArrayList<Board> listBoard = new ArrayList<Board>();
  private ArrayList<Card> listCards = new ArrayList<Card>();
  private JPanel bpanel = new JPanel();
- private CardView cv;
+// private CardView cv;
  
     public BoardView(BacklogView blv) {
      //BoardController im Konstruktor
@@ -73,7 +73,7 @@ private JLabel[] columns = new JLabel[100];
 private String columnSize, rowSize;
 private JLabel title;
 private JTextArea description;
-private BoardView bv = this;
+//private BoardView bv = this;
 
     private String getRows(int rows) {
         String row = "4dlu, 100dlu, ";
@@ -137,7 +137,8 @@ private BoardView bv = this;
         int k = 0;
         
         for (int i = 0; i < listCards.size(); i++) {
-            cv = new CardView(listCards.get(i).getCa_id(), listCards, blv, this);
+//            cv = new CardView(listCards.get(i).getCa_id(), listCards, blv, this);
+        	new CardView(listCards.get(i).getCa_id(), listCards, blv, this);
             
             description = new JTextArea(listCards.get(i).getDescription());
             description.setEnabled(false);
@@ -191,7 +192,6 @@ private BoardView bv = this;
         
         bpanel.setLayout(new FormLayout(getColumns(listSubColumns.size()), getRows(15)));
         showColumns(listMainColumns, listSubColumns);
-        System.out.println(listSubColumns.size() + "::" + listMainColumns + "::" + listSubColumns);
         return bpanel;
        
     }   
