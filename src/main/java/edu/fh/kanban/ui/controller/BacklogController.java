@@ -8,6 +8,7 @@ import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
+import edu.fh.kanban.data.Sort;
 import edu.fh.kanban.ui.view.SimpleCardView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,7 @@ import java.util.List;
 
 /**
  *
- * @author David, Malte
+ * @author David, Malte, Lorenz
  */
 public class BacklogController extends Controller{
     
@@ -114,17 +115,34 @@ public class BacklogController extends Controller{
    	if (s == "Creation time"){
    		System.out.println("Test");
    	}
-//   	else if (s == "Headline"){
-//   		List Card = Sort.sortByHeadline(listCard);
+   	else if (s == "Headline"){
+   		List<Card> Card = Sort.sortByHeadline(listCard);
+   		
+   		Iterator<Card> IC = Card.iterator();
+     		while(IC.hasNext()){
+     			IC.next();
+     		}
+     		
+   		System.out.println(listCard);
+   	}
+   	else if (s == "Value"){
+   		List<Card> Card = Sort.sortByValue(listCard);
+   		
+   		Iterator<Card> IC = Card.iterator();
+  		while(IC.hasNext()){
+  			IC.next();
+   	}
+  		System.out.println(listCard);
+   	}
+//   	else if (s == "Size"){
+//   		List Card = Sort.sortBySize(listCard);
 //   		
-//   		Iterator<Card> test3 = Card.iterator();
-//     		while(test3.hasNext()){
-//     			Card c = test3.next();
-//     		}
-//     		
-//   		System.out.println("Test2");
+//   		Iterator<Card> IC = Card.iterator();
+//  		while(IC.hasNext()){
+//  			Card c = IC.next();
 //   	}
-
+//  		System.out.println(listCard);
+//    }
     }
     
 //    private int parseId(String s){
