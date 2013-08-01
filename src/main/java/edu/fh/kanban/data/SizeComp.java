@@ -1,26 +1,25 @@
-/*package edu.fh.kanban.data;
+package edu.fh.kanban.data;
 
 import java.util.Comparator;
 
-*//**
+/**
  * @author Ghost
  *
- *//*
+ */
 public class SizeComp implements Comparator<Card>{
 
 	@Override
 	  public int compare(Card c1, Card c2) {
 	    int x=0;
-		if (c1.Integer.parseInt(Integer.parseInt(getValue())) == c2.Integer.parseInt(getValue())) {
+		if (Integer.parseInt(c1.getValue()) == Integer.parseInt(c2.getValue())) {
 	      x= 0;										
 	    }
-		else if (c1.Integer.parseInt(getValue()) < c2.Integer.parseInt(getValue())) {		
+		else if (Integer.parseInt(c1.getValue()) < Integer.parseInt(c2.getValue())) {		
 	      x= -1;									
 	    }
-		else if (c2.Integer.parseInt(getValue()) > c2.Integer.parseInt(getValue())) {
+		else if (Integer.parseInt(c2.getValue()) > Integer.parseInt(c2.getValue())) {
 	      x= 1;										
 	    }
 	    return x;
-
+		}
 }
-*/

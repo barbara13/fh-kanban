@@ -113,7 +113,7 @@ public class BacklogController extends Controller{
    	System.out.println(s);
    	
    	if (s == "Creation time"){
-   		System.out.println("Test");
+   		System.out.println(listCard);
    	}
    	else if (s == "Headline"){
    		List<Card> Card = Sort.sortByHeadline(listCard);
@@ -134,15 +134,15 @@ public class BacklogController extends Controller{
    	}
   		System.out.println(listCard);
    	}
-//   	else if (s == "Size"){
-//   		List Card = Sort.sortBySize(listCard);
-//   		
-//   		Iterator<Card> IC = Card.iterator();
-//  		while(IC.hasNext()){
-//  			Card c = IC.next();
-//   	}
-//  		System.out.println(listCard);
-//    }
+   	else if (s == "Size"){
+   		List<Card> Card = Sort.sortBySize(listCard);
+   		
+   		Iterator<Card> IC = Card.iterator();
+  		while(IC.hasNext()){
+  			IC.next();
+   	}
+  		System.out.println(listCard);
+    }
     }
     
 //    private int parseId(String s){

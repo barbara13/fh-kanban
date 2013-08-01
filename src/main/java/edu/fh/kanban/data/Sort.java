@@ -56,7 +56,7 @@ public class Sort{
 		
 	}
 	
-/*	public static List sortBySize(ArrayList<Card> listCard){
+	public static List<Card> sortBySize(ArrayList<Card> listCard){
 	
 		Comparator<Card> comp = new SizeComp();	
 		List<Card> card = addIntoList(listCard);
@@ -65,7 +65,7 @@ public class Sort{
 		return card;
 	
 	
-}*/
+}
 	
 
 }
