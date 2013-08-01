@@ -20,7 +20,6 @@ import edu.fh.kanban.data.Column;
 
 public class ExportToPdf {
 	
-    private String path;
     private XMLBoard xml;
     private ArrayList<Column> listSubColumns = new ArrayList<Column>();
     private ArrayList<Column> listMainColumns = new ArrayList<Column>();
@@ -31,7 +30,6 @@ public class ExportToPdf {
     
     public ExportToPdf(String path){
         xml = new XMLBoard();
-    	this.path = path;
     	
     	try {
 			createPdf(path);
@@ -74,17 +72,18 @@ public class ExportToPdf {
     	for(int i = 0; i < listSubColumns.size(); i++){
     		table.addCell(listSubColumns.get(i).getName().toString());
     	}
-    	for(int i = 0; i < 10; i++){
-    		for(int j = 0; j < listSubColumns.size(); j++){
-    			listCards = xml.readCardsFromColumn(listSubColumns.get(j).getCo_id());
-    			if(false){
-    				
-//        			table.addCell(card);	//Hier kommen alle Karten rein
-    			}else{
-    				break;
-    			}
-    		}
-    	}
+    	
+//    	for(int i = 0; i < 10; i++){
+//    		for(int j = 0; j < listSubColumns.size(); j++){
+//    			listCards = xml.readCardsFromColumn(listSubColumns.get(j).getCo_id());
+//    			if(false){
+//    				
+////        			table.addCell(card);	//Hier kommen alle Karten rein
+//    			}else{
+//    				break;
+//    			}
+//    		}
+//    	}
         cb.endText();
         
         document.add(table);
