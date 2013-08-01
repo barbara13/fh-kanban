@@ -41,9 +41,10 @@ import com.itextpdf.text.DocumentException;
 	        if (result == JFileChooser.APPROVE_OPTION) {
 	        	if(chooser.getFileFilter().getDescription().equals("CSV")){
 	        		path = chooser.getSelectedFile().toString() + ".csv";
+	        		new ExportToCsv(path);
 	        	}else if(chooser.getFileFilter().getDescription().equals("PDF")){
 	        		path = chooser.getSelectedFile().toString() + ".pdf";
-	        		new TestPdfErstellen(path);
+	        		new ExportToPdf(path);
 	        	}else if(chooser.getFileFilter().getDescription().equals("HTML")){
 	        		path = chooser.getSelectedFile().toString() + ".html";
 	        	}

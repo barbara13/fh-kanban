@@ -18,7 +18,7 @@ import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
 
-public class TestPdfErstellen {
+public class ExportToPdf {
 	
     private String path;
     private XMLBoard xml;
@@ -29,7 +29,7 @@ public class TestPdfErstellen {
     
     private PdfPTable table;
     
-    public TestPdfErstellen(String path){
+    public ExportToPdf(String path){
         xml = new XMLBoard();
     	this.path = path;
     	
