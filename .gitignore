@@ -17,5 +17,3 @@ db/log/log.ctrl
 /JavaApplication9/nbproject/private/
 /JavaApplication9/build/
 *.ucls
-
-src/main/java/edu/fh/kanban/data/Sort.java

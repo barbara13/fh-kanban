@@ -1,12 +1,12 @@
-/*
+
 package edu.fh.kanban.data;
 
 import java.util.Comparator;
 
-*//**
+/**
  * @author Ghost
  *
- *//*
+ */
 public class NameComp implements Comparator<Card>{
 
 	@Override
@@ -24,4 +24,3 @@ public class NameComp implements Comparator<Card>{
 	  }
 
 }
-*/
