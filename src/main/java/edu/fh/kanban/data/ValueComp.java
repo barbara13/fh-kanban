@@ -1,14 +1,14 @@
 /**
  * 
- *//*
+ */
 package edu.fh.kanban.data;
 
 import java.util.Comparator;
 
-*//**
+/**
  * @author Ghost
  *
- *//*
+ */
 public class ValueComp implements Comparator<Card> {
 
 	@Override
@@ -28,4 +28,3 @@ public class ValueComp implements Comparator<Card> {
 	  }
 
 }
-*/
