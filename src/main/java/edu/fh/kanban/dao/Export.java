@@ -38,19 +38,21 @@ import com.itextpdf.text.DocumentException;
 	        chooser.setVisible(true);
 
 	        int result = chooser.showSaveDialog(this);
-
 	        if (result == JFileChooser.APPROVE_OPTION) {
-
-	           path = chooser.getSelectedFile().toString();
-
+	        	if(chooser.getFileFilter().getDescription().equals("CSV")){
+	        		path = chooser.getSelectedFile().toString() + ".csv";
+	        	}else if(chooser.getFileFilter().getDescription().equals("PDF")){
+	        		path = chooser.getSelectedFile().toString() + ".pdf";
+	        		new TestPdfErstellen(path);
+	        	}else if(chooser.getFileFilter().getDescription().equals("HTML")){
+	        		path = chooser.getSelectedFile().toString() + ".html";
+	        	}
 	            chooser.setVisible(false);
 	        }
 //	        this.file = new File(path);
 	        chooser.setVisible(false);
-	        
-	        new TestPdfErstellen(path);
-	        
 	    }
+	    
 	    public File getFile() {
 	    	return this.file;
 	    }
