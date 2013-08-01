@@ -1,13 +1,8 @@
 package edu.fh.kanban.dao;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import com.itextpdf.text.DocumentException;
 		
 	/**
 	 * 
@@ -16,14 +11,11 @@ import com.itextpdf.text.DocumentException;
 	 */
 	
 	public class Export extends JFrame{
-		
 		private static final long serialVersionUID = 1L;
-		private File file;
 
 	    public Export(){
 			
 	    	String path = System.getProperty("user.home");
-//	        this.file = new File(path.trim());
 
 	    	JFileChooser chooser = new JFileChooser(path);
 	        chooser.setDialogType(JFileChooser.SAVE_DIALOG);
@@ -50,12 +42,6 @@ import com.itextpdf.text.DocumentException;
 	        	}
 	            chooser.setVisible(false);
 	        }
-//	        this.file = new File(path);
 	        chooser.setVisible(false);
 	    }
-	    
-	    public File getFile() {
-	    	return this.file;
-	    }
-	    
 	}

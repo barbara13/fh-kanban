@@ -7,9 +7,8 @@ import java.awt.event.ActionListener;
  *
  * @author David
  */
-public class Controller implements ActionListener{
 
-    @Override
+public class Controller implements ActionListener{
     public void actionPerformed(ActionEvent e) {
     }
 }
