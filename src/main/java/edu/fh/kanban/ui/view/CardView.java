@@ -200,10 +200,6 @@ public class CardView extends JFrame implements View {
 		return tglbtnBlocker;
 	}
 
-//	public JButton getBtnAddCard() {
-//        return btnAddCard;
-//    }
-
     public JButton getBtnEdit() {
         return btnEdit;
     }
@@ -215,12 +211,4 @@ public class CardView extends JFrame implements View {
     public JButton getBtnCancel() {
         return btnCancel;
     }
-
-//    public JButton getBtnForward() {
-//        return btnForward;
-//    }
-//
-//    public JButton getBtnBackward() {
-//        return btnBackward;
-//    }
 }

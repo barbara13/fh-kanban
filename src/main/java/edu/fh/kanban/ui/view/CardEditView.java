@@ -122,6 +122,10 @@ public class CardEditView extends JFrame{
 		return cId;
 	}
 	
+	public void setCId(int cId){
+		this.cId = cId;
+	}
+	
 	public String getTxtHeadline() {
 		return txtHeadline.getText().toString();
 	}
