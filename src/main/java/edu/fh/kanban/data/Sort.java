@@ -14,13 +14,13 @@ import java.util.List;
 
 public class Sort{
 	
-	public static List<Card> addIntoList(ArrayList <Card>listCard){
+	public static List<Card> addIntoList(ArrayList <Card>slist){
 		
 		List<Card> card = new ArrayList<Card>();
 		
-		if(listCard!=null){
+		if(slist!=null){
 			
-			Iterator<Card> lit = listCard.iterator();
+			Iterator<Card> lit = slist.iterator();
 			while(lit.hasNext()){
 				Card c = lit.next();
 				
@@ -36,30 +36,30 @@ public class Sort{
 	}
 	
 		 
-	public static List<Card> sortByValue(ArrayList<Card> listCard){
+	public static List<Card> sortByValue(ArrayList<Card> slist){
 		
 		Comparator<Card> comp = new ValueComp();
-		List<Card> card = addIntoList(listCard); //Help list
+		List<Card> card = addIntoList(slist); //Help list
 		Collections.sort(card,comp);
 		
 		return card;
 		
 	}
 	
-	public static List<Card> sortByHeadline(ArrayList<Card> listCard){
+	public static List<Card> sortByHeadline(ArrayList<Card> slist){
 		
 		Comparator<Card> comp = new NameComp();
-		List<Card> card = addIntoList(listCard);
+		List<Card> card = addIntoList(slist);
 		Collections.sort(card,comp);
 		
 		return card;
 		
 	}
 	
-	public static List<Card> sortBySize(ArrayList<Card> listCard){
+	public static List<Card> sortBySize(ArrayList<Card> slist){
 	
 		Comparator<Card> comp = new SizeComp();	
-		List<Card> card = addIntoList(listCard);
+		List<Card> card = addIntoList(slist);
 		Collections.sort(card,comp);
 	
 		return card;
