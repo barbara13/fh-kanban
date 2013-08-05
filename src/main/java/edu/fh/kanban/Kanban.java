@@ -110,6 +110,14 @@ public class Kanban {
                         firstBoard = false;
                         html.setEnabled(true);
                         saveAs.setEnabled(true);
+                        try{
+                        for(int i = 0; backlogView.getAddcards()[i].getText().toString() != "0"; i++){
+                        backlogView.getAddcards()[i].setEnabled(true);
+                        }
+                        }
+                        catch(java.lang.NullPointerException exc){
+                            return;
+                        }
                     } else if (firstBoard == false) {
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), boardView.getComponent());
                         pane.removeTabAt(1);
