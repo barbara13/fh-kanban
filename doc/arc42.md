@@ -117,6 +117,7 @@ Einsatz einer GUI.
 ## 7.6. Geschäftsregeln
 
 ## 7.7. Konfiguration
+Beim erstellen eines neuen Boards hat der Benutzer die Möglichkeit, den Namen des zu erstellenden Boards festzulegen. Darüber hinaus können die Farben für die entsprechende Zeitvorgaben festgelegt werden(Standard, Fixed Date, Expedite, Intangible). Außerdem kann die Anzahl und Beschreibung der Spalten selbst gewählt werden und die maximale Zahl an Katen, die eine Spalte aufnehmen kann(Wip).
 
 ## 7.8. Logging, Protokollierung
 Auftretende Exceptions werden in einer Log File gespeichert.
@@ -126,6 +127,8 @@ Auftretende Exceptions werden in einer Log File gespeichert.
 
 ## 7.10. Persistenz
 Speicherung aller Daten in XML Dateien.
+
+Export to… Barbara ergänzen
 
 ## 7.11. Plausibilisierung und Validierung
 Feldeingaben werden durch entsprechende Algorithmen auf Richtigkeit überprüft, bzw. können bsp. in Felder in denen Zahlenwerte gefordert werden, nur Zahlenwerte eingegeben werden.
