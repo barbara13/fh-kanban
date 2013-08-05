@@ -141,6 +141,7 @@ public class CardCreateView extends JFrame implements View {
 	}
 
 	public void setValue(String value) {
+		comboBoxValue.addItem(value);
 		comboBoxValue.setSelectedItem(value);
 	}
 
