@@ -1,4 +1,4 @@
-﻿# Architekturdokumentation
+# Architekturdokumentation
 
 # 1. Einführung und Ziele
 Dieser Abschnitt führt in die Aufgabenstellung ein und skizziert die Ziele, die das Team-Projekt 2013 verfolgt.
@@ -72,24 +72,6 @@ Zugrunde liegt das MVC-Modell
 # 5. Bausteinsicht
 Statische Zerlegung des Systems in Bausteine (Module, Komponenten, Subsysteme, Teilsysteme, Klassen, Interfaces, Pakete, Bibliotheken, Frameworks, Schichten, Partitionen, Tiers, Funktionen, Makros, Operationen, Datenstrukturen...) sowie deren Beziehungen.
 
-
-Die Klasse "Kanban" beinhaltet die mainfunktion, diese Initialisiert das Hauptfenster zur Programmsteuerung.
-
-Das Interface "View" stellt eine initMethode zu Verfügung um eine JFrame zu initialisieren.
-
-In der Klasse "BacklogView" werden alle Karten angezeigt. Diese referenziert auf den BacklogController.
-
-Die Klasse "BoardView" implementiert die View und erbt von JPanel. Diese beinhaltet das erstellte Board, hier werden die Karten mithilfe des BoardControllers durch drag & drop zwischen den Spalten verschoben.
-
-Die Klasse "BoardPreferencesView" implementiert die View und erbt von JFrame. Diese beinhaltet alle Einstellung zur Erstellung eines Boards. Durch die Referenzierung auf die Klasse "BoardPreferencesController" wird das Board in XML-Tabellenstruktur gespeichert.
-
-Die Klasse "CardCreateView" implementiert die View und erbt von JFrame. Diese beinhaltet alle Komponenten zur Erstellung einer Karte. Durch die Referenzierung auf die Klasse "CardCreateController" wird die Karte in die XML-Tabellenstruktur gespeichert.
-
-Die Klasse "CardEditView" implementiert die View und erbt von JFrame. Diese beinhaltet alle Komponenten zur Editierung einer bereits erstellten Karte. Durch die Referenzierung auf die Klasse "CardEditController" wird die Karte in die XML-Tabellenstruktur geändert.
-
-Die Klasse "CardView" implementiert die View und erbt von JFrame. Diese zeigt einer aus dem Backlog selektierte Karte mit all ihren Parametern und bietet durch die Referenzierung auf den "CardController" diese Karte zu editieren, auf das Board zu verschieben oder diese zu löschen.
-
-
 siehe Diagramme
 
 
@@ -100,6 +82,7 @@ siehe Diagramme
 Dieser Abschnitt beschreibt allgemeine Strukturen und Aspekte, die systemweit gelten. Darüber hinaus stellt er verschiedene technische Lösungskonzepte vor.
 
 ## 7.1 Fachliche Strukturen
+## 7.1.1 
 
 ## 7.2 Typische Muster und Strukturen
 
@@ -107,7 +90,26 @@ Dieser Abschnitt beschreibt allgemeine Strukturen und Aspekte, die systemweit ge
 Exception Handling.
 
 ## 7.4. Bedienoberfläche
-Grafische Benutzeroberfläche mittels Swing
+Grafische Benutzeroberflächen mittels Swing
+
+### 7.4.1 CardView
+Die CardView zeigt die Karten auf der BoardView oder dem Backlog an und bietet die Möglichkeit die Karten zu verändern, zu löschen oder dem Board hinzuzufügen. 
+
+### 7.4.2 CardEditView
+Die Klasse "CardEditView" implementiert die View und erbt von JFrame. Diese beinhaltet alle Komponenten zur Editierung einer bereits erstellten Karte. Wurde eine Karte editiert, aber nicht alle Felder ausgefüllt ist die Speicherung nicht möglich. Leere Felder werden rot markieret und es wird eine entsprechende Fehlermeldung auf dem Bildschirm ausgegeben. Fehleingaben wie Bsp. die Eingabe von Buchstaben in einem Feld wo Zahlenwerte erwartet werden, werden durch entsprechende Kontorollalgorithmen abgefangen. Wenn das Fenster während des editierens geschlossen wird, werden alle Änderungen rückgängig gemacht und die Karte auf den ursprünglichen Stand zurückgesetzt. Durch die Referenzierung auf die Klasse "CardEditController" wird die Karte in die XML-Tabellenstruktur geändert.
+
+### 7.4.3 CardCreateView
+Die Klasse "CardCreateView" implementiert die View und erbt von JFrame. Diese beinhaltet alle Komponenten zur Erstellung einer Karte. Beim Anlegen einer Karte müssen alle Felder ausgefüllt werden, ansonsten ist eine Speicherung nicht möglich. Felder die nicht ausgefüllt wurden, werden rot markiert und es wird eine entsprechende Fehlermeldung auf dem Bildschirm ausgegeben. Fehleingaben wie Bsp. die Eingabe von Buchstaben in einem Feld wo Zahlenwerte erwartet werden, werden durch entsprechende Kontorollalgorithmen abgefangen. Durch die Referenzierung auf die Klasse "CardCreateController" wird die Karte in die XML-Tabellenstruktur gespeichert.
+
+### 7.4.4 BoardView
+Die Klasse "BoardView" implementiert die View und erbt von JPanel. Diese beinhaltet das erstellte Board mit den vorher getroffenen Einstellungen und stellt die vorhandenen Karten in den jeweiligen Spalten da. Darüber hinaus ist es möglich die Karten zwischen den einzelnen Spalten zu verschieben, allerdings dürfen Karten nur in eine Richtung verschoben werden.
+
+### 7.4.5 BoardPreferencesView
+Die Klasse "BoardPreferencesView" implementiert die View und erbt von JFrame. Hier können sämtliche Einstellungen zur Erstellung eines neuen Boards festgelegt werden, wie z.B. die Anzahl und die Namen der Spalten die auf dem neuen Board existieren sollen. Durch die Referenzierung auf die Klasse "BoardPreferencesController" wird das Board in XML-Tabellenstruktur gespeichert.
+
+### 7.4.6 BacklogView
+In der Klasse "BacklogView" werden alle Karten angezeigt.Darüber hinaus verfügt der Backlog über eine Suche und die Möglichkeit Karten nach bestimmten Eigenschaften(Creation Time, Value, Size, Headline) sortieren zu lassen. Die Klasse BacklogView referenziert auf den BacklogController.
+
 
 ## 7.5. Ergonomie
 Einsatz einer GUI.
