@@ -96,7 +96,18 @@ public class XMLBoard extends XML {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Board getBoard(){
+        
+        boardList = doc.getElementsByTagName("board"); 
+        
+        for (int i = 0; i < boardList.getLength(); i++) {
+            listBoard.add(new Board(Kanban.tryParseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(boardList.item(i).getAttributes().getNamedItem("name").toString()), getString(boardList.item(i).getAttributes().getNamedItem("expedite").toString()),getString(boardList.item(i).getAttributes().getNamedItem("standart").toString()), getString(boardList.item(i).getAttributes().getNamedItem("fixedDate").toString()), getString(boardList.item(i).getAttributes().getNamedItem("intangible").toString())));
+        }
 
+        return listBoard.get(0);
+    }
+    
     public ArrayList<Board> readBoard() {
         listBoard.clear();
         boardList = doc.getElementsByTagName("board");
