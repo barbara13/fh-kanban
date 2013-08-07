@@ -53,7 +53,8 @@ public class BoardController extends Controller{
             
     private XMLBoard xml;
     private ArrayList<Card> listCards = new ArrayList<Card>();
-     
+    private Board board = new Board();
+    private Color color;
     
     private JTextField searchtext;
     private JButton showCards[] = new JButton[100];
@@ -75,8 +76,15 @@ public class BoardController extends Controller{
     }  
     
    public void showColumns(ArrayList<Column> mainColumns, ArrayList<Column> subColumns) {
+       //color = Color.decode(null);
+       
+       
+      // if(board.getExpedite() == "java.awt.Color[r=255,g=0,b=0]"){
+      //      color = java.awt.Color[r=255,g=0,b=0];
+      //  }
         cardcounter = 0;
         xml.loadXML(Kanban.xmlPath); 
+        board = xml.getBoard();
         //listAllCards = xml.readCards();
         int w = 0;
         searchtext = new JTextField();
@@ -136,6 +144,8 @@ public class BoardController extends Controller{
             cardpanel = new SimpleCardView().getComponent();
             cardpanel.add(description, CC.xywh(2, 3, 5, 2)); 
             cardpanel.add(cardID[cardcounter] , CC.xy(4, 2));
+           // cardpanel.setBackground(color);
+            
             showCards[i]= new JButton("SHOW");
             
         //    forward[cardcounter] = new JButton("Forward");
