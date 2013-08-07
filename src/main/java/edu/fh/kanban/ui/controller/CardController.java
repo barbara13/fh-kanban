@@ -59,7 +59,13 @@ public class CardController implements ActionListener {
         } 
         if (src == cView.getBtnAddCard()) {
             xmlb.loadXML(Kanban.xmlPath);
-            xmlb.addCardToBoard(cView.getcId());
+            
+            if(xmlb.checkCardAtBoard(cView.getcId()) == false){
+                xmlb.addCardToBoard(cView.getcId());  
+            } else{
+                System.out.println("Card ist schon auf dem Board vorhanden");
+            }
+            
             
             refreshBoard();
             refreshBacklog();

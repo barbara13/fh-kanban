@@ -69,6 +69,7 @@ public class XMLBoard extends XML {
     private boolean wipCheck = false;
     private int wipCount;
     private SimpleDateFormat sd = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+    private boolean isCardOnBoard;
 
     public XMLBoard() {
         try {
@@ -614,7 +615,6 @@ public class XMLBoard extends XML {
         } catch (TransformerException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     private boolean checkWip(int co_id) {
@@ -636,6 +636,20 @@ public class XMLBoard extends XML {
         }
 
         return wipCheck;
+    }
+    
+    public boolean checkCardAtBoard(int ca_id){
+        isCardOnBoard = false;
+        cardList = doc.getElementsByTagName("card");
+
+        for(int i = 0; i < cardList.getLength(); i++){
+            if(Kanban.tryParseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == ca_id){
+                isCardOnBoard = true;
+                break;
+            }
+        }
+        
+        return isCardOnBoard;
     }
 
     public void createBoard(String xmlPath) {
