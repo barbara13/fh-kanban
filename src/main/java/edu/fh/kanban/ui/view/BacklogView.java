@@ -63,13 +63,13 @@ public class BacklogView extends JPanel implements View {
             
         setLayout(new FormLayout(new ColumnSpec[]{
             FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("max(120dlu;pref)"),//61
+            ColumnSpec.decode("max(120dlu;pref):grow"),//61
             FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("max(120dlu;pref)"),//121
+            ColumnSpec.decode("max(120dlu;pref):grow"),//121
             FormFactory.RELATED_GAP_COLSPEC,
             ColumnSpec.decode("max(120dlu;pref):grow"),//57
             FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("max(73dlu;pref)"),//73
+            ColumnSpec.decode("max(73dlu;pref):grow"),//73
             FormFactory.RELATED_GAP_COLSPEC,
             FormFactory.DEFAULT_COLSPEC,
             FormFactory.RELATED_GAP_COLSPEC,},
