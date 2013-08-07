@@ -20,6 +20,7 @@ import edu.fh.kanban.ui.view.BoardPreferencesView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
 import javax.swing.JFileChooser;
+import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -101,25 +102,30 @@ public class Kanban {
                 int x = chooser.showOpenDialog(null);
 
                 if (x == JFileChooser.APPROVE_OPTION) {
+                    
                     xmlName = chooser.getSelectedFile().getName();
                     xmlPath = chooser.getSelectedFile().getPath();
                     xmlPath = xmlPath.replaceAll("\\\\", "\\\\\\\\");
                     //boardView.getComponent();
                     if (firstBoard == true) {
-                        pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), boardView.getComponent());
+                        JScrollPane scrollpane = new JScrollPane();
+                        scrollpane.setViewportView(boardView.getComponent());
+                        pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), scrollpane);
                         firstBoard = false;
                         html.setEnabled(true);
                         saveAs.setEnabled(true);
-                        try{
-                        for(int i = 0; backlogView.getAddcards()[i].getText().toString() != "0"; i++){
-                        backlogView.getAddcards()[i].setEnabled(true);
-                        }
-                        }
-                        catch(java.lang.NullPointerException exc){
-                            return;
-                        }
+                      //  try{
+                      //  for(int i = 0; backlogView.getAddcards()[i].getText().toString() != "0"; i++){
+                      //  backlogView.getAddcards()[i].setEnabled(true);
+                     //   }
+                     //   }
+                     //   catch(java.lang.NullPointerException exc){
+                     //       return;
+                     //   }
                     } else if (firstBoard == false) {
-                        pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), boardView.getComponent());
+                        JScrollPane scrollpane = new JScrollPane();
+                        scrollpane.setViewportView(boardView.getComponent());
+                        pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), scrollpane);
                         pane.removeTabAt(1);
                         
                     }
@@ -141,8 +147,10 @@ public class Kanban {
         menubar.add(file);
 
 
+        JScrollPane scrollpane = new JScrollPane();
+        scrollpane.setViewportView(backlogView.getComponent());
         pane = new JTabbedPane();
-        pane.addTab("Backlog", backlogView.getComponent());
+        pane.addTab("Backlog", scrollpane);
         //pane.addTab("Board", boardView.getComponent());
 
         JFrame frame = new JFrame();

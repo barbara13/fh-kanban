@@ -141,7 +141,8 @@ public class HTML extends XML {
             
         for(int k = 0; k < listCard.size(); k++){
             int id = listCard.get(k).getCo_id();
-            
+            System.out.println("CARD: "+ listCard.get(k).getCa_id());
+            System.out.println("COLUMN: "+ listCard.get(k).getCo_id());
             if(tdElement.get(k).getCo_id() == id){
                 System.out.println("ELEMENT: " +tdElement.get(k).getTdElement().getTextContent());
                 trElement.add(createTrElement(mainTableElement));

@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+import edu.fh.kanban.Kanban;
 
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.controller.CardController;
@@ -37,7 +38,7 @@ public class CardView extends JFrame implements View {
     private int cId, effort;
     private String description, headline, value, create, start, done;
     private JButton btnEdit, btnDelete, btnCancel;
-//    private JButton btnAddCard, btnForward, btnBackward;
+    private JButton btnAddCard, btnForward, btnBackward;
     private JToggleButton tglbtnBlocker = new JToggleButton("Blocker");;
     
    /* 
@@ -141,23 +142,23 @@ public class CardView extends JFrame implements View {
         getContentPane().add(new JLabel(done), "8, 12, fill, top");
 
         //If Karte bereits on Board soll der Button - btnAddCard.setvivible(false);
-//        btnAddCard = new JButton("Add Card");
-//        btnAddCard.addActionListener(cController);
+        btnAddCard = new JButton("Add Card");
+        btnAddCard.addActionListener(cController);
 //        
-//        btnForward = new JButton("Forward");
-//        btnForward.addActionListener(cController);
-//        getContentPane().add(btnForward, "10, 12, 3, 1, fill, top");
+        btnForward = new JButton("Forward");
+        btnForward.addActionListener(cController);
+        getContentPane().add(btnForward, "10, 12, 3, 1, fill, top");
 //
-//        btnBackward = new JButton("Back");
-//        btnBackward.addActionListener(cController);
-//        getContentPane().add(btnBackward, "10, 14, 3, 1, fill, top");
-//        
-//        getContentPane().add(btnAddCard, "10, 14, 3, 1, fill, top");
-//        if (Kanban.xmlPath == null) {
-//            btnAddCard.setEnabled(false);
-//        } else {
-//            btnAddCard.setEnabled(true);
-//        }
+        btnBackward = new JButton("Back");
+        btnBackward.addActionListener(cController);
+        getContentPane().add(btnBackward, "10, 14, 3, 1, fill, top");
+        
+        getContentPane().add(btnAddCard, "10, 14, 3, 1, fill, top");
+        if (Kanban.xmlPath == null) {
+            btnAddCard.setEnabled(false);
+        } else {
+            btnAddCard.setEnabled(true);
+        }
                 
         btnEdit = new JButton("Edit");
         btnEdit.addActionListener(cController);
@@ -210,4 +211,20 @@ public class CardView extends JFrame implements View {
     public JButton getBtnCancel() {
         return btnCancel;
     }
+
+    public JButton getBtnForward() {
+        return btnForward;
+    }
+
+    public JButton getBtnBackward() {
+        return btnBackward;
+    }
+
+    public JButton getBtnAddCard() {
+        return btnAddCard;
+    }
+
+   
+    
+    
 }

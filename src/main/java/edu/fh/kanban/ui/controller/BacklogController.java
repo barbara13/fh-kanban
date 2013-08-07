@@ -60,27 +60,29 @@ public class BacklogController extends Controller{
             blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
             blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
             blv.getShowcards()[i]= new JButton("SHOW");
-            blv.getAddcards()[i]= new JButton("To Board");
+           // blv.getAddcards()[i]= new JButton("To Board");
             
-            blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
+           // blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
             blv.getCards()[i].add(blv.getShowcards()[i], CC.xy(6, 2));
-            blv.getAddcards()[i].setEnabled(false);
+           // blv.getAddcards()[i].setEnabled(false);
            
-            blv.getAddcards()[i].addActionListener(new ActionListener(){
+           /* blv.getAddcards()[i].addActionListener(new ActionListener(){
                public void actionPerformed(ActionEvent c) {
                    xmlb.loadXML(Kanban.xmlPath);
                    xmlb.addCardToBoard(cv.getcId());
                } 
-            });
+            });*/
             
             
             blv.getShowcards()[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i <= blv.getCards().length; i++){
+					
+                                    for(int i = 0; i <= blv.getCards().length; i++){
 						if(e.getSource() == blv.getShowcards()[i]){
 							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
 			                cv.getComponent();
-                                    
+                                        cv.getBtnBackward().setVisible(false);
+                                        cv.getBtnForward().setVisible(false);
 							break;
 						}
 					}

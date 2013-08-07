@@ -69,6 +69,7 @@ public class XMLBoard extends XML {
     private boolean wipCheck = false;
     private int wipCount;
     private SimpleDateFormat sd = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+    private boolean isCardOnBoard;
 
     public XMLBoard() {
         try {
@@ -95,7 +96,18 @@ public class XMLBoard extends XML {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Board getBoard(){
+        
+        boardList = doc.getElementsByTagName("board"); 
+        
+        for (int i = 0; i < boardList.getLength(); i++) {
+            listBoard.add(new Board(Kanban.tryParseInt(getString(boardList.item(i).getAttributes().getNamedItem("b_id").toString())), getString(boardList.item(i).getAttributes().getNamedItem("name").toString()), getString(boardList.item(i).getAttributes().getNamedItem("expedite").toString()),getString(boardList.item(i).getAttributes().getNamedItem("standart").toString()), getString(boardList.item(i).getAttributes().getNamedItem("fixedDate").toString()), getString(boardList.item(i).getAttributes().getNamedItem("intangible").toString())));
+        }
 
+        return listBoard.get(0);
+    }
+    
     public ArrayList<Board> readBoard() {
         listBoard.clear();
         boardList = doc.getElementsByTagName("board");
@@ -614,7 +626,6 @@ public class XMLBoard extends XML {
         } catch (TransformerException ex) {
             Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     private boolean checkWip(int co_id) {
@@ -636,6 +647,20 @@ public class XMLBoard extends XML {
         }
 
         return wipCheck;
+    }
+    
+    public boolean checkCardAtBoard(int ca_id){
+        isCardOnBoard = false;
+        cardList = doc.getElementsByTagName("card");
+
+        for(int i = 0; i < cardList.getLength(); i++){
+            if(Kanban.tryParseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == ca_id){
+                isCardOnBoard = true;
+                break;
+            }
+        }
+        
+        return isCardOnBoard;
     }
 
     public void createBoard(String xmlPath) {
