@@ -34,9 +34,22 @@ public class BoardView extends JPanel implements View {
  private ArrayList<Column> listSubColumns = new ArrayList<Column>();
  private ArrayList<Column> listMainColumns = new ArrayList<Column>();
  private ArrayList<Board> listBoard = new ArrayList<Board>();
- private ArrayList<Card> listCards = new ArrayList<Card>();
+// private ArrayList<Card> listCards = new ArrayList<Card>();
  private ArrayList<Card> listAllCards = new ArrayList<Card>();
  private JPanel bpanel = new JPanel();
+ 
+private JTextField searchtext;
+//private JButton[] showCards = new JButton[100];
+//private JButton[] forward = new JButton[100];
+//private JButton[] backward = new JButton[100];
+private JPanel[] cardpanel = new JPanel[100];
+private JLabel[] columns = new JLabel[100];
+//private JLabel[] cardID = new JLabel[100];
+    
+private String columnSize, rowSize;
+private JLabel title;
+//private JTextArea description;
+private JScrollPane scrollpane = new JScrollPane();
 
 // private CardView cv;
  
@@ -59,24 +72,9 @@ public class BoardView extends JPanel implements View {
 
     public JTextField getSearchtext() {
         return searchtext;
-    }
+    }  
 
 
-    
-    
-
-
-private JTextField searchtext;
-private JButton[] showCards = new JButton[100];
-private JButton[] forward = new JButton[100];
-private JButton[] backward = new JButton[100];
-private JPanel[] cardpanel = new JPanel[100];
-private JLabel[] columns = new JLabel[100];
-private JLabel[] cardID = new JLabel[100];
-    
-private String columnSize, rowSize;
-private JLabel title;
-private JTextArea description;
 //private BoardView bv = this;
 
     private String getRows(int rows) {
@@ -123,8 +121,13 @@ private JTextArea description;
         title = new JLabel(listBoard.get(i).getName());
         title.setFont(new Font("Arial", Font.BOLD, 24));
         
-        
+        //bpanel.add(scrollpane);
         bpanel.setLayout(new FormLayout(getColumns(listSubColumns.size()), getRows(15)));
+        //scrollpane.setLayout(new FormLayout(getColumns(listSubColumns.size()), getRows(15)));
+        //bpanel.add(scrollpane, CC.CENTER);
+        
+        //bpanel.add(scrollpane,CC.xy(2, 2));
+        
         //showColumns(listMainColumns, listSubColumns);
         c.showColumns(listMainColumns, listSubColumns);
         
@@ -144,10 +147,11 @@ private JTextArea description;
         return listAllCards;
     }
 
-    public JButton[] getShowCards() {
-        return showCards;
+    public JScrollPane getScrollpane() {
+        return scrollpane;
     }
-    
+
+
     
     
     
