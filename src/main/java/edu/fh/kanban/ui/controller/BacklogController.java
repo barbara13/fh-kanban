@@ -51,7 +51,6 @@ public class BacklogController extends Controller{
 
     public void showCards() {
         listCard = xml.readCards();
-
         for (i = 0; i < listCard.size(); i++) {
             cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
             
@@ -88,10 +87,6 @@ public class BacklogController extends Controller{
 				}
 			});
             
-            //listCard.get(i).getCa_id();
-            //blv.getCards()[i] = cards.getPanel().add(cv);
-            
-            
             blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1 , 1));
             j+=2;
 
@@ -107,42 +102,188 @@ public class BacklogController extends Controller{
    	listCard = xml.readCards();
       	
    	s = (String) blv.getSort().getSelectedItem();
-   	System.out.println(s);
    	
    	if (s == "Creation time"){
-   		System.out.println(listCard);
+
+   		blv.getPanel().removeAll();
+
+   		int i=0;
+   		int j=0;
+   		int k=0;
+   		
+   		listCard = xml.readCards();
+        for (i = 0; i < listCard.size(); i++) {
+            cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+            
+            description = new JTextArea(listCard.get(i).getDescription());
+            description.setEnabled(false);
+            blv.getCards()[i] = new SimpleCardView();
+            blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
+            blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
+            blv.getShowcards()[i]= new JButton("SHOW");
+            blv.getAddcards()[i]= new JButton("To Board");
+            
+            blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
+            blv.getCards()[i].add(blv.getShowcards()[i], CC.xy(6, 2));
+            blv.getAddcards()[i].setEnabled(false);
+           
+            blv.getAddcards()[i].addActionListener(new ActionListener(){
+               public void actionPerformed(ActionEvent c) {
+                   xmlb.loadXML(Kanban.xmlPath);
+                   xmlb.addCardToBoard(cv.getcId());
+               } 
+            });
+            
+            
+            blv.getShowcards()[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i <= blv.getCards().length; i++){
+						if(e.getSource() == blv.getShowcards()[i]){
+							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+			                cv.getComponent();
+                                    
+							break;
+						}
+					}
+				}
+			});
+            
+            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1 , 1));
+            j+=2;
+
+            if (j == 6) {
+                k+=2;
+                j = 0;
+            }
+        }
+  		blv.getPanel().updateUI();
+
    	}
-   	else if (s == "Headline"){
+   	else if (s == "Headline"){								
    		List<Card> Card = Sort.sortByHeadline(listCard);
    		
-   		Iterator<Card> IC = Card.iterator();
-     		while(IC.hasNext()){
-     			IC.next();
+   		Iterator<Card> ICH = Card.iterator();
+     		while(ICH.hasNext()){
+     			ICH.next();
      		}
-     		
-   		System.out.println(listCard);
+     		   		
+   		blv.getPanel().removeAll();
+   		int i=0;
+   		int j=0;
+   		int k=0;
+  		for (i = 1; i < listCard.size(); i++) {
+            cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+            
+            description = new JTextArea(listCard.get(i).getDescription());
+            description.setEnabled(false);
+            blv.getCards()[i] = new SimpleCardView();
+            blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
+            blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
+            blv.getShowcards()[i]= new JButton("SHOW");
+            blv.getAddcards()[i]= new JButton("To Board");
+            
+            blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
+            blv.getCards()[i].add(blv.getShowcards()[i], CC.xy(6, 2));
+            blv.getAddcards()[i].setEnabled(false);
+           
+            blv.getAddcards()[i].addActionListener(new ActionListener(){
+               public void actionPerformed(ActionEvent c) {
+                   xmlb.loadXML(Kanban.xmlPath);
+                   xmlb.addCardToBoard(cv.getcId());
+               } 
+            });
+            
+            
+            blv.getShowcards()[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i <= blv.getCards().length; i++){
+						if(e.getSource() == blv.getShowcards()[i]){
+							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+			                cv.getComponent();
+                                    
+							break;
+						}
+					}
+				}
+			});
+
+            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1 , 1));
+            j+=2;
+
+            if (j == 6) {
+                k+=2;
+                j = 0;
+            }
+        }
+  		blv.getPanel().updateUI();
    	}
    	else if (s == "Value"){
    		List<Card> Card = Sort.sortByValue(listCard);
    		
-   		Iterator<Card> IC = Card.iterator();
-  		while(IC.hasNext()){
-  			IC.next();
-   	}
-  		System.out.println(listCard);
-  		
+   		Iterator<Card> ICV = Card.iterator();
+  		while(ICV.hasNext()){
+  			ICV.next();
+  			
+   	}  		
+  		blv.getPanel().removeAll();
+  		int i=0;
+   		int j=0;
+   		int k=0;
+  		for (i = 0; i < listCard.size(); i++) {
+            cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+            
+            description = new JTextArea(listCard.get(i).getDescription());
+            description.setEnabled(false);
+            blv.getCards()[i] = new SimpleCardView();
+            blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
+            blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
+            blv.getShowcards()[i]= new JButton("SHOW");
+            blv.getAddcards()[i]= new JButton("To Board");
+            
+            blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
+            blv.getCards()[i].add(blv.getShowcards()[i], CC.xy(6, 2));
+            blv.getAddcards()[i].setEnabled(false);
+           
+            blv.getAddcards()[i].addActionListener(new ActionListener(){
+               public void actionPerformed(ActionEvent c) {
+                   xmlb.loadXML(Kanban.xmlPath);
+                   xmlb.addCardToBoard(cv.getcId());
+               } 
+            });
+            
+            
+            blv.getShowcards()[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i <= blv.getCards().length; i++){
+						if(e.getSource() == blv.getShowcards()[i]){
+							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+			                cv.getComponent();
+                                    
+							break;
+						}
+					}
+				}
+			});
 
+            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1 , 1));
+            j+=2;
+
+            if (j == 6) {
+                k+=2;
+                j = 0;
+            }
+        }
+  		blv.getPanel().updateUI();
   		
    	}
-   	else if (s == "Size"){
+   	/*else if (s == "Size"){
    		List<Card> Card = Sort.sortBySize(listCard);
    		
-   		Iterator<Card> IC = Card.iterator();
-  		while(IC.hasNext()){
-  			IC.next();
-   	}
-  		System.out.println(listCard);
-    }
+   		Iterator<Card> ICS = Card.iterator();
+  		while(ICS.hasNext()){
+  			ICS.next();
+  		}
+    }*/
     }
     
 //    private int parseId(String s){

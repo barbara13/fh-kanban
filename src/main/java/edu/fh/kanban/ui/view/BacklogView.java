@@ -33,11 +33,12 @@ public class BacklogView extends JPanel implements View {
     /**
 	 * 
 	 */
+	 
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField searchfield;
     private BacklogController c = null;
-//    private JPanel panel = new JPanel();
+	private JPanel panel = new JPanel();
 //    private JSeparator sep;
     private JPanel[] cards = new JPanel[100];
     private JButton[] showcards = new JButton[100];
@@ -47,9 +48,6 @@ public class BacklogView extends JPanel implements View {
 //    private int i = 0;
     private BoardView bv;
 
-    /**
-     * @wbp.parser.entryPoint
-     */
     public void setBv(BoardView bv) {
         this.bv = bv;
     }
@@ -60,7 +58,11 @@ public class BacklogView extends JPanel implements View {
     
     public  JComponent getComponent() {
     	c = new BacklogController(this, bv);
-            
+       
+    	/**
+    	* @wbp.parser.entryPoint
+    	*/
+    	
         setLayout(new FormLayout(new ColumnSpec[]{
             FormFactory.RELATED_GAP_COLSPEC,
             ColumnSpec.decode("max(120dlu;pref)"),//61
@@ -97,6 +99,45 @@ public class BacklogView extends JPanel implements View {
             FormFactory.RELATED_GAP_ROWSPEC,
             RowSpec.decode("max(16dlu;default)"),
             FormFactory.RELATED_GAP_ROWSPEC,}));
+        
+        panel.setLayout(new FormLayout(new ColumnSpec[]{
+                FormFactory.RELATED_GAP_COLSPEC,
+                ColumnSpec.decode("max(120dlu;pref)"),//61
+                FormFactory.RELATED_GAP_COLSPEC,
+                ColumnSpec.decode("max(120dlu;pref)"),//121
+                FormFactory.RELATED_GAP_COLSPEC,
+                ColumnSpec.decode("max(120dlu;pref):grow"),//57
+                FormFactory.RELATED_GAP_COLSPEC,
+                ColumnSpec.decode("max(73dlu;pref)"),//73
+                FormFactory.RELATED_GAP_COLSPEC,
+                FormFactory.DEFAULT_COLSPEC,
+                FormFactory.RELATED_GAP_COLSPEC,},
+                new RowSpec[]{
+                FormFactory.RELATED_GAP_ROWSPEC,
+                FormFactory.DEFAULT_ROWSPEC,
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,
+                RowSpec.decode("max(16dlu;default)"),
+                FormFactory.RELATED_GAP_ROWSPEC,}));
 
         searchfield = new JTextField();
 //		searchfield.addKeyListener(c);
@@ -149,13 +190,14 @@ public class BacklogView extends JPanel implements View {
 
         add(comboBox, "8, 4, right, default");
         add(new JSeparator(), CC.xywh(1, 5, 10, 1));
+        add(panel, CC.xywh(1, 7, 11, 17));
         
         c.showCards();
         return this;
     }
 
     public JPanel getPanel() {
-        return this;
+        return panel;
     }
 
     public JPanel[] getCards() {
