@@ -1,5 +1,7 @@
 package edu.fh.kanban.ui.controller;
 
+import edu.fh.kanban.Kanban;
+import edu.fh.kanban.dao.XMLBoard;
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
@@ -24,7 +26,7 @@ public class CardController implements ActionListener {
     private CardView cView;
     private CardEditView ceView;
     private XMLCard xml;
-//    private XMLBoard xmlb;
+    private XMLBoard xmlb;
     private BacklogView blv;
     private BoardView bv;
 
@@ -34,7 +36,7 @@ public class CardController implements ActionListener {
         this.bv = bv;
         this.blv = blv;
         xml = new XMLCard();
-//        xmlb = new XMLBoard();
+        xmlb = new XMLBoard();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -54,16 +56,16 @@ public class CardController implements ActionListener {
             	xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
             	xml.editCard(cView.getcId(), "blocker_tooltip", "");
         	}
-        }else 
-//        	if (src == cView.getBtnAddCard()) {
-//            xmlb.loadXML(Kanban.xmlPath);
-//            xmlb.addCardToBoard(cView.getcId());
-//            
-//            refreshBoard();
-//            refreshBacklog();
-//            cView.dispose();
-//            
-//        } else 
+        } 
+        if (src == cView.getBtnAddCard()) {
+            xmlb.loadXML(Kanban.xmlPath);
+            xmlb.addCardToBoard(cView.getcId());
+            
+            refreshBoard();
+            refreshBacklog();
+            cView.dispose();
+            
+        } else 
         	if (src == cView.getBtnEdit()) {
             ceView = new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription());
             ceView.getComponent();
@@ -74,17 +76,17 @@ public class CardController implements ActionListener {
         } else if (src == cView.getBtnCancel()) {
             cView.dispose();
         } 
-//        else if (src == cView.getBtnBackward()){
-//            xmlb.loadXML(Kanban.xmlPath);
-//            xmlb.prevCard(cView.getcId());
-//            refreshBoard();
-//            cView.dispose();
-//        } else if (src == cView.getBtnForward()){
-//            xmlb.loadXML(Kanban.xmlPath);
-//            xmlb.forwardCard(cView.getcId());
-//            refreshBoard();
-//            cView.dispose();
-//        }
+        else if (src == cView.getBtnBackward()){
+            xmlb.loadXML(Kanban.xmlPath);
+            xmlb.prevCard(cView.getcId());
+            refreshBoard();
+            cView.dispose();
+        } else if (src == cView.getBtnForward()){
+            xmlb.loadXML(Kanban.xmlPath);
+            xmlb.forwardCard(cView.getcId());
+            refreshBoard();
+            cView.dispose();
+        }
     }
 
         public void refreshBoard(){

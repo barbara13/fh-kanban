@@ -56,10 +56,10 @@ public class BoardController extends Controller{
      
     
     private JTextField searchtext;
-    private JButton showCards = new JButton();
+    private JButton showCards[] = new JButton[100];
     private JPanel[] cards = new JPanel[100];
-    private JButton[] forward = new JButton[100];
-    private JButton[] backward = new JButton[100];
+  //private JButton[] forward = new JButton[100];
+  //  private JButton[] backward = new JButton[100];
     private JPanel cardpanel = new JPanel();
     private JLabel[] columns = new JLabel[100];
     private JLabel cardID[] = new JLabel[100];
@@ -67,7 +67,7 @@ public class BoardController extends Controller{
     private JTextArea description;
     public int id[] = new int[100];
     int cardcounter = 0;
-    
+   
     public BoardController(BoardView bv){
        this.bv = bv;
        xml = new XMLBoard();
@@ -75,7 +75,7 @@ public class BoardController extends Controller{
     }  
     
    public void showColumns(ArrayList<Column> mainColumns, ArrayList<Column> subColumns) {
-       
+        cardcounter = 0;
         xml.loadXML(Kanban.xmlPath); 
         //listAllCards = xml.readCards();
         int w = 0;
@@ -117,7 +117,8 @@ public class BoardController extends Controller{
 
   
     private void showCards(Column column, int sameColumn, int columncount) {
-       
+        
+        
         try{  
         listCards = xml.readCardsFromColumn(column.getCo_id());
         int m = 0;
@@ -125,14 +126,9 @@ public class BoardController extends Controller{
         
         
         for (int i = 0; i < listCards.size(); i++) {
-           final int cardcounter2 = cardcounter;
-           //cv = new CardView(listCards.get(i).getCa_id(), listCards, blv, bv);
-           
-           cardID[cardcounter] = new JLabel("" + listCards.get(i).getCa_id());
-           
-           //cv = new CardView(bv.getListAllCards().get(cardcounter).getCa_id(), listCards, blv, bv);
-        	
-            
+          final int cardcounter2 = cardcounter;
+           cardID[cardcounter] = new JLabel("" + listCards.get(i).getCa_id());    
+       
             
             
             description = new JTextArea(listCards.get(i).getDescription());
@@ -140,51 +136,36 @@ public class BoardController extends Controller{
             cardpanel = new SimpleCardView().getComponent();
             cardpanel.add(description, CC.xywh(2, 3, 5, 2)); 
             cardpanel.add(cardID[cardcounter] , CC.xy(4, 2));
-            showCards= new JButton("SHOW");
-            forward[cardcounter] = new JButton("Forward");
-            backward[cardcounter] = new JButton("Back");
+            showCards[i]= new JButton("SHOW");
+            
+        //    forward[cardcounter] = new JButton("Forward");
+        //    backward[cardcounter] = new JButton("Back");
           
-            forward[cardcounter].setEnabled(false);
-            backward[cardcounter].setEnabled(false);
+        //    forward[cardcounter].setEnabled(false);
+        //    backward[cardcounter].setEnabled(false);
             
             
+ 
             
-           //cardpanel[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
-           cardpanel.add(showCards, CC.xy(6, 2));
-           cardpanel.add(backward[cardcounter], CC.xy(4, 6, CC.CENTER, CC.CENTER));
-           cardpanel.add(forward[cardcounter], CC.xy(6, 6, CC.CENTER, CC.CENTER));
+          
+           cardpanel.add(showCards[i], CC.xy(6, 2));
+    
             
-            
-            showCards.addActionListener(new ActionListener() {
+            showCards[i].addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent e) {
                           
-                                    cv = new CardView(bv.getListAllCards().get(cardcounter2).getCa_id(), bv.getListAllCards(), blv, bv);
-                                    cv.getComponent();
-                                   
-                                   
-                                    //System.out.println("test " + cv.getcId() + cardcounter2);
-
-                                    
-					/*for(int i = 0; i <= listAllCards.size(); i++){
-						if(e.getSource() == showCards[i]){
-                                                  
-                                                    // listCards = xml.readCardsFromColumn(column.getCo_id());
-					    
-
-                                        cv = new CardView(listCards.get(i).getCa_id(), listCards, blv, bv);
+                                   // for(int i = 0; i <= bv.getCardpanel().length; i++){
+						//if (e.getSource() == bv.getShowCards()[i]){
+					cv = new CardView(bv.getListAllCards().get(cardcounter2).getCa_id(), bv.getListAllCards(), blv, bv);
 			                cv.getComponent();
-//			                src = e.getSource();
-//			                id = parseId(e.getActionCommand());
-//			                cv.getBtnBackward().setVisible(false);
-//			                cv.getBtnForward().setVisible(false);
-                                                }
-						}	*/
-                                    forward[cardcounter2].setEnabled(true);
-                                    backward[cardcounter2].setEnabled(true);
-            
-                                }
+                                        //cv.getBtnBackward().setVisible(false);
+                                        //cv.getBtnForward().setVisible(false);
+					cv.getBtnAddCard().setVisible(false);
+                                        
+				}
+                     
 			}); 
-            
+    /*        
            backward[cardcounter].addActionListener(new ActionListener(){
                public void actionPerformed(ActionEvent c) {
                                //xml.loadXML(Kanban.xmlPath);
@@ -201,7 +182,7 @@ public class BoardController extends Controller{
                } 
             });
             
-           
+           */
             
          bv.getBpanel().add(cardpanel, CC.xy(sameColumn, 8 + k, CC.CENTER, CC.CENTER));
          k+=2;
@@ -214,16 +195,11 @@ public class BoardController extends Controller{
     
    } 
     
-       private void refreshBoard(){
-           cardcounter = 0;
-            bv.getBpanel().removeAll();
-            bv.getComponent();           
-            bv.getBpanel().updateUI();
-            
-        }
     
     
      public void actionPerformed(ActionEvent e) {
+         
+       
  /*        xml.loadXML(Kanban.xmlPath);
          listCard = xml.readCards();
          id = bv.getId();

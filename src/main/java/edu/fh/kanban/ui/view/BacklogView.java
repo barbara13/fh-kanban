@@ -41,7 +41,7 @@ public class BacklogView extends JPanel implements View {
 //    private JSeparator sep;
     private JPanel[] cards = new JPanel[100];
     private JButton[] showcards = new JButton[100];
-    private JButton[] addcards = new JButton[100];
+   // private JButton[] addcards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
     private JComboBox comboBox;
 //    private int i = 0;
@@ -151,6 +151,7 @@ public class BacklogView extends JPanel implements View {
         add(new JSeparator(), CC.xywh(1, 5, 10, 1));
         
         c.showCards();
+        
         return this;
     }
 
@@ -178,9 +179,9 @@ public class BacklogView extends JPanel implements View {
         return showcards;
     }
 
-    public JButton[] getAddcards() {
-        return addcards;
-    }
+ //   public JButton[] getAddcards() {
+ //       return addcards;
+ //   }
     
     
 }

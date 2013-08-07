@@ -100,9 +100,6 @@ private JTextArea description;
         return columnSize;
 	}
 
-    public ArrayList<Card> getListAllCards() {
-        return listAllCards;
-    }
     
 
 
@@ -130,6 +127,7 @@ private JTextArea description;
         bpanel.setLayout(new FormLayout(getColumns(listSubColumns.size()), getRows(15)));
         //showColumns(listMainColumns, listSubColumns);
         c.showColumns(listMainColumns, listSubColumns);
+        
         return bpanel;
        
     }   
@@ -137,4 +135,20 @@ private JTextArea description;
     public ArrayList<Board> getListBoard() {
         return listBoard;
     }
+
+    public JPanel[] getCardpanel() {
+        return cardpanel;
+    }
+    
+    public ArrayList<Card> getListAllCards() {
+        return listAllCards;
+    }
+
+    public JButton[] getShowCards() {
+        return showCards;
+    }
+    
+    
+    
+    
 }
