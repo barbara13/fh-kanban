@@ -60,6 +60,15 @@ public class ExportToCsv {
         	writer.print(listSubColumns.get(i).getName().toString());
         	writer.print(";");
         }
+        for(int i = 0; i < listSubColumns.size(); i++){
+          listCards = xml.readCardsFromColumn(listSubColumns.get(i).getCo_id());
+          
+      	for(int k = 0; k < listCards.size(); k++){
+      		System.out.println("column: " + i);
+      		System.out.println("Card ID:" + listCards.get(k).getCa_id());
+      	}
+      }
+     
         
         //Hier muss dann die Karten implementiert werden
         
@@ -67,5 +76,5 @@ public class ExportToCsv {
         writer.flush();
         fw.close();
         writer.close();
+        }
     }
-}
