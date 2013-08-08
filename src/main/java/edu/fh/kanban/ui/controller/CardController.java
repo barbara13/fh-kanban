@@ -24,7 +24,7 @@ public class CardController implements ActionListener {
 
     private Object src;
     private CardView cView;
-    private CardEditView ceView;
+//    private CardEditView ceView;
     private XMLCard xml;
     private XMLBoard xmlb;
     private BacklogView blv;
@@ -66,15 +66,14 @@ public class CardController implements ActionListener {
                 System.out.println("Card ist schon auf dem Board vorhanden");
             }
             
-            
             refreshBoard();
             refreshBacklog();
             cView.dispose();
             
         } else 
         	if (src == cView.getBtnEdit()) {
-            ceView = new CardEditView(cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription());
-            ceView.getComponent();
+            new CardEditView(blv, cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription()).getComponent();
+            cView.dispose();
         } else if (src == cView.getBtnDelete()) {
             xml.deleteCard(cView.getcId());
             refreshBacklog();

@@ -39,9 +39,9 @@ public class CardEditView extends JFrame{
     private JComboBox<String> comboBoxValue;
 	
     //Konstruktor
-	public CardEditView(String headline, int cardId, int effort, String value, String description){
+	public CardEditView(BacklogView blv, String headline, int cardId, int effort, String value, String description){
 		super("EDIT: \"" + headline + "\"");
-		cController = new CardEditController(this);
+		cController = new CardEditController(this, blv);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(new Rectangle(0, 0, 700, 500));
 		setLocationByPlatform(true);
@@ -56,7 +56,7 @@ public class CardEditView extends JFrame{
 		//Werte werden initilisiert
 		this.cId = cardId;
 		txtHeadline = new JTextField(headline);
-		txtEffort = new JTextField("" + effort);
+		txtEffort = new JTextField(Integer.toString(effort));
 		textDescription = new TextArea(description);
 		comboBoxValue = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] {"Standart", "Expedite", "Fixed Date", "Intangible"}));
 		comboBoxValue.setSelectedIndex(index);

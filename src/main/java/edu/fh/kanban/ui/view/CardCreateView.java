@@ -74,12 +74,12 @@ public class CardCreateView extends JFrame implements View {
 				FormFactory.UNRELATED_GAP_ROWSPEC,
 				RowSpec.decode("20px"),
 				FormFactory.UNRELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC,
+				RowSpec.decode("fill:20dlu"),
 				FormFactory.RELATED_GAP_ROWSPEC,
 				RowSpec.decode("20px"),
 				FormFactory.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("100px"),
-				RowSpec.decode("max(100dlu;default)"),
+				RowSpec.decode("default:grow"),
+				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC,
@@ -104,15 +104,15 @@ public class CardCreateView extends JFrame implements View {
 		getContentPane().add(new JLabel("Description:"), "2, 8, default, bottom");
 
 		textDescription = new TextArea();
-		getContentPane().add(textDescription, "2, 10, 9, 2, fill, fill");
+		getContentPane().add(textDescription, "2, 10, 9, 1, fill, fill");
 
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(cController);
-		getContentPane().add(btnCancel, "2, 15, fill, top");
+		getContentPane().add(btnCancel, "2, 13, fill, top");
 
 		btnCreate = new JButton("Create");
 		btnCreate.addActionListener(cController);
-		getContentPane().add(btnCreate, "4, 15, fill, top");
+		getContentPane().add(btnCreate, "4, 13, fill, top");
 
 		setVisible(true);
 		return (JComponent) getContentPane();

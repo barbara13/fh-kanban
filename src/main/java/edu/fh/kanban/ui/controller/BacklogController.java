@@ -1,15 +1,11 @@
 package edu.fh.kanban.ui.controller;
 
-import com.jgoodies.forms.factories.CC;
-import edu.fh.kanban.Kanban;
-import edu.fh.kanban.dao.XMLBoard;
 import edu.fh.kanban.dao.XMLCard;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
-import edu.fh.kanban.data.Sort;
-import edu.fh.kanban.ui.view.SimpleCardView;
+import edu.fh.kanban.ui.view.BacklogCardView;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,14 +13,12 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
-import java.util.Iterator;
-import java.util.List;
 import javax.swing.BorderFactory;
 
 
 /**
  *
- * @author David, Malte, Lorenz
+ * @author David, Malte, Lorenz, Maxim
  */
 public class BacklogController extends Controller{
     
@@ -32,270 +26,231 @@ public class BacklogController extends Controller{
     private BacklogView blv;
     private CardView cv;
     private XMLCard xml;
-    private XMLBoard xmlb;
     private ArrayList<Card> listCard = new ArrayList<Card>();
-    private int j = 0;
-    private int k = 0;
-    private int i;
-//    private Object src;
-    private String s = null;
-//    private int id;
-//    private SimpleCardView cards;
-    private JTextArea description;
     
-
     public BacklogController(BacklogView blv, BoardView bv) {
         this.bv = bv;
         this.blv = blv;
-        xml = new XMLCard();
-        xmlb = new XMLBoard();
     }
 
     public void showCards() {
+        xml = new XMLCard();
         listCard = xml.readCards();
         
-        for (i = 0; i < listCard.size(); i++) {
-            cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
-            
-            description = new JTextArea(listCard.get(i).getDescription());
-            description.setEnabled(false);
-            blv.getCards()[i] = new SimpleCardView();
-            blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
-            blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
-            blv.getCards()[i].setBorder(BorderFactory.createLineBorder(Color.black));
-            blv.getShowcards()[i]= new JButton("SHOW");
-           // blv.getAddcards()[i]= new JButton("To Board");
-            
-           // blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
-            blv.getCards()[i].add(blv.getShowcards()[i], CC.xy(6, 2));
-           // blv.getAddcards()[i].setEnabled(false);
-           
-           /* blv.getAddcards()[i].addActionListener(new ActionListener(){
-               public void actionPerformed(ActionEvent c) {
-                   xmlb.loadXML(Kanban.xmlPath);
-                   xmlb.addCardToBoard(cv.getcId());
-               } 
-            });*/
-            
-            
-            blv.getShowcards()[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-                                    for(int i = 0; i <= blv.getCards().length; i++){
-						if(e.getSource() == blv.getShowcards()[i]){
-							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
-			                cv.getComponent();
-                                        cv.getBtnBackward().setVisible(false);
-                                        cv.getBtnForward().setVisible(false);
-							break;
-						}
-					}
-				}
-			});
-            
-            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1 , 1));
-            j+=2;
-
-            if (j == 6) {
-                k+=2;
-                j = 0;
+        for (int i = 0, j = 1, k = 1; i < listCard.size(); i++, j += 2) {
+				addCardToPanel(i, i, j, k);
+            if (j == 7){
+                k += 2; j = -1;
             }
         }
     }
     
-    @Override
     public void actionPerformed(ActionEvent e) {
-   	listCard = xml.readCards();
-      	
-   	s = (String) blv.getSort().getSelectedItem();
-   	
-   	if (s == "Creation time"){
-
+    	xml = new XMLCard();
+    	listCard = xml.readCards();
+	   	String selecteItem = blv.getSort().getSelectedItem().toString();
    		blv.getPanel().removeAll();
-
-   		int i=0;
-   		int j=0;
-   		int k=0;
-   		
-   		listCard = xml.readCards();
-        for (i = 0; i < listCard.size(); i++) {
-            cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
-            
-            description = new JTextArea(listCard.get(i).getDescription());
-            description.setEnabled(false);
-            blv.getCards()[i] = new SimpleCardView();
-            blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
-            blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
-            blv.getShowcards()[i]= new JButton("SHOW");
-            blv.getAddcards()[i]= new JButton("To Board");
-            
-            blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
-            blv.getCards()[i].add(blv.getShowcards()[i], CC.xy(6, 2));
-            blv.getAddcards()[i].setEnabled(false);
-           
-            blv.getAddcards()[i].addActionListener(new ActionListener(){
-               public void actionPerformed(ActionEvent c) {
-                   xmlb.loadXML(Kanban.xmlPath);
-                   xmlb.addCardToBoard(cv.getcId());
-               } 
-            });
-            
-            
-            blv.getShowcards()[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i <= blv.getCards().length; i++){
-						if(e.getSource() == blv.getShowcards()[i]){
-							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
-			                cv.getComponent();
-                                    
-							break;
-						}
-					}
-				}
-			});
-            
-            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1 , 1));
-            j+=2;
-
-            if (j == 6) {
-                k+=2;
-                j = 0;
-            }
-        }
-  		blv.getPanel().updateUI();
-
-   	}
-   	else if (s == "Headline"){								
-   		List<Card> Card = Sort.sortByHeadline(listCard);
-   		
-   		Iterator<Card> ICH = Card.iterator();
-     		while(ICH.hasNext()){
-     			ICH.next();
-     		}
-     		   		
-   		blv.getPanel().removeAll();
-   		int i=0;
-   		int j=0;
-   		int k=0;
-  		for (i = 1; i < listCard.size(); i++) {
-            cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
-            
-            description = new JTextArea(listCard.get(i).getDescription());
-            description.setEnabled(false);
-            blv.getCards()[i] = new SimpleCardView();
-            blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
-            blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
-            blv.getShowcards()[i]= new JButton("SHOW");
-            blv.getAddcards()[i]= new JButton("To Board");
-            
-            blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
-            blv.getCards()[i].add(blv.getShowcards()[i], CC.xy(6, 2));
-            blv.getAddcards()[i].setEnabled(false);
-           
-            blv.getAddcards()[i].addActionListener(new ActionListener(){
-               public void actionPerformed(ActionEvent c) {
-                   xmlb.loadXML(Kanban.xmlPath);
-                   xmlb.addCardToBoard(cv.getcId());
-               } 
-            });
-            
-            
-            blv.getShowcards()[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i <= blv.getCards().length; i++){
-						if(e.getSource() == blv.getShowcards()[i]){
-							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
-			                cv.getComponent();
-                                    
-							break;
-						}
-					}
-				}
-			});
-
-            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1 , 1));
-            j+=2;
-
-            if (j == 6) {
-                k+=2;
-                j = 0;
-            }
-        }
-  		blv.getPanel().updateUI();
-   	}
-   	else if (s == "Value"){
-   		List<Card> Card = Sort.sortByValue(listCard);
-   		
-   		Iterator<Card> ICV = Card.iterator();
-  		while(ICV.hasNext()){
-  			ICV.next();
-  			
-   	}  		
-  		blv.getPanel().removeAll();
-  		int i=0;
-   		int j=0;
-   		int k=0;
-  		for (i = 0; i < listCard.size(); i++) {
-            cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
-            
-            description = new JTextArea(listCard.get(i).getDescription());
-            description.setEnabled(false);
-            blv.getCards()[i] = new SimpleCardView();
-            blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
-            blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
-            blv.getShowcards()[i]= new JButton("SHOW");
-            blv.getAddcards()[i]= new JButton("To Board");
-            
-            blv.getCards()[i].add(blv.getAddcards()[i], CC.xy(4, 6, CC.CENTER, CC.CENTER));
-            blv.getCards()[i].add(blv.getShowcards()[i], CC.xy(6, 2));
-            blv.getAddcards()[i].setEnabled(false);
-           
-            blv.getAddcards()[i].addActionListener(new ActionListener(){
-               public void actionPerformed(ActionEvent c) {
-                   xmlb.loadXML(Kanban.xmlPath);
-                   xmlb.addCardToBoard(cv.getcId());
-               } 
-            });
-            
-            
-            blv.getShowcards()[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					for(int i = 0; i <= blv.getCards().length; i++){
-						if(e.getSource() == blv.getShowcards()[i]){
-							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
-			                cv.getComponent();
-                                    
-							break;
-						}
-					}
-				}
-			});
-
-            blv.getPanel().add(blv.getCards()[i], CC.xywh(2 + j, 6 + k, 1 , 1));
-            j+=2;
-
-            if (j == 6) {
-                k+=2;
-                j = 0;
-            }
-        }
-  		blv.getPanel().updateUI();
-  		
-   	}
-   	/*else if (s == "Size"){
-   		List<Card> Card = Sort.sortBySize(listCard);
-   		
-   		Iterator<Card> ICS = Card.iterator();
-  		while(ICS.hasNext()){
-  			ICS.next();
-  		}
-    }*/
+	   	
+	   	if(selecteItem.equals("Card ID")){
+	   		int array[] = new int[listCard.size()];
+	   		
+	   		for(int i = 0; i < array.length; i++){
+	   			array[i] = listCard.get(i).getCa_id();
+	   		}
+	   		
+	   		array = sortByInt(array);
+	   		
+	   		for(int i = 0, j = 1, k = 1; i < array.length; i++){
+	   			for(int n = 0;  n < listCard.size(); n++){
+	   				if(array[i] == listCard.get(n).getCa_id()){
+	   					addCardToPanel(i, n, j, k);
+	   		            
+	   		            if (j == 7){
+	   		                k += 2; j = -1;
+	   		            }
+	   		            j += 2;
+	   				}
+	   			}
+	   		}
+	   	}else if(selecteItem.equals("Headline")){
+	   		String array[] = new String[listCard.size()];
+	   		
+	   		for(int i = 0; i < array.length; i++){
+	   			array[i] = listCard.get(i).getName();
+	   		}
+	   		array = sortByString(array);
+	   		for(int i = 0, j = 1, k = 1; i < array.length; i++){
+	   			for(int n = 0;  n < listCard.size(); n++){
+	   				if(array[i].equals(listCard.get(n).getName())){
+	   					addCardToPanel(i, n, j, k);
+	   		            
+	   		            if (j == 7){
+	   		                k += 2; j = -1;
+	   		            }
+	   		            j += 2;
+	   				}
+	   			}
+	   		}
+	   	}else if(selecteItem.equals("Effort")){
+	   		int array[] = new int[listCard.size()];
+	   		
+	   		for(int i = 0; i < array.length; i++){
+	   			array[i] = listCard.get(i).getEffort();
+	   		}
+	   		
+	   		array = sortByInt(array);
+	   		
+	   		for(int i = 0, j = 1, k = 1; i < array.length; i++){
+	   			for(int n = 0;  n < listCard.size(); n++){
+	   				if(array[i] == listCard.get(n).getEffort()){
+	   					addCardToPanel(i, n, j, k);
+	   		            
+	   		            if (j == 7){
+	   		                k += 2; j = -1;
+	   		            }
+	   		            j += 2;
+	   				}
+	   			}
+	   		}
+	   	}else if(selecteItem.equals("Value")){
+	   		String array[] = new String[listCard.size()];
+	   		
+	   		for(int i = 0; i < array.length; i++){
+	   			array[i] = listCard.get(i).getValue();
+	   		}
+	   		
+	   		array = sortByString(array);
+	   		
+	   		for(int i = 0, j = 1, k = 1; i < array.length; i++){
+	   			for(int n = 0;  n < listCard.size(); n++){
+	   				if(array[i].equals(listCard.get(n).getValue())){
+	   					addCardToPanel(i, n, j, k);
+	   		            
+	   		            if (j == 7){
+	   		                k += 2; j = -1;
+	   		            }
+	   		            j += 2;
+	   				}
+	   			}
+	   		}
+	   	} else if(selecteItem.equals("Creation time")){
+	   		String array[] = new String[listCard.size()];
+	   		
+	   		for(int i = 0; i < array.length; i++){
+	   			array[i] = listCard.get(i).getCreatedDate();
+	   		}
+	   		
+	   		array = sortByString(array);
+	   		
+	   		for(int i = 0, j = 1, k = 1; i < array.length; i++){
+	   			for(int n = 0;  n < listCard.size(); n++){
+	   				if(array[i].equals(listCard.get(n).getCreatedDate())){
+	   					addCardToPanel(i, n, j, k);
+	   		            if (j == 7){
+	   		                k += 2; j = -1;
+	   		            }
+	   		            j += 2;
+	   				}
+	   			}
+	   		}
+	   	}
+   		blv.getPanel().updateUI();
     }
     
-//    private int parseId(String s){
-//        int s1 = s.indexOf(":");
-//
-//        return Integer.parseInt(s.substring(0, s1));
-//    }
+    private void addCardToPanel(int toCard, int fromCard, int column, int row){
+    	JTextArea desc = new JTextArea(listCard.get(fromCard).getDescription());
+           desc.setEditable(false);
+           
+           blv.getCards()[toCard] = new BacklogCardView();
+           blv.getCards()[toCard].add(new JLabel(Integer.toString(listCard.get(fromCard).getCa_id())), "4, 2");
+           blv.getCards()[toCard].add(new JLabel(listCard.get(fromCard).getName()), "8, 2");
+           blv.getCards()[toCard].add(new JLabel(Integer.toString(listCard.get(fromCard).getEffort())), "4, 4");
+           blv.getCards()[toCard].add(new JLabel(listCard.get(fromCard).getValue()), "8, 4");
+           blv.getCards()[toCard].add(desc, "2, 10, 9, 1, fill, fill");
+           blv.getCards()[toCard].add(new JLabel(listCard.get(fromCard).getCreatedDate()), "4, 12, 7, 1");
+           blv.getCards()[toCard].setBorder(BorderFactory.createLineBorder(Color.black));
+           
+           blv.getShowcards()[fromCard]= new JButton("SHOW");
+           blv.getCards()[toCard].add(blv.getShowcards()[fromCard], "10, 2");
+           blv.getShowcards()[fromCard].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					for(int i = 0; i < blv.getCards().length; i++){
+						if(e.getSource() == blv.getShowcards()[i]){
+							cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
+			                cv.getComponent();
+                            cv.getBtnBackward().setVisible(false);
+                            cv.getBtnForward().setVisible(false);
+                            cv.getTglbtnBlocker().setVisible(false);
+							break;
+						}
+					}
+				}
+			});
+
+           blv.getPanel().add(blv.getCards()[toCard], column + ", " + row + ", 1, 1");
+    }
     
+    private int[] sortByInt(int array[]){
+    	for(int i = 0; i < array.length; i++){
+   			for(int j = (i+1);  j < array.length; j++){
+   				if(array[i] > array[j]){
+   					int tausch = array[i];
+   					array[i] = array[j];
+   					array[j] = tausch;
+   				}
+   			}
+   		}
+    	for(int i = 0; i < array.length; i++){
+    		int j = (i+1);
+    		if(j < array.length){
+    			while(array[i] == array[j]){
+        			array[j] = -1;
+        			j++;
+        			if(j == array.length) break;
+        		}
+        		if(i != (j-1)){
+        			for(int k = (i+1); k < array.length; k++, j++){
+        				if(j < array.length){
+        					array[k] = array[j];
+        				}else{
+        					array[k] = -1;
+        				}
+        			}
+        		}
+    		}
+    	}
+		return array;
+    }
+    
+    private String[] sortByString(String array[]){
+    	for(int i = 0; i < array.length; i++){
+   			for(int j = (i+1);  j < array.length; j++){
+   				if(array[i].compareTo(array[j]) > 0){
+   					String tausch = array[i];
+   					array[i] = array[j];
+   					array[j] = tausch;
+   				}
+   			}
+   		}
+    	for(int i = 0; i < array.length; i++){
+    		int j = (i+1);
+    		if(j < array.length){
+    			while(array[i].equals(array[j])){
+        			array[j] = "-1";
+        			j++;
+        			if(j == array.length) break;
+        		}
+        		if(i != (j-1)){
+        			for(int k = (i+1); k < array.length; k++, j++){
+        				if(j < array.length){
+        					array[k] = array[j];
+        				}else{
+        					array[k] = "-1";
+        				}
+        			}
+        		}
+    		}
+    	}
+		return array;
+    }
 }

@@ -1,6 +1,7 @@
 package edu.fh.kanban.ui.controller;
 
 import edu.fh.kanban.dao.XMLCard;
+import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.CardEditView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,10 +22,12 @@ public class CardEditController implements ActionListener, KeyListener {
     private Object src;
     private CardEditView cEditView;
     private XMLCard card = new XMLCard();
+    private BacklogView blv;
 
     //Konstruktor
-    public CardEditController(CardEditView cEditView) {
+    public CardEditController(CardEditView cEditView, BacklogView blv) {
         this.cEditView = cEditView;
+        this.blv = blv;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -38,9 +41,7 @@ public class CardEditController implements ActionListener, KeyListener {
                 card.editCard(cEditView.getCId(), "effort", cEditView.getTxtEffort());
                 card.editCard(cEditView.getCId(), "value", cEditView.getValue());
                 card.editCard(cEditView.getCId(), "description", cEditView.getTextDescription());
-//                bv.getPanel().removeAll();
-//                bv.getComponent();
-//                bv.getPanel().updateUI();
+                blv.getSort().setSelectedIndex(0);
                 cEditView.dispose();
                 //Datenbank Eintrag ändern der cId --> cEditView.getCId()
             }

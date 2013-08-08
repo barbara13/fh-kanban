@@ -24,7 +24,7 @@ public class CardTest {
 	private ArrayList<Card> listCards = new ArrayList<Card>();
 	
 	private CardCreateView ccreate = new CardCreateView(null);
-	private CardEditView cedit = new CardEditView(null, 0, 0, "Expedite", null);
+	private CardEditView cedit = new CardEditView(null, null, 0, 0, "Expedite", null);
 	private CardView cview = new CardView(0, listCards, null, null);
 
 	@Test

@@ -18,7 +18,7 @@ import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
 
-import edu.fh.kanban.ui.view.SimpleCardView;
+import edu.fh.kanban.ui.view.BacklogCardView;
 import java.awt.Color;
 import java.awt.Font;
 //import java.awt.Component;
@@ -165,7 +165,7 @@ public class BoardController extends Controller{
             
             description = new JTextArea(listCards.get(i).getDescription());
             description.setEnabled(false);
-            cardpanel = new SimpleCardView().getComponent();
+            cardpanel = new BacklogCardView().getComponent();
             cardpanel.add(description, CC.xywh(2, 3, 5, 2)); 
             cardpanel.add(cardID[cardcounter] , CC.xy(4, 2));
             

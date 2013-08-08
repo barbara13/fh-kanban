@@ -39,7 +39,7 @@ public class CardView extends JFrame implements View {
     private String description, headline, value, create, start, done;
     private JButton btnEdit, btnDelete, btnCancel;
     private JButton btnAddCard, btnForward, btnBackward;
-    private JToggleButton tglbtnBlocker = new JToggleButton("Blocker");;
+    private JToggleButton tglbtnBlocker = new JToggleButton("Blocker");
     
     public CardView(int cId, ArrayList<Card> listCard, BacklogView blv, BoardView bv) {
 

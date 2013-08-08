@@ -12,9 +12,10 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JSeparator;
 
 import edu.fh.kanban.ui.controller.BacklogController;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 
 /**
  *
@@ -30,6 +31,7 @@ public class BacklogView extends JPanel implements View {
 	private JTextField searchfield;
     private BacklogController c = null;
     private JPanel[] cards = new JPanel[100];
+    private JPanel cardPnl = new JPanel();
     private JButton[] showcards = new JButton[100], addcards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
     private JComboBox<String> comboBox;
@@ -58,23 +60,9 @@ public class BacklogView extends JPanel implements View {
         		FormFactory.RELATED_GAP_ROWSPEC,
         		RowSpec.decode("max(16dlu;default)"),
         		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.DEFAULT_ROWSPEC,
         		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
+        		RowSpec.decode("fill:default:grow"),
         		FormFactory.RELATED_GAP_ROWSPEC,}));
 
 /*
@@ -107,18 +95,53 @@ public class BacklogView extends JPanel implements View {
                 }
                 
             }
-        });*/
-        
+        });
+*/
+
         searchfield = new JTextField();
         searchfield.setColumns(10);
         
-        comboBox = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[]{"Creation time", "Headline", "Value", "Size"}));
+        comboBox = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[]{"Card ID", "Headline", "Effort", "Value", "Creation time"}));
         comboBox.addActionListener(c);
         
         add(searchfield, "8, 2, fill, default");
         add(comboBox, "8, 4, fill, default");
+        add(new JLabel("Search:"), "6, 2, right, default");
         add(new JLabel("Sort by:"), "6, 4, right, default");
-        add(new JSeparator(), "2, 5, 7, 1");
+        add(new JSeparator(), "2, 6, 7, 1");
+        
+        JScrollPane scrollPane = new JScrollPane();
+        add(scrollPane, "2, 8, 7, 1, fill, fill");
+        
+        scrollPane.setViewportView(cardPnl);
+        cardPnl.setLayout(new FormLayout(new ColumnSpec[] {
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),},
+        	new RowSpec[] {
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,}));
         
         c.showCards();
         return this;
@@ -129,7 +152,7 @@ public class BacklogView extends JPanel implements View {
     }
     
     public JPanel getPanel() {
-        return this;
+        return cardPnl;
     }
 
     public JPanel[] getCards() {
