@@ -26,6 +26,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -147,7 +148,7 @@ public class BoardController extends Controller{
            // cardpanel.setBackground(color);
             
             showCards[i]= new JButton("SHOW");
-            
+            cardpanel.setBorder(BorderFactory.createLineBorder(Color.black));
         //    forward[cardcounter] = new JButton("Forward");
         //    backward[cardcounter] = new JButton("Back");
           

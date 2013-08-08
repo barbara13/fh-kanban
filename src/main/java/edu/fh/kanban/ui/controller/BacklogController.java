@@ -10,6 +10,7 @@ import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
 import edu.fh.kanban.data.Sort;
 import edu.fh.kanban.ui.view.SimpleCardView;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.BorderFactory;
 
 
 /**
@@ -59,6 +61,7 @@ public class BacklogController extends Controller{
             blv.getCards()[i] = new SimpleCardView();
             blv.getCards()[i].add(description, CC.xywh(2, 3, 5, 2)); 
             blv.getCards()[i].add(new JLabel("" + listCard.get(i).getCa_id()), CC.xy(4, 2));
+            blv.getCards()[i].setBorder(BorderFactory.createLineBorder(Color.black));
             blv.getShowcards()[i]= new JButton("SHOW");
            // blv.getAddcards()[i]= new JButton("To Board");
             

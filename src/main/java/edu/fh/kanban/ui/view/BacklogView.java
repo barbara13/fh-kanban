@@ -38,7 +38,7 @@ public class BacklogView extends JPanel implements View {
 	
 	private JTextField searchfield;
     private BacklogController c = null;
-	private JPanel panel = new JPanel();
+	//private JPanel panel = new JPanel();
 //    private JSeparator sep;
     private JPanel[] cards = new JPanel[100];
     private JButton[] showcards = new JButton[100];
@@ -100,7 +100,7 @@ public class BacklogView extends JPanel implements View {
             RowSpec.decode("max(16dlu;default)"),
             FormFactory.RELATED_GAP_ROWSPEC,}));
         
-        panel.setLayout(new FormLayout(new ColumnSpec[]{
+ /*      panel.setLayout(new FormLayout(new ColumnSpec[]{
                 FormFactory.RELATED_GAP_COLSPEC,
                 ColumnSpec.decode("max(120dlu;pref)"),//61
                 FormFactory.RELATED_GAP_COLSPEC,
@@ -137,7 +137,7 @@ public class BacklogView extends JPanel implements View {
                 RowSpec.decode("max(16dlu;default)"),
                 FormFactory.RELATED_GAP_ROWSPEC,
                 RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,}));
+                FormFactory.RELATED_GAP_ROWSPEC,}));*/
 
         searchfield = new JTextField();
 //		searchfield.addKeyListener(c);
@@ -190,14 +190,14 @@ public class BacklogView extends JPanel implements View {
 
         add(comboBox, "8, 4, right, default");
         add(new JSeparator(), CC.xywh(1, 5, 10, 1));
-        add(panel, CC.xywh(1, 7, 11, 17));
+        //add(panel, CC.xywh(1, 7, 11, 17));
         
         c.showCards();
         return this;
     }
 
     public JPanel getPanel() {
-        return panel;
+        return this;
     }
 
     public JPanel[] getCards() {
