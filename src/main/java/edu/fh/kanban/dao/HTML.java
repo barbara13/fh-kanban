@@ -51,13 +51,18 @@ public class HTML extends XML {
     private Element colElement;
     private Element firstColumnElement;
     private Element lastColumnElement;
+    private Element cardElement;
     private ArrayList <Element> columnElements = new ArrayList();
     private ArrayList <Element> rowElements = new ArrayList();
     private XMLBoard xml = new XMLBoard();
     
     
+    
+    private ArrayList <Element> tdElement = new ArrayList();
     private ArrayList <Element> trElement = new ArrayList();
-    private ArrayList <Td> tdElement = new ArrayList();
+    
+    private ArrayList <Element> tdElementSkip = new ArrayList();
+    private ArrayList <Element> trElementSkip = new ArrayList();
     
     private Element[] tr;
     private Element[][] td;
@@ -97,58 +102,82 @@ public class HTML extends XML {
              
         
         //Next Spalte
-        trElement.add(createTrElement(mainTableElement));
+        trElementSkip.add(createTrElement(mainTableElement));
         //tdElement.add(createTdElement(trElement.get(0), listSubColumn.get(0).getName().toString()));
-        tdElement.add(new Td(createTdElement(trElement.get(0), listSubColumn.get(0).getName().toString()),listSubColumn.get(0).getCo_id()));
+        tdElementSkip.add(createTdElement(trElementSkip.get(0), listSubColumn.get(0).getName().toString()));
 
         
         //Main Spalten
         for(int i = 0; i < listMainColumn.size(); i++){
             //tdElement.add(createTdElement(trElement.get(0), listMainColumn.get(i).getName().toString()));
-            tdElement.add(new Td(createTdElement(trElement.get(0), listMainColumn.get(i).getName().toString()), listMainColumn.get(i).getCo_id()));
+            tdElementSkip.add(createTdElement(trElementSkip.get(0), listMainColumn.get(i).getName().toString()));
         }
         
         
-        trElement.add(createTrElement(mainTableElement));
+        trElementSkip.add(createTrElement(mainTableElement));
         //Platzhalter für NextSpalte
         //tdElement.add(createTdElement(trElement.get(1), " "));
-        tdElement.add(new Td(createTdElement(trElement.get(1), " "), 0));
+        tdElementSkip.add(createTdElement(trElementSkip.get(1), " "));
                 
         //Untertabelle Do und Done
         for(int j = 0; j < listMainColumn.size(); j++){
             //System.out.println("tttt");
             //Untertabelle
             //tdElement.add(createTdElement(trElement.get(1), " "));
-            tdElement.add(new Td(createTdElement(trElement.get(1), " "), 0));
-            subTableElement.add(createSubTable(tdElement.get(tdElement.size()-1).getTdElement()));
-            trElement.add(createTrElement(subTableElement.get(j)));
+            tdElementSkip.add(createTdElement(trElementSkip.get(1), " "));
+            
+            subTableElement.add(createSubTable(tdElementSkip.get(tdElementSkip.size()-1)));
+            
+            trElementSkip.add(createTrElement(subTableElement.get(j)));
             //tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Do"));
-            tdElement.add(new Td(createTdElement(trElement.get(trElement.size()-1), "Do"),listMainColumn.get(j).getCo_id()+1));
+            tdElementSkip.add(createTdElement(trElementSkip.get(trElementSkip.size()-1), "Do"));
             //System.out.println(listMainColumn.get(j).getCo_id());
             
             //tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Done"));   
-            tdElement.add(new Td(createTdElement(trElement.get(trElement.size()-1), "Done"),listMainColumn.get(j).getCo_id()+2));
+            tdElementSkip.add(createTdElement(trElementSkip.get(trElementSkip.size()-1), "Done"));
         }
         
         
         
         //Done Spalte
         //tdElement.add(createTdElement(trElement.get(0), listSubColumn.get(listSubColumn.size()-1).getName().toString()));
-        tdElement.add(new Td(createTdElement(trElement.get(0), listSubColumn.get(listSubColumn.size()-1).getName().toString()),0));
+        tdElement.add(createTdElement(trElementSkip.get(0), listSubColumn.get(listSubColumn.size()-1).getName().toString()));
         
         //Platzhalter
         //tdElement.add(createTdElement(trElement.get(trElement.size()-1), " "));
+                   
+
+        for(int l = 1; l < listSubColumn.size()-1; l++){
+
+            listCard = xml.readCardsFromColumn(listSubColumn.get(l).getCo_id());
+             
+           
             
+            for(int k = 0; k < listCard.size(); k++){
+                trElement.add(createTrElement(subTableElement.get(l)));
+                tdElement.add(createTdElement(trElement.get(k)));
+                createCardElement(tdElement.get(k) ,listCard.get(k).getName());
+                
+            }
+            
+        }
+        
+        /*
         for(int k = 0; k < listCard.size(); k++){
             int id = listCard.get(k).getCo_id();
             System.out.println("CARD: "+ listCard.get(k).getCa_id());
             System.out.println("COLUMN: "+ listCard.get(k).getCo_id());
+            
+            
+            
             if(tdElement.get(k).getCo_id() == id){
                 System.out.println("ELEMENT: " +tdElement.get(k).getTdElement().getTextContent());
                 trElement.add(createTrElement(mainTableElement));
             }        
                   
         }
+        * */
+        
         
         //System.out.println(Kanban.xmlName);
 
@@ -209,6 +238,28 @@ public class HTML extends XML {
         
         return colElement;
     }
+    
+        private Element createTdElement(Element tr) {
+        colElement = doc.createElement("td");
+        tr.appendChild(colElement);
+        
+        return colElement;
+    }
+    
+     private Element createCardElement(Element td, String name) {    
+         cardElement = doc.createElement("input"); 
+         td.appendChild(cardElement);
+         
+         attr = doc.createAttribute("type");
+         attr.setValue("button");
+         cardElement.setAttributeNode(attr);
+         
+         attr = doc.createAttribute("value");
+         attr.setValue(name);
+         cardElement.setAttributeNode(attr);
+         
+        return cardElement;
+     }
     
     
     class Td{
