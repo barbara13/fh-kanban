@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><!--
 To change this template, choose Tools | Templates
 and open the template in the editor.
+<<<<<<< HEAD
 --><cards>
     
+=======
+--><cards>
+    
+>>>>>>> 0ad6a33d30ba1ab6892a284f04607332dcfe2644
 <card blocker="false" blocker_tooltip="" ca_id="20" co_id="0" created="25.07.2013 16:34:11" description="Test" done="" effort="22" name="TestCard" started="" value="Expedite"/><card blocker="false" blocker_tooltip="" ca_id="21" co_id="0" created="25.07.2013 16:43:04" description="123" done="" effort="2" name="Hallo" started="" value="Standart"/><card blocker="false" blocker_tooltip="" ca_id="22" co_id="0" created="30.07.2013 14:37:19" description="rf" done="" effort="33" name="tester" started="" value="Expedite"/><card blocker="true" blocker_tooltip="blocked" ca_id="23" co_id="0" created="08.08.2013 11:06:33" description="dies ist Z" done="" effort="26" name="z" started="" value="Standart"/><card blocker="false" blocker_tooltip="" ca_id="24" co_id="0" created="08.08.2013 11:06:59" description="Die ist Y" done="" effort="25" name="Y" started="" value="Standart"/><card blocker="false" blocker_tooltip="" ca_id="25" co_id="0" created="08.08.2013 11:07:15" description="die ist X" done="" effort="23" name="X" started="" value="Standart"/></cards>
