@@ -43,8 +43,6 @@ public class ExportBoardToPdf {
     private void createPdf(String filename) throws DocumentException, IOException {
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filename));
-       // PrintWriter pdfwriter = new PrintWriter(writer);
-        
         
         xml.loadXML(Kanban.xmlPath);
         listBoard = xml.readBoard();

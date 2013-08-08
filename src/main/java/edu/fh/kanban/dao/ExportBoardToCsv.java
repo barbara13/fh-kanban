@@ -32,13 +32,10 @@ public class ExportBoardToCsv {
 		}
     }
 
-    private void createCsv(String filename) throws DocumentException, IOException { 
-//    	BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-    	
-    	 FileWriter fw = new FileWriter(filename);
-    	 PrintWriter writer = new PrintWriter(fw);
+    private void createCsv(String filename) throws DocumentException, IOException {
+    	FileWriter fw = new FileWriter(filename);
+    	PrintWriter writer = new PrintWriter(fw);
 
-       
         xml.loadXML(Kanban.xmlPath);
         listBoard = xml.readBoard();
         listMainColumns = xml.readMainColumns();
@@ -52,31 +49,25 @@ public class ExportBoardToCsv {
         	writer.print(";;");
         }
         writer.append("\n");
+        
         for(int i = 0; i < listSubColumns.size(); i++){
         	writer.print(listSubColumns.get(i).getName().toString());
         	writer.print(";");
         }
         writer.append("\n");
         
-        int k = 0;
-        while(k != 10){
+        for(int k = 0; k< 10; k++){
         	for(int i = 0; i < listSubColumns.size(); i++){
                 listCards = xml.readCardsFromColumn(listSubColumns.get(i).getCo_id());
-                
-	                for(;k < listCards.size();){
-	              	  writer.print("CardID: " + listCards.get(k).getCa_id() + " Effort: " + listCards.get(k).getEffort() + " Value: " + listCards.get(k).getValue() + " Description: " + listCards.get(k).getDescription());
-	              	  break;
+	                if(k < listCards.size()){
+	              	  	writer.print("CardID: " + listCards.get(k).getCa_id() + " Effort: " + listCards.get(k).getEffort() + " Value: " + listCards.get(k).getValue() + " Description: " + listCards.get(k).getDescription());
+	                }else{
+	                	writer.print(";");
 	                }
-	                writer.print(";");
               }
-        	k++;
         	writer.append("\n");
         }
         
-        
-        //Hier muss dann die Karten implementiert werden
-        
-        writer.append("\n");
         writer.flush();
         fw.close();
         writer.close();

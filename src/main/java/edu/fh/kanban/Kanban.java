@@ -1,7 +1,8 @@
 package edu.fh.kanban;
 
+import edu.fh.kanban.dao.ExportBacklog;
 import edu.fh.kanban.dao.HTML;
-import edu.fh.kanban.dao.Export;
+import edu.fh.kanban.dao.ExportBoard;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -62,18 +63,24 @@ public class Kanban {
             }
         });
         
+        final JMenuItem exportBacklog = new JMenuItem("Export Backlog to...");
+        exportBacklog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new ExportBacklog();
+			}
+		}); 
+        
         final JMenuItem html = new JMenuItem("Export to HTML...");
         html.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new HTML().createHTML();
             }
         });
-        
-        //Klasse SaveAll
-        final JMenuItem saveAs = new JMenuItem("Export to...");
-        saveAs.addActionListener(new ActionListener() {
+
+        final JMenuItem exportBoard = new JMenuItem("Export Board to...");
+        exportBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new Export();
+				new ExportBoard();
 				
 			}
 		});
@@ -113,7 +120,7 @@ public class Kanban {
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), scrollpane);
                         firstBoard = false;
                         html.setEnabled(true);
-                        saveAs.setEnabled(true);
+                        exportBoard.setEnabled(true);
                       //  try{
                       //  for(int i = 0; backlogView.getAddcards()[i].getText().toString() != "0"; i++){
                       //  backlogView.getAddcards()[i].setEnabled(true);
@@ -138,10 +145,11 @@ public class Kanban {
         file.add(board_preferences);
         file.add(card_preferences);
         file.add(loadBoard);
+        file.add(exportBacklog);
         file.add(html);
-        file.add(saveAs);
+        file.add(exportBoard);
         html.setEnabled(false);
-        saveAs.setEnabled(false);
+        exportBoard.setEnabled(false);
 
         JMenuBar menubar = new JMenuBar();
         menubar.add(file);

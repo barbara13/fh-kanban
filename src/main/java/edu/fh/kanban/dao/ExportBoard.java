@@ -9,12 +9,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 	 * @author Barbara
 	 *
 	 */
-	
-	public class Export extends JFrame{
+	public class ExportBoard extends JFrame{
 		private static final long serialVersionUID = 1L;
 
-	    public Export(){
-			
+	    public ExportBoard(){
 	    	String path = System.getProperty("user.home");
 
 	    	JFileChooser chooser = new JFileChooser(path);
