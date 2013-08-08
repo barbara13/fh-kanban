@@ -12,7 +12,7 @@ import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
 
-public class ExportToCsv {
+public class ExportBoardToCsv {
 	
     private XMLBoard xml;
     private ArrayList<Column> listSubColumns = new ArrayList<Column>();
@@ -20,7 +20,7 @@ public class ExportToCsv {
     private ArrayList<Board> listBoard = new ArrayList<Board>();
     private ArrayList<Card> listCards = new ArrayList<Card>();
     
-    public ExportToCsv(String path){
+    public ExportBoardToCsv(String path){
         xml = new XMLBoard();
     	
     	try {

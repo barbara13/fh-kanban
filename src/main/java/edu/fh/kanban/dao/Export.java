@@ -33,10 +33,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 	        if (result == JFileChooser.APPROVE_OPTION) {
 	        	if(chooser.getFileFilter().getDescription().equals("CSV")){
 	        		path = chooser.getSelectedFile().toString() + ".csv";
-	        		new ExportToCsv(path);
+	        		new ExportBoardToCsv(path);
 	        	}else if(chooser.getFileFilter().getDescription().equals("PDF")){
 	        		path = chooser.getSelectedFile().toString() + ".pdf";
-	        		new ExportToPdf(path);
+	        		new ExportBoardToPdf(path);
 	        	}else if(chooser.getFileFilter().getDescription().equals("HTML")){
 	        		path = chooser.getSelectedFile().toString() + ".html";
 	        	}

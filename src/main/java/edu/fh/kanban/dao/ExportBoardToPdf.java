@@ -18,7 +18,7 @@ import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
 
-public class ExportToPdf {
+public class ExportBoardToPdf {
 	
     private XMLBoard xml;
     private ArrayList<Column> listSubColumns = new ArrayList<Column>();
@@ -28,7 +28,7 @@ public class ExportToPdf {
     
     private PdfPTable table;
     
-    public ExportToPdf(String path){
+    public ExportBoardToPdf(String path){
         xml = new XMLBoard();
     	
     	try {
