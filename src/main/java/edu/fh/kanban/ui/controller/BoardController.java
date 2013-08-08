@@ -55,7 +55,8 @@ public class BoardController extends Controller{
     private XMLBoard xml;
     private ArrayList<Card> listCards = new ArrayList<Card>();
     private Board board = new Board();
-    private Color color;
+    private Color expediteColor, fixedDateColor, intangibleColor, standartColor; 
+    private String expedite, fixedDate, intangible, standart;
     
     private JTextField searchtext;
     private JButton showCards[] = new JButton[100];
@@ -86,8 +87,29 @@ public class BoardController extends Controller{
         cardcounter = 0;
         xml.loadXML(Kanban.xmlPath); 
         board = xml.getBoard();
-        color = Color.decode("#893BFF");
+        
+        expedite = board.getExpedite();
+        expedite = expedite.substring(2, expedite.length());
+        expedite = ("#" + expedite);
+        expediteColor = Color.decode(expedite);
+        
+        fixedDate = board.getFixedDate();
+        fixedDate = fixedDate.substring(2, fixedDate.length());
+        fixedDate = ("#" + fixedDate);
+        fixedDateColor = Color.decode(fixedDate);
+        
+        standart = board.getStandart();
+        standart = standart.substring(2, standart.length());
+        standart = ("#" + standart);
+        standartColor = Color.decode(standart);
+        
+        intangible = board.getIntangible();
+        intangible = intangible.substring(2, intangible.length());
+        intangible = ("#" + intangible);
+        intangibleColor = Color.decode(intangible);
         //listAllCards = xml.readCards();
+        
+        System.out.println(expedite + fixedDate+ standart+ intangible);
         int w = 0;
         searchtext = new JTextField();
         
@@ -146,7 +168,20 @@ public class BoardController extends Controller{
             cardpanel = new SimpleCardView().getComponent();
             cardpanel.add(description, CC.xywh(2, 3, 5, 2)); 
             cardpanel.add(cardID[cardcounter] , CC.xy(4, 2));
-            cardpanel.setBackground(color);
+            
+            if (listCards.get(i).getValue().equals("Expedite")){
+                cardpanel.setBackground(expediteColor);
+            }
+            else if (listCards.get(i).getValue().equals("Fixed Date")){
+                cardpanel.setBackground(fixedDateColor);
+            }
+            else if (listCards.get(i).getValue().equals("Intangible")){
+                cardpanel.setBackground(intangibleColor);
+            }
+            else if (listCards.get(i).getValue().equals("Standart")){
+                cardpanel.setBackground(standartColor);
+            }
+            
             
             showCards[i]= new JButton("SHOW");
             cardpanel.setBorder(BorderFactory.createLineBorder(Color.black));
