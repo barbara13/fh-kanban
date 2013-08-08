@@ -109,7 +109,6 @@ public class BoardController extends Controller{
         intangibleColor = Color.decode(intangible);
         //listAllCards = xml.readCards();
         
-        System.out.println(expedite + fixedDate+ standart+ intangible);
         int w = 0;
         searchtext = new JTextField();
         
@@ -208,6 +207,7 @@ public class BoardController extends Controller{
                                         //cv.getBtnBackward().setVisible(false);
                                         //cv.getBtnForward().setVisible(false);
 					cv.getBtnAddCard().setVisible(false);
+                                        cv.getBtnEdit().setVisible(false);
                                         
 				}
                      
