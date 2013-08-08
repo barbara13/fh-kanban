@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!--
 To change this template, choose Tools | Templates
 and open the template in the editor.
-<<<<<<< HEAD
---><primary_keys>
-    <board b_id="21"/>
-    <column co_id="197"/>
-    <card ca_id="26"/>
-=======
 --><primary_keys>
     <board b_id="22"/>
     <column co_id="205"/>
-    <card ca_id="26"/>
->>>>>>> 20ed7fab9be5516fab4f2fea2c06bcb2d4c3444f
+    <card ca_id="27"/>
 </primary_keys>

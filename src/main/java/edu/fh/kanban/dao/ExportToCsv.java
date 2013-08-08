@@ -43,7 +43,6 @@ public class ExportToCsv {
         listBoard = xml.readBoard();
         listMainColumns = xml.readMainColumns();
         listSubColumns = xml.readSubColumns();
-        //listSubColumns.get(0).getCo_id();
         
         writer.print(listBoard.get(0).getName() + "\n ;");
         
@@ -57,24 +56,22 @@ public class ExportToCsv {
         	writer.print(listSubColumns.get(i).getName().toString());
         	writer.print(";");
         }
-        for(int i = 0; i < listSubColumns.size(); i++){
-          listCards = xml.readCardsFromColumn(listSubColumns.get(i).getCo_id());
-          
-      	for(int k = 0; k < listCards.size(); k++){
-      		System.out.println("column: " + i);
-      		System.out.println("Card ID:" + listCards.get(k).getCa_id());
-      	}
-      }
-     
+        writer.append("\n");
         
-//        for(int i = 0; i < listSubColumns.size(); i++){
-//            listCards = xml.readCardsFromColumn(listSubColumns.get(i).getCo_id());
-//            
-//        	for(int k = 0; k < listCards.size(); k++){
-//        		System.out.println("column: " + i);
-//        		System.out.println("Card ID:" + listCards.get(k).getCa_id());
-//        	}
-//        }
+        int k = 0;
+        while(k != 10){
+        	for(int i = 0; i < listSubColumns.size(); i++){
+                listCards = xml.readCardsFromColumn(listSubColumns.get(i).getCo_id());
+                
+	                for(;k < listCards.size();){
+	              	  writer.print("CardID: " + listCards.get(k).getCa_id() + " Effort: " + listCards.get(k).getEffort() + " Value: " + listCards.get(k).getValue() + " Description: " + listCards.get(k).getDescription());
+	              	  break;
+	                }
+	                writer.print(";");
+              }
+        	k++;
+        	writer.append("\n");
+        }
         
         
         //Hier muss dann die Karten implementiert werden

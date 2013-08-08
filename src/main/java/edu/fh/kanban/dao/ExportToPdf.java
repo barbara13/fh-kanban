@@ -43,8 +43,9 @@ public class ExportToPdf {
     private void createPdf(String filename) throws DocumentException, IOException {
         Document document = new Document();
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filename));
+       // PrintWriter pdfwriter = new PrintWriter(writer);
         
-        int k = 0;
+        
         xml.loadXML(Kanban.xmlPath);
         listBoard = xml.readBoard();
         listMainColumns = xml.readMainColumns();
@@ -59,7 +60,7 @@ public class ExportToPdf {
         cb.beginText();
         cb.setFontAndSize(bf, 12);
         cb.moveText(20, 815);
-        cb.showText(listBoard.get(k).getName());
+        cb.showText(listBoard.get(0).getName());
         int spalten = ((listSubColumns.size() - 2) / 2);
         
     	table.addCell("");
@@ -73,22 +74,19 @@ public class ExportToPdf {
     		table.addCell(listSubColumns.get(i).getName().toString());
     	}
     	
-//    	for(int i = 0; i < 10; i++){
-//    		for(int j = 0; j < listSubColumns.size(); j++){
-//    			listCards = xml.readCardsFromColumn(listSubColumns.get(j).getCo_id());
-//    			if(false){
-//    				
-////        			table.addCell(card);	//Hier kommen alle Karten rein
-//    			}else{
-//    				break;
-//    			}
-//    		}
-//    	}
+        for(int k = 0; k < 10; k++){
+        	for(int i = 0; i < listSubColumns.size(); i++){
+                listCards = xml.readCardsFromColumn(listSubColumns.get(i).getCo_id());
+	                if(k < listCards.size()){
+	                	System.out.println(listCards.get(k).getCa_id() + "K= " + k);
+	              	    table.addCell("CardID: " + Integer.toString(listCards.get(k).getCa_id()) + " Effort: " + Integer.toString(listCards.get(k).getEffort()) + " Value: " + listCards.get(k).getValue().toString() + " Description: " + listCards.get(k).getDescription().toString());
+	                }else{
+	                	table.addCell("");
+	                }
+              }
+        }
         cb.endText();
-        
         document.add(table);
-
         document.close();
-
     }
 }
