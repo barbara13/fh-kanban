@@ -67,7 +67,7 @@ public class BoardPreferencesController implements ActionListener {
             } else if (panelfehler == false) {
 
                 //Übergabe, was im Board gespeichert wird und das Fenster wird geschlossen
-                xml.addBoard(bpv.getTxtName().getText().toString(), bpv.getComboBoxExpedite().COLORS[bpv.getComboBoxExpedite().getSelectedIndex()].toString(), bpv.getComboBoxStandart().COLORS[bpv.getComboBoxStandart().getSelectedIndex()].toString(), bpv.getComboBoxFixedDate().COLORS[bpv.getComboBoxFixedDate().getSelectedIndex()].toString(), bpv.getComboBoxIntangible().COLORS[bpv.getComboBoxIntangible().getSelectedIndex()].toString());
+                xml.addBoard(bpv.getTxtName().getText().toString(), Integer.toHexString(bpv.getComboBoxExpedite().COLORS[bpv.getComboBoxExpedite().getSelectedIndex()].getRGB()), Integer.toHexString(bpv.getComboBoxStandart().COLORS[bpv.getComboBoxStandart().getSelectedIndex()].getRGB()), Integer.toHexString(bpv.getComboBoxFixedDate().COLORS[bpv.getComboBoxFixedDate().getSelectedIndex()].getRGB()), Integer.toHexString(bpv.getComboBoxIntangible().COLORS[bpv.getComboBoxIntangible().getSelectedIndex()].getRGB()));
                 xml.addColumn("Next", "50");
                 for (int i = 0; i < arrayindex; i++) {
                     xml.addNewColumn(txtColumname[i].getText().toString(), wip[i].getValue().toString());
