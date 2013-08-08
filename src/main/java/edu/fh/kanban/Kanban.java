@@ -55,11 +55,22 @@ public class Kanban {
             throw new RuntimeException(e);
         }
         LOGGER.info("Creating UI components.");
+        
+        final BacklogView backlogView = new BacklogView();
+        BoardView boardView = new BoardView(backlogView);
+        backlogView.setBv(boardView);
 
         JMenuItem board_preferences = new JMenuItem("New Board...");
         board_preferences.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new BoardPreferencesView().getComponent();
+            }
+        });
+        
+        JMenuItem card_preferences = new JMenuItem("New Card...");
+        card_preferences.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new CardCreateView(backlogView).getComponent();
             }
         });
         
@@ -84,18 +95,6 @@ public class Kanban {
 				
 			}
 		});
-             
-        final BacklogView backlogView = new BacklogView();
-        BoardView boardView = new BoardView(backlogView);
-        backlogView.setBv(boardView);
-        
-                
-        JMenuItem card_preferences = new JMenuItem("New Card...");
-        card_preferences.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new CardCreateView(backlogView).getComponent();
-            }
-        });
 
         JMenuItem loadBoard = new JMenuItem("Load Board...");
         loadBoard.addActionListener(new ActionListener() {
@@ -134,10 +133,8 @@ public class Kanban {
                         scrollpane.setViewportView(boardView.getComponent());
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), scrollpane);
                         pane.removeTabAt(1);
-                        
                     }
                 }
-
             }
         });
 
@@ -154,12 +151,11 @@ public class Kanban {
         JMenuBar menubar = new JMenuBar();
         menubar.add(file);
 
-
         JScrollPane scrollpane = new JScrollPane();
         scrollpane.setViewportView(backlogView.getComponent());
+        
         pane = new JTabbedPane();
         pane.addTab("Backlog", scrollpane);
-        //pane.addTab("Board", boardView.getComponent());
 
         JFrame frame = new JFrame();
         frame.setJMenuBar(menubar);

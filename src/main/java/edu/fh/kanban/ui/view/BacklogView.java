@@ -1,166 +1,92 @@
 package edu.fh.kanban.ui.view;
 
-import com.jgoodies.forms.factories.CC;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 
-//import edu.fh.kanban.dao.XMLCard;
-//import edu.fh.kanban.data.Card;
-import edu.fh.kanban.ui.controller.BacklogController;
-//import edu.fh.kanban.ui.controller.CardCreateController;
-//import java.awt.event.KeyEvent;
-//import java.awt.event.KeyListener;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-//import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-//import javax.swing.JScrollBar;
 import javax.swing.JSeparator;
-//import java.awt.event.KeyAdapter;
-//import java.util.ArrayList;
+
+import edu.fh.kanban.ui.controller.BacklogController;
 
 /**
  *
- * @author David, Lorenz
+ * @author David, Lorenz, Maxim
  */
 public class BacklogView extends JPanel implements View {
 
-    /**
-	 * 
-	 */
-	 
+	/**
+	  *
+	  */
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField searchfield;
     private BacklogController c = null;
-	//private JPanel panel = new JPanel();
-//    private JSeparator sep;
     private JPanel[] cards = new JPanel[100];
-    private JButton[] showcards = new JButton[100];
-    private JButton[] addcards = new JButton[100];
+    private JButton[] showcards = new JButton[100], addcards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
-    private JComboBox comboBox;
-//    private int i = 0;
+    private JComboBox<String> comboBox;
     private BoardView bv;
 
-    public void setBv(BoardView bv) {
-        this.bv = bv;
-    }
-
-    public BacklogView() {
-        getComponents();
+    public BacklogView(){
+    	getComponent();
     }
     
     public  JComponent getComponent() {
     	c = new BacklogController(this, bv);
-       
-    	/**
-    	* @wbp.parser.entryPoint
-    	*/
-    	
-        setLayout(new FormLayout(new ColumnSpec[]{
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("max(120dlu;pref):grow"),//61
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("max(120dlu;pref):grow"),//121
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("max(120dlu;pref):grow"),//57
-            FormFactory.RELATED_GAP_COLSPEC,
-            ColumnSpec.decode("max(73dlu;pref):grow"),//73
-            FormFactory.RELATED_GAP_COLSPEC,
-            FormFactory.DEFAULT_COLSPEC,
-            FormFactory.RELATED_GAP_COLSPEC,},
-            new RowSpec[]{
-            FormFactory.RELATED_GAP_ROWSPEC,
-            FormFactory.DEFAULT_ROWSPEC,
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,
-            RowSpec.decode("max(16dlu;default)"),
-            FormFactory.RELATED_GAP_ROWSPEC,}));
-        
- /*      panel.setLayout(new FormLayout(new ColumnSpec[]{
-                FormFactory.RELATED_GAP_COLSPEC,
-                ColumnSpec.decode("max(120dlu;pref)"),//61
-                FormFactory.RELATED_GAP_COLSPEC,
-                ColumnSpec.decode("max(120dlu;pref)"),//121
-                FormFactory.RELATED_GAP_COLSPEC,
-                ColumnSpec.decode("max(120dlu;pref):grow"),//57
-                FormFactory.RELATED_GAP_COLSPEC,
-                ColumnSpec.decode("max(73dlu;pref)"),//73
-                FormFactory.RELATED_GAP_COLSPEC,
-                FormFactory.DEFAULT_COLSPEC,
-                FormFactory.RELATED_GAP_COLSPEC,},
-                new RowSpec[]{
-                FormFactory.RELATED_GAP_ROWSPEC,
-                FormFactory.DEFAULT_ROWSPEC,
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,
-                RowSpec.decode("max(16dlu;default)"),
-                FormFactory.RELATED_GAP_ROWSPEC,}));*/
 
-        searchfield = new JTextField();
-//		searchfield.addKeyListener(c);
-        add(searchfield, "6, 2, 3, 1, right, default");
-        searchfield.setColumns(10);
+        setLayout(new FormLayout(new ColumnSpec[] {
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("max(100dlu;default)"),
+        		FormFactory.RELATED_GAP_COLSPEC,},
+        	new RowSpec[] {
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("max(16dlu;default)"),
+        		FormFactory.RELATED_GAP_ROWSPEC,}));
 
 /*
         searchfield.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
+            public void keyTyped(KeyEvent e) {}
+            public void keyPressed(KeyEvent e) {}
             public void keyReleased(KeyEvent e) {
                 try{
-                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                    i--;
-                    i--;
-                }
+	                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+	                    i--;
+	                    i--;
+	                }
                 
                 for(int j = 0; j < cards.length; j++){
                     
@@ -182,20 +108,26 @@ public class BacklogView extends JPanel implements View {
                 
             }
         });*/
-
-        add(new JLabel("Sort by"), "6, 4, right, default");
-
-        comboBox = new JComboBox(new String[]{"Creation time", "Headline", "Value", "Size"});
+        
+        searchfield = new JTextField();
+        searchfield.setColumns(10);
+        
+        comboBox = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[]{"Creation time", "Headline", "Value", "Size"}));
         comboBox.addActionListener(c);
-
-        add(comboBox, "8, 4, right, default");
-        add(new JSeparator(), CC.xywh(1, 5, 10, 1));
-        //add(panel, CC.xywh(1, 7, 11, 17));
+        
+        add(searchfield, "8, 2, fill, default");
+        add(comboBox, "8, 4, fill, default");
+        add(new JLabel("Sort by:"), "6, 4, right, default");
+        add(new JSeparator(), "2, 5, 7, 1");
         
         c.showCards();
         return this;
     }
-
+    
+    public void setBv(BoardView bv) {
+        this.bv = bv;
+    }
+    
     public JPanel getPanel() {
         return this;
     }
@@ -208,7 +140,7 @@ public class BacklogView extends JPanel implements View {
         return ids;
     }
 
-    public JComboBox getSort() {
+    public JComboBox<String> getSort() {
         return comboBox;
     }
 
@@ -223,6 +155,4 @@ public class BacklogView extends JPanel implements View {
     public JButton[] getAddcards() {
         return addcards;
     }
-    
-    
 }

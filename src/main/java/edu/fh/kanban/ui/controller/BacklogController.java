@@ -53,6 +53,7 @@ public class BacklogController extends Controller{
 
     public void showCards() {
         listCard = xml.readCards();
+        
         for (i = 0; i < listCard.size(); i++) {
             cv = new CardView(listCard.get(i).getCa_id(), listCard, blv, bv);
             
