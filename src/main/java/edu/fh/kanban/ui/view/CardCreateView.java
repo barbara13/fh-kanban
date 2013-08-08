@@ -58,31 +58,32 @@ public class CardCreateView extends JFrame implements View {
 		// Das FormLayout aus jgoodies wird verwendet
 		getContentPane().setLayout(
 				new FormLayout(new ColumnSpec[] {
-						FormFactory.UNRELATED_GAP_COLSPEC,
-						ColumnSpec.decode("100px"),
-						FormFactory.UNRELATED_GAP_COLSPEC,
-						ColumnSpec.decode("100px"),
-						FormFactory.UNRELATED_GAP_COLSPEC,
-						ColumnSpec.decode("230px"),
-						FormFactory.UNRELATED_GAP_COLSPEC,
-						ColumnSpec.decode("100px"),
-						FormFactory.UNRELATED_GAP_COLSPEC,
-						ColumnSpec.decode("100px"), }, new RowSpec[] {
-						FormFactory.UNRELATED_GAP_ROWSPEC,
-						RowSpec.decode("20px"),
-						FormFactory.UNRELATED_GAP_ROWSPEC,
-						RowSpec.decode("20px"),
-						FormFactory.UNRELATED_GAP_ROWSPEC,
-						RowSpec.decode("20px"),
-						FormFactory.UNRELATED_GAP_ROWSPEC,
-						RowSpec.decode("100px"),
-						RowSpec.decode("max(100dlu;default)"),
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC, }));
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("100px"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("100px"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("230px"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("100px"),
+				FormFactory.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("100px"),},
+			new RowSpec[] {
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormFactory.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("100px"),
+				RowSpec.decode("max(100dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
 
 		getContentPane().add(new JLabel("Head Line:"), "2, 2, right, default");
 
@@ -97,16 +98,13 @@ public class CardCreateView extends JFrame implements View {
 
 		getContentPane().add(new JLabel("Value:"), "8, 4, right, center");
 
-		comboBoxValue = new JComboBox<String>(new DefaultComboBoxModel<String>(
-				new String[] { "Standart", "Expedite", "Fixed Date",
-						"Intangible" }));
+		comboBoxValue = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[] { "Standart", "Expedite", "Fixed Date", "Intangible" }));
 		getContentPane().add(comboBoxValue, "10, 4, fill, default");
 
-		getContentPane().add(new JLabel("Description:"),
-				"2, 6, default, bottom");
+		getContentPane().add(new JLabel("Description:"), "2, 8, default, bottom");
 
 		textDescription = new TextArea();
-		getContentPane().add(textDescription, "2, 8, 9, 2, fill, fill");
+		getContentPane().add(textDescription, "2, 10, 9, 2, fill, fill");
 
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(cController);
