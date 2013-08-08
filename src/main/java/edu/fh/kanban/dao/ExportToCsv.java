@@ -1,6 +1,5 @@
 package edu.fh.kanban.dao;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -44,9 +43,7 @@ public class ExportToCsv {
         listBoard = xml.readBoard();
         listMainColumns = xml.readMainColumns();
         listSubColumns = xml.readSubColumns();
-        
-//        String[][] line = {{listBoard.get(0).getName(), "1", "2", "3", "4", "5", "6", "7", "8", "9"},
-//        				  {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}};
+        //listSubColumns.get(0).getCo_id();
         
         writer.print(listBoard.get(0).getName() + "\n ;");
         
@@ -60,6 +57,16 @@ public class ExportToCsv {
         	writer.print(listSubColumns.get(i).getName().toString());
         	writer.print(";");
         }
+        
+//        for(int i = 0; i < listSubColumns.size(); i++){
+//            listCards = xml.readCardsFromColumn(listSubColumns.get(i).getCo_id());
+//            
+//        	for(int k = 0; k < listCards.size(); k++){
+//        		System.out.println("column: " + i);
+//        		System.out.println("Card ID:" + listCards.get(k).getCa_id());
+//        	}
+//        }
+        
         
         //Hier muss dann die Karten implementiert werden
         
