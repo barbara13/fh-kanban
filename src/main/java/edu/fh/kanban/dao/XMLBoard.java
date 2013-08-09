@@ -384,6 +384,11 @@ public class XMLBoard extends XML {
         return newCardElement;
     }
 
+    /**
+     * Durchsucht die SubColumns nach einer bestimmter Column
+     * @param co_id
+     * @return 
+     */
     public Element searchColumn(int co_id) {
         columnList = doc.getElementsByTagName("column");
         for (int i = 0; i < columnList.getLength(); i++) {
@@ -397,6 +402,11 @@ public class XMLBoard extends XML {
         return searchedElement;
     }
 
+    /**
+     * Durchsucht die MainColumns nach einer bestimmter Column
+     * @param co_id
+     * @return 
+     */
     public Element searchColumns(int co_id) {
         columnList = doc.getElementsByTagName("columns");
         for (int i = 0; i < columnList.getLength(); i++) {
@@ -521,10 +531,12 @@ public class XMLBoard extends XML {
 
         cardElement = searchCard(ca_id);
 
+
         this.ca_id = Kanban.tryParseInt(cardElement.getAttribute("ca_id"));
         this.co_id = Kanban.tryParseInt(cardElement.getAttribute("co_id"));
 
         columnElement = searchColumn(co_id);
+        
         if (columnElement.getAttribute("name").equals("Done")) {
             maxCount = 1;
         } else {
@@ -532,7 +544,8 @@ public class XMLBoard extends XML {
         }
 
         columnList = doc.getElementsByTagName("column");
-
+        
+        
         for (int i = columnList.getLength() - 1; i >= 0; i--) {
             if (f == false) {
                 if (Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
@@ -543,12 +556,18 @@ public class XMLBoard extends XML {
             } else {
                 count++;
             }
-
+            
+            targetColumnElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+            if(targetColumnElement.getAttribute("name").equals("Next")){
+                count = 2;
+            }
+            
             if (count == maxCount) {
-
                 targetColumnElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
                 targetCardElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
-
+                
+                
+                
                 cardElement.getAttribute("co_id");
                 if (checkWip(Kanban.tryParseInt(targetColumnElement.getAttribute("co_id"))) == true) {
 

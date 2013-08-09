@@ -4,7 +4,10 @@
  */
 package edu.fh.kanban.dao;
 
+import edu.fh.kanban.Kanban;
 import edu.fh.kanban.data.Board;
+import edu.fh.kanban.data.Card;
+import edu.fh.kanban.data.Column;
 import java.util.ArrayList;
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -21,7 +24,7 @@ public class XMLBoardTest {
     private XML_Pk pkXml = new XML_Pk();
     public XMLBoardTest() {
     }
-    
+    /*
     public void createTestXml(XMLBoard boardXml){
 
         cardXml.addCard("card1", "Beschreibung", "5", "Standart", "false", "Text");
@@ -41,12 +44,11 @@ public class XMLBoardTest {
         
         boardXml.createBoard("BoardText.xml");
         
-        //cardXml.deleteCard(pkXml.getCa_id()-1);
-
         
         
     }
-
+    */
+    
     @BeforeClass
     public static void setUpClass() throws Exception {
     }
@@ -72,11 +74,10 @@ public class XMLBoardTest {
         System.out.println("loadXML");
         
         XMLBoard instance = new XMLBoard();
-        createTestXml(instance);
-        String xmlPath = "BoardTest";
+        String xmlPath = "BoardTest.xml";
         instance.loadXML(xmlPath);
         
-        assertEquals("BoardTest", xmlPath);
+        assertEquals("BoardTest.xml", xmlPath);
     }
 
     /**
@@ -88,8 +89,10 @@ public class XMLBoardTest {
         System.out.println("getBoard");
         
         XMLBoard instance = new XMLBoard();
-        createTestXml(instance);
-        Board expResult = new Board(pkXml.getB_id(), "BoardTest", "#FF0000", "#00FFFF", "#0000FF", "#800080");
+        
+        instance.loadXML("BoardTest.xml");
+        
+        Board expResult = new Board(999, "BoardTest", "#FF0000", "#00FFFF", "#0000FF", "#800080");
         Board result = instance.getBoard();
 
         assertTrue(expResult.getB_id() == result.getB_id());
@@ -110,14 +113,22 @@ public class XMLBoardTest {
         System.out.println("readSubColumns");
         
         XMLBoard instance = new XMLBoard();
-        createTestXml(instance);
+        instance.loadXML("BoardTest.xml");
         
-        ArrayList expResult = null;
+        ArrayList <Column> expResult = new ArrayList();
+        expResult.add(new Column(995, 999, "Next", 100));
+        expResult.add(new Column(997, 999, "Do", 2));
+        expResult.add(new Column(998, 999, "Done", 100));
+        expResult.add(new Column(999, 999, "Done", 100));
         
-        ArrayList result = instance.readSubColumns();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ArrayList <Column> result = instance.readSubColumns();
+        
+        for(int i = 0; i < expResult.size(); i++){
+            assertTrue(expResult.get(i).getCo_id() == result.get(i).getCo_id());
+            assertTrue(expResult.get(i).getB_id() == result.get(i).getB_id());
+            assertEquals(expResult.get(i).getName(), result.get(i).getName());
+            assertTrue(expResult.get(i).getWip() == result.get(i).getWip());
+        }
     }
 
     /**
@@ -127,11 +138,19 @@ public class XMLBoardTest {
     public void testReadMainColumns() {
         System.out.println("readMainColumns");
         XMLBoard instance = new XMLBoard();
-        ArrayList expResult = null;
-        ArrayList result = instance.readMainColumns();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.loadXML("BoardTest.xml");
+        
+        ArrayList <Column> expResult = new ArrayList();
+        expResult.add(new Column(996, 999, "Column1", 2));
+        
+        ArrayList <Column> result = instance.readMainColumns();
+        
+        for(int i = 0; i < expResult.size(); i++){
+            assertTrue(expResult.get(i).getCo_id() == result.get(i).getCo_id());
+            assertTrue(expResult.get(i).getB_id() == result.get(i).getB_id());
+            assertEquals(expResult.get(i).getName(), result.get(i).getName());
+            assertTrue(expResult.get(i).getWip() == result.get(i).getWip());
+        }
     }
 
     /**
@@ -141,11 +160,26 @@ public class XMLBoardTest {
     public void testReadCards() {
         System.out.println("readCards");
         XMLBoard instance = new XMLBoard();
-        ArrayList expResult = null;
-        ArrayList result = instance.readCards();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.loadXML("BoardTest.xml");
+        
+        ArrayList <Card> expResult = new ArrayList();
+        expResult.add(new Card(46, 995, "card1", "Beschreibung", 5, "Standart", "false", "Text", "08.08.2013 13:37:20", "08.08.2013 15:12:25", ""));
+       
+        ArrayList <Card> result = instance.readCards();
+               
+        for(int i = 0; i < expResult.size(); i++){
+            assertTrue(expResult.get(i).getCo_id() == result.get(i).getCo_id());
+            assertTrue(expResult.get(i).getCa_id() == result.get(i).getCa_id());
+            assertEquals(expResult.get(i).getName(), result.get(i).getName());
+            assertEquals(expResult.get(i).getDescription(), result.get(i).getDescription());
+            assertTrue(expResult.get(i).getEffort() == result.get(i).getEffort());
+            assertEquals(expResult.get(i).getValue(), result.get(i).getValue());
+            assertEquals(expResult.get(i).getBlocker(), result.get(i).getBlocker());
+            assertEquals(expResult.get(i).getBlocker_tooltip(), result.get(i).getBlocker_tooltip());
+            assertEquals(expResult.get(i).getStartedDate(), result.get(i).getStartedDate());
+            assertEquals(expResult.get(i).getCreatedDate(), result.get(i).getCreatedDate());
+            assertEquals(expResult.get(i).getDoneDate(), result.get(i).getDoneDate());
+        }
     }
 
     /**
@@ -154,256 +188,29 @@ public class XMLBoardTest {
     @Test
     public void testReadCardsFromColumn() {
         System.out.println("readCardsFromColumn");
-        int co_id = 0;
+        int co_id = 995;
         XMLBoard instance = new XMLBoard();
-        ArrayList expResult = null;
-        ArrayList result = instance.readCardsFromColumn(co_id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.loadXML("BoardTest.xml");
+        
+        ArrayList <Card> expResult = new ArrayList();
+        expResult.add(new Card(46, 995, "card1", "Beschreibung", 5, "Standart", "false", "Text", "08.08.2013 13:37:20", "08.08.2013 15:12:25", ""));
+        
+        ArrayList <Card> result = instance.readCardsFromColumn(co_id);
+               
+        for(int i = 0; i < expResult.size(); i++){
+            assertTrue(expResult.get(i).getCo_id() == result.get(i).getCo_id());
+            assertTrue(expResult.get(i).getCa_id() == result.get(i).getCa_id());
+            assertEquals(expResult.get(i).getName(), result.get(i).getName());
+            assertEquals(expResult.get(i).getDescription(), result.get(i).getDescription());
+            assertTrue(expResult.get(i).getEffort() == result.get(i).getEffort());
+            assertEquals(expResult.get(i).getValue(), result.get(i).getValue());
+            assertEquals(expResult.get(i).getBlocker(), result.get(i).getBlocker());
+            assertEquals(expResult.get(i).getBlocker_tooltip(), result.get(i).getBlocker_tooltip());
+            assertEquals(expResult.get(i).getStartedDate(), result.get(i).getStartedDate());
+            assertEquals(expResult.get(i).getCreatedDate(), result.get(i).getCreatedDate());
+            assertEquals(expResult.get(i).getDoneDate(), result.get(i).getDoneDate());
+        }
     }
 
-    /**
-     * Test of addBoard method, of class XMLBoard.
-     */
-    @Test
-    public void testAddBoard() {
-        System.out.println("addBoard");
-        String name = "";
-        String expedite = "";
-        String standart = "";
-        String fixedDate = "";
-        String intangible = "";
-        XMLBoard instance = new XMLBoard();
-        instance.addBoard(name, expedite, standart, fixedDate, intangible);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of addNewColumn method, of class XMLBoard.
-     */
-    @Test
-    public void testAddNewColumn() {
-        System.out.println("addNewColumn");
-        String name = "";
-        String wip = "";
-        XMLBoard instance = new XMLBoard();
-        instance.addNewColumn(name, wip);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addColumn method, of class XMLBoard.
-     */
-    @Test
-    public void testAddColumn() {
-        System.out.println("addColumn");
-        String name = "";
-        String wip = "";
-        XMLBoard instance = new XMLBoard();
-        instance.addColumn(name, wip);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addCard method, of class XMLBoard.
-     */
-    @Test
-    public void testAddCard() {
-        System.out.println("addCard");
-        Element card = null;
-        String co_id = "";
-        XMLBoard instance = new XMLBoard();
-        Element expResult = null;
-        Element result = instance.addCard(card, co_id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of searchColumn method, of class XMLBoard.
-     */
-    @Test
-    public void testSearchColumn() {
-        System.out.println("searchColumn");
-        int co_id = 0;
-        XMLBoard instance = new XMLBoard();
-        Element expResult = null;
-        Element result = instance.searchColumn(co_id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of searchColumns method, of class XMLBoard.
-     */
-    @Test
-    public void testSearchColumns() {
-        System.out.println("searchColumns");
-        int co_id = 0;
-        XMLBoard instance = new XMLBoard();
-        Element expResult = null;
-        Element result = instance.searchColumns(co_id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of searchCard method, of class XMLBoard.
-     */
-    @Test
-    public void testSearchCard() {
-        System.out.println("searchCard");
-        int ca_id = 0;
-        XMLBoard instance = new XMLBoard();
-        Element expResult = null;
-        Element result = instance.searchCard(ca_id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addCardToBoard method, of class XMLBoard.
-     */
-    @Test
-    public void testAddCardToBoard() {
-        System.out.println("addCardToBoard");
-        int ca_id = 0;
-        XMLBoard instance = new XMLBoard();
-        instance.addCardToBoard(ca_id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of forwardCard method, of class XMLBoard.
-     */
-    @Test
-    public void testForwardCard() {
-        System.out.println("forwardCard");
-        int ca_id = 0;
-        XMLBoard instance = new XMLBoard();
-        instance.forwardCard(ca_id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of prevCard method, of class XMLBoard.
-     */
-    @Test
-    public void testPrevCard() {
-        System.out.println("prevCard");
-        int ca_id = 0;
-        XMLBoard instance = new XMLBoard();
-        instance.prevCard(ca_id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of deleteCard method, of class XMLBoard.
-     */
-    @Test
-    public void testDeleteCard() {
-        System.out.println("deleteCard");
-        int ca_id = 0;
-        int co_id = 0;
-        XMLBoard instance = new XMLBoard();
-        instance.deleteCard(ca_id, co_id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of editBoard method, of class XMLBoard.
-     */
-    @Test
-    public void testEditBoard() {
-        System.out.println("editBoard");
-        int id = 0;
-        String attr = "";
-        String value = "";
-        XMLBoard instance = new XMLBoard();
-        instance.editBoard(id, attr, value);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of editColumn method, of class XMLBoard.
-     */
-    @Test
-    public void testEditColumn() {
-        System.out.println("editColumn");
-        int id = 0;
-        String attr = "";
-        String value = "";
-        XMLBoard instance = new XMLBoard();
-        instance.editColumn(id, attr, value);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of editCard method, of class XMLBoard.
-     */
-    @Test
-    public void testEditCard() {
-        System.out.println("editCard");
-        int id = 0;
-        String attr = "";
-        String value = "";
-        XMLBoard instance = new XMLBoard();
-        instance.editCard(id, attr, value);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of createNewBoard method, of class XMLBoard.
-     */
-    @Test
-    public void testCreateNewBoard() {
-        System.out.println("createNewBoard");
-        XMLBoard instance = new XMLBoard();
-        instance.createNewBoard();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of checkCardAtBoard method, of class XMLBoard.
-     */
-    @Test
-    public void testCheckCardAtBoard() {
-        System.out.println("checkCardAtBoard");
-        int ca_id = 0;
-        XMLBoard instance = new XMLBoard();
-        boolean expResult = false;
-        boolean result = instance.checkCardAtBoard(ca_id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of createBoard method, of class XMLBoard.
-     */
-    @Test
-    public void testCreateBoard() {
-        System.out.println("createBoard");
-        String xmlPath = "";
-        XMLBoard instance = new XMLBoard();
-        instance.createBoard(xmlPath);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 }

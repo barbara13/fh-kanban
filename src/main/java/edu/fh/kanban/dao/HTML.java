@@ -114,19 +114,24 @@ public class HTML extends XML {
             tdElementSkip.add(createTdElement(trElementSkip.get(0), listMainColumn.get(i).getName().toString()));
         }
 
-        
-
+                
+         
+        //Done Spalte
+        tdElementSkip.add(createTdElement(trElementSkip.get(trElementSkip.size()-1), listSubColumn.get(listSubColumn.size()-1).getName().toString()));
         trElementSkip.add(createTrElement(mainTableElement));
-        //NextSpalte
+        
+        
+        //NextTabelle
         nextTdElement = createTdElement(trElementSkip.get(1), " ");
         nextTableElement = this.createSubTable(nextTdElement);
         
+
         //Untertabelle Do und Done
         for (int j = 0; j < listMainColumn.size(); j++) {
             //System.out.println("tttt");
             //Untertabelle
             //tdElement.add(createTdElement(trElement.get(1), " "));
-            tdElementSkip.add(createTdElement(trElementSkip.get(1), " "));
+            tdElementSkip.add(createTdElement(trElementSkip.get(1), "  "));
 
             subTableElement.add(createSubTable(tdElementSkip.get(tdElementSkip.size() - 1)));
 
@@ -138,12 +143,13 @@ public class HTML extends XML {
             //tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Done"));   
             tdElementSkip.add(createTdElement(trElementSkip.get(trElementSkip.size() - 1), "Done"));
         }
-
-        //Done Spalte
-        doneTdElement = createTdElement(trElementSkip.get(trElementSkip.size()-1), " ");
+        
+        doneTdElement = createTdElement(createTdElement(trElementSkip.get(1), " hier "));
         doneTableElement = this.createSubTable(doneTdElement);
         
-        //Next
+        
+        
+        //Next Cards
         listCard = xml.readCardsFromColumn(listSubColumn.get(0).getCo_id());
         for (int k = 0; k < listCard.size(); k++) {
             trElement.add(createTrElement(nextTableElement));
@@ -157,12 +163,11 @@ public class HTML extends XML {
 
 
 
-
         /**
          * ************************
          */
         
-        //Do & Done
+        //Do & Done Cards
         for (int l = 1; l < listSubColumn.size() - 1; l++) {
             listCard = xml.readCardsFromColumn(listSubColumn.get(l).getCo_id());
 
@@ -195,12 +200,12 @@ public class HTML extends XML {
 
         }
         
-        //Done        
+        //Done Cards        
         listCard = xml.readCardsFromColumn(listSubColumn.get(listSubColumn.size()-1).getCo_id());
         //z = 0;
         for (int k = 0; k < listCard.size(); k++) {
             trElement.add(createTrElement(doneTableElement));
-            tdElement.add(createTdElement(trElement.get(z)));
+            tdElement.add(createTdElement(trElement.get(trElement.size()-1), "??"));
 
             createCardElement(tdElement.get(r), listCard.get(k).getName());
             
