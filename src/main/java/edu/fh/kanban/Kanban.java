@@ -22,7 +22,6 @@ import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardCreateView;
 import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Kanban {
@@ -57,8 +56,8 @@ public class Kanban {
         LOGGER.info("Creating UI components.");
         
         final BacklogView backlogView = new BacklogView();
-        BoardView boardView = new BoardView(backlogView);
-        backlogView.setBv(boardView);
+//        BoardView boardView = new BoardView(backlogView);
+//        backlogView.setBv(boardView);
 
         JMenuItem board_preferences = new JMenuItem("New Board...");
         board_preferences.addActionListener(new ActionListener() {
@@ -100,37 +99,38 @@ public class Kanban {
         loadBoard.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-                FileFilter filter = new FileNameExtensionFilter("XMLDatei", "xml");
                 chooser = new JFileChooser();
-                chooser.addChoosableFileFilter(filter);
-                BoardView boardView = new BoardView(backlogView);
-                backlogView.setBv(boardView);
-                int x = chooser.showOpenDialog(null);
-
-                if (x == JFileChooser.APPROVE_OPTION) {
-                    
+                chooser.addChoosableFileFilter(new FileNameExtensionFilter("XMLDatei", "xml"));
+                
+                
+                
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     xmlName = chooser.getSelectedFile().getName();
                     xmlPath = chooser.getSelectedFile().getPath();
                     xmlPath = xmlPath.replaceAll("\\\\", "\\\\\\\\");
                     //boardView.getComponent();
+                    
+                    BoardView boardView = new BoardView(backlogView);
+                    backlogView.setBv(boardView);
+                    
                     if (firstBoard == true) {
                         JScrollPane scrollpane = new JScrollPane();
-                        scrollpane.setViewportView(boardView.getComponent());
+                        scrollpane.setViewportView(boardView);
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), scrollpane);
                         firstBoard = false;
                         html.setEnabled(true);
                         exportBoard.setEnabled(true);
-                      //  try{
-                      //  for(int i = 0; backlogView.getAddcards()[i].getText().toString() != "0"; i++){
-                      //  backlogView.getAddcards()[i].setEnabled(true);
-                     //   }
-                     //   }
-                     //   catch(java.lang.NullPointerException exc){
-                     //       return;
-                     //   }
+//                        try{
+//                        for(int i = 0; backlogView.getAddcards()[i].getText().toString() != "0"; i++){
+//                        backlogView.getAddcards()[i].setEnabled(true);
+//                        }
+//                        }
+//                        catch(java.lang.NullPointerException exc){
+//                            return;
+//                        }
                     } else if (firstBoard == false) {
                         JScrollPane scrollpane = new JScrollPane();
-                        scrollpane.setViewportView(boardView.getComponent());
+                        scrollpane.setViewportView(boardView);
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), scrollpane);
                         pane.removeTabAt(1);
                     }
