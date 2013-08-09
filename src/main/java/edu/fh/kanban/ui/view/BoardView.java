@@ -1,18 +1,18 @@
 package edu.fh.kanban.ui.view;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
-import com.jgoodies.forms.factories.*;
+
 import com.jgoodies.forms.layout.*;
+
 import edu.fh.kanban.Kanban;
 import edu.fh.kanban.dao.XMLBoard;
 import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
 import edu.fh.kanban.ui.controller.BoardController;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import com.jgoodies.forms.factories.FormFactory;
 
 /**
  *
@@ -22,118 +22,152 @@ import java.util.ArrayList;
 
 public class BoardView extends JPanel implements View {
   
-/**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
 //BoardController definieren    
- private BoardController c = null;
- private XMLBoard xml;
- private BacklogView blv;
- private ArrayList<Column> listSubColumns = new ArrayList<Column>();
- private ArrayList<Column> listMainColumns = new ArrayList<Column>();
- private ArrayList<Board> listBoard = new ArrayList<Board>();
-// private ArrayList<Card> listCards = new ArrayList<Card>();
- private ArrayList<Card> listAllCards = new ArrayList<Card>();
- private JPanel bpanel = new JPanel();
+	 private BoardController c = null;
+	 private XMLBoard xml;
+	 private ArrayList<Column> listSubColumns = new ArrayList<Column>();
+	 private ArrayList<Column> listMainColumns = new ArrayList<Column>();
+	 private ArrayList<Board> listBoard = new ArrayList<Board>();
+     private ArrayList<Card> listCards = new ArrayList<Card>();
  
-private JTextField searchtext;
-//private JButton[] showCards = new JButton[100];
-//private JButton[] forward = new JButton[100];
-//private JButton[] backward = new JButton[100];
-private JPanel[] cardpanel = new JPanel[100];
-private JLabel[] columns = new JLabel[100];
-//private JLabel[] cardID = new JLabel[100];
-    
-private String columnSize, rowSize;
-private JLabel title;
-//private JTextArea description;
-private JScrollPane scrollpane = new JScrollPane();
+	 private JTextField searchtext;
+	 private JPanel boardPanel;
+	 private JPanel[] cardpanel = new JPanel[100];
+	 private JLabel title;
+	 private JLabel[] columns = new JLabel[100];
+	 private JScrollPane scrollpane = new JScrollPane();
+	 private JTextField txtSearch;
+	 
+     private JButton[] showCards = new JButton[100];
 
-// private CardView cv;
- 
     public BoardView(BacklogView blv) {
      //BoardController im Konstruktor
-        c = new BoardController(this);
-        this.blv = blv;
+        c = new BoardController(this, blv);
         xml = new XMLBoard();
-        getComponents();
+        getComponent();
     }
 
-
-    public JLabel[] getColumns() {
-        return columns;
-    }
-
-    public JPanel getBpanel() {
-        return bpanel;
-    }
-
-    public JTextField getSearchtext() {
-        return searchtext;
-    }  
-
-
-//private BoardView bv = this;
-
-    private String getRows(int rows) {
-        String row = "4dlu, 100dlu, ";
-			
-        for (int i = 0; i < rows; i++){
-            rowSize = rowSize + row;
-        }
-        
-        return rowSize;
-	}
-
-        
-    private String getColumns(int columns){
-        String column = "4dlu, 130dlu, ";
-
-        for (int i = 0; i < columns; i++){
-            columnSize = columnSize + column;
-        }
-        
-        return columnSize;
-	}
-
-    
-
-
-
-    
-
-    
-    
     public JComponent getComponent() {
-        int i = 0;
         xml.loadXML(Kanban.xmlPath);
-        listAllCards = xml.readCards();
+        listCards = xml.readCards();
         listBoard = xml.readBoard();
         listMainColumns = xml.readMainColumns();
         listSubColumns = xml.readSubColumns();
-        searchtext = new JTextField();
-        columnSize = new String("5dlu, 130dlu, ");
-        rowSize = new String("5dlu, 20dlu, 5dlu, 20dlu, 5dlu, 20dlu, ");
- 
         
-        title = new JLabel(listBoard.get(i).getName());
+        setLayout(new FormLayout(new ColumnSpec[] {
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		FormFactory.DEFAULT_COLSPEC,
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("max(80dlu;default)"),
+        		FormFactory.UNRELATED_GAP_COLSPEC,},
+        	new RowSpec[] {
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		RowSpec.decode("fill:default:grow"),}));
+        
+        JLabel label = new JLabel("Board Name:");
+        add(label, "2, 1");
+        
+        title = new JLabel(listBoard.get(0).getName());
         title.setFont(new Font("Arial", Font.BOLD, 24));
+        add(title, "4, 1, left, default");
         
-        //bpanel.add(scrollpane);
-        bpanel.setLayout(new FormLayout(getColumns(listSubColumns.size()), getRows(15)));
-        //scrollpane.setLayout(new FormLayout(getColumns(listSubColumns.size()), getRows(15)));
-        //bpanel.add(scrollpane, CC.CENTER);
+        txtSearch = new JTextField();
+        add(txtSearch, "6, 1, fill, default");
+        add(new JSeparator(), "2, 3, 5, 1");
         
-        //bpanel.add(scrollpane,CC.xy(2, 2));
+        boardPanel = new JPanel();
+        add(boardPanel, "2, 5, 5, 1");
+        boardPanel.setLayout(new FormLayout(new ColumnSpec[] {
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),
+        		FormFactory.RELATED_GAP_COLSPEC,
+        		ColumnSpec.decode("default:grow"),},
+        	new RowSpec[] {
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,}));
         
-        //showColumns(listMainColumns, listSubColumns);
-        c.showColumns(listMainColumns, listSubColumns);
+        paintBoard();
         
-        return bpanel;
-       
-    }   
+        return this;
+    }
+    
+    public void paintBoard(){
+    	c.showColumns(listMainColumns, listSubColumns);
+    }
 
     public ArrayList<Board> getListBoard() {
         return listBoard;
@@ -143,16 +177,27 @@ private JScrollPane scrollpane = new JScrollPane();
         return cardpanel;
     }
     
-    public ArrayList<Card> getListAllCards() {
-        return listAllCards;
+    public JButton[] getShowCards(){
+    	return showCards;
+    }
+    
+    public ArrayList<Card> getListCards() {
+        return listCards;
     }
 
     public JScrollPane getScrollpane() {
         return scrollpane;
     }
 
+    public JLabel[] getColumns() {
+        return columns;
+    }
 
-    
-    
-    
+    public JPanel getBpanel() {
+        return boardPanel;
+    }
+
+    public JTextField getSearchtext() {
+        return searchtext;
+    }
 }

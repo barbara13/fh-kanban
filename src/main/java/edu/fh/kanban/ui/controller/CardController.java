@@ -64,7 +64,7 @@ public class CardController implements ActionListener {
                 System.out.println("Card ist schon auf dem Board vorhanden");
             }
             
-            refreshBoard();
+            bv.paintBoard();
             blv.getSort().setSelectedIndex(0);
             cView.dispose();
             
@@ -80,19 +80,13 @@ public class CardController implements ActionListener {
         } else if (src == cView.getBtnBackward()){
             xmlb.loadXML(Kanban.xmlPath);
             xmlb.prevCard(cView.getcId());
-            refreshBoard();
+            bv.paintBoard();
             cView.dispose();
         } else if (src == cView.getBtnForward()){
             xmlb.loadXML(Kanban.xmlPath);
             xmlb.forwardCard(cView.getcId());
-            refreshBoard();
+            bv.paintBoard();
             cView.dispose();
         }
-    }
-
-    public void refreshBoard(){
-        bv.getBpanel().removeAll();
-        bv.getComponent();
-        bv.getBpanel().updateUI();
     }
 }

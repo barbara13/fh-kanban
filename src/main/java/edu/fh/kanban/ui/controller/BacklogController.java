@@ -158,7 +158,7 @@ public class BacklogController extends Controller{
     }
     
     private void addCardToPanel(int toCard, int fromCard, int column, int row){
-    	JTextArea desc = new JTextArea(listCard.get(fromCard).getDescription());
+    	   JTextArea desc = new JTextArea(listCard.get(fromCard).getDescription());
            desc.setEditable(false);
            
            blv.getCards()[toCard] = new BacklogCardView();
