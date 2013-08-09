@@ -7,13 +7,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 	/**
 	 * 
 	 * @author Barbara
+	 * Das Board kann als Pdf, csv oder html gespeichert werden
 	 *
 	 */
 	public class ExportBoard extends JFrame{
 		private static final long serialVersionUID = 1L;
+		private String path;
 
 	    public ExportBoard(){
-	    	String path = System.getProperty("user.home");
+	    	path = System.getProperty("user.home");
 
 	    	JFileChooser chooser = new JFileChooser(path);
 	        chooser.setDialogType(JFileChooser.SAVE_DIALOG);
@@ -42,4 +44,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 	        }
 	        chooser.setVisible(false);
 	    }
+
+		public String getPath() {
+			return path;
+		}
+
+		public void setPath(String path) {
+			this.path = path;
+		}
 	}

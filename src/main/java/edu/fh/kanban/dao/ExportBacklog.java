@@ -7,12 +7,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class ExportBacklog extends JFrame {
 
 	/**
+	 * @author Maxim
+	 * Der Backlog kann als Pdf oder csv gespeichert werden
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private String path;
 	
 	public ExportBacklog(){
-		String path = System.getProperty("user.home");
+		path = System.getProperty("user.home");
 
     	JFileChooser chooser = new JFileChooser(path);
         chooser.setDialogType(JFileChooser.SAVE_DIALOG);
@@ -36,5 +39,12 @@ public class ExportBacklog extends JFrame {
             chooser.setVisible(false);
         }
         chooser.setVisible(false);
+	}
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 }

@@ -8,7 +8,7 @@ import edu.fh.kanban.ui.view.BacklogView;
 
 /**
 *
-* @author Lorenz
+* @author 
 */
 
 public class BacklogViewTest {
