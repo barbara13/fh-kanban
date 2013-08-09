@@ -35,10 +35,10 @@ public class CardView extends JFrame implements View {
      */
     private static final long serialVersionUID = 1L;
     private CardController cController = null;
-    private int cId, effort;
+    private int cId, effort, column;
     private String description, headline, value, create, start, done;
-    private JButton btnEdit, btnDelete, btnCancel;
-    private JButton btnAddCard, btnForward, btnBackward;
+    private JButton btnEdit, btnDeleteFromBacklog, btnCancel;
+    private JButton btnAddCard, btnForward, btnBackward, btnDeleteFromBoard;
     private JToggleButton tglbtnBlocker = new JToggleButton("Blocker");
     
     public CardView(int cId, ArrayList<Card> listCard, BacklogView blv, BoardView bv) {
@@ -48,6 +48,7 @@ public class CardView extends JFrame implements View {
         setLocationByPlatform(true);
         setResizable(false);
         this.cId = cId;
+        
 
         //Auslesen der cards
         for (int i = 0; i < listCard.size(); i++) {
@@ -61,6 +62,7 @@ public class CardView extends JFrame implements View {
 	        	done = listCard.get(i).getDoneDate();
 	        	tglbtnBlocker.setSelected(Boolean.parseBoolean(listCard.get(i).getBlocker()));
 	        	tglbtnBlocker.setToolTipText(listCard.get(i).getBlocker_tooltip());
+                    column = listCard.get(i).getCo_id();
 	            break;
             }
         }
@@ -128,10 +130,7 @@ public class CardView extends JFrame implements View {
         getContentPane().add(new JLabel(start), "6, 12, fill, top");
         getContentPane().add(new JLabel(done), "8, 12, fill, top");
 
-        //If Karte bereits on Board soll der Button - btnAddCard.setvivible(false);
-        btnAddCard = new JButton("Add Card");
-        btnAddCard.addActionListener(cController);
-        
+ 
         btnForward = new JButton("Forward");
         btnForward.addActionListener(cController);
         getContentPane().add(btnForward, "10, 12, 3, 1, fill, top");
@@ -140,20 +139,27 @@ public class CardView extends JFrame implements View {
         btnBackward.addActionListener(cController);
         getContentPane().add(btnBackward, "10, 14, 3, 1, fill, top");
         
+        btnAddCard = new JButton("Add Card");
+        
         getContentPane().add(btnAddCard, "10, 14, 3, 1, fill, top");
         if (Kanban.xmlPath == null) {
             btnAddCard.setEnabled(false);
         } else {
             btnAddCard.setEnabled(true);
+            btnAddCard.addActionListener(cController);
         }
                 
         btnEdit = new JButton("Edit");
         btnEdit.addActionListener(cController);
         getContentPane().add(btnEdit, "8, 14, fill, top");
         
-        btnDelete = new JButton("Delete");
-        btnDelete.addActionListener(cController);
-        getContentPane().add(btnDelete, "6, 14, fill, top");
+        btnDeleteFromBacklog = new JButton("Delete");
+        btnDeleteFromBacklog.addActionListener(cController);
+        getContentPane().add(btnDeleteFromBacklog, "6, 14, fill, top");
+        
+        btnDeleteFromBoard = new JButton("Delete");
+        btnDeleteFromBoard.addActionListener(cController);
+        getContentPane().add(btnDeleteFromBoard, "6, 14, fill, top");
 
         btnCancel = new JButton("Cancel");
         btnCancel.addActionListener(cController);
@@ -183,6 +189,12 @@ public class CardView extends JFrame implements View {
         return headline;
     }
 
+    public int getColumn() {
+        return column;
+    }
+    
+    
+
     public JToggleButton getTglbtnBlocker() {
 		return tglbtnBlocker;
 	}
@@ -191,8 +203,12 @@ public class CardView extends JFrame implements View {
         return btnEdit;
     }
 
-    public JButton getBtnDelete() {
-        return btnDelete;
+    public JButton getBtnDeleteFromBacklog() {
+        return btnDeleteFromBacklog;
+    }
+
+    public JButton getBtnDeleteFromBoard() {
+        return btnDeleteFromBoard;
     }
 
     public JButton getBtnCancel() {
@@ -210,4 +226,6 @@ public class CardView extends JFrame implements View {
     public JButton getBtnAddCard() {
         return btnAddCard;
     }
+    
+    
 }

@@ -56,8 +56,8 @@ public class Kanban {
         LOGGER.info("Creating UI components.");
         
         final BacklogView backlogView = new BacklogView();
-//        BoardView boardView = new BoardView(backlogView);
-//        backlogView.setBv(boardView);
+        //BoardView boardView = new BoardView(backlogView);
+        //backlogView.setBv(boardView);
 
         JMenuItem board_preferences = new JMenuItem("New Board...");
         board_preferences.addActionListener(new ActionListener() {
@@ -111,7 +111,8 @@ public class Kanban {
                     //boardView.getComponent();
                     
                     BoardView boardView = new BoardView(backlogView);
-                    backlogView.setBv(boardView);
+                    //backlogView.setBv(boardView);
+                    System.out.println(backlogView.getBv());
                     
                     if (firstBoard == true) {
                         JScrollPane scrollpane = new JScrollPane();
@@ -152,7 +153,7 @@ public class Kanban {
         menubar.add(file);
 
         JScrollPane scrollpane = new JScrollPane();
-        scrollpane.setViewportView(backlogView.getComponent());
+        scrollpane.setViewportView(backlogView);
         
         pane = new JTabbedPane();
         pane.addTab("Backlog", scrollpane);

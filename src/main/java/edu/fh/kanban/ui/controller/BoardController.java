@@ -44,8 +44,9 @@ public class BoardController extends Controller {
     }
 
     public void showColumns(ArrayList<Column> mainColumns, ArrayList<Column> subColumns) {
-        bv.getBpanel().removeAll();
         cardcounter = 0;
+        bv.getBpanel().removeAll();
+        
         xml.loadXML(Kanban.xmlPath);
         board = xml.getBoard();
 
@@ -75,7 +76,7 @@ public class BoardController extends Controller {
             bv.getBpanel().add(new JLabel(mainColumns.get(i).getName()), x + ", 2, 3, 1 Center, Center");
         }
 
-        for (int i = 0, x = 2; i < subColumns.size() - 1; i++, x += 2) {
+        for (int i = 0, x = 2; i < subColumns.size(); i++, x += 2) {
             bv.getBpanel().add(new JLabel(subColumns.get(i).getName() + " (" + subColumns.get(i).getWip() + ")"), x + ", 4, Center, Center");
             showCards(subColumns.get(i), x, i);
         }
@@ -87,6 +88,7 @@ public class BoardController extends Controller {
 
         for (int i = 0, y = 6; i < listCards.size(); i++, y += 2) {
             final int cardcounter2 = cardcounter;
+            
 
             JTextArea description = new JTextArea(listCards.get(i).getDescription());
             description.setEnabled(false);
@@ -94,7 +96,12 @@ public class BoardController extends Controller {
             bv.getCardpanel()[i] = new BacklogCardView();
             bv.getCardpanel()[i].add(description, "2, 10, 9, 1, fill, fill");
             bv.getCardpanel()[i].add(new JLabel(Integer.toString(listCards.get(i).getCa_id())), "4, 2");
-
+            bv.getCardpanel()[i].add(new JLabel(listCards.get(i).getName()), "8, 2");
+            bv.getCardpanel()[i].add(new JLabel(Integer.toString(listCards.get(i).getEffort())), "4, 4");
+            bv.getCardpanel()[i].add(new JLabel(listCards.get(i).getValue()), "8, 4"); 
+            bv.getCardpanel()[i].add(new JLabel(listCards.get(i).getCreatedDate()), "4, 12, 7, 1"); 
+             
+             
             if (listCards.get(i).getValue().equals("Expedite")) {
                 bv.getCardpanel()[i].setBackground(expediteColor);
             } else if (listCards.get(i).getValue().equals("Fixed Date")) {
@@ -111,9 +118,11 @@ public class BoardController extends Controller {
             bv.getShowCards()[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     cv = new CardView(bv.getListCards().get(cardcounter2).getCa_id(), bv.getListCards(), blv, bv);
+                    //System.out.println(cardcounter2);
                     cv.getComponent();
                     cv.getBtnAddCard().setVisible(false);
                     cv.getBtnEdit().setVisible(false);
+                    cv.getBtnDeleteFromBacklog().setVisible(false);
                 }
             });
             bv.getBpanel().add(bv.getCardpanel()[i], sameColumn + ", " + y + ", Center, Center");

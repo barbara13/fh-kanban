@@ -62,19 +62,22 @@ public class CardController implements ActionListener {
                 xmlb.addCardToBoard(cView.getcId());  
             } else{
                 System.out.println("Card ist schon auf dem Board vorhanden");
-            }
-            
-            bv.paintBoard();
-            blv.getSort().setSelectedIndex(0);
+            }  
             cView.dispose();
+            //bv.paintBoard();
             
         } else if (src == cView.getBtnEdit()) {
             new CardEditView(blv, cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription()).getComponent();
             cView.dispose();
-        } else if (src == cView.getBtnDelete()) {
+        } else if (src == cView.getBtnDeleteFromBacklog()) {
             xml.deleteCard(cView.getcId());
             blv.getSort().setSelectedIndex(0);
             cView.dispose();
+        } else if (src == cView.getBtnDeleteFromBoard()){
+           xmlb.loadXML(Kanban.xmlPath);
+           xmlb.deleteCard(cView.getcId(), cView.getColumn());
+           bv.paintBoard();
+           cView.dispose();
         } else if (src == cView.getBtnCancel()) {
             cView.dispose();
         } else if (src == cView.getBtnBackward()){

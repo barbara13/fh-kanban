@@ -181,6 +181,7 @@ public class BacklogController extends Controller{
                             cv.getBtnBackward().setVisible(false);
                             cv.getBtnForward().setVisible(false);
                             cv.getTglbtnBlocker().setVisible(false);
+                            cv.getBtnDeleteFromBoard().setVisible(false);
 							break;
 						}
 					}

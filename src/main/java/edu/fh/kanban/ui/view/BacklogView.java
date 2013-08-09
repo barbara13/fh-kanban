@@ -35,7 +35,7 @@ public class BacklogView extends JPanel implements View {
     private JButton[] showcards = new JButton[100], addcards = new JButton[100];
     private JLabel[] ids = new JLabel[100];
     private JComboBox<String> comboBox;
-    private BoardView bv;
+    private BoardView bv = null;
 
     public BacklogView(){
     	getComponent();
@@ -150,6 +150,11 @@ public class BacklogView extends JPanel implements View {
     public void setBv(BoardView bv) {
         this.bv = bv;
     }
+
+    public BoardView getBv() {
+        return bv;
+    }
+    
     
     public JPanel getPanel() {
         return cardPnl;

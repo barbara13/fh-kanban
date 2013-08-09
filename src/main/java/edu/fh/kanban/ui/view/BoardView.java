@@ -42,22 +42,22 @@ public class BoardView extends JPanel implements View {
 	 private JLabel[] columns = new JLabel[100];
 	 private JScrollPane scrollpane = new JScrollPane();
 	 private JTextField txtSearch;
-	 
+	 private BacklogView blv;
+         
      private JButton[] showCards = new JButton[100];
 
     public BoardView(BacklogView blv) {
      //BoardController im Konstruktor
         c = new BoardController(this, blv);
         xml = new XMLBoard();
+        this.blv = blv;
         getComponent();
     }
 
     public JComponent getComponent() {
         xml.loadXML(Kanban.xmlPath);
-        listCards = xml.readCards();
         listBoard = xml.readBoard();
-        listMainColumns = xml.readMainColumns();
-        listSubColumns = xml.readSubColumns();
+        
         
         setLayout(new FormLayout(new ColumnSpec[] {
         		FormFactory.UNRELATED_GAP_COLSPEC,
@@ -161,11 +161,16 @@ public class BoardView extends JPanel implements View {
         		FormFactory.DEFAULT_ROWSPEC,}));
         
         paintBoard();
-        
+        blv.setBv(this);
         return this;
     }
     
     public void paintBoard(){
+        xml.loadXML(Kanban.xmlPath);
+        listMainColumns = xml.readMainColumns();
+        listSubColumns = xml.readSubColumns();
+        listCards = xml.readCards();
+        
     	c.showColumns(listMainColumns, listSubColumns);
     }
 
