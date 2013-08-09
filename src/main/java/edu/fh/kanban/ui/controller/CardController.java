@@ -24,7 +24,6 @@ public class CardController implements ActionListener {
 
     private Object src;
     private CardView cView;
-//    private CardEditView ceView;
     private XMLCard xml;
     private XMLBoard xmlb;
     private BacklogView blv;
@@ -56,8 +55,7 @@ public class CardController implements ActionListener {
             	xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
             	xml.editCard(cView.getcId(), "blocker_tooltip", "");
         	}
-        } 
-        if (src == cView.getBtnAddCard()) {
+        } else if (src == cView.getBtnAddCard()) {
             xmlb.loadXML(Kanban.xmlPath);
             
             if(xmlb.checkCardAtBoard(cView.getcId()) == false){
@@ -67,21 +65,19 @@ public class CardController implements ActionListener {
             }
             
             refreshBoard();
-            refreshBacklog();
+            blv.getSort().setSelectedIndex(0);
             cView.dispose();
             
-        } else 
-        	if (src == cView.getBtnEdit()) {
+        } else if (src == cView.getBtnEdit()) {
             new CardEditView(blv, cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription()).getComponent();
             cView.dispose();
         } else if (src == cView.getBtnDelete()) {
             xml.deleteCard(cView.getcId());
-            refreshBacklog();
+            blv.getSort().setSelectedIndex(0);
             cView.dispose();
         } else if (src == cView.getBtnCancel()) {
             cView.dispose();
-        } 
-        else if (src == cView.getBtnBackward()){
+        } else if (src == cView.getBtnBackward()){
             xmlb.loadXML(Kanban.xmlPath);
             xmlb.prevCard(cView.getcId());
             refreshBoard();
@@ -94,15 +90,9 @@ public class CardController implements ActionListener {
         }
     }
 
-        public void refreshBoard(){
-            bv.getBpanel().removeAll();
-            bv.getComponent();
-            bv.getBpanel().updateUI();
-        }
-        
-        public void refreshBacklog(){
-            blv.getPanel().removeAll();
-            blv.getComponent();
-            blv.getPanel().updateUI();
-        }
+    public void refreshBoard(){
+        bv.getBpanel().removeAll();
+        bv.getComponent();
+        bv.getBpanel().updateUI();
+    }
 }
