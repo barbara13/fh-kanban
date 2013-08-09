@@ -20,8 +20,7 @@ import javax.swing.JScrollPane;
 
 /**
  * + Preferences dialog for colors, name of board, columns(10), wips(10) +
- * Validate on wip limits (10 Stück) + Edit dialog for card + Warn user if
- * modifications have not been saved
+ * Validate on wip limits (10 Stück) + Edit dialog for card
  *
  * @author Barbara
  *
