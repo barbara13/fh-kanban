@@ -16,8 +16,6 @@ import javax.swing.JLabel;
 import edu.fh.kanban.ui.controller.BacklogController;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 
 /**
  *
@@ -67,42 +65,9 @@ public class BacklogView extends JPanel implements View {
         		RowSpec.decode("fill:default:grow"),
         		FormFactory.RELATED_GAP_ROWSPEC,}));
 
-
-        searchfield.addCaretListener(new CaretListener() {
-                public void caretUpdate(CaretEvent e) {
-                    System.out.println("456486");
-                }
-            });
-           /*     try{
-	                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-	                    i--;
-	                    i--;
-	                }
-                
-                for(int j = 0; j < cards.length; j++){
-                    
-                if (searchfield.getText().toString().regionMatches(true, 0 + i, cards[j].getText().toString(), 0 + i, 1)) {
-                    cards[j].setVisible(true);
-                    i++;
-                } else {
-                    cards[j].setVisible(false);
-                    i++;
-                }
-                if (searchfield.getText().toString().equals("")) {
-                    
-                    cards[j].setVisible(true);
-                }
-                }
-                } catch(NullPointerException exc){
-                   return;
-                }*/
-                
-         //   }
-       // });
-
-
         searchfield = new JTextField();
         searchfield.setColumns(10);
+        searchfield.addCaretListener(c);
         
         comboBox = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[]{"Card ID", "Headline", "Effort", "Value", "Creation time"}));
         comboBox.addActionListener(c);
@@ -126,6 +91,34 @@ public class BacklogView extends JPanel implements View {
         		FormFactory.RELATED_GAP_COLSPEC,
         		ColumnSpec.decode("default:grow"),},
         	new RowSpec[] {
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
+        		FormFactory.DEFAULT_ROWSPEC,
+        		FormFactory.RELATED_GAP_ROWSPEC,
         		FormFactory.DEFAULT_ROWSPEC,
         		FormFactory.RELATED_GAP_ROWSPEC,
         		FormFactory.DEFAULT_ROWSPEC,

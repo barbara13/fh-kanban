@@ -14,13 +14,15 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.BorderFactory;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 
 /**
  *
  * @author David, Malte, Lorenz, Maxim
  */
-public class BacklogController extends Controller{
+public class BacklogController extends Controller implements CaretListener{
     
     private BoardView bv;
     private BacklogView blv;
@@ -261,4 +263,78 @@ public class BacklogController extends Controller{
     	}
 		return array;
     }
+    
+    private String[] sortAndByString(String array[], String searchText){
+    	System.out.println(searchText.length());
+    	for(int i = 0; i < array.length; i++){
+		    if (searchText.regionMatches(true, 0, array[i], 0, searchText.length())){
+		    } else {
+		        array[i] = "-1";
+		    }
+	    }
+    	
+    	for(int i = 0; i < array.length; i++){
+   			for(int j = (i+1);  j < array.length; j++){
+   				if(searchText.compareTo(array[j]) == 0){
+   					String tausch = array[i];
+   					array[i] = array[j];
+   					array[j] = tausch;
+   				}
+   			}
+   		}
+    	
+    	for(int i = 0; i < array.length; i++){
+    		int j = (i+1);
+    		if(j < array.length){
+    			while(array[i].equals(array[j])){
+        			array[j] = "-1";
+        			j++;
+        			if(j == array.length) break;
+        		}
+        		if(i != (j-1)){
+        			for(int k = (i+1); k < array.length; k++, j++){
+        				if(j < array.length){
+        					array[k] = array[j];
+        				}else{
+        					array[k] = "-1";
+        				}
+        			}
+        		}
+    		}
+    	}
+    	
+		return array;
+    }
+    
+	public void caretUpdate(CaretEvent e) {
+		
+		String searchText = blv.getSearch().getText().trim();
+		if(!searchText.isEmpty()){
+			blv.getPanel().removeAll();
+			
+			String array[] = new String[listCard.size()];
+	   		
+	   		for(int i = 0; i < array.length; i++){
+	   			array[i] = listCard.get(i).getName();
+	   		}
+	   		
+	   		array = sortAndByString(array, blv.getSearch().getText());
+	   		
+	   		for(int i = 0, j = 1, k = 1; i < array.length; i++){
+	   			for(int n = 0;  n < listCard.size(); n++){
+	   				if(array[i].equals(listCard.get(n).getName())){
+	   					addCardToPanel(i, n, j, k);
+	   		            
+	   		            if (j == 7){
+	   		                k += 2; j = -1;
+	   		            }
+	   		            j += 2;
+	   				}
+	   			}
+	   		}
+	   		blv.getPanel().updateUI();	
+		} else{
+			blv.getSort().setSelectedIndex(1);
+		}
+    } 
 }
