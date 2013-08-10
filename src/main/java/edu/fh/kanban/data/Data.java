@@ -19,7 +19,15 @@ public class Data {
     private ArrayList <Column> listColumn;
     private ArrayList <Card> listCard;
     
-    public Data(XMLBoard b){
+    public ArrayList<Column> getListColumn() {
+		return listColumn;
+	}
+
+	public ArrayList<Card> getListCard() {
+		return listCard;
+	}
+
+	public Data(XMLBoard b){
         board = b;
     }
     
@@ -33,29 +41,19 @@ public class Data {
                     if(listBoard.get(i).getB_id() == Integer.parseInt(value)){
                         id = listBoard.get(i).getB_id();
                     }
-                }
-                
-                else if(attr.equals("name")){
+                } else if(attr.equals("name")){
                     if(listBoard.get(i).getName().equals(value)){
                         //id 
                     }
-                }
-                
-                else if(attr.equals("color")){
+                } else if(attr.equals("color")){
                     
                 }
             }
-        }
-        
-        else if(type.equals("column")){
+        } else if(type.equals("column")){
             listColumn = board.readSubColumns();
-        }
-        
-        else if(type.equals("card")){   
+        } else if(type.equals("card")){   
             listCard = board.readCards();
         }
-        
         return id;
     }
-    
 }

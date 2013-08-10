@@ -4,9 +4,6 @@
  */
 package edu.fh.kanban.data;
 
-import edu.fh.kanban.dao.XMLBoard;
-import java.util.ArrayList;
-
 /**
  *
  * @author Ronald

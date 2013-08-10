@@ -39,6 +39,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 	        		new ExportBoardToPdf(path);
 	        	}else if(chooser.getFileFilter().getDescription().equals("HTML")){
 	        		path = chooser.getSelectedFile().toString() + ".html";
+	        		new HTML().createHTML();
 	        	}
 	            chooser.setVisible(false);
 	        }

@@ -37,14 +37,14 @@ public class BoardColor extends JComboBox<Object>{
         setModel(new DefaultComboBoxModel<Object>(INT_ARRAY));
         setRenderer(new ComboBoxRenderer());
     }
-    class ComboBoxRenderer extends JLabel implements ListCellRenderer {
+    class ComboBoxRenderer extends JLabel implements ListCellRenderer<Object> {
         /**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
 		public ComboBoxRenderer() {setOpaque(true);}
         public Component getListCellRendererComponent(
-                final JList list, final Object value, final int index,
+                final JList<?> list, final Object value, final int index,
                 final boolean isSelected, final boolean cellHasFocus) {
             setBackground(list.getBackground());
             setForeground(list.getForeground());

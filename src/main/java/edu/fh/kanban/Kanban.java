@@ -1,7 +1,6 @@
 package edu.fh.kanban;
 
 import edu.fh.kanban.dao.ExportBacklog;
-import edu.fh.kanban.dao.HTML;
 import edu.fh.kanban.dao.ExportBoard;
 
 import java.awt.BorderLayout;
@@ -56,8 +55,6 @@ public class Kanban {
         LOGGER.info("Creating UI components.");
         
         final BacklogView backlogView = new BacklogView();
-        //BoardView boardView = new BoardView(backlogView);
-        //backlogView.setBv(boardView);
 
         JMenuItem board_preferences = new JMenuItem("New Board...");
         board_preferences.addActionListener(new ActionListener() {
@@ -73,20 +70,13 @@ public class Kanban {
             }
         });
         
-        final JMenuItem exportBacklog = new JMenuItem("Export Backlog to...");
+        JMenuItem exportBacklog = new JMenuItem("Export Backlog to...");
         exportBacklog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new ExportBacklog();
 			}
 		}); 
         
-        final JMenuItem html = new JMenuItem("Export to HTML...");
-        html.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new HTML().createHTML();
-            }
-        });
-
         final JMenuItem exportBoard = new JMenuItem("Export Board to...");
         exportBoard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -102,33 +92,18 @@ public class Kanban {
                 chooser = new JFileChooser();
                 chooser.addChoosableFileFilter(new FileNameExtensionFilter("XMLDatei", "xml"));
                 
-                
-                
                 if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                     xmlName = chooser.getSelectedFile().getName();
                     xmlPath = chooser.getSelectedFile().getPath();
                     xmlPath = xmlPath.replaceAll("\\\\", "\\\\\\\\");
-                    //boardView.getComponent();
-                    
                     BoardView boardView = new BoardView(backlogView);
-                    //backlogView.setBv(boardView);
-                    System.out.println(backlogView.getBv());
                     
                     if (firstBoard == true) {
                         JScrollPane scrollpane = new JScrollPane();
                         scrollpane.setViewportView(boardView);
                         pane.addTab("Board: " + chooser.getSelectedFile().getName().substring(0, chooser.getSelectedFile().getName().lastIndexOf(46)), scrollpane);
                         firstBoard = false;
-                        html.setEnabled(true);
                         exportBoard.setEnabled(true);
-//                        try{
-//                        for(int i = 0; backlogView.getAddcards()[i].getText().toString() != "0"; i++){
-//                        backlogView.getAddcards()[i].setEnabled(true);
-//                        }
-//                        }
-//                        catch(java.lang.NullPointerException exc){
-//                            return;
-//                        }
                     } else if (firstBoard == false) {
                         JScrollPane scrollpane = new JScrollPane();
                         scrollpane.setViewportView(boardView);
@@ -144,9 +119,7 @@ public class Kanban {
         file.add(card_preferences);
         file.add(loadBoard);
         file.add(exportBacklog);
-        file.add(html);
         file.add(exportBoard);
-        html.setEnabled(false);
         exportBoard.setEnabled(false);
 
         JMenuBar menubar = new JMenuBar();

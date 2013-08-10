@@ -4,8 +4,6 @@
  */
 package edu.fh.kanban.data;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Ronald
