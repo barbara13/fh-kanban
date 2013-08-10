@@ -115,7 +115,6 @@ public class BoardController extends Controller {
             bv.getShowCards()[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     cv = new CardView(bv.getListCards().get(cardcounter2).getCa_id(), bv.getListCards(), blv, bv);
-                    //System.out.println(cardcounter2);
                     cv.getComponent();
                     cv.getBtnAddCard().setVisible(false);
                     cv.getBtnEdit().setVisible(false);
@@ -127,25 +126,6 @@ public class BoardController extends Controller {
         }
     }
 
-//  private int parseId(String s){
-//	  int s1 = s.indexOf(":");
-//      return Integer.parseInt(s.substring(0, s1));
-//  }
     public void actionPerformed(ActionEvent e) {
-        /* 
-         *      
-         * xml.loadXML(Kanban.xmlPath);
-         * listCard = xml.readCards();
-         * id = bv.getId();
-         * src = e.getSource();
-         * 
-         * id = parseId(e.getActionCommand());	//Das ist ja nicht mehr so!!!!!!!!
-         * cv = new CardView(id[i], listCard, blv, bv);
-         * cv.getComponent();
-         * cv.getBtnEdit().setVisible(false);
-         * cv.getBtnAddCard().setVisible(false);
-         * cv.getBtnDelete().setVisible(false);
-         * 
-         * */
     }
 }

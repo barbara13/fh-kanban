@@ -62,7 +62,4 @@ public class BacklogCardView extends JPanel implements View {
 
         return this;
     }
-//    public JPanel getPanel() {
-//        return this;
-//    }
 }
