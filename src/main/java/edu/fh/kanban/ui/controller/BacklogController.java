@@ -28,10 +28,17 @@ public class BacklogController extends Controller{
     private XMLCard xml;
     private ArrayList<Card> listCard = new ArrayList<Card>();
     
-    public BacklogController(BacklogView blv, BoardView bv) {
-        this.bv = bv;
+    public BacklogController(BacklogView blv) {
+        
         this.blv = blv;
     }
+
+    public void setBv(BoardView bv) {
+        this.bv = bv;
+    }
+    
+    
+    
 
     public void showCards() {
         xml = new XMLCard();

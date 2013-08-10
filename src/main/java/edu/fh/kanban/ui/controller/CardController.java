@@ -64,7 +64,7 @@ public class CardController implements ActionListener {
                 System.out.println("Card ist schon auf dem Board vorhanden");
             }  
             cView.dispose();
-            //bv.paintBoard();
+            bv.paintBoard();
             
         } else if (src == cView.getBtnEdit()) {
             new CardEditView(blv, cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription()).getComponent();

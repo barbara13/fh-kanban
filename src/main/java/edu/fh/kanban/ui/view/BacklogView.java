@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import edu.fh.kanban.ui.controller.BacklogController;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 
 /**
  *
@@ -42,7 +44,7 @@ public class BacklogView extends JPanel implements View {
     }
     
     public  JComponent getComponent() {
-    	c = new BacklogController(this, bv);
+    	c = new BacklogController(this);
 
         setLayout(new FormLayout(new ColumnSpec[] {
         		FormFactory.RELATED_GAP_COLSPEC,
@@ -65,12 +67,13 @@ public class BacklogView extends JPanel implements View {
         		RowSpec.decode("fill:default:grow"),
         		FormFactory.RELATED_GAP_ROWSPEC,}));
 
-/*
-        searchfield.addKeyListener(new KeyListener() {
-            public void keyTyped(KeyEvent e) {}
-            public void keyPressed(KeyEvent e) {}
-            public void keyReleased(KeyEvent e) {
-                try{
+
+        searchfield.addCaretListener(new CaretListener() {
+                public void caretUpdate(CaretEvent e) {
+                    System.out.println("456486");
+                }
+            });
+           /*     try{
 	                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 	                    i--;
 	                    i--;
@@ -92,11 +95,11 @@ public class BacklogView extends JPanel implements View {
                 }
                 } catch(NullPointerException exc){
                    return;
-                }
+                }*/
                 
-            }
-        });
-*/
+         //   }
+       // });
+
 
         searchfield = new JTextField();
         searchfield.setColumns(10);
@@ -149,11 +152,13 @@ public class BacklogView extends JPanel implements View {
     
     public void setBv(BoardView bv) {
         this.bv = bv;
+        c.setBv(bv);
     }
 
     public BoardView getBv() {
         return bv;
     }
+    
     
     
     public JPanel getPanel() {
