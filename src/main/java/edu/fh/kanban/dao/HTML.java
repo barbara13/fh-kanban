@@ -8,18 +8,9 @@ import edu.fh.kanban.Kanban;
 import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
-import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JEditorPane;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.html.*;
-import javax.swing.text.html.parser.ParserDelegator;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -62,12 +53,10 @@ public class HTML extends XML {
     private ArrayList<Element> trElement = new ArrayList();
     private ArrayList<Element> tdElementSkip = new ArrayList();
     private ArrayList<Element> trElementSkip = new ArrayList();
-    
     private Element nextTableElement;
     private Element nextTdElement;
     private Element doneTableElement;
     private Element doneTdElement;
-    
     private Element[][] td;
     private int td_i = 0;
     private ArrayList<Element> subTableElement = new ArrayList();
@@ -88,7 +77,7 @@ public class HTML extends XML {
 
     }
 
-    public void createHTML() {
+    public void createHTML(String path) {
 
         htmlTag = doc.createElement("html");
         doc.appendChild(htmlTag);
@@ -114,17 +103,17 @@ public class HTML extends XML {
             tdElementSkip.add(createTdElement(trElementSkip.get(0), listMainColumn.get(i).getName().toString()));
         }
 
-                
-         
+
+
         //Done Spalte
-        tdElementSkip.add(createTdElement(trElementSkip.get(trElementSkip.size()-1), listSubColumn.get(listSubColumn.size()-1).getName().toString()));
+        tdElementSkip.add(createTdElement(trElementSkip.get(trElementSkip.size() - 1), listSubColumn.get(listSubColumn.size() - 1).getName().toString()));
         trElementSkip.add(createTrElement(mainTableElement));
-        
-        
+
+
         //NextTabelle
         nextTdElement = createTdElement(trElementSkip.get(1));
         nextTableElement = this.createSubTable(nextTdElement);
-        
+
 
         //Untertabelle Do und Done
         for (int j = 0; j < listMainColumn.size(); j++) {
@@ -143,12 +132,12 @@ public class HTML extends XML {
             //tdElement.add(createTdElement(trElement.get(trElement.size()-1), "Done"));   
             tdElementSkip.add(createTdElement(trElementSkip.get(trElementSkip.size() - 1), "Done"));
         }
-        
+
         doneTdElement = createTdElement(trElementSkip.get(1));
         doneTableElement = this.createSubTable(doneTdElement);
-        
-        
-        
+
+
+
         //Next Cards
         listCard = xml.readCardsFromColumn(listSubColumn.get(0).getCo_id());
         for (int k = 0; k < listCard.size(); k++) {
@@ -156,7 +145,7 @@ public class HTML extends XML {
             tdElement.add(createTdElement(trElement.get(z)));
 
             createCardElement(tdElement.get(r), listCard.get(k).getName());
-            
+
             r++;
             z++;
         }
@@ -166,7 +155,6 @@ public class HTML extends XML {
         /**
          * ************************
          */
-        
         //Do & Done Cards
         for (int l = 1; l < listSubColumn.size() - 1; l++) {
             listCard = xml.readCardsFromColumn(listSubColumn.get(l).getCo_id());
@@ -199,26 +187,25 @@ public class HTML extends XML {
             }
 
         }
-        
+
         //Done Cards        
-        listCard = xml.readCardsFromColumn(listSubColumn.get(listSubColumn.size()-1).getCo_id());
+        listCard = xml.readCardsFromColumn(listSubColumn.get(listSubColumn.size() - 1).getCo_id());
         //z = 0;
-       
+
         for (int k = 0; k < listCard.size(); k++) {
             trElement.add(createTrElement(doneTableElement));
             tdElement.add(createTdElement(trElement.get(z)));
 
             createCardElement(tdElement.get(r), listCard.get(k).getName());
-            
+
             r++;
             z++;
         }
-        
-        
-        
-        
 
-        this.updateXML(Kanban.xmlName.substring(0, Kanban.xmlName.lastIndexOf(46)) + ".html");
+
+
+
+        this.updateXML(path);
     }
 
     private void loadXML() {
