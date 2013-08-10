@@ -1,1 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><board b_id="41" expedite="#FF0000" fixedDate="#0000FF" intangible="#800080" name="BoardTest" standart="#00FFFF"><column b_id="41" co_id="272" name="Next" wip="100"><card blocker="false" blocker_tooltip="" ca_id="27" co_id="272" created="08.08.2013 20:48:32" description="Dies ist A" done="" effort="1" name="A" started="08.08.2013 20:48:32" value="Intangible"/><card blocker="false" blocker_tooltip="" ca_id="28" co_id="272" created="08.08.2013 20:49:09" description="Dies ist G" done="" effort="26" name="G" started="08.08.2013 20:49:09" value="Expedite"/></column><columns b_id="41" co_id="273" name="Column1" wip="2"><column b_id="41" co_id="274" name="Do" wip="2"><card blocker="false" blocker_tooltip="Text" ca_id="35" co_id="274" created="09.08.2013 13:59:32" description="Beschreibung" done="" effort="5" name="card1" started="09.08.2013 13:59:32" value="Standart"/></column><column b_id="41" co_id="275" name="Done" wip="100"/></columns><column b_id="41" co_id="276" name="Done" wip="100"/></board>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This XML File is for JUnit Test. DON'T EDIT THIS FILE! -->
+<board b_id="999" expedite="#FF0000" fixedDate="#0000FF" intangible="#800080" name="BoardTest" standart="#00FFFF">
+    <column b_id="999" co_id="995" name="Next" wip="100">
+        <card blocker="false" blocker_tooltip="Text" ca_id="46" co_id="995" created="08.08.2013 13:37:20" description="Beschreibung" done="" effort="5" name="card1" started="08.08.2013 15:12:25" value="Standart"/>
+    </column>
+    <columns b_id="999" co_id="996" name="Column1" wip="2">
+        <column b_id="999" co_id="997" name="Do" wip="2"/>
+        <column b_id="999" co_id="998" name="Done" wip="100"/>
+    </columns>
+    <column b_id="999" co_id="999" name="Done" wip="100"/>
+</board>

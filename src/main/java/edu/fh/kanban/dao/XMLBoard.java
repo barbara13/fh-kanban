@@ -83,6 +83,10 @@ public class XMLBoard extends XML {
 
     }
 
+    /**
+     * Parsed eine XML Datei und speichert sie in dem HSP 
+     * @param xmlPath 
+     */
     public void loadXML(String xmlPath) {
         try {
             this.xmlPath = xmlPath;
@@ -97,8 +101,11 @@ public class XMLBoard extends XML {
         }
     }
     
-    public Board getBoard(){
-        
+    /**
+     * Liest das Board aus der geladenen XML Datei aus und gibt es zurück
+     * @return Board
+     */
+    public Board getBoard(){  
         boardList = doc.getElementsByTagName("board"); 
         
         for (int i = 0; i < boardList.getLength(); i++) {
@@ -108,6 +115,10 @@ public class XMLBoard extends XML {
         return listBoard.get(0);
     }
     
+    /**
+     * Liest das Board aus der geladenen XML Datei aus und gibt als es ArrayList zurück
+     * @return ArrayList
+     */
     public ArrayList<Board> readBoard() {
         listBoard.clear();
         boardList = doc.getElementsByTagName("board");
@@ -119,6 +130,10 @@ public class XMLBoard extends XML {
         return listBoard;
     }
 
+    /**
+     * Liest die Unterspalten do und done aus und gibt sie als ArrayList zurück
+     * @return ArrayList
+     */
     public ArrayList<Column> readSubColumns() {
         listSubColumn.clear();
         columnList = doc.getElementsByTagName("column");
@@ -130,6 +145,10 @@ public class XMLBoard extends XML {
         return listSubColumn;
     }
 
+    /**
+     * Liest die Hauptspalten aus und gibt sie als ArrayList zurück
+     * @return ArrayList
+     */
     public ArrayList<Column> readMainColumns() {
         listMainColumn.clear();
         columnList = doc.getElementsByTagName("columns");
@@ -141,6 +160,10 @@ public class XMLBoard extends XML {
         return listMainColumn;
     }
 
+    /**
+     * Liest die Karten aus der geladenen XML Datei aus und gibt sie als ArrayList zurück
+     * @return ArrayList
+     */
     public ArrayList<Card> readCards() {
         listCard.clear();
         cardList = doc.getElementsByTagName("card");
@@ -151,11 +174,14 @@ public class XMLBoard extends XML {
         return listCard;
     }
 
+    /**
+     * Liest die Karten einer bestimmten Spalte aus und gibt sie als ArrayList
+     * @param co_id
+     * @return ArrayList
+     */
     public ArrayList<Card> readCardsFromColumn(int co_id) {
         listCard.clear();
-        //listSubColumn.clear();
-
-        
+       
         cardList = doc.getElementsByTagName("card");
         columnList = doc.getElementsByTagName("column");
 
@@ -168,14 +194,18 @@ public class XMLBoard extends XML {
         return listCard;
     }
 
+    /**
+     * Erstellt ein XML Board. Um die XML Datei zu erstellen muss anschließend die Mehtode
+     * createBoard aufgerufen werden.
+     * @param name
+     * @param expedite
+     * @param standart
+     * @param fixedDate
+     * @param intangible 
+     */
     public void addBoard(String name, String expedite, String standart, String fixedDate, String intangible) {
-        //Wenn kein root existiert
-
-        //doc = docBuilder.newDocument();
         pk = new XML_Pk();
 
-        // root elements
-        //doc = docBuilder.newDocument();
         rootElement = doc.createElement("board");
         doc.appendChild(rootElement);
 
@@ -208,12 +238,14 @@ public class XMLBoard extends XML {
         attr = doc.createAttribute("intangible");
         attr.setValue(intangible);
         rootElement.setAttributeNode(attr);
-
-
-
-
     }
+    
 
+    /**
+     * Fügt eine Hauptspalte zu dem geladenen Board hinzu.
+     * @param name
+     * @param wip 
+     */
     public void addNewColumn(String name, String wip) {
 
         columnElement = doc.createElement("columns");
@@ -292,9 +324,13 @@ public class XMLBoard extends XML {
         attr2.setValue("100");
         subColumnElement2.setAttributeNode(attr2);
 
-        //pk.setCo_id();
     }
 
+    /**
+     * Fügt eine Unterspalte zu dem geladen Board hinzu.
+     * @param name
+     * @param wip 
+     */
     public void addColumn(String name, String wip) {
         columnElement = doc.createElement("column");
         rootElement.appendChild(columnElement);
@@ -322,6 +358,12 @@ public class XMLBoard extends XML {
         pk.setCo_id();
     }
 
+    /**
+     * Fügt eine Karte zu einer bestimmten Spalte hinzu
+     * @param card
+     * @param co_id
+     * @return 
+     */
     public Element addCard(Element card, String co_id) {
         Element newCardElement;
         newCardElement = doc.createElement("card");
@@ -385,7 +427,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Durchsucht die SubColumns nach einer bestimmter Column
+     * Durchsucht die Unterspalten nach einer bestimmter Column
      * @param co_id
      * @return 
      */
@@ -420,8 +462,12 @@ public class XMLBoard extends XML {
         return searchedElement;
     }
 
+     /**
+     * Durchsucht das Board nach einer Karte und gibt sie zurück
+     * @param ca_id
+     * @return Element
+     */
     public Element searchCard(int ca_id) {
-        //doc = docBuilder.newDocument();
         cardList = doc.getElementsByTagName("card");
 
         for (int i = 0; i < cardList.getLength(); i++) {
@@ -437,18 +483,24 @@ public class XMLBoard extends XML {
         return searchedElement;
     }
 
+    /**
+     * Gibt die erste Spalte des Boards zurück
+     * @return Element
+     */
     private Element getFirstColumn() {
-        //doc.getDocumentElement();
         columnList = doc.getElementsByTagName("column");
         searchedElement = (Element) columnList.item(0);
 
         return searchedElement;
     }
 
+    /**
+     * Fügt eine Karte aus dem Backlog ins Board hinzu.
+     * @param ca_id 
+     */
     public void addCardToBoard(int ca_id) {
         columnElement = getFirstColumn();
         cardElement = xmlCard.searchCard(ca_id);
-
 
         //Wenn die gesuchte card und column gefunden wurde oder keine firstcard exisitiert
         if (cardElement != null && columnElement != null) {
@@ -463,6 +515,10 @@ public class XMLBoard extends XML {
         }
     }
 
+    /**
+     * Verschiebt eine Karte in die nächste Spalte.
+     * @param ca_id 
+     */
     public void forwardCard(int ca_id) {
         boolean f = false;
         Element targetCardElement;
@@ -521,6 +577,10 @@ public class XMLBoard extends XML {
         }
     }
 
+    /**
+     * Verschiebt eine Karte in die vorherige Do bzw. Next Spalte
+     * @param ca_id 
+     */
     public void prevCard(int ca_id) {
         boolean f = false;
         int count = 0;
@@ -565,9 +625,7 @@ public class XMLBoard extends XML {
             if (count == maxCount) {
                 targetColumnElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
                 targetCardElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
-                
-                
-                
+                   
                 cardElement.getAttribute("co_id");
                 if (checkWip(Kanban.tryParseInt(targetColumnElement.getAttribute("co_id"))) == true) {
 
@@ -579,12 +637,15 @@ public class XMLBoard extends XML {
                     updateXML(xmlPath);
                     break;
                 }
-
-
             }
         }
     }
 
+    /**
+     * Löscht eine bestimmte Karte aus einer bestimmten Spalte aus dem Board
+     * @param ca_id
+     * @param co_id 
+     */
     public void deleteCard(int ca_id, int co_id) {
         cardElement = searchCard(ca_id);
         columnElement = searchColumn(co_id);
@@ -597,6 +658,12 @@ public class XMLBoard extends XML {
         }
     }
 
+    /**
+     * Verändert das Board. attr -> Attribut; value -> Wert der geändert werden soll
+     * @param id
+     * @param attr
+     * @param value 
+     */
     public void editBoard(int id, String attr, String value) {
         boardList = doc.getElementsByTagName("board");
 
@@ -609,6 +676,12 @@ public class XMLBoard extends XML {
         }
     }
 
+    /**
+     * Verändert eine Spalte. attr -> Attribut; value -> Wert der geändert werden soll
+     * @param id
+     * @param attr
+     * @param value 
+     */
     public void editColumn(int id, String attr, String value) {
         columnList = doc.getElementsByTagName("column");
 
@@ -621,6 +694,12 @@ public class XMLBoard extends XML {
         }
     }
 
+    /**
+     * Verändert eine karte. attr -> Attribut; value -> Wert der geändert werden soll
+     * @param id
+     * @param attr
+     * @param value 
+     */
     public void editCard(int id, String attr, String value) {
         cardList = doc.getElementsByTagName("card");
 
@@ -632,21 +711,12 @@ public class XMLBoard extends XML {
             }
         }
     }
-
-    public void createNewBoard() {
-        try {
-            transformerFactory = TransformerFactory.newInstance();
-            transformer = transformerFactory.newTransformer();
-            source = new DOMSource(doc);
-            result = new StreamResult(new File(xmlPath));
-            transformer.transform(source, result);
-        } catch (TransformerConfigurationException ex) {
-            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TransformerException ex) {
-            Logger.getLogger(XMLBoard.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+    
+    /**
+     * Überprüft eine Spalte ob sie noch Platz hat
+     * @param co_id
+     * @return true -> frei; false -> belegt
+     */
     private boolean checkWip(int co_id) {
         searchedElement = this.searchColumn(co_id);
         wip = Kanban.tryParseInt(searchedElement.getAttribute("wip"));
@@ -668,6 +738,11 @@ public class XMLBoard extends XML {
         return wipCheck;
     }
     
+    /**
+     * Überprüft ob eine bestimmte Karte auf dem Board bereits vorhanden ist.
+     * @param ca_id
+     * @return false -> frei; true -> besetzt
+     */
     public boolean checkCardAtBoard(int ca_id){
         isCardOnBoard = false;
         cardList = doc.getElementsByTagName("card");
@@ -682,6 +757,10 @@ public class XMLBoard extends XML {
         return isCardOnBoard;
     }
 
+    /**
+     * Erstellt ein Board als XML Datei.
+     * @param xmlPath 
+     */
     public void createBoard(String xmlPath) {
         updateXML(xmlPath);
         pk.setB_id();

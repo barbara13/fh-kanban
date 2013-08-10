@@ -122,7 +122,7 @@ public class HTML extends XML {
         
         
         //NextTabelle
-        nextTdElement = createTdElement(trElementSkip.get(1), " ");
+        nextTdElement = createTdElement(trElementSkip.get(1));
         nextTableElement = this.createSubTable(nextTdElement);
         
 
@@ -131,7 +131,7 @@ public class HTML extends XML {
             //System.out.println("tttt");
             //Untertabelle
             //tdElement.add(createTdElement(trElement.get(1), " "));
-            tdElementSkip.add(createTdElement(trElementSkip.get(1), "  "));
+            tdElementSkip.add(createTdElement(trElementSkip.get(1)));
 
             subTableElement.add(createSubTable(tdElementSkip.get(tdElementSkip.size() - 1)));
 
@@ -144,7 +144,7 @@ public class HTML extends XML {
             tdElementSkip.add(createTdElement(trElementSkip.get(trElementSkip.size() - 1), "Done"));
         }
         
-        doneTdElement = createTdElement(createTdElement(trElementSkip.get(1), " hier "));
+        doneTdElement = createTdElement(trElementSkip.get(1));
         doneTableElement = this.createSubTable(doneTdElement);
         
         
@@ -177,7 +177,7 @@ public class HTML extends XML {
                 trElement.add(createTrElement(subTableElement.get(h)));
 
                 if (u == 2) {
-                    tdElement.add(createTdElement(trElement.get(z), " "));
+                    tdElement.add(createTdElement(trElement.get(z)));
                     r++;
                 }
 
@@ -203,9 +203,10 @@ public class HTML extends XML {
         //Done Cards        
         listCard = xml.readCardsFromColumn(listSubColumn.get(listSubColumn.size()-1).getCo_id());
         //z = 0;
+       
         for (int k = 0; k < listCard.size(); k++) {
             trElement.add(createTrElement(doneTableElement));
-            tdElement.add(createTdElement(trElement.get(trElement.size()-1), "??"));
+            tdElement.add(createTdElement(trElement.get(z)));
 
             createCardElement(tdElement.get(r), listCard.get(k).getName());
             
