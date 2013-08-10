@@ -22,7 +22,7 @@ public class CardCreateController implements ActionListener, KeyListener {
 
     private Object src;
     private CardCreateView cCreateView;
-    private  BacklogView bv;
+    private BacklogView bv;
     private XMLCard xml;
 
     public CardCreateController(CardCreateView cCreateView, BacklogView bv) {
@@ -39,10 +39,10 @@ public class CardCreateController implements ActionListener, KeyListener {
         //über die Methode addCard die Karte hinzugefügt
         //Sollte das nicht der Fall sein wird das Feld ROT markiert das nicht ausgefüllt ist
 
-        if(src == cCreateView.getBtnCreate()){
+        if (src == cCreateView.getBtnCreate()) {
             if (cCreateView.getTxtHeadline().isEmpty() || cCreateView.getTxtEffort().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "nicht alle Felder sind ausgefüllt", "Fehlermelung", JOptionPane.WARNING_MESSAGE);
-            }else{
+            } else {
                 //Eintrag in die XMLCard
                 xml.addCard(cCreateView.getTxtHeadline(), cCreateView.getTextDescription(), cCreateView.getTxtEffort(), cCreateView.getValue(), "false", "");
                 xml.createCard();
@@ -56,8 +56,12 @@ public class CardCreateController implements ActionListener, KeyListener {
     }
 
     //In bestimmten JTextfield's werden nur Zahlen aktzeptiert diese sorgt dafür
-    public void keyPressed(KeyEvent e) {}
-    public void keyReleased(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) {
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
         if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {

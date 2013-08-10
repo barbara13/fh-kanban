@@ -9,13 +9,10 @@ import edu.fh.kanban.ui.view.BacklogView;
 import edu.fh.kanban.ui.view.BoardView;
 import edu.fh.kanban.ui.view.CardView;
 import edu.fh.kanban.ui.view.BacklogCardView;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -46,7 +43,7 @@ public class BoardController extends Controller {
     public void showColumns(ArrayList<Column> mainColumns, ArrayList<Column> subColumns) {
         cardcounter = 0;
         bv.getBpanel().removeAll();
-        
+
         xml.loadXML(Kanban.xmlPath);
         board = xml.getBoard();
 
@@ -88,7 +85,7 @@ public class BoardController extends Controller {
 
         for (int i = 0, y = 6; i < listCards.size(); i++, y += 2) {
             final int cardcounter2 = cardcounter;
-            
+
 
             JTextArea description = new JTextArea(listCards.get(i).getDescription());
             description.setEnabled(false);
@@ -98,10 +95,10 @@ public class BoardController extends Controller {
             bv.getCardpanel()[i].add(new JLabel(Integer.toString(listCards.get(i).getCa_id())), "4, 2");
             bv.getCardpanel()[i].add(new JLabel(listCards.get(i).getName()), "8, 2");
             bv.getCardpanel()[i].add(new JLabel(Integer.toString(listCards.get(i).getEffort())), "4, 4");
-            bv.getCardpanel()[i].add(new JLabel(listCards.get(i).getValue()), "8, 4"); 
-            bv.getCardpanel()[i].add(new JLabel(listCards.get(i).getCreatedDate()), "4, 12, 7, 1"); 
-             
-             
+            bv.getCardpanel()[i].add(new JLabel(listCards.get(i).getValue()), "8, 4");
+            bv.getCardpanel()[i].add(new JLabel(listCards.get(i).getCreatedDate()), "4, 12, 7, 1");
+
+
             if (listCards.get(i).getValue().equals("Expedite")) {
                 bv.getCardpanel()[i].setBackground(expediteColor);
             } else if (listCards.get(i).getValue().equals("Fixed Date")) {

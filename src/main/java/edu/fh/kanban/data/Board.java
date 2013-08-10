@@ -9,6 +9,7 @@ package edu.fh.kanban.data;
  * @author Ronald
  */
 public class Board {
+
     private int b_id;
     private String name;
     private String expedite;
@@ -16,7 +17,6 @@ public class Board {
     private String fixedDate;
     private String intangible;
 
-    
     public Board(int b_id, String name, String expedite, String standart, String fixedDate, String intangible) {
         this.b_id = b_id;
         this.name = name;
@@ -25,12 +25,9 @@ public class Board {
         this.fixedDate = fixedDate;
         this.intangible = intangible;
     }
-    
-        
-    public Board() {
 
+    public Board() {
     }
-    
 
     public int getB_id() {
         return b_id;
@@ -55,14 +52,4 @@ public class Board {
     public String getStandart() {
         return standart;
     }
-    
-    
-
-    
-    
-
-    
-
-    
-    
 }

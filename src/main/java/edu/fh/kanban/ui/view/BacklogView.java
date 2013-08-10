@@ -23,12 +23,11 @@ import javax.swing.JSeparator;
  */
 public class BacklogView extends JPanel implements View {
 
-	/**
-	  *
-	  */
-	private static final long serialVersionUID = 1L;
-	
-	private JTextField searchfield;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private JTextField searchfield;
     private BacklogController c = null;
     private JPanel[] cards = new JPanel[100];
     private JPanel cardPnl = new JPanel();
@@ -37,112 +36,112 @@ public class BacklogView extends JPanel implements View {
     private JComboBox<String> comboBox;
     private BoardView bv = null;
 
-    public BacklogView(){
-    	getComponent();
+    public BacklogView() {
+        getComponent();
     }
-    
-    public  JComponent getComponent() {
-    	c = new BacklogController(this);
 
-        setLayout(new FormLayout(new ColumnSpec[] {
-        		FormFactory.RELATED_GAP_COLSPEC,
-        		ColumnSpec.decode("default:grow"),
-        		FormFactory.RELATED_GAP_COLSPEC,
-        		ColumnSpec.decode("default:grow"),
-        		FormFactory.RELATED_GAP_COLSPEC,
-        		ColumnSpec.decode("default:grow"),
-        		FormFactory.RELATED_GAP_COLSPEC,
-        		ColumnSpec.decode("max(100dlu;default)"),
-        		FormFactory.RELATED_GAP_COLSPEC,},
-        	new RowSpec[] {
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("max(16dlu;default)"),
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		RowSpec.decode("fill:default:grow"),
-        		FormFactory.RELATED_GAP_ROWSPEC,}));
+    public JComponent getComponent() {
+        c = new BacklogController(this);
+
+        setLayout(new FormLayout(new ColumnSpec[]{
+            FormFactory.RELATED_GAP_COLSPEC,
+            ColumnSpec.decode("default:grow"),
+            FormFactory.RELATED_GAP_COLSPEC,
+            ColumnSpec.decode("default:grow"),
+            FormFactory.RELATED_GAP_COLSPEC,
+            ColumnSpec.decode("default:grow"),
+            FormFactory.RELATED_GAP_COLSPEC,
+            ColumnSpec.decode("max(100dlu;default)"),
+            FormFactory.RELATED_GAP_COLSPEC,},
+                new RowSpec[]{
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            RowSpec.decode("max(16dlu;default)"),
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            RowSpec.decode("fill:default:grow"),
+            FormFactory.RELATED_GAP_ROWSPEC,}));
 
         searchfield = new JTextField();
         searchfield.setColumns(10);
         searchfield.addCaretListener(c);
-        
+
         comboBox = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[]{"Card ID", "Headline", "Effort", "Value", "Creation time"}));
         comboBox.addActionListener(c);
-        
+
         add(searchfield, "8, 2, fill, default");
         add(comboBox, "8, 4, fill, default");
         add(new JLabel("Search:"), "6, 2, right, default");
         add(new JLabel("Sort by:"), "6, 4, right, default");
         add(new JSeparator(), "2, 6, 7, 1");
-        
+
         JScrollPane scrollPane = new JScrollPane();
         add(scrollPane, "2, 8, 7, 1, fill, fill");
-        
+
         scrollPane.setViewportView(cardPnl);
-        cardPnl.setLayout(new FormLayout(new ColumnSpec[] {
-        		ColumnSpec.decode("default:grow"),
-        		FormFactory.RELATED_GAP_COLSPEC,
-        		ColumnSpec.decode("default:grow"),
-        		FormFactory.RELATED_GAP_COLSPEC,
-        		ColumnSpec.decode("default:grow"),
-        		FormFactory.RELATED_GAP_COLSPEC,
-        		ColumnSpec.decode("default:grow"),},
-        	new RowSpec[] {
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,
-        		FormFactory.RELATED_GAP_ROWSPEC,
-        		FormFactory.DEFAULT_ROWSPEC,}));
-        
+        cardPnl.setLayout(new FormLayout(new ColumnSpec[]{
+            ColumnSpec.decode("default:grow"),
+            FormFactory.RELATED_GAP_COLSPEC,
+            ColumnSpec.decode("default:grow"),
+            FormFactory.RELATED_GAP_COLSPEC,
+            ColumnSpec.decode("default:grow"),
+            FormFactory.RELATED_GAP_COLSPEC,
+            ColumnSpec.decode("default:grow"),},
+                new RowSpec[]{
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,
+            FormFactory.RELATED_GAP_ROWSPEC,
+            FormFactory.DEFAULT_ROWSPEC,}));
+
         c.showCards();
         return this;
     }
-    
+
     public void setBv(BoardView bv) {
         this.bv = bv;
         c.setBv(bv);
@@ -151,9 +150,7 @@ public class BacklogView extends JPanel implements View {
     public BoardView getBv() {
         return bv;
     }
-    
-    
-    
+
     public JPanel getPanel() {
         return cardPnl;
     }

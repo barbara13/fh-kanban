@@ -28,7 +28,6 @@ public class XMLCard extends XML {
     private DocumentBuilderFactory docBuilderFactory;
     private DocumentBuilder docBuilder;
     private String xmlPath = "cards.xml";
-    
     private XML_Pk pk;
     private Element cardElement = null;
     private Element searchedElement = null;
@@ -36,13 +35,11 @@ public class XMLCard extends XML {
     private NodeList rootList = null;
     private NodeList cardList = null;
     private Attr attr;
-    
-    private ArrayList <Card> listCard= new ArrayList();
-   
+    private ArrayList<Card> listCard = new ArrayList();
     private SimpleDateFormat sd = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    private String dateString; 
+    private String dateString;
     private Date date;
-    
+
     public XMLCard() {
         try {
             docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -106,22 +103,22 @@ public class XMLCard extends XML {
         attr = doc.createAttribute("blocker");
         attr.setValue(blocker);
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut Blocker_Tooltip hinzufügen
         attr = doc.createAttribute("blocker_tooltip");
         attr.setValue(blocker_tooltip);
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut Created hinzufügen
         attr = doc.createAttribute("created");
         attr.setValue(sd.format(new Date()));
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut Started hinzufügen
         attr = doc.createAttribute("started");
         attr.setValue("");
         cardElement.setAttributeNode(attr);
-        
+
         //Attribut Done hinzufügen
         attr = doc.createAttribute("done");
         attr.setValue("");
@@ -159,28 +156,26 @@ public class XMLCard extends XML {
     public void createCard() {
         this.updateXML(xmlPath);
     }
-    
-        
-    public void editCard(int id, String attr, String value){
+
+    public void editCard(int id, String attr, String value) {
         cardList = doc.getElementsByTagName("card");
-        
-        for(int i = 0; i < cardList.getLength(); i++){
-            if(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id){
+
+        for (int i = 0; i < cardList.getLength(); i++) {
+            if (Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == id) {
                 cardList.item(i).getAttributes().getNamedItem(attr).setTextContent(value);
                 updateXML(xmlPath);
                 break;
             }
         }
-    } 
-    
-        
-    public ArrayList<Card> readCards(){     
+    }
+
+    public ArrayList<Card> readCards() {
         listCard.clear();
         cardList = doc.getElementsByTagName("card");
-        
-        for(int i = 0; i < cardList.getLength() ; i++){
-            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())),getString(cardList.item(i).getAttributes().getNamedItem("name").toString()),getString(cardList.item(i).getAttributes().getNamedItem("description").toString()),Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())),getString(cardList.item(i).getAttributes().getNamedItem("value").toString()),getString(cardList.item(i).getAttributes().getNamedItem("blocker").toString()), getString(cardList.item(i).getAttributes().getNamedItem("blocker_tooltip").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString()), getString(cardList.item(i).getAttributes().getNamedItem("started").toString()), getString(cardList.item(i).getAttributes().getNamedItem("done").toString())));
-         }
+
+        for (int i = 0; i < cardList.getLength(); i++) {
+            listCard.add(new Card(Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("co_id").toString())), getString(cardList.item(i).getAttributes().getNamedItem("name").toString()), getString(cardList.item(i).getAttributes().getNamedItem("description").toString()), Integer.parseInt(getString(cardList.item(i).getAttributes().getNamedItem("effort").toString())), getString(cardList.item(i).getAttributes().getNamedItem("value").toString()), getString(cardList.item(i).getAttributes().getNamedItem("blocker").toString()), getString(cardList.item(i).getAttributes().getNamedItem("blocker_tooltip").toString()), getString(cardList.item(i).getAttributes().getNamedItem("created").toString()), getString(cardList.item(i).getAttributes().getNamedItem("started").toString()), getString(cardList.item(i).getAttributes().getNamedItem("done").toString())));
+        }
         return listCard;
     }
 }

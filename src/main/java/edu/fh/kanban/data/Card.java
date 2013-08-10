@@ -9,6 +9,7 @@ package edu.fh.kanban.data;
  * @author Ronald
  */
 public class Card {
+
     private int ca_id;
     private int co_id;
     private String name;
@@ -21,7 +22,7 @@ public class Card {
     private String startedDate;
     private String doneDate;
 
-    public Card(int ca_id, int co_id, String name, String description, int effort, String value, String blocker, String blocker_tooltip,String createdDate, String startedDate, String doneDate) {
+    public Card(int ca_id, int co_id, String name, String description, int effort, String value, String blocker, String blocker_tooltip, String createdDate, String startedDate, String doneDate) {
         this.ca_id = ca_id;
         this.co_id = co_id;
         this.name = name;
@@ -78,6 +79,4 @@ public class Card {
     public String getDoneDate() {
         return doneDate;
     }
-    
-    
 }

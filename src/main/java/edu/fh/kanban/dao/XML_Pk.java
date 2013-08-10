@@ -19,18 +19,18 @@ import org.xml.sax.SAXException;
  */
 public class XML_Pk extends XML {
     //private Document doc;
+
     private DocumentBuilderFactory docBuilderFactory;
     private DocumentBuilder docBuilder;
 
-    
     public XML_Pk() {
         try {
-            
+
             docBuilderFactory = DocumentBuilderFactory.newInstance();
             docBuilder = docBuilderFactory.newDocumentBuilder();
             doc = docBuilder.parse(new File("Pks.xml"));
             doc.getDocumentElement().normalize();
-            
+
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(XML_Pk.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
@@ -39,39 +39,42 @@ public class XML_Pk extends XML {
             Logger.getLogger(XML_Pk.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * Liest die aktuelle b_id aus Pks.xml
+     *
      * @return int b_id
      */
     public int getB_id() {
         return Integer.parseInt(this.getString(doc.getElementsByTagName("board").item(0).getAttributes().getNamedItem("b_id").toString()));
     }
-    
+
     /**
      * Liest die aktuelle co_id aus Pks.xml
+     *
      * @return int co_id
      */
     public int getCo_id() {
         return Integer.parseInt(this.getString(doc.getElementsByTagName("column").item(0).getAttributes().getNamedItem("co_id").toString()));
     }
-    
+
     /**
      * Liest die aktuelle ca_id aus Pks.xml
+     *
      * @return int ca_id
      */
     public int getCa_id() {
         return Integer.parseInt(this.getString(doc.getElementsByTagName("card").item(0).getAttributes().getNamedItem("ca_id").toString()));
     }
-    
+
     /**
      * Zählt die b_id um eins hoch
      */
-    public void setB_id() { 
+    public void setB_id() {
         doc.getElementsByTagName("board").item(0).getAttributes().getNamedItem("b_id").setTextContent(String.valueOf(this.getB_id() + 1));
         this.updateXML("Pks.xml");
     }
-    
+
     /**
      * Zählt die co_id um eins hoch
      */
@@ -79,7 +82,7 @@ public class XML_Pk extends XML {
         doc.getElementsByTagName("column").item(0).getAttributes().getNamedItem("co_id").setTextContent(String.valueOf(this.getCo_id() + 1));
         this.updateXML("Pks.xml");
     }
-    
+
     /**
      * Zählt die ca_id um eins hoch
      */
@@ -87,7 +90,7 @@ public class XML_Pk extends XML {
         doc.getElementsByTagName("card").item(0).getAttributes().getNamedItem("ca_id").setTextContent(String.valueOf(this.getCa_id() + 1));
         this.updateXML("Pks.xml");
     }
-    
+
     public void loadXML(String xmlPath) {
     }
 }

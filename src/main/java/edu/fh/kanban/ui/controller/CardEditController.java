@@ -50,8 +50,12 @@ public class CardEditController implements ActionListener, KeyListener {
         }
     }
 
-    public void keyPressed(KeyEvent e) {}
-    public void keyReleased(KeyEvent e) {}
+    public void keyPressed(KeyEvent e) {
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
         if (c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {

@@ -9,9 +9,7 @@ import edu.fh.kanban.ui.view.CardEditView;
 import edu.fh.kanban.ui.view.CardView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -29,7 +27,6 @@ public class CardController implements ActionListener {
     private BacklogView blv;
     private BoardView bv;
 
-    
     public CardController(CardView cView, BacklogView blv, BoardView bv) {
         this.cView = cView;
         this.bv = bv;
@@ -40,32 +37,32 @@ public class CardController implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         src = e.getSource();
-        if(src == cView.getTglbtnBlocker()){
-        	if(cView.getTglbtnBlocker().isSelected()){
-        		String message = JOptionPane.showInputDialog("Block Message");
-        		if(message != null){
-        			cView.getTglbtnBlocker().setToolTipText(message);
-                	xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
-                	xml.editCard(cView.getcId(), "blocker_tooltip", cView.getTglbtnBlocker().getToolTipText().toString());
-        		}else{
-        			cView.getTglbtnBlocker().doClick();
-        		}
-            	
-        	}else{
-            	xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
-            	xml.editCard(cView.getcId(), "blocker_tooltip", "");
-        	}
+        if (src == cView.getTglbtnBlocker()) {
+            if (cView.getTglbtnBlocker().isSelected()) {
+                String message = JOptionPane.showInputDialog("Block Message");
+                if (message != null) {
+                    cView.getTglbtnBlocker().setToolTipText(message);
+                    xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
+                    xml.editCard(cView.getcId(), "blocker_tooltip", cView.getTglbtnBlocker().getToolTipText().toString());
+                } else {
+                    cView.getTglbtnBlocker().doClick();
+                }
+
+            } else {
+                xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
+                xml.editCard(cView.getcId(), "blocker_tooltip", "");
+            }
         } else if (src == cView.getBtnAddCard()) {
             xmlb.loadXML(Kanban.xmlPath);
-            
-            if(xmlb.checkCardAtBoard(cView.getcId()) == false){
-                xmlb.addCardToBoard(cView.getcId());  
-            } else{
+
+            if (xmlb.checkCardAtBoard(cView.getcId()) == false) {
+                xmlb.addCardToBoard(cView.getcId());
+            } else {
                 System.out.println("Card ist schon auf dem Board vorhanden");
-            }  
+            }
             cView.dispose();
             bv.paintBoard();
-            
+
         } else if (src == cView.getBtnEdit()) {
             new CardEditView(blv, cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription()).getComponent();
             cView.dispose();
@@ -73,19 +70,19 @@ public class CardController implements ActionListener {
             xml.deleteCard(cView.getcId());
             blv.getSort().setSelectedIndex(0);
             cView.dispose();
-        } else if (src == cView.getBtnDeleteFromBoard()){
-           xmlb.loadXML(Kanban.xmlPath);
-           xmlb.deleteCard(cView.getcId(), cView.getColumn());
-           bv.paintBoard();
-           cView.dispose();
+        } else if (src == cView.getBtnDeleteFromBoard()) {
+            xmlb.loadXML(Kanban.xmlPath);
+            xmlb.deleteCard(cView.getcId(), cView.getColumn());
+            bv.paintBoard();
+            cView.dispose();
         } else if (src == cView.getBtnCancel()) {
             cView.dispose();
-        } else if (src == cView.getBtnBackward()){
+        } else if (src == cView.getBtnBackward()) {
             xmlb.loadXML(Kanban.xmlPath);
             xmlb.prevCard(cView.getcId());
             bv.paintBoard();
             cView.dispose();
-        } else if (src == cView.getBtnForward()){
+        } else if (src == cView.getBtnForward()) {
             xmlb.loadXML(Kanban.xmlPath);
             xmlb.forwardCard(cView.getcId());
             bv.paintBoard();
