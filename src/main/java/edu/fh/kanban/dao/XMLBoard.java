@@ -41,17 +41,12 @@ public class XMLBoard extends XML {
     private NodeList boardList = null;
     private NodeList columnList = null;
     private NodeList cardList = null;
-//    private NodeList cl = null;
     private ArrayList<Board> listBoard = new ArrayList<Board>();
     private ArrayList<Column> listMainColumn = new ArrayList<Column>();
     private ArrayList<Column> listSubColumn = new ArrayList<Column>();
     private ArrayList<Card> listCard = new ArrayList<Card>();
-//    private int totalColumns;
-//    private int totalCards;
     private XML_Pk pk;
-//    private int b_id;
     private int co_id;
-//    private int ca_id;
     private Attr attr;
     private Attr attr1;
     private Attr attr2;
@@ -93,7 +88,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Liest das Board aus der geladenen XML Datei aus und gibt es zurück
+     * Liest das Board aus der geladenen XML Datei aus und gibt es zurÃ¼ck
      *
      * @return Board
      */
@@ -109,7 +104,7 @@ public class XMLBoard extends XML {
 
     /**
      * Liest das Board aus der geladenen XML Datei aus und gibt als es ArrayList
-     * zurück
+     * zurÃ¼ck
      *
      * @return ArrayList
      */
@@ -125,7 +120,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Liest die Unterspalten do und done aus und gibt sie als ArrayList zurück
+     * Liest die Unterspalten do und done aus und gibt sie als ArrayList zurÃ¼ck
      *
      * @return ArrayList
      */
@@ -141,7 +136,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Liest die Hauptspalten aus und gibt sie als ArrayList zurück
+     * Liest die Hauptspalten aus und gibt sie als ArrayList zurÃ¼ck
      *
      * @return ArrayList
      */
@@ -158,7 +153,7 @@ public class XMLBoard extends XML {
 
     /**
      * Liest die Karten aus der geladenen XML Datei aus und gibt sie als
-     * ArrayList zurück
+     * ArrayList zurÃ¼ck
      *
      * @return ArrayList
      */
@@ -194,7 +189,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Erstellt ein XML Board. Um die XML Datei zu erstellen muss anschließend
+     * Erstellt ein XML Board. Um die XML Datei zu erstellen muss anschlieÃŸend
      * die Mehtode createBoard aufgerufen werden.
      *
      * @param name
@@ -209,39 +204,39 @@ public class XMLBoard extends XML {
         rootElement = doc.createElement("board");
         doc.appendChild(rootElement);
 
-        //Attribut b_id hinzufügen
+        //Attribut b_id hinzufÃ¼gen
         attr = doc.createAttribute("b_id");
         attr.setValue(String.valueOf(pk.getB_id()));
         rootElement.setAttributeNode(attr);
 
-        //Attribut name hinzufügen
+        //Attribut name hinzufÃ¼gen
         attr = doc.createAttribute("name");
         attr.setValue(name);
         rootElement.setAttributeNode(attr);
 
-        //Attribut expedite hinzufügen
+        //Attribut expedite hinzufÃ¼gen
         attr = doc.createAttribute("expedite");
         attr.setValue(expedite);
         rootElement.setAttributeNode(attr);
 
-        //Attribut standart hinzufügen
+        //Attribut standart hinzufÃ¼gen
         attr = doc.createAttribute("standart");
         attr.setValue(standart);
         rootElement.setAttributeNode(attr);
 
-        //Attribut fixedDate hinzufügen
+        //Attribut fixedDate hinzufÃ¼gen
         attr = doc.createAttribute("fixedDate");
         attr.setValue(fixedDate);
         rootElement.setAttributeNode(attr);
 
-        //Attribut intangible hinzufügen
+        //Attribut intangible hinzufÃ¼gen
         attr = doc.createAttribute("intangible");
         attr.setValue(intangible);
         rootElement.setAttributeNode(attr);
     }
 
     /**
-     * Fügt eine Hauptspalte zu dem geladenen Board hinzu.
+     * FÃ¼gt eine Hauptspalte zu dem geladenen Board hinzu.
      *
      * @param name
      * @param wip
@@ -257,7 +252,7 @@ public class XMLBoard extends XML {
         columnElement.appendChild(subColumnElement2);
 
         /*
-         * Attribut co_id hinzufügen
+         * Attribut co_id hinzufÃ¼gen
          */
         //Column
         attr = doc.createAttribute("co_id");
@@ -277,7 +272,7 @@ public class XMLBoard extends XML {
 
 
         /*
-         * Attribut b_id hinzufügen
+         * Attribut b_id hinzufÃ¼gen
          */
         //Column
         attr = doc.createAttribute("b_id");
@@ -293,7 +288,7 @@ public class XMLBoard extends XML {
         subColumnElement2.setAttributeNode(attr2);
 
         /*
-         * Attribut name hinzufügen
+         * Attribut name hinzufÃ¼gen
          */
         //Column
         attr = doc.createAttribute("name");
@@ -309,7 +304,7 @@ public class XMLBoard extends XML {
         subColumnElement2.setAttributeNode(attr2);
 
         /*
-         * Attribut wip hinzufügen
+         * Attribut wip hinzufÃ¼gen
          */
         //SubColumn
         attr = doc.createAttribute("wip");
@@ -327,7 +322,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Fügt eine Unterspalte zu dem geladen Board hinzu.
+     * FÃ¼gt eine Unterspalte zu dem geladen Board hinzu.
      *
      * @param name
      * @param wip
@@ -336,22 +331,22 @@ public class XMLBoard extends XML {
         columnElement = doc.createElement("column");
         rootElement.appendChild(columnElement);
 
-        //Attribut co_id hinzufügen
+        //Attribut co_id hinzufÃ¼gen
         attr = doc.createAttribute("co_id");
         attr.setValue(String.valueOf(pk.getCo_id()));
         columnElement.setAttributeNode(attr);
 
-        //Attribut b_id hinzufügen
+        //Attribut b_id hinzufÃ¼gen
         attr = doc.createAttribute("b_id");
         attr.setValue(String.valueOf(pk.getB_id()));
         columnElement.setAttributeNode(attr);
 
-        //Attribut name hinzufügen
+        //Attribut name hinzufÃ¼gen
         attr = doc.createAttribute("name");
         attr.setValue(name);
         columnElement.setAttributeNode(attr);
 
-        //Attribut wip hinzufügen
+        //Attribut wip hinzufÃ¼gen
         attr = doc.createAttribute("wip");
         attr.setValue(wip);
         columnElement.setAttributeNode(attr);
@@ -360,7 +355,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Fügt eine Karte zu einer bestimmten Spalte hinzu
+     * FÃ¼gt eine Karte zu einer bestimmten Spalte hinzu
      *
      * @param card
      * @param co_id
@@ -370,57 +365,57 @@ public class XMLBoard extends XML {
         Element newCardElement;
         newCardElement = doc.createElement("card");
 
-        //Attribut ca_id hinzufügen
+        //Attribut ca_id hinzufÃ¼gen
         attr = doc.createAttribute("ca_id");
         attr.setValue(card.getAttribute("ca_id"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut co_id hinzufügen
+        //Attribut co_id hinzufÃ¼gen
         attr = doc.createAttribute("co_id");
         attr.setValue(card.getAttribute("co_id"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut name hinzufügen
+        //Attribut name hinzufÃ¼gen
         attr = doc.createAttribute("name");
         attr.setValue(card.getAttribute("name"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut Description hinzufügen
+        //Attribut Description hinzufÃ¼gen
         attr = doc.createAttribute("description");
         attr.setValue(card.getAttribute("description"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut Effort hinzufügen
+        //Attribut Effort hinzufÃ¼gen
         attr = doc.createAttribute("effort");
         attr.setValue(card.getAttribute("effort"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut Value hinzufügen
+        //Attribut Value hinzufÃ¼gen
         attr = doc.createAttribute("value");
         attr.setValue(card.getAttribute("value"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut Blocker hinzufügen
+        //Attribut Blocker hinzufÃ¼gen
         attr = doc.createAttribute("blocker");
         attr.setValue(card.getAttribute("blocker"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut Blocker_Tooltip hinzufügen
+        //Attribut Blocker_Tooltip hinzufÃ¼gen
         attr = doc.createAttribute("blocker_tooltip");
         attr.setValue(card.getAttribute("blocker_tooltip"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut Created hinzufügen
+        //Attribut Created hinzufÃ¼gen
         attr = doc.createAttribute("created");
         attr.setValue(card.getAttribute("created"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut Started hinzufügen
+        //Attribut Started hinzufÃ¼gen
         attr = doc.createAttribute("started");
         attr.setValue(card.getAttribute("created"));
         newCardElement.setAttributeNode(attr);
 
-        //Attribut Started hinzufügen
+        //Attribut Started hinzufÃ¼gen
         attr = doc.createAttribute("done");
         attr.setValue(card.getAttribute(""));
         newCardElement.setAttributeNode(attr);
@@ -440,7 +435,7 @@ public class XMLBoard extends XML {
             //Wenn gesuchtes Element gefunden wurde
             if (Kanban.tryParseInt(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
                 searchedElement = (Element) columnList.item(i);
-                //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
+                //Abbruch der Schleife wenn gesuchtes Element gelÃ¶scht wurde
                 break;
             }
         }
@@ -459,7 +454,7 @@ public class XMLBoard extends XML {
             //Wenn gesuchtes Element gefunden wurde
             if (Kanban.tryParseInt(this.getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
                 searchedElement = (Element) columnList.item(i);
-                //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
+                //Abbruch der Schleife wenn gesuchtes Element gelÃ¶scht wurde
                 break;
             }
         }
@@ -467,7 +462,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Durchsucht das Board nach einer Karte und gibt sie zurück
+     * Durchsucht das Board nach einer Karte und gibt sie zurÃ¼ck
      *
      * @param ca_id
      * @return Element
@@ -478,9 +473,8 @@ public class XMLBoard extends XML {
         for (int i = 0; i < cardList.getLength(); i++) {
             //Wenn gesuchtes Element gefunden wurde
             if (Kanban.tryParseInt(this.getString(cardList.item(i).getAttributes().getNamedItem("ca_id").toString())) == ca_id) {
-                //cardList.item(i).getAttributes().getNamedItem("name");
                 searchedElement = (Element) cardList.item(i);
-                //Abbruch der Schleife wenn gesuchtes Element gelöscht wurde
+                //Abbruch der Schleife wenn gesuchtes Element gelÃ¶scht wurde
                 break;
             }
         }
@@ -489,7 +483,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Gibt die erste Spalte des Boards zurück
+     * Gibt die erste Spalte des Boards zurÃ¼ck
      *
      * @return Element
      */
@@ -501,7 +495,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Fügt eine Karte aus dem Backlog ins Board hinzu.
+     * FÃ¼gt eine Karte aus dem Backlog ins Board hinzu.
      *
      * @param ca_id
      */
@@ -516,26 +510,23 @@ public class XMLBoard extends XML {
             this.editCard(ca_id, "co_id", columnElement.getAttribute("co_id"));
             editCard(ca_id, "started", sd.format(new Date()));
 
-            //xmlCard.deleteCard(ca_id);
-
             updateXML(xmlPath);
         }
     }
 
     /**
-     * Verschiebt eine Karte in die nächste Spalte.
+     * Verschiebt eine Karte in die nÃ¤chste Spalte.
      *
      * @param ca_id
      */
     public void forwardCard(int ca_id) {
         boolean f = false;
-//        Element targetCardElement;
+
         Element targetColumnElement;
 
 
         cardElement = searchCard(ca_id);
 
-//        this.ca_id = Kanban.tryParseInt(cardElement.getAttribute("ca_id"));
         this.co_id = Kanban.tryParseInt(cardElement.getAttribute("co_id"));
 
         columnList = doc.getElementsByTagName("column");
@@ -556,7 +547,7 @@ public class XMLBoard extends XML {
             } else {
 
                 targetColumnElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
-//                targetCardElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
+
 
 
 
@@ -566,11 +557,10 @@ public class XMLBoard extends XML {
                     deleteCard(ca_id, this.co_id);
                     editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));
 
-//                    cl = doc.getElementsByTagName("columns");
                     //Letztes Element der Liste
                     Element doneElement = (Element) columnList.item(columnList.getLength() - 1);
 
-                    //Überprüfen ob Done oder nicht
+                    //ÃœberprÃ¼fen ob Done oder nicht
                     if (targetColumnElement == doneElement) {
                         editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "done", sd.format(new Date()));
                     } else {
@@ -605,11 +595,15 @@ public class XMLBoard extends XML {
         
         columnList = doc.getElementsByTagName("column");
         Element lastDone = (Element) columnList.item(columnList.getLength()-1);
-        System.out.println(columnElement.getAttribute("name"));
         
-        if (columnElement.getAttribute("name").equals("Done")) {
+        if (columnElement.getAttribute("name").equals("Done")){
             maxCount = 1;
         } else {
+            maxCount = 2;
+        }
+        
+        //Beim letzten Done
+        if(lastDone.getAttribute("co_id").equals(columnElement.getAttribute("co_id"))){
             maxCount = 2;
         }
 
@@ -649,7 +643,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Löscht eine bestimmte Karte aus einer bestimmten Spalte aus dem Board
+     * LÃ¶scht eine bestimmte Karte aus einer bestimmten Spalte aus dem Board
      *
      * @param ca_id
      * @param co_id
@@ -659,7 +653,7 @@ public class XMLBoard extends XML {
         columnElement = searchColumn(co_id);
 
         if (cardElement != null) {
-            //Element aus der Datei löschen
+            //Element aus der Datei lÃ¶schen
             columnElement.removeChild(cardElement);
             //XML Datei aktualisieren
             updateXML(xmlPath);
@@ -667,7 +661,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Verändert das Board. attr -> Attribut; value -> Wert der geändert werden
+     * VerÃ¤ndert das Board. attr -> Attribut; value -> Wert der geÃ¤ndert werden
      * soll
      *
      * @param id
@@ -687,7 +681,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Verändert eine Spalte. attr -> Attribut; value -> Wert der geändert
+     * VerÃ¤ndert eine Spalte. attr -> Attribut; value -> Wert der geÃ¤ndert
      * werden soll
      *
      * @param id
@@ -707,7 +701,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Verändert eine karte. attr -> Attribut; value -> Wert der geändert werden
+     * VerÃ¤ndert eine karte. attr -> Attribut; value -> Wert der geÃ¤ndert werden
      * soll
      *
      * @param id
@@ -727,7 +721,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Überprüft eine Spalte ob sie noch Platz hat
+     * ÃœberprÃ¼ft eine Spalte ob sie noch Platz hat
      *
      * @param co_id
      * @return true -> frei; false -> belegt
@@ -754,7 +748,7 @@ public class XMLBoard extends XML {
     }
 
     /**
-     * Überprüft ob eine bestimmte Karte auf dem Board bereits vorhanden ist.
+     * ÃœberprÃ¼ft ob eine bestimmte Karte auf dem Board bereits vorhanden ist.
      *
      * @param ca_id
      * @return false -> frei; true -> besetzt
