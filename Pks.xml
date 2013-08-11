@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
---><primary_keys>
-    <board b_id="50"/>
-    <column co_id="372"/>
-    <card ca_id="57"/>
+<?xml version="1.0" encoding="UTF-8"?><primary_keys>
+    <board b_id="2"/>
+    <column co_id="9"/>
+    <card ca_id="2"/>
 </primary_keys>
