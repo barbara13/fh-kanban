@@ -618,9 +618,7 @@ public class XMLBoard extends XML {
         for (int i = columnList.getLength() - 1; i >= 0; i--) {
             if (f == false) {
                 if (Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())) == co_id) {
-
                     f = true;
-
                 }
             } else {
                 count++;
@@ -633,11 +631,10 @@ public class XMLBoard extends XML {
 
             if (count == maxCount) {
                 targetColumnElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
-//                targetCardElement = searchColumn(Kanban.tryParseInt(getString(columnList.item(i).getAttributes().getNamedItem("co_id").toString())));
 
                 cardElement.getAttribute("co_id");
                 if (checkWip(Kanban.tryParseInt(targetColumnElement.getAttribute("co_id"))) == true) {
-
+                    
                     deleteCard(ca_id, this.co_id);
                     targetColumnElement.appendChild(this.addCard(cardElement, getString(targetColumnElement.getAttribute("co_id"))));
                     editCard(Kanban.tryParseInt(cardElement.getAttribute("ca_id")), "co_id", targetColumnElement.getAttribute("co_id"));

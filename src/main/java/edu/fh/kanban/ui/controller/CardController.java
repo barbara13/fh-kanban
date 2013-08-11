@@ -42,6 +42,7 @@ public class CardController implements ActionListener {
             if (cView.getTglbtnBlocker().isSelected()) {
                 String message = JOptionPane.showInputDialog("Block Message");
                 if (message != null) {
+                    xmlb.loadXML(Kanban.xmlPath);
                     cView.getTglbtnBlocker().setToolTipText(message);
                     xmlb.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
                     xmlb.editCard(cView.getcId(), "blocker_tooltip", cView.getTglbtnBlocker().getToolTipText().toString());
