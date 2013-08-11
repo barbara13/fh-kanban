@@ -60,7 +60,7 @@ public class ExportBoardToCsv {
             for (int i = 0; i < listSubColumns.size(); i++) {
                 listCards = xml.readCardsFromColumn(listSubColumns.get(i).getCo_id());
                 if (k < listCards.size()) {
-                    writer.print("CardID: " + listCards.get(k).getCa_id() + " Effort: " + listCards.get(k).getEffort() + " Value: " + listCards.get(k).getValue() + " Description: " + listCards.get(k).getDescription());
+                    writer.print("CardID: " + listCards.get(k).getCa_id() + " Effort: " + listCards.get(k).getEffort() + " Value: " + listCards.get(k).getValue() + " Description: " + listCards.get(k).getDescription() + ";");
                 } else {
                     writer.print(";");
                 }
