@@ -129,10 +129,12 @@ public class CardView extends JFrame implements View {
 
         btnForward = new JButton("Forward");
         btnForward.addActionListener(cController);
+        if(tglbtnBlocker.isSelected()) btnForward.setEnabled(false);
         getContentPane().add(btnForward, "10, 12, 3, 1, fill, top");
 
         btnBackward = new JButton("Back");
         btnBackward.addActionListener(cController);
+        if(tglbtnBlocker.isSelected()) btnBackward.setEnabled(false);
         getContentPane().add(btnBackward, "10, 14, 3, 1, fill, top");
 
         btnAddCard = new JButton("Add Card");
