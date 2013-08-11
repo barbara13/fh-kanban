@@ -68,7 +68,7 @@ public class BacklogView extends JPanel implements View {
         searchfield.setColumns(10);
         searchfield.addCaretListener(c);
 
-        comboBox = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[]{"Card ID", "Headline", "Effort", "Value", "Creation time"}));
+        comboBox = new JComboBox<String>(new DefaultComboBoxModel<String>(new String[]{"Creation time", "Headline", "Value", "Effort", "Description"}));
         comboBox.addActionListener(c);
 
         add(searchfield, "8, 2, fill, default");

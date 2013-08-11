@@ -55,22 +55,21 @@ public class BacklogController extends Controller implements CaretListener {
         xml = new XMLCard();
         listCard = xml.readCards();
         String selecteItem = blv.getSort().getSelectedItem().toString();
+        String array[] = new String[listCard.size()];
         blv.getPanel().removeAll();
 
-        if (selecteItem.equals("Card ID")) {
-            int array[] = new int[listCard.size()];
+        if (selecteItem.equals("Creation time")) {
 
             for (int i = 0; i < array.length; i++) {
-                array[i] = listCard.get(i).getCa_id();
+                array[i] = listCard.get(i).getCreatedDate();
             }
 
-            array = sortByInt(array);
+            array = sortCards(array);
 
             for (int i = 0, j = 1, k = 1; i < array.length; i++) {
                 for (int n = 0; n < listCard.size(); n++) {
-                    if (array[i] == listCard.get(n).getCa_id()) {
+                    if (array[i].equals(listCard.get(n).getCreatedDate())) {
                         addCardToPanel(i, n, j, k);
-
                         if (j == 7) {
                             k += 2;
                             j = -1;
@@ -80,12 +79,11 @@ public class BacklogController extends Controller implements CaretListener {
                 }
             }
         } else if (selecteItem.equals("Headline")) {
-            String array[] = new String[listCard.size()];
 
             for (int i = 0; i < array.length; i++) {
                 array[i] = listCard.get(i).getName();
             }
-            array = sortByString(array);
+            array = sortCards(array);
             for (int i = 0, j = 1, k = 1; i < array.length; i++) {
                 for (int n = 0; n < listCard.size(); n++) {
                     if (array[i].equals(listCard.get(n).getName())) {
@@ -99,36 +97,13 @@ public class BacklogController extends Controller implements CaretListener {
                     }
                 }
             }
-        } else if (selecteItem.equals("Effort")) {
-            int array[] = new int[listCard.size()];
-
-            for (int i = 0; i < array.length; i++) {
-                array[i] = listCard.get(i).getEffort();
-            }
-
-            array = sortByInt(array);
-
-            for (int i = 0, j = 1, k = 1; i < array.length; i++) {
-                for (int n = 0; n < listCard.size(); n++) {
-                    if (array[i] == listCard.get(n).getEffort()) {
-                        addCardToPanel(i, n, j, k);
-
-                        if (j == 7) {
-                            k += 2;
-                            j = -1;
-                        }
-                        j += 2;
-                    }
-                }
-            }
         } else if (selecteItem.equals("Value")) {
-            String array[] = new String[listCard.size()];
 
             for (int i = 0; i < array.length; i++) {
                 array[i] = listCard.get(i).getValue();
             }
 
-            array = sortByString(array);
+            array = sortCards(array);
 
             for (int i = 0, j = 1, k = 1; i < array.length; i++) {
                 for (int n = 0; n < listCard.size(); n++) {
@@ -143,19 +118,40 @@ public class BacklogController extends Controller implements CaretListener {
                     }
                 }
             }
-        } else if (selecteItem.equals("Creation time")) {
-            String array[] = new String[listCard.size()];
+        } else if (selecteItem.equals("Effort")) {
 
             for (int i = 0; i < array.length; i++) {
-                array[i] = listCard.get(i).getCreatedDate();
+                array[i] = Integer.toString(listCard.get(i).getEffort());
             }
 
-            array = sortByString(array);
+            array = sortCards(array);
 
             for (int i = 0, j = 1, k = 1; i < array.length; i++) {
                 for (int n = 0; n < listCard.size(); n++) {
-                    if (array[i].equals(listCard.get(n).getCreatedDate())) {
+                    if (Integer.parseInt(array[i]) == listCard.get(n).getEffort()) {
                         addCardToPanel(i, n, j, k);
+
+                        if (j == 7) {
+                            k += 2;
+                            j = -1;
+                        }
+                        j += 2;
+                    }
+                }
+            }
+        } else if (selecteItem.equals("Description")) {
+
+            for (int i = 0; i < array.length; i++) {
+                array[i] = listCard.get(i).getDescription();
+            }
+
+            array = sortCards(array);
+
+            for (int i = 0, j = 1, k = 1; i < array.length; i++) {
+                for (int n = 0; n < listCard.size(); n++) {
+                    if (array[i].equals(listCard.get(n).getDescription())) {
+                        addCardToPanel(i, n, j, k);
+
                         if (j == 7) {
                             k += 2;
                             j = -1;
@@ -166,6 +162,124 @@ public class BacklogController extends Controller implements CaretListener {
             }
         }
         blv.getPanel().updateUI();
+    }
+    
+    public void caretUpdate(CaretEvent e) {
+
+        String searchText = blv.getSearch().getText().trim();
+        
+        if (!searchText.isEmpty()) {
+            blv.getPanel().removeAll();
+            String selecteItem = blv.getSort().getSelectedItem().toString();
+            String array[] = new String[listCard.size()];
+            
+            if (selecteItem.equals("Creation time")) {
+                for (int i = 0; i < array.length; i++) {
+                    array[i] = listCard.get(i).getCreatedDate();
+                }
+
+                array = searchCards(array, blv.getSearch().getText());
+
+                for (int i = 0, j = 1, k = 1; i < array.length; i++) {
+                    for (int n = 0; n < listCard.size(); n++) {
+                        if (array[i].equals(listCard.get(n).getCreatedDate())) {
+                            addCardToPanel(i, n, j, k);
+                            if (j == 7) {
+                                k += 2;
+                                j = -1;
+                            }
+                            j += 2;
+                        }
+                    }
+                }
+            } else if (selecteItem.equals("Headline")) {
+
+                for (int i = 0; i < array.length; i++) {
+                    array[i] = listCard.get(i).getName();
+                }
+                array = searchCards(array, blv.getSearch().getText());
+                
+                for (int i = 0, j = 1, k = 1; i < array.length; i++) {
+                    for (int n = 0; n < listCard.size(); n++) {
+                        if (array[i].equals(listCard.get(n).getName())) {
+                            addCardToPanel(i, n, j, k);
+
+                            if (j == 7) {
+                                k += 2;
+                                j = -1;
+                            }
+                            j += 2;
+                        }
+                    }
+                }
+            } else if (selecteItem.equals("Value")) {
+
+                for (int i = 0; i < array.length; i++) {
+                    array[i] = listCard.get(i).getValue();
+                }
+
+                array = searchCards(array, blv.getSearch().getText());
+
+                for (int i = 0, j = 1, k = 1; i < array.length; i++) {
+                    for (int n = 0; n < listCard.size(); n++) {
+                        if (array[i].equals(listCard.get(n).getValue())) {
+                            addCardToPanel(i, n, j, k);
+
+                            if (j == 7) {
+                                k += 2;
+                                j = -1;
+                            }
+                            j += 2;
+                        }
+                    }
+                }
+            }  else if (selecteItem.equals("Effort")) {
+
+                for (int i = 0; i < array.length; i++) {
+                    array[i] = Integer.toString(listCard.get(i).getEffort());
+                }
+
+                array = searchCards(array, blv.getSearch().getText());
+
+                for (int i = 0, j = 1, k = 1; i < array.length; i++) {
+                    for (int n = 0; n < listCard.size(); n++) {
+                        if (Integer.parseInt(array[i]) == listCard.get(n).getEffort()) {
+                            addCardToPanel(i, n, j, k);
+
+                            if (j == 7) {
+                                k += 2;
+                                j = -1;
+                            }
+                            j += 2;
+                        }
+                    }
+                }
+            } else if (selecteItem.equals("Description")) {
+
+                for (int i = 0; i < array.length; i++) {
+                    array[i] = listCard.get(i).getDescription();
+                }
+
+                array = searchCards(array, blv.getSearch().getText());
+
+                for (int i = 0, j = 1, k = 1; i < array.length; i++) {
+                    for (int n = 0; n < listCard.size(); n++) {
+                        if (array[i].equals(listCard.get(n).getDescription())) {
+                            addCardToPanel(i, n, j, k);
+
+                            if (j == 7) {
+                                k += 2;
+                                j = -1;
+                            }
+                            j += 2;
+                        }
+                    }
+                }
+            }
+            blv.getPanel().updateUI();
+        } else {
+            blv.getSort().setSelectedIndex(blv.getSort().getSelectedIndex());
+        }
     }
 
     private void addCardToPanel(int toCard, int fromCard, int column, int row) {
@@ -202,41 +316,7 @@ public class BacklogController extends Controller implements CaretListener {
         blv.getPanel().add(blv.getCards()[toCard], column + ", " + row + ", 1, 1");
     }
 
-    private int[] sortByInt(int array[]) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = (i + 1); j < array.length; j++) {
-                if (array[i] > array[j]) {
-                    int tausch = array[i];
-                    array[i] = array[j];
-                    array[j] = tausch;
-                }
-            }
-        }
-        for (int i = 0; i < array.length; i++) {
-            int j = (i + 1);
-            if (j < array.length) {
-                while (array[i] == array[j]) {
-                    array[j] = -1;
-                    j++;
-                    if (j == array.length) {
-                        break;
-                    }
-                }
-                if (i != (j - 1)) {
-                    for (int k = (i + 1); k < array.length; k++, j++) {
-                        if (j < array.length) {
-                            array[k] = array[j];
-                        } else {
-                            array[k] = -1;
-                        }
-                    }
-                }
-            }
-        }
-        return array;
-    }
-
-    private String[] sortByString(String array[]) {
+    private String[] sortCards(String array[]) {
         for (int i = 0; i < array.length; i++) {
             for (int j = (i + 1); j < array.length; j++) {
                 if (array[i].compareToIgnoreCase(array[j]) > 0) {
@@ -270,13 +350,15 @@ public class BacklogController extends Controller implements CaretListener {
         return array;
     }
 
-    private String[] searchByString(String array[], String searchText) {
+    private String[] searchCards(String array[], String searchText) {
         for (int i = 0; i < array.length; i++) {
             if (searchText.regionMatches(true, 0, array[i], 0, searchText.length())) {
             } else {
                 array[i] = "-1";
             }
         }
+        
+        array = sortCards(array);
 
         for (int i = 1; i < array.length; i++) {
         	if (searchText.compareTo(array[i]) == 0) {
@@ -285,61 +367,6 @@ public class BacklogController extends Controller implements CaretListener {
                 array[0] = tausch;
             }
         }
-
-        for (int i = 0; i < array.length; i++) {
-            int j = (i + 1);
-            if (j < array.length) {
-                while (array[i].equals(array[j])) {
-                    array[j] = "-1";
-                    j++;
-                    if (j == array.length) {
-                        break;
-                    }
-                }
-                if (i != (j - 1)) {
-                    for (int k = (i + 1); k < array.length; k++, j++) {
-                        if (j < array.length) {
-                            array[k] = array[j];
-                        } else {
-                            array[k] = "-1";
-                        }
-                    }
-                }
-            }
-        }
         return array;
-    }
-
-    public void caretUpdate(CaretEvent e) {
-
-        String searchText = blv.getSearch().getText().trim();
-        if (!searchText.isEmpty()) {
-            blv.getPanel().removeAll();
-
-            String array[] = new String[listCard.size()];
-
-            for (int i = 0; i < array.length; i++) {
-                array[i] = listCard.get(i).getName();
-            }
-
-            array = searchByString(array, blv.getSearch().getText());
-
-            for (int i = 0, j = 1, k = 1; i < array.length; i++) {
-                for (int n = 0; n < listCard.size(); n++) {
-                    if (array[i].equals(listCard.get(n).getName())) {
-                        addCardToPanel(i, n, j, k);
-
-                        if (j == 7) {
-                            k += 2;
-                            j = -1;
-                        }
-                        j += 2;
-                    }
-                }
-            }
-            blv.getPanel().updateUI();
-        } else {
-            blv.getSort().setSelectedIndex(1);
-        }
     }
 }

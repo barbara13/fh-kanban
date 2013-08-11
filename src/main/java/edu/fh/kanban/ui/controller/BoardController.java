@@ -105,7 +105,7 @@ public class BoardController extends Controller {
                 bv.getCardpanel()[i].setBackground(fixedDateColor);
             } else if (listCards.get(i).getValue().equals("Intangible")) {
                 bv.getCardpanel()[i].setBackground(intangibleColor);
-            } else if (listCards.get(i).getValue().equals("Standart")) {
+            } else if (listCards.get(i).getValue().equals("Standard")) {
                 bv.getCardpanel()[i].setBackground(standartColor);
             }
             bv.getCardpanel()[i].setBorder(BorderFactory.createLineBorder(Color.black));
