@@ -595,17 +595,18 @@ public class XMLBoard extends XML {
         int count = 0;
         int maxCount;
 
-//        Element targetCardElement;
         Element targetColumnElement;
 
         cardElement = searchCard(ca_id);
 
-
-//        this.ca_id = Kanban.tryParseInt(cardElement.getAttribute("ca_id"));
         this.co_id = Kanban.tryParseInt(cardElement.getAttribute("co_id"));
 
         columnElement = searchColumn(co_id);
-
+        
+        columnList = doc.getElementsByTagName("column");
+        Element lastDone = (Element) columnList.item(columnList.getLength()-1);
+        System.out.println(columnElement.getAttribute("name"));
+        
         if (columnElement.getAttribute("name").equals("Done")) {
             maxCount = 1;
         } else {

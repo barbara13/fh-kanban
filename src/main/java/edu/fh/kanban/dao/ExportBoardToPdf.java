@@ -75,7 +75,6 @@ public class ExportBoardToPdf {
             for (int i = 0; i < listSubColumns.size(); i++) {
                 listCards = xml.readCardsFromColumn(listSubColumns.get(i).getCo_id());
                 if (k < listCards.size()) {
-                    System.out.println(listCards.get(k).getCa_id() + "K= " + k);
                     table.addCell("CardID: " + Integer.toString(listCards.get(k).getCa_id()) + " Effort: " + Integer.toString(listCards.get(k).getEffort()) + " Value: " + listCards.get(k).getValue().toString() + " Description: " + listCards.get(k).getDescription().toString());
                 } else {
                     table.addCell("");
