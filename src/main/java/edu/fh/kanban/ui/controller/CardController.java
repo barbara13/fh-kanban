@@ -33,6 +33,7 @@ public class CardController implements ActionListener {
         this.blv = blv;
         xml = new XMLCard();
         xmlb = new XMLBoard();
+        System.out.println(Boolean.toString(cView.getTglbtnBlocker().isSelected()));
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -42,15 +43,21 @@ public class CardController implements ActionListener {
                 String message = JOptionPane.showInputDialog("Block Message");
                 if (message != null) {
                     cView.getTglbtnBlocker().setToolTipText(message);
-                    xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
-                    xml.editCard(cView.getcId(), "blocker_tooltip", cView.getTglbtnBlocker().getToolTipText().toString());
+                    xmlb.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
+                    xmlb.editCard(cView.getcId(), "blocker_tooltip", cView.getTglbtnBlocker().getToolTipText().toString());
+                    cView.getBtnForward().setEnabled(false);
+                    cView.getBtnBackward().setEnabled(false);
+                    bv.paintBoard();
                 } else {
                     cView.getTglbtnBlocker().doClick();
                 }
 
             } else {
-                xml.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
-                xml.editCard(cView.getcId(), "blocker_tooltip", "");
+                xmlb.editCard(cView.getcId(), "blocker", Boolean.toString(cView.getTglbtnBlocker().isSelected()));
+                xmlb.editCard(cView.getcId(), "blocker_tooltip", "");
+                cView.getBtnForward().setEnabled(true);
+                cView.getBtnBackward().setEnabled(true);
+                bv.paintBoard();
             }
         } else if (src == cView.getBtnAddCard()) {
             xmlb.loadXML(Kanban.xmlPath);

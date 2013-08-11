@@ -5,7 +5,6 @@
 package edu.fh.kanban.dao;
 
 import edu.fh.kanban.Kanban;
-import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
 import java.util.ArrayList;
@@ -25,43 +24,43 @@ public class HTML extends XML {
 
     private DocumentBuilderFactory docBuilderFactory;
     private DocumentBuilder docBuilder;
-    private String htmlPath;
-    private ArrayList<Board> listBoard = new ArrayList();
-    private ArrayList<Column> listMainColumn = new ArrayList();
-    private ArrayList<Column> listSubColumn = new ArrayList();
-    private ArrayList<Card> listCard = new ArrayList();
+//    private String htmlPath;
+//    private ArrayList<Board> listBoard = new ArrayList<Board>();
+    private ArrayList<Column> listMainColumn = new ArrayList<Column>();
+    private ArrayList<Column> listSubColumn = new ArrayList<Column>();
+    private ArrayList<Card> listCard = new ArrayList<Card>();
     private Element htmlTag;
     private Element bodyTag;
-    private Element tableElement;
+//    private Element tableElement;
     private Element mainTableElement;
     //private Element subTableElement;
-    private Element rowHeadElement;
+//    private Element rowHeadElement;
     private Element rowElement;
     private Element colElement;
-    private Element firstColumnElement;
-    private Element lastColumnElement;
+//    private Element firstColumnElement;
+//    private Element lastColumnElement;
     private Element cardElement;
-    private ArrayList<Element> columnElements = new ArrayList();
-    private ArrayList<Element> rowElements = new ArrayList();
+//    private ArrayList<Element> columnElements = new ArrayList<Element>();
+//    private ArrayList<Element> rowElements = new ArrayList<Element>();
     private XMLBoard xml = new XMLBoard();
     private int t = 0;
     private int h = 0;
     private int r = 0;
     private int z = 0;
     private int u = 0;
-    private ArrayList<Element> tdElement = new ArrayList();
-    private ArrayList<Element> trElement = new ArrayList();
-    private ArrayList<Element> tdElementSkip = new ArrayList();
-    private ArrayList<Element> trElementSkip = new ArrayList();
+    private ArrayList<Element> tdElement = new ArrayList<Element>();
+    private ArrayList<Element> trElement = new ArrayList<Element>();
+    private ArrayList<Element> tdElementSkip = new ArrayList<Element>();
+    private ArrayList<Element> trElementSkip = new ArrayList<Element>();
     private Element nextTableElement;
     private Element nextTdElement;
     private Element doneTableElement;
     private Element doneTdElement;
-    private Element[][] td;
-    private int td_i = 0;
-    private ArrayList<Element> subTableElement = new ArrayList();
-    private ArrayList<Element> tdSubElement = new ArrayList();
-    private ArrayList<Element> trSubElement = new ArrayList();
+//    private Element[][] td;
+//    private int td_i = 0;
+    private ArrayList<Element> subTableElement = new ArrayList<Element>();
+//    private ArrayList<Element> tdSubElement = new ArrayList();
+//    private ArrayList<Element> trSubElement = new ArrayList();
     private Attr attr;
 
     public HTML() {
@@ -211,7 +210,7 @@ public class HTML extends XML {
     private void loadXML() {
         xml.loadXML(Kanban.xmlPath);
 
-        listBoard = xml.readBoard();
+//        listBoard = xml.readBoard();
         listMainColumn = xml.readMainColumns();
         listSubColumn = xml.readSubColumns();
         listCard = xml.readCards();
@@ -246,12 +245,12 @@ public class HTML extends XML {
         return rowElement;
     }
 
-    private Element createThElement(Element tr) {
-        rowHeadElement = doc.createElement("th");
-        tr.appendChild(rowHeadElement);
-
-        return rowHeadElement;
-    }
+//    private Element createThElement(Element tr) {
+//        rowHeadElement = doc.createElement("th");
+//        tr.appendChild(rowHeadElement);
+//
+//        return rowHeadElement;
+//    }
 
     private Element createTdElement(Element tr, String name) {
         colElement = doc.createElement("td");

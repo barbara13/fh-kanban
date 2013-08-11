@@ -239,7 +239,7 @@ public class BacklogController extends Controller implements CaretListener {
     private String[] sortByString(String array[]) {
         for (int i = 0; i < array.length; i++) {
             for (int j = (i + 1); j < array.length; j++) {
-                if (array[i].compareTo(array[j]) > 0) {
+                if (array[i].compareToIgnoreCase(array[j]) > 0) {
                     String tausch = array[i];
                     array[i] = array[j];
                     array[j] = tausch;
@@ -270,8 +270,7 @@ public class BacklogController extends Controller implements CaretListener {
         return array;
     }
 
-    private String[] sortAndByString(String array[], String searchText) {
-        System.out.println(searchText.length());
+    private String[] searchByString(String array[], String searchText) {
         for (int i = 0; i < array.length; i++) {
             if (searchText.regionMatches(true, 0, array[i], 0, searchText.length())) {
             } else {
@@ -279,13 +278,11 @@ public class BacklogController extends Controller implements CaretListener {
             }
         }
 
-        for (int i = 0; i < array.length; i++) {
-            for (int j = (i + 1); j < array.length; j++) {
-                if (searchText.compareTo(array[j]) == 0) {
-                    String tausch = array[i];
-                    array[i] = array[j];
-                    array[j] = tausch;
-                }
+        for (int i = 1; i < array.length; i++) {
+        	if (searchText.compareTo(array[i]) == 0) {
+                String tausch = array[i];
+                array[i] = array[0];
+                array[0] = tausch;
             }
         }
 
@@ -310,7 +307,6 @@ public class BacklogController extends Controller implements CaretListener {
                 }
             }
         }
-
         return array;
     }
 
@@ -326,7 +322,7 @@ public class BacklogController extends Controller implements CaretListener {
                 array[i] = listCard.get(i).getName();
             }
 
-            array = sortAndByString(array, blv.getSearch().getText());
+            array = searchByString(array, blv.getSearch().getText());
 
             for (int i = 0, j = 1, k = 1; i < array.length; i++) {
                 for (int n = 0; n < listCard.size(); n++) {

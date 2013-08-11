@@ -4,24 +4,22 @@
  */
 package edu.fh.kanban.dao;
 
-import edu.fh.kanban.Kanban;
 import edu.fh.kanban.data.Board;
 import edu.fh.kanban.data.Card;
 import edu.fh.kanban.data.Column;
 import java.util.ArrayList;
 import org.junit.*;
 import static org.junit.Assert.*;
-import org.w3c.dom.Element;
 
 /**
  *
  * @author Malte
  */
 public class XMLBoardTest {
-           
-    private XMLBoard boardXml = new XMLBoard();  
-    private XMLCard cardXml = new XMLCard();   
-    private XML_Pk pkXml = new XML_Pk();
+//           
+//    private XMLBoard boardXml = new XMLBoard();  
+//    private XMLCard cardXml = new XMLCard();   
+//    private XML_Pk pkXml = new XML_Pk();
     public XMLBoardTest() {
     }
     /*
@@ -115,7 +113,7 @@ public class XMLBoardTest {
         XMLBoard instance = new XMLBoard();
         instance.loadXML("BoardTest.xml");
         
-        ArrayList <Column> expResult = new ArrayList();
+        ArrayList<Column> expResult = new ArrayList<Column>();
         expResult.add(new Column(995, 999, "Next", 100));
         expResult.add(new Column(997, 999, "Do", 2));
         expResult.add(new Column(998, 999, "Done", 100));
@@ -140,7 +138,7 @@ public class XMLBoardTest {
         XMLBoard instance = new XMLBoard();
         instance.loadXML("BoardTest.xml");
         
-        ArrayList <Column> expResult = new ArrayList();
+        ArrayList<Column> expResult = new ArrayList<Column>();
         expResult.add(new Column(996, 999, "Column1", 2));
         
         ArrayList <Column> result = instance.readMainColumns();
@@ -162,7 +160,7 @@ public class XMLBoardTest {
         XMLBoard instance = new XMLBoard();
         instance.loadXML("BoardTest.xml");
         
-        ArrayList <Card> expResult = new ArrayList();
+        ArrayList<Card> expResult = new ArrayList<Card>();
         expResult.add(new Card(46, 995, "card1", "Beschreibung", 5, "Standart", "false", "Text", "08.08.2013 13:37:20", "08.08.2013 15:12:25", ""));
        
         ArrayList <Card> result = instance.readCards();
@@ -192,7 +190,7 @@ public class XMLBoardTest {
         XMLBoard instance = new XMLBoard();
         instance.loadXML("BoardTest.xml");
         
-        ArrayList <Card> expResult = new ArrayList();
+        ArrayList<Card> expResult = new ArrayList<Card>();
         expResult.add(new Card(46, 995, "card1", "Beschreibung", 5, "Standart", "false", "Text", "08.08.2013 13:37:20", "08.08.2013 15:12:25", ""));
         
         ArrayList <Card> result = instance.readCardsFromColumn(co_id);

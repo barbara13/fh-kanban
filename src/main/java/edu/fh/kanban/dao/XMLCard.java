@@ -32,13 +32,13 @@ public class XMLCard extends XML {
     private Element cardElement = null;
     private Element searchedElement = null;
     private Element rootElement = null;
-    private NodeList rootList = null;
+//    private NodeList rootList = null;
     private NodeList cardList = null;
     private Attr attr;
-    private ArrayList<Card> listCard = new ArrayList();
+    private ArrayList<Card> listCard = new ArrayList<Card>();
     private SimpleDateFormat sd = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    private String dateString;
-    private Date date;
+//    private String dateString;
+//    private Date date;
 
     public XMLCard() {
         try {
