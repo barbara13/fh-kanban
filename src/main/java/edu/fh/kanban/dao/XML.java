@@ -27,6 +27,11 @@ public class XML {
     protected StreamResult result;
     protected Document doc;
 
+    /**
+     * Extrahiert den Wert eines ausgelesen Attribut aus und gibt diesen zurÃ¼ck
+     * @param s
+     * @return Sting
+     */
     protected String getString(String s) {
         int s1 = s.indexOf("=\"") + 2;
         int s2 = s.length() - 1;
@@ -34,21 +39,26 @@ public class XML {
         return s.substring(s1, s2);
     }
 
+
+    /**
+     * Aktualisiert die XML Datei.
+     * @param name 
+     */
     protected void updateXML(String name) {
-        try {
+        try {        
             transformerFactory = TransformerFactory.newInstance();
             transformer = transformerFactory.newTransformer();
             source = new DOMSource(doc);
             result = new StreamResult(new File(name));
-
-
+          
+                
             transformer.transform(source, result);
         } catch (TransformerConfigurationException ex) {
             Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TransformerException ex) {
             Logger.getLogger(XML.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
 
     }
 }
