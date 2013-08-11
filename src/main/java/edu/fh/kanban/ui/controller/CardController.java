@@ -33,7 +33,6 @@ public class CardController implements ActionListener {
         this.blv = blv;
         xml = new XMLCard();
         xmlb = new XMLBoard();
-        System.out.println(Boolean.toString(cView.getTglbtnBlocker().isSelected()));
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -69,7 +68,6 @@ public class CardController implements ActionListener {
             }
             cView.dispose();
             bv.paintBoard();
-
         } else if (src == cView.getBtnEdit()) {
             new CardEditView(blv, cView.getHeadline(), cView.getcId(), cView.getEffort(), cView.getValue(), cView.getDescription()).getComponent();
             cView.dispose();
