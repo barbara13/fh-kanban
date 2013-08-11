@@ -24,24 +24,15 @@ public class HTML extends XML {
 
     private DocumentBuilderFactory docBuilderFactory;
     private DocumentBuilder docBuilder;
-//    private String htmlPath;
-//    private ArrayList<Board> listBoard = new ArrayList<Board>();
     private ArrayList<Column> listMainColumn = new ArrayList<Column>();
     private ArrayList<Column> listSubColumn = new ArrayList<Column>();
     private ArrayList<Card> listCard = new ArrayList<Card>();
     private Element htmlTag;
     private Element bodyTag;
-//    private Element tableElement;
     private Element mainTableElement;
-    //private Element subTableElement;
-//    private Element rowHeadElement;
     private Element rowElement;
     private Element colElement;
-//    private Element firstColumnElement;
-//    private Element lastColumnElement;
     private Element cardElement;
-//    private ArrayList<Element> columnElements = new ArrayList<Element>();
-//    private ArrayList<Element> rowElements = new ArrayList<Element>();
     private XMLBoard xml = new XMLBoard();
     private int t = 0;
     private int h = 0;
@@ -56,11 +47,7 @@ public class HTML extends XML {
     private Element nextTdElement;
     private Element doneTableElement;
     private Element doneTdElement;
-//    private Element[][] td;
-//    private int td_i = 0;
     private ArrayList<Element> subTableElement = new ArrayList<Element>();
-//    private ArrayList<Element> tdSubElement = new ArrayList();
-//    private ArrayList<Element> trSubElement = new ArrayList();
     private Attr attr;
 
     public HTML() {
@@ -143,7 +130,8 @@ public class HTML extends XML {
             trElement.add(createTrElement(nextTableElement));
             tdElement.add(createTdElement(trElement.get(z)));
 
-            createCardElement(tdElement.get(r), listCard.get(k).getName());
+            createCardElement(tdElement.get(r), listCard.get(k).getCo_id(), listCard.get(k).getName(), listCard.get(k).getEffort(), listCard.get(k).getValue(), listCard.get(k).getCreatedDate(), listCard.get(k).getStartedDate(), listCard.get(k).getDoneDate());
+
 
             r++;
             z++;
@@ -170,7 +158,8 @@ public class HTML extends XML {
 
                 tdElement.add(createTdElement(trElement.get(z)));
 
-                createCardElement(tdElement.get(r), listCard.get(k).getName());
+                createCardElement(tdElement.get(r), listCard.get(k).getCo_id(), listCard.get(k).getName(), listCard.get(k).getEffort(), listCard.get(k).getValue(), listCard.get(k).getCreatedDate(), listCard.get(k).getStartedDate(), listCard.get(k).getDoneDate());
+
                 r++;
                 z++;
             }
@@ -195,7 +184,7 @@ public class HTML extends XML {
             trElement.add(createTrElement(doneTableElement));
             tdElement.add(createTdElement(trElement.get(z)));
 
-            createCardElement(tdElement.get(r), listCard.get(k).getName());
+            createCardElement(tdElement.get(r), listCard.get(k).getCo_id(), listCard.get(k).getName(), listCard.get(k).getEffort(), listCard.get(k).getValue(), listCard.get(k).getCreatedDate(), listCard.get(k).getStartedDate(), listCard.get(k).getDoneDate());
 
             r++;
             z++;
@@ -210,7 +199,6 @@ public class HTML extends XML {
     private void loadXML() {
         xml.loadXML(Kanban.xmlPath);
 
-//        listBoard = xml.readBoard();
         listMainColumn = xml.readMainColumns();
         listSubColumn = xml.readSubColumns();
         listCard = xml.readCards();
@@ -234,8 +222,6 @@ public class HTML extends XML {
         td.appendChild(table);
 
         return table;
-        //rowElement = doc.createElement("tr");
-        //colElement = doc.createElement("th");
     }
 
     private Element createTrElement(Element table) {
@@ -244,13 +230,6 @@ public class HTML extends XML {
 
         return rowElement;
     }
-
-//    private Element createThElement(Element tr) {
-//        rowHeadElement = doc.createElement("th");
-//        tr.appendChild(rowHeadElement);
-//
-//        return rowHeadElement;
-//    }
 
     private Element createTdElement(Element tr, String name) {
         colElement = doc.createElement("td");
@@ -267,18 +246,23 @@ public class HTML extends XML {
         return colElement;
     }
 
-    private Element createCardElement(Element td, String name) {
-        cardElement = doc.createElement("input");
+    private Element createCardElement(Element td, int id, String name, int effort, String value, String created, String started, String finished) {
+        cardElement = doc.createElement("button");
         td.appendChild(cardElement);
 
         attr = doc.createAttribute("type");
-        attr.setValue("button");
+        attr.setValue("submit");
         cardElement.setAttributeNode(attr);
-
+        
+        cardElement.appendChild (doc.createCDATASection ("Id: " + id + "<br/> Headline: " + name + "<br> Effort: " + effort + "<br> Value: " + value + "<br> Created at: " + created + "<br> Started at: " + started + "<br> Finished at: " + finished));
+        //cardElement.setTextContent("Id: " + id + "<br/> Headline: " + name + "<br> Effort: " + effort + "<br> Value: " + value + "<br> Created at: " + created + "<br> Started at: " + started + "<br> Finished at: " + finished);
+        
+        /*
         attr = doc.createAttribute("value");
-        attr.setValue(name);
+        attr.setValue(id + "<br>" + name+"\n");
         cardElement.setAttributeNode(attr);
-
+        */
+        
         return cardElement;
     }
 }

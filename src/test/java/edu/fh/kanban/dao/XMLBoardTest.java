@@ -16,36 +16,10 @@ import static org.junit.Assert.*;
  * @author Malte
  */
 public class XMLBoardTest {
-//           
-//    private XMLBoard boardXml = new XMLBoard();  
-//    private XMLCard cardXml = new XMLCard();   
-//    private XML_Pk pkXml = new XML_Pk();
+
     public XMLBoardTest() {
     }
-    /*
-    public void createTestXml(XMLBoard boardXml){
 
-        cardXml.addCard("card1", "Beschreibung", "5", "Standart", "false", "Text");
-        pkXml.setCa_id();
-        cardXml.createCard();
-        
-        boardXml.addBoard("BoardTest", "#FF0000", "#00FFFF", "#0000FF", "#800080");
-        boardXml.addColumn("Next", "100");
-        boardXml.addNewColumn("Column1", "2");
-        boardXml.addColumn("Done", "100");
-        
-        boardXml.createBoard("BoardTest.xml");
-        boardXml.loadXML("BoardTest.xml");
-        
-
-        boardXml.addCardToBoard(46);
-        
-        boardXml.createBoard("BoardText.xml");
-        
-        
-        
-    }
-    */
     
     @BeforeClass
     public static void setUpClass() throws Exception {
